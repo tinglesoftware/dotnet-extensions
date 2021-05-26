@@ -9,6 +9,7 @@ This repository contains projects/libraries for adding useful functionality to d
 - [DataAnnotations](./src/Tingle.Extensions.DataAnnotations)
 - [Logging to LogAnalytics](./src/Tingle.Extensions.Logging.LogAnalytics)
 - [Phone Validators](./src/Tingle.Extensions.PhoneValidators)
+- [Processing](./src/Tingle.Extensions.Processing)
 
 ### Samples
 

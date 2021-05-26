@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Extensions for processing work e.g. in a background thread/task</Description>
+  </PropertyGroup>
+
+</Project>
