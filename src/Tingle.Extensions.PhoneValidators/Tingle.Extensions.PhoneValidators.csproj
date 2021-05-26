@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Validators for phone numbers from specific MNOs (Mobile Network Providers)</Description>
+    <Description>Validation handlers for phone numbers either via attributes or resolvable services with support for specific MNOs (Mobile Network Providers).</Description>
   </PropertyGroup>
 
   <ItemGroup>

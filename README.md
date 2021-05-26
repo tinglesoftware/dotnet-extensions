@@ -12,3 +12,11 @@ This repository contains projects/libraries for adding useful functionality to d
 |`Tingle.Extensions.Json`|[![NuGet](https://img.shields.io/nuget/v/Tingle.Extensions.Json.svg)](https://www.nuget.org/packages/Tingle.Extensions.Json/)|Various serialization functionalities that aren't in the `System.Text.Json` library but may already be in the counterpart `Newtonsoft.Json` library. See [docs](./src/Tingle.Extensions.Json/README.md).|
 |`Tingle.Extensions.PhoneValidators`|[![NuGet](https://img.shields.io/nuget/v/Tingle.Extensions.PhoneValidators.svg)](https://www.nuget.org/packages/Tingle.Extensions.PhoneValidators/)|Convenience for validation of phone numbers either via attributes or resolvable services. See [docs](./src/Tingle.Extensions.PhoneValidators/README.md).|
 |`Tingle.Extensions.Processing`|[![NuGet](https://img.shields.io/nuget/v/Tingle.Extensions.Processing.svg)](https://www.nuget.org/packages/Tingle.Extensions.Processing/)|Helpers for making processing of bulk in memory tasks. See [docs](./src/Tingle.Extensions.Processing/README.md).|
+
+### Issues &amp; Comments
+
+Please leave all comments, bugs, requests, and issues on the Issues page. We'll respond to your request ASAP!
+
+### License
+
+The Library is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license. Refer to the [LICENSE](./LICENSE) file for more information.

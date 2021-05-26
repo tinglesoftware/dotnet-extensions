@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Extensions for working with System.Text.Json</Description>
+    <Description>Various serialization functionalities that aren't in the `System.Text.Json` library but may already be in the counterpart `Newtonsoft.Json` library.</Description>
   </PropertyGroup>
 
   <ItemGroup>

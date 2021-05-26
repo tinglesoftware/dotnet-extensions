@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Extensions for processing work e.g. in a background thread/task</Description>
+    <Description>Helpers for making processing of bulk in memory tasks e.g. in a background thread/task</Description>
   </PropertyGroup>
 
 </Project>

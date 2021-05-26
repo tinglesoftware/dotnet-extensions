@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Extensions for working with validation</Description>
+    <Description>Extra validation attributes for application specific scenarios.</Description>
     <NoWarn>$(NoWarn);CA1813</NoWarn>
   </PropertyGroup>
 
