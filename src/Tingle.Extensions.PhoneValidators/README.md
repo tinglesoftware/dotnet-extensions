@@ -4,16 +4,53 @@ This library is used to validate if a phone number is valid. Currently, only Ken
 Where needed simply inject `IEnumerable<IPhoneNumberValidator>` to get all validators available.
 However, it is advised that you inject the implementation required, for example inject `SafaricomPhoneValidator` to validate Safaricom phone numbers.
 
-## Adding To Services Collection
+## Using attributes
+
+The .NET framework has validation inbuilt. You can use this to validate phone numbers:
 
 ```csharp
-public void ConfigureServices(IServicesCollection services) {
+public class SetPhoneNumberModel
+{
+    [Required]
+    public string UserId { get; set; }
+
+    [Required]
+    [Phone] // useful for generating docs in Swagger
+    [E164Phone] // ensures a phone in E.164 format
+    public string Phone { get; set; }
+}
+```
+
+Using this in AspNetCore is easy since model validation is inbuilt and enabled by default.
+
+```csharp
+[Route("api/v1/[controller]")]
+public class DummyController : ControllerBase
+{
+    [HttpGet]
+    public Task<IActionResult> TestAsync([FromBody, Required] SetPhoneNumberModel model)
+    {
+        // If we get here, the model was already validated
+        // Otherwise, problem details were returned.
+
+        return Ok();
+    }
+}
+```
+
+## Using Dependency Injection
+
+First add to the services collection before they can be resolved.
+
+```csharp
+public void ConfigureServices(IServicesCollection services)
+{
     services.AddSafaricomPhoneNumberValidator(); // Safaricom
     services.AddAirtelPhoneNumberValidator(); // Airetl
 }
 ```
 
-## Sample Usage (all validators)
+### Sample Usage (all possible validators)
 
 ```csharp
 [Route("api/v1/[controller]")]
@@ -37,8 +74,9 @@ public class DummyController : ControllerBase
         return Ok(msisdn);
     }
 }
+```
 
-## Sample Usage (Safaricom validators)
+### Sample Usage (Safaricom validator)
 
 ```csharp
 [Route("api/v1/[controller]")]
@@ -61,3 +99,4 @@ public class DummyController : ControllerBase
         return Ok(msisdn);
     }
 }
+```
