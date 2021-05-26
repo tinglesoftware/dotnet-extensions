@@ -1,7 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Helpers for making processing of bulk in memory tasks e.g. in a background thread/task</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);Processing</PackageTags>
   </PropertyGroup>
 
 </Project>

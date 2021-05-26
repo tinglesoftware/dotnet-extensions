@@ -1,7 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Easier ways to handle optional values especially in libraries.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);AnyOf</PackageTags>
   </PropertyGroup>
 
 </Project>
