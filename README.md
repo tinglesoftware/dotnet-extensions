@@ -6,6 +6,7 @@ This repository contains projects/libraries for adding useful functionality to d
 
 - [All Sources](./src/)
 - [AnyOf](./src/Tingle.Extensions.AnyOf)
+- [DataAnnotations](./src/Tingle.Extensions.DataAnnotations)
 - [Logging to LogAnalytics](./src/Tingle.Extensions.Logging.LogAnalytics)
 
 ### Samples
