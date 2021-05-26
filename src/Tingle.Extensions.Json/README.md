@@ -1,6 +1,6 @@
 ﻿# Tingle.Extensions.Json
 
-This library provides various serialization functionalities that aren't in the `System.Text.Json` library but are in the counterpart `Newtonsoft.Json` library.
+This library provides various serialization functionalities that aren't in the `System.Text.Json` library but may already be in the counterpart `Newtonsoft.Json` library.
 
 The various functionalities will be described using examples below.
 
@@ -27,7 +27,9 @@ class TestType3
     public DateTimeOffset? Value3 { get; set; }
 }
 ```
+
 ### Cloning
+
 You can use it to create an object clone via the JSON serializer. An example is shown below:
 
 ```Program.cs
@@ -39,6 +41,7 @@ static void Main(string[] args)
 ```
 
 ### Copying
+
 You can use it to convert one object to another via the JSON serializer. An example is shown below:
 
 ```Program.cs
@@ -55,7 +58,7 @@ static void Main(string[] args)
 
 ### Version Converter
 
-Version class represents the version number of an assembly, operating system, or the common language runtime. This class cannot be inherited. 
+Version class represents the version number of an assembly, operating system, or the common language runtime. This class cannot be inherited.
 
 The example below will show how to deserialize this to/from a string.
 
@@ -79,9 +82,9 @@ static void Main(string[] args)
 }
 ```
 
-### Timespan Converter
+### TimeSpan Converter
 
-A Timespan represents a time interval. The example below will show how to deserialize this to/from a string.
+A TimeSpan represents a time interval. The example below will show how to deserialize this to/from a string.
 
 ```cs
 class TestModel
@@ -102,8 +105,3 @@ static void Main(string[] args)
     var dst_json = JsonSerializer.Serialize(model, options);
 }
 ```
-
-
-
-
-
