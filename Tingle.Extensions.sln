@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Logging.LogAnalytics", "src\Tingle.Extensions.Logging.LogAnalytics\Tingle.Extensions.Logging.LogAnalytics.csproj", "{FDA94A72-2875-4D9B-B1A0-12AF90E8423B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PhoneValidators", "src\Tingle.Extensions.PhoneValidators\Tingle.Extensions.PhoneValidators.csproj", "{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{815F0941-3B70-4705-A583-AF627559595C}"
 	ProjectSection(SolutionItems) = preProject
 		tests\Directory.Build.props = tests\Directory.Build.props
@@ -22,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.AnyOf.Tests", "tests\Tingle.Extensions.AnyOf.Tests\Tingle.Extensions.AnyOf.Tests.csproj", "{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnotations.Tests", "tests\Tingle.Extensions.DataAnnotations.Tests\Tingle.Extensions.DataAnnotations.Tests.csproj", "{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PhoneValidators.Tests", "tests\Tingle.Extensions.PhoneValidators.Tests\Tingle.Extensions.PhoneValidators.Tests.csproj", "{526B37AD-256A-445A-9A42-E5C53989B11E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}"
 	ProjectSection(SolutionItems) = preProject
@@ -48,6 +52,10 @@ Global
 		{FDA94A72-2875-4D9B-B1A0-12AF90E8423B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA94A72-2875-4D9B-B1A0-12AF90E8423B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDA94A72-2875-4D9B-B1A0-12AF90E8423B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +64,10 @@ Global
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526B37AD-256A-445A-9A42-E5C53989B11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526B37AD-256A-445A-9A42-E5C53989B11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526B37AD-256A-445A-9A42-E5C53989B11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526B37AD-256A-445A-9A42-E5C53989B11E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,8 +80,10 @@ Global
 		{3FB76745-2584-462C-933F-7EC527184AF7} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{51FA6572-8EB6-4291-8D02-BB736057A50E} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{FDA94A72-2875-4D9B-B1A0-12AF90E8423B} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
+		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E} = {815F0941-3B70-4705-A583-AF627559595C}
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD} = {815F0941-3B70-4705-A583-AF627559595C}
+		{526B37AD-256A-445A-9A42-E5C53989B11E} = {815F0941-3B70-4705-A583-AF627559595C}
 		{A2A259BA-50B5-4232-A518-BCA291CC9DCF} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
