@@ -1,3 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <Description>Convenience for handling alternate values.</Description>
+  </PropertyGroup>
+
 </Project>
