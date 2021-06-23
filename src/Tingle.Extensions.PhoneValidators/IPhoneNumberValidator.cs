@@ -19,20 +19,20 @@ namespace Tingle.Extensions.PhoneValidators
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        string ToMsisdn(string phoneNumber);
+        string? ToMsisdn(string phoneNumber);
 
         /// <summary>
         /// Generate all possible values for a phone number
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        IEnumerable<string> MakePossibleValues(string phoneNumber);
+        IEnumerable<string>? MakePossibleValues(string phoneNumber);
 
         /// <summary>
         /// Make an <see href="https://en.wikipedia.org/wiki/E.164">E.164</see> version of a phone number.
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        string ToE164(string phoneNumber);
+        string? ToE164(string phoneNumber);
     }
 }

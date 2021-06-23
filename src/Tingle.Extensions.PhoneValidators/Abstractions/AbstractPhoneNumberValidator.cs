@@ -29,7 +29,7 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         }
 
         /// <inheritdoc/>
-        public IEnumerable<string> MakePossibleValues(string phoneNumber)
+        public IEnumerable<string>? MakePossibleValues(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
 
@@ -41,7 +41,7 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         }
 
         /// <inheritdoc/>
-        public string ToMsisdn(string phoneNumber)
+        public string? ToMsisdn(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
 
@@ -52,7 +52,7 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         }
 
         /// <inheritdoc/>
-        public string ToE164(string phoneNumber)
+        public string? ToE164(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
 
