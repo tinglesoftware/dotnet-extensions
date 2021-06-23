@@ -24,13 +24,9 @@ namespace Tingle.Extensions.Processing
         /// <returns></returns>
         public static Task<string> GetResourceAsStringAsync<T>(string resourceName)
         {
-            using (var st = GetResourceAsStream<T>(resourceName))
-            {
-                using (var reader = new StreamReader(st))
-                {
-                    return reader.ReadToEndAsync();
-                }
-            }
+            using var st = GetResourceAsStream<T>(resourceName);
+            using var reader = new StreamReader(st);
+            return reader.ReadToEndAsync();
         }
 
         /// <summary>

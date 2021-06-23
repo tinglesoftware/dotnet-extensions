@@ -85,11 +85,9 @@ namespace System.Net.Http
         {
             var stringToHash = string.Join("\n", method, contentLength, contentType, $"{DateHeaderName}:{date}", resource);
             var bytesToHash = Encoding.ASCII.GetBytes(stringToHash);
-            using (var sha256 = new HMACSHA256(key))
-            {
-                var calculatedHash = sha256.ComputeHash(bytesToHash);
-                return Convert.ToBase64String(calculatedHash);
-            }
+            using var sha256 = new HMACSHA256(key);
+            var calculatedHash = sha256.ComputeHash(bytesToHash);
+            return Convert.ToBase64String(calculatedHash);
         }
     }
 }
