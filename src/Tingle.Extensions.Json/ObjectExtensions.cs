@@ -16,8 +16,8 @@ namespace System
         /// <param name="source">the source of the data</param>
         /// <param name="options">the serialization settings if any</param>
         /// <returns></returns>
-        public static T JsonClone<T>(this T source, JsonSerializerOptions options = null)
-                where T : class
+        public static T? JsonClone<T>(this T? source, JsonSerializerOptions? options = null)
+            where T : class
         {
             if (source == default) return default;
             var json = JsonSerializer.Serialize(source, options ?? JsonHelper.DefaultOptions);
@@ -48,7 +48,7 @@ namespace System
         /// <param name="source">the source of the data</param>
         /// <param name="options">the serialization settings if any</param>
         /// <returns></returns>
-        public static T JsonConvertTo<T>(this object source, JsonSerializerOptions options = null)
+        public static T? JsonConvertTo<T>(this object? source, JsonSerializerOptions? options = null)
         {
             if (source == default) return default;
             var json = JsonSerializer.Serialize(source, options ?? JsonHelper.DefaultOptions);
