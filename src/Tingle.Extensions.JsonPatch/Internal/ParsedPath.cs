@@ -12,8 +12,6 @@ namespace Tingle.Extensions.JsonPatch.Internal
     /// </summary>
     public readonly struct ParsedPath
     {
-        private static readonly string[] Empty = null;
-
         private readonly string[] _segments;
 
         public ParsedPath(string path)
@@ -39,7 +37,7 @@ namespace Tingle.Extensions.JsonPatch.Internal
             }
         }
 
-        public IReadOnlyList<string> Segments => _segments ?? Empty;
+        public IReadOnlyList<string> Segments => _segments ?? Array.Empty<string>();
 
         private static string[] ParsePath(string path)
         {
