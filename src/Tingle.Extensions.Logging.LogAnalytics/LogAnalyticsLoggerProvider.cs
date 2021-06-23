@@ -16,7 +16,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
         // The LogAnalytics logger options.
         private readonly LogAnalyticsLoggerOptions options;
         // The external scope provider to allow setting scope data in messages.
-        private IExternalScopeProvider externalScopeProvider;
+        private IExternalScopeProvider? externalScopeProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LogAnalyticsLoggerProvider"/> class.

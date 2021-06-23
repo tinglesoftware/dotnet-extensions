@@ -36,11 +36,11 @@ namespace System.Net.Http
         }
 
         public static async Task UploadInnerAsync(this HttpClient httpClient,
-                                             string workspaceId,
-                                             byte[] workspaceKey,
-                                             string payload,
-                                             string logType,
-                                             DateTimeOffset? generated = null)
+                                                  string workspaceId,
+                                                  byte[] workspaceKey,
+                                                  string payload,
+                                                  string logType,
+                                                  DateTimeOffset? generated = null)
         {
             var encoding = Encoding.UTF8;
 
