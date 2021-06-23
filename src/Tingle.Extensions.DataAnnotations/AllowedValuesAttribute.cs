@@ -15,7 +15,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.
         /// </summary>
-        public AllowedValuesAttribute(IEnumerable<object> allowedValues) : base("The value(s) '{0}' is/are not allowed for field {1}.")
+        public AllowedValuesAttribute(IEnumerable<object> allowedValues) : base("The field {0} only permits: {1}.")
         {
             this.allowedValues = allowedValues ?? throw new ArgumentNullException(nameof(allowedValues));
         }
@@ -30,6 +30,13 @@ namespace System.ComponentModel.DataAnnotations
         /// Defaults to <see cref="EqualityComparer{T}.Default"/>.
         /// </summary>
         public IEqualityComparer<object> Comparer { get; set; } = EqualityComparer<object>.Default;
+
+        /// <summary>
+        /// Formats the error message to display if the validation fails.
+        /// </summary>
+        /// <param name="name">The name of the field that caused the validation failure.</param>
+        /// <returns>The formatted error message.</returns>
+        public override string FormatErrorMessage(string name) => string.Format(ErrorMessageString, name, string.Join(",", allowedValues));
 
         /// <inheritdoc/>
         public override bool IsValid(object? value)

@@ -29,7 +29,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
                 Assert.Equal(nameof(TestModel1.SomeValue), memeberName);
                 Assert.NotNull(val.ErrorMessage);
                 Assert.NotEmpty(val.ErrorMessage);
-                Assert.Equal($"The value(s) '{value}' is/are not allowed for field {memeberName}.", val.ErrorMessage);
+                Assert.Equal($"The field {memeberName} only permits: 1,2,3,4,5.", val.ErrorMessage);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
                 Assert.Equal(nameof(TestModel2.SomeValue), memeberName);
                 Assert.NotNull(val.ErrorMessage);
                 Assert.NotEmpty(val.ErrorMessage);
-                Assert.Equal($"The value(s) '{value}' is/are not allowed for field {memeberName}.", val.ErrorMessage);
+                Assert.Equal($"The field {memeberName} only permits: 1.1,2.2,3.3,4.4,5.5.", val.ErrorMessage);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
                 Assert.Equal(nameof(TestModel2.SomeValue), memeberName);
                 Assert.NotNull(val.ErrorMessage);
                 Assert.NotEmpty(val.ErrorMessage);
-                Assert.Equal($"The value(s) '{value}' is/are not allowed for field {memeberName}.", val.ErrorMessage);
+                Assert.Equal($"The field {memeberName} only permits: blue,green,yellow.", val.ErrorMessage);
             }
         }
 
@@ -110,17 +110,17 @@ namespace Tingle.Extensions.DataAnnotations.Tests
                 Assert.Equal(nameof(TestModel4.SomeValues), memeberName);
                 Assert.NotNull(val.ErrorMessage);
                 Assert.NotEmpty(val.ErrorMessage);
-                Assert.Equal($"The value(s) '{value}' is/are not allowed for field {memeberName}.", val.ErrorMessage);
+                Assert.Equal($"The field {memeberName} only permits: blue,green,yellow.", val.ErrorMessage);
             }
         }
 
         [Theory]
-        [InlineData(true, null, "green", "blue", "yellow")]
-        [InlineData(true, null, "blue", "yellow")]
-        [InlineData(true, null, "yellow")]
-        [InlineData(false, "yelo", "green", "blue", "yelo")]
-        [InlineData(false, "BLUE", "green", "BLUE", "yellow")]
-        public void Works_For_DoubleStringArray(bool expected, string invalid, params string[] value)
+        [InlineData(true, "green", "blue", "yellow")]
+        [InlineData(true, "blue", "yellow")]
+        [InlineData(true, "yellow")]
+        [InlineData(false, "green", "blue", "yelo")]
+        [InlineData(false, "green", "BLUE", "yellow")]
+        public void Works_For_CaseSensitiveStrings(bool expected, params string[] value)
         {
             var obj = new TestModel5 { SomeValues = value.ToList(), };
             var context = new ValidationContext(obj);
@@ -137,7 +137,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
                 Assert.Equal(nameof(TestModel5.SomeValues), memeberName);
                 Assert.NotNull(val.ErrorMessage);
                 Assert.NotEmpty(val.ErrorMessage);
-                Assert.Equal($"The value(s) '{invalid}' is/are not allowed for field {memeberName}.", val.ErrorMessage);
+                Assert.Equal($"The field {memeberName} only permits: blue,green,yellow.", val.ErrorMessage);
             }
         }
 
