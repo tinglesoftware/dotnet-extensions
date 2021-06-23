@@ -141,27 +141,14 @@ namespace Tingle.Extensions.JsonPatch.Helpers
         {
 
             if (string.IsNullOrWhiteSpace(propertyName)) return propertyName;
-
-            string result;
-
-            switch (type)
+            string result = type switch
             {
-                case CaseTransformType.CamelCase:
-                    result = char.ToLowerInvariant(propertyName[0]) + propertyName.Substring(1);
-                    break;
-                case CaseTransformType.LowerCase:
-                    result = propertyName.ToLowerInvariant();
-                    break;
-                case CaseTransformType.UpperCase:
-                    result = propertyName.ToUpperInvariant();
-                    break;
-                case CaseTransformType.OriginalCase:
-                    result = propertyName;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-
+                CaseTransformType.CamelCase => char.ToLowerInvariant(propertyName[0]) + propertyName.Substring(1),
+                CaseTransformType.LowerCase => propertyName.ToLowerInvariant(),
+                CaseTransformType.UpperCase => propertyName.ToUpperInvariant(),
+                CaseTransformType.OriginalCase => propertyName,
+                _ => throw new NotImplementedException(),
+            };
             return result;
         }
     }
