@@ -20,7 +20,7 @@ namespace Tingle.Extensions.Processing
         /// </summary>
         /// <param name="concurrencyLimit">the maximum number of concurrent items</param>
         /// <param name="handler">the handler for item in the data. This handler shall be awaited.</param>
-        public SequentialBatchProcessor(int concurrencyLimit = 1, Func<T, CancellationToken, Task> handler = null)
+        public SequentialBatchProcessor(int concurrencyLimit = 1, Func<T, CancellationToken, Task>? handler = null)
         {
             concurrencyLimiter = new SemaphoreSlim(1, concurrencyLimit);
             this.handler = handler ?? ((s, c) => Task.CompletedTask);

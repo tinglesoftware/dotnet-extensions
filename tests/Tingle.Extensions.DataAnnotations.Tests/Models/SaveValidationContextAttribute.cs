@@ -7,7 +7,8 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models
     {
         public static IList<ValidationContext> SavedContexts = new List<ValidationContext>();
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        /// <inheritdoc/>
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             SavedContexts.Add(validationContext);
             return ValidationResult.Success;

@@ -73,13 +73,13 @@ namespace Tingle.Extensions.PhoneValidators.Tests
         class TestModel1
         {
             [E164Phone]
-            public string SomePhoneNumber { get; set; }
+            public string? SomePhoneNumber { get; set; }
         }
 
         class TestModel2
         {
             [E164Phone("KE")]
-            public string SomePhoneNumber { get; set; }
+            public string? SomePhoneNumber { get; set; }
         }
     }
 }

@@ -790,7 +790,7 @@ namespace Tingle.Extensions.JsonPatch
         }
 
         // Internal for testing
-        internal string GetPath<TProp>(Expression<Func<TModel, TProp>> expr, string position)
+        internal string GetPath<TProp>(Expression<Func<TModel, TProp>> expr, string? position)
         {
             var segments = GetPathSegments(expr.Body);
             var path = string.Join("/", segments);
@@ -828,7 +828,7 @@ namespace Tingle.Extensions.JsonPatch
                     return listOfSegments;
 
                 case ExpressionType.MemberAccess:
-                    var memberExpression = expr as MemberExpression;
+                    var memberExpression = (MemberExpression)expr;
                     listOfSegments.AddRange(GetPathSegments(memberExpression.Expression));
                     // Get property name, respecting JsonProperty attribute
                     listOfSegments.Add(ExpressionHelpers.CaseTransform(GetPropertyNameFromMemberExpression(memberExpression), CaseTransformType));
@@ -869,7 +869,7 @@ namespace Tingle.Extensions.JsonPatch
         {
             var converted = Expression.Convert(expression, typeof(object));
             var fakeParameter = Expression.Parameter(typeof(object), null);
-            var lambda = Expression.Lambda<Func<object, object>>(converted, fakeParameter);
+            var lambda = Expression.Lambda<Func<object?, object>>(converted, fakeParameter);
             var func = lambda.Compile();
 
             return Convert.ToString(func(null), CultureInfo.InvariantCulture);

@@ -62,10 +62,10 @@ namespace System.Text.Json
         /// <param name="namingPolicy">the naming policy, if not set, the one in the options is used</param>
         /// <returns></returns>
         public static JsonSerializerOptions AddConverterForEnumsAsStrings(this JsonSerializerOptions options,
-                                                                          JsonNamingPolicy namingPolicy = null)
+                                                                          JsonNamingPolicy? namingPolicy = null)
         {
             options.Converters.Add(new JsonStringEnumConverter(namingPolicy ?? options?.PropertyNamingPolicy));
-            return options;
+            return options!;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace System.Text.Json
         /// <param name="namingPolicy">the naming policy, if not set, the one in the options is used</param>
         /// <returns></returns>
         public static JsonSerializerOptions AddKnownConverters(this JsonSerializerOptions options,
-                                                               JsonNamingPolicy namingPolicy = null)
+                                                               JsonNamingPolicy? namingPolicy = null)
         {
             return options.AddConverterForTimeSpan()
                           .AddConverterForVersion()

@@ -16,7 +16,7 @@ namespace Tingle.Extensions.PhoneValidators.Safaricom
         // The digits are 00-09, 10-19, 20-29, 40-49, 90-99, 57-59, 68-69 when prefixed with 7 and 10-15 when prefixed with 1
         internal const string RegExComplete = @"^(?:254|\+254|0)?((?:(?:7(?:(?:[01249][0-9])|(?:5[789])|(?:6[89])))|(?:1(?:[1][0-5])))[0-9]{6})$";
 
-        private static readonly Regex regex = new Regex(@RegExComplete);
+        private static readonly Regex regex = new(@RegExComplete);
 
         /// <summary>
         /// Creates a instance of <see cref="SafaricomPhoneNumberValidator"/>

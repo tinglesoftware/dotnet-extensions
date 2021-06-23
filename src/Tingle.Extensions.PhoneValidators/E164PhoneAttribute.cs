@@ -8,7 +8,7 @@ namespace System.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public sealed class E164PhoneAttribute : ValidationAttribute
     {
-        private readonly string defaultRegion;
+        private readonly string? defaultRegion;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="E164PhoneAttribute"/> class.
@@ -20,7 +20,7 @@ namespace System.ComponentModel.DataAnnotations
         /// If the number is guaranteed to start with a '+' followed by the country calling
         /// code, then "ZZ" or null can be supplied.
         /// </param>
-        public E164PhoneAttribute(string defaultRegion = null) : base("The field {0} must be a valid E.164 phone number.")
+        public E164PhoneAttribute(string? defaultRegion = null) : base("The field {0} must be a valid E.164 phone number.")
         {
             this.defaultRegion = defaultRegion?.ToUpperInvariant();
 
@@ -33,33 +33,19 @@ namespace System.ComponentModel.DataAnnotations
             }
         }
 
-        /// <summary>
-        /// Validates the specified object.
-        /// </summary>
-        /// <param name="value">The object to validate.</param>
-        /// <param name="validationContext">
-        /// The <see cref="ValidationContext"/> object that describes
-        /// the context where the validation checks are performed. This parameter cannot
-        /// be null.
-        /// </param>
-        /// <exception cref="ValidationException">Validation failed.</exception>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        /// <inheritdoc/>
+        public override bool IsValid(object? value)
         {
-            // convert the object to a string and ensure that it is not null
-            if (!(value is string s)) return ValidationResult.Success;
-            if (string.IsNullOrEmpty(s)) return ValidationResult.Success;
-
-            // attempt to parse phone number
+            if (value is not string s || string.IsNullOrEmpty(s)) return true;
             try
             {
                 var phoneNumberUtil = PhoneNumberUtil.GetInstance();
                 _ = phoneNumberUtil.Parse(numberToParse: s, defaultRegion: defaultRegion);
-                return ValidationResult.Success;
+                return true;
             }
             catch (Exception ex) when (ex is NumberParseException)
             {
-                return new ValidationResult(errorMessage: FormatErrorMessage(name: validationContext.DisplayName),
-                                            memberNames: new string[] { validationContext.MemberName });
+                return false;
             }
         }
     }

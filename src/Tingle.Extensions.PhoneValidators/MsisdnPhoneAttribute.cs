@@ -13,41 +13,21 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         public MsisdnPhoneAttribute() : base("The field {0} must be a valid MSISDN phone number.") { }
 
-        /// <summary>
-        /// Validates the specified object.
-        /// </summary>
-        /// <param name="value">The object to validate.</param>
-        /// <param name="validationContext">
-        /// The <see cref="ValidationContext"/> object that describes
-        /// the context where the validation checks are performed. This parameter cannot
-        /// be null.
-        /// </param>
-        /// <exception cref="ValidationException">Validation failed.</exception>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        /// <inheritdoc/>
+        public override bool IsValid(object? value)
         {
-            // convert the object to a string and ensure that it is not null
-            if (!(value is string s)) return ValidationResult.Success;
-            if (string.IsNullOrEmpty(s)) return ValidationResult.Success;
-
-            // if the value already starts with a plus, we have failed
-            if (s.StartsWith("+"))
-            {
-                return new ValidationResult(errorMessage: FormatErrorMessage(name: validationContext.DisplayName),
-                                            memberNames: new string[] { validationContext.MemberName });
-            }
-
-            // attempt to parse phone number
+            if (value is not string s || string.IsNullOrEmpty(s)) return true;
+            if (s.StartsWith("+")) return false;
             try
             {
                 var prepended = "+" + s;
                 var phoneNumberUtil = PhoneNumberUtil.GetInstance();
                 _ = phoneNumberUtil.Parse(numberToParse: prepended, defaultRegion: null);
-                return ValidationResult.Success;
+                return true;
             }
             catch (Exception ex) when (ex is NumberParseException)
             {
-                return new ValidationResult(errorMessage: FormatErrorMessage(name: validationContext.DisplayName),
-                                            memberNames: new string[] { validationContext.MemberName });
+                return false;
             }
         }
     }

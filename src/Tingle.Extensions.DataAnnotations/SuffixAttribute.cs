@@ -23,34 +23,13 @@
         public StringComparison Comparison { get; set; } = StringComparison.CurrentCulture;
 
         /// <summary>
-        /// Validates the specified object.
-        /// </summary>
-        /// <param name="value">The object to validate.</param>
-        /// <param name="validationContext">
-        /// The <see cref="ValidationContext"/> object that describes
-        /// the context where the validation checks are performed. This parameter cannot
-        /// be null.
-        /// </param>
-        /// <exception cref="ValidationException">Validation failed.</exception>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            // convert the object to a string and ensure that it is not null
-            if (!(value is string s)) return ValidationResult.Success;
-            if (s == null) return ValidationResult.Success;
-
-            // check if the string ends with the suffix
-            if (s.EndsWith(suffix, Comparison)) return ValidationResult.Success;
-
-            // at this point, we can only fail
-            return new ValidationResult(errorMessage: FormatErrorMessage(name: validationContext.DisplayName),
-                                        memberNames: new string[] { validationContext.MemberName });
-        }
-
-        /// <summary>
         /// Formats the error message to display if the validation fails.
         /// </summary>
         /// <param name="name">The name of the field that caused the validation failure.</param>
         /// <returns>The formatted error message.</returns>
         public override string FormatErrorMessage(string name) => string.Format(ErrorMessageString, name, suffix);
+
+        /// <inheritdoc/>
+        public override bool IsValid(object? value) => value is not string s || s == null || s.EndsWith(suffix, Comparison);
     }
 }

@@ -27,7 +27,7 @@ namespace Tingle.Extensions.Json.Tests
 
         class TestModel
         {
-            public Version Deployed { get; set; }
+            public Version? Deployed { get; set; }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Tingle.Extensions.JsonPatch.Operations
 {
     public class OperationBase
     {
-        private string _op;
+        private string? _op;
         private OperationType _operationType;
 
         [JsonIgnore]
@@ -18,10 +18,10 @@ namespace Tingle.Extensions.JsonPatch.Operations
         }
 
         [JsonPropertyName("path")]
-        public string path { get; set; }
+        public string? path { get; set; }
 
         [JsonPropertyName("op")]
-        public string op
+        public string? op
         {
             get
             {
@@ -39,11 +39,11 @@ namespace Tingle.Extensions.JsonPatch.Operations
         }
 
         [JsonPropertyName("from")]
-        public string from { get; set; }
+        public string? from { get; set; }
 
         public OperationBase() { }
 
-        public OperationBase(string op, string path, string from)
+        public OperationBase(string op, string path, string? from)
         {
             this.op = op ?? throw new ArgumentNullException(nameof(op));
             this.path = path ?? throw new ArgumentNullException(nameof(path));

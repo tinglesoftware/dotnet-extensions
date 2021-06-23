@@ -8,12 +8,12 @@
         /// <summary>
         /// Gets or sets the unique identifier of the LogAnalytics workspace.
         /// </summary>
-        public string WorkspaceId { get; set; }
+        public string? WorkspaceId { get; set; }
 
         /// <summary>
         /// Gets or sets the key for authentication against the LogAnalytics endpoint.
         /// </summary>
-        public string WorkspaceKey { get; set; }
+        public string? WorkspaceKey { get; set; }
 
         /// <summary>
         /// Gets or sets the name that appears appear on LogAnalytics navigation menu.

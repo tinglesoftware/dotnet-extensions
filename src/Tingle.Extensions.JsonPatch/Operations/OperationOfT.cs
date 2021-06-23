@@ -9,7 +9,7 @@ namespace Tingle.Extensions.JsonPatch.Operations
     {
         public Operation() { }
 
-        public Operation(string op, string path, string from, object value) : base(op, path, from)
+        public Operation(string op, string path, string? from, object? value) : base(op, path, from)
         {
             if (op == null) throw new ArgumentNullException(nameof(op));
             if (path == null) throw new ArgumentNullException(nameof(path));
@@ -17,7 +17,7 @@ namespace Tingle.Extensions.JsonPatch.Operations
             this.value = value;
         }
 
-        public Operation(string op, string path, string from) : base(op, path, from)
+        public Operation(string op, string path, string? from) : base(op, path, from)
         {
             if (op == null) throw new ArgumentNullException(nameof(op));
             if (path == null) throw new ArgumentNullException(nameof(path));

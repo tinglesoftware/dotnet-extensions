@@ -13,7 +13,7 @@ namespace Tingle.Extensions.JsonPatch.Converters
             return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(JsonPatchDocument<>);
         }
 
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
             var modelType = typeToConvert.GetGenericArguments()[0];
             var conveterType = typeof(TypedJsonPatchDocumentConverterInner<>).MakeGenericType(modelType);
@@ -22,15 +22,16 @@ namespace Tingle.Extensions.JsonPatch.Converters
 
         internal class TypedJsonPatchDocumentConverterInner<T> : JsonConverter<JsonPatchDocument<T>> where T : class
         {
-            public override JsonPatchDocument<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            /// <inheritdoc/>
+            public override JsonPatchDocument<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                if (reader.TokenType == JsonTokenType.Null)
-                    return null;
+                if (reader.TokenType == JsonTokenType.Null) return default;
 
                 var operations = JsonSerializer.Deserialize<List<Operation<T>>>(ref reader, options);
-                return new JsonPatchDocument<T>(operations);
+                return new JsonPatchDocument<T>(operations ?? new List<Operation<T>>());
             }
 
+            /// <inheritdoc/>
             public override void Write(Utf8JsonWriter writer, JsonPatchDocument<T> value, JsonSerializerOptions options)
             {
                 // we write an array of the operations

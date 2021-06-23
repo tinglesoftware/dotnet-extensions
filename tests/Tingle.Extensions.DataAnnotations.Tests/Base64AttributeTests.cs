@@ -37,7 +37,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel
         {
             [Base64]
-            public string SomeKey { get; set; }
+            public string? SomeKey { get; set; }
         }
     }
 }

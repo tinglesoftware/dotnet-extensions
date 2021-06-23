@@ -25,12 +25,6 @@ namespace Tingle.Extensions.Json
         /// <inheritdoc/>
         public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
         {
-            if (value == null)
-            {
-                writer.WriteNullValue();
-                return;
-            }
-
             writer.WriteStringValue(value.ToString());
         }
     }

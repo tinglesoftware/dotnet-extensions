@@ -16,7 +16,7 @@ namespace Tingle.Extensions.PhoneValidators.Telkom
         // The digits are 70-79 when prefixed with 7
         internal const string RegExComplete = @"^(?:254|\+254|0)?(7(?:(?:7[0-9]))[0-9]{6})$";
 
-        private static readonly Regex regex = new Regex(@RegExComplete);
+        private static readonly Regex regex = new(@RegExComplete);
 
         /// <summary>
         /// Creates an instance of <see cref="TelkomPhoneNumberValidator"/>

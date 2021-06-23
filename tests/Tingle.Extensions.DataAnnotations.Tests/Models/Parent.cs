@@ -14,10 +14,10 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models
         [Range(0, 10, ErrorMessage = "Parent PropertyB not within range")]
         public int? PropertyB { get; set; }
 
-        public Child Child { get; set; }
+        public Child? Child { get; set; }
 
         [SkipRecursiveValidation]
-        public Child SkippedChild { get; set; }
+        public Child? SkippedChild { get; set; }
 
         [SaveValidationContext]
         public bool HasNoRealValidation { get; set; }

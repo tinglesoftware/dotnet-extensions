@@ -81,7 +81,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel3
         {
             [DateMustBeInThePast]
-            public string SomeField1 { get; set; }
+            public string? SomeField1 { get; set; }
 
             [DateMustBeInThePast]
             public int SomeField2 { get; set; }

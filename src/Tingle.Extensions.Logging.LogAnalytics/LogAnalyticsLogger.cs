@@ -30,7 +30,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
         /// <summary>
         /// Gets or sets the external scope provider.
         /// </summary>
-        internal IExternalScopeProvider ExternalScopeProvider { get; set; }
+        internal IExternalScopeProvider? ExternalScopeProvider { get; set; }
 
         ///<inheritdoc/>
         public IDisposable BeginScope<TState>(TState state) => ExternalScopeProvider?.Push(state) ?? NullScope.Instance;
@@ -124,7 +124,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
                     // Create payload in JSON and key from Base64
                     var payload = System.Text.Json.JsonSerializer.Serialize(data);
                     var key = Convert.FromBase64String(options.WorkspaceKey);
-                    var tsk = httpClient.UploadAsync(workspaceId: options.WorkspaceId,
+                    var tsk = httpClient.UploadAsync(workspaceId: options.WorkspaceId!,
                                                      workspaceKey: key,
                                                      payload: payload,
                                                      logType: options.LogTypeName,
