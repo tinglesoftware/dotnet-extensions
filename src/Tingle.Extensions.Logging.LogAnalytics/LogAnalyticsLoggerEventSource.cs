@@ -9,7 +9,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
     [EventSource(Name = "Tingle-LogAnalytics-LoggerProvider")]
     internal class LogAnalyticsLoggerEventSource : EventSource
     {
-        public static readonly LogAnalyticsLoggerEventSource Log = new LogAnalyticsLoggerEventSource();
+        public static readonly LogAnalyticsLoggerEventSource Log = new();
         public readonly string ApplicationName;
 
         private LogAnalyticsLoggerEventSource()

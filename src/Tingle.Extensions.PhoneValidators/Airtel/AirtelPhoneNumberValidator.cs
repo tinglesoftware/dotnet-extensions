@@ -16,7 +16,7 @@ namespace Tingle.Extensions.PhoneValidators.Airtel
         // The digits are 30-39, 50-56, 85-89 when prefixed with 7 and 00-02 when prefixed with 1
         internal const string RegExComplete = @"^(?:254|\+254|0)?((?:(?:7(?:(?:3[0-9])|(?:5[0-6])|(8[5-9])))|(?:1(?:[0][0-2])))[0-9]{6})$";
 
-        private static readonly Regex regex = new Regex(@RegExComplete);
+        private static readonly Regex regex = new(@RegExComplete);
 
         /// <summary>
         /// Creates an instance of <see cref="AirtelPhoneNumberValidator"/>
