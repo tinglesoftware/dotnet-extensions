@@ -7,11 +7,11 @@
     {
         /// <summary>Gets the value of the current <see cref="AnyOf"/> object.</summary>
         /// <returns>The value of the current <see cref="AnyOf"/> object.</returns>
-        public abstract object Value { get; }
+        public abstract object? Value { get; }
 
         /// <summary>Gets the type of the current <see cref="AnyOf"/> object.</summary>
         /// <returns>The type of the current <see cref="AnyOf"/> object.</returns>
-        public abstract Type Type { get; }
+        public abstract Type? Type { get; }
 
         /// <summary>Returns a string that represents the current object.</summary>
         /// <returns>A string that represents the current object.</returns>
@@ -28,8 +28,8 @@
     /// <typeparam name="T2">The second possible type of the value.</typeparam>
     public class AnyOf<T1, T2> : AnyOf
     {
-        private readonly T1 value1;
-        private readonly T2 value2;
+        private readonly T1? value1;
+        private readonly T2? value2;
         private readonly Values setValue;
 
         /// <summary>
@@ -60,7 +60,7 @@
 
         /// <summary>Gets the value of the current <see cref="AnyOf{T1, T2}"/> object.</summary>
         /// <returns>The value of the current <see cref="AnyOf{T1, T2}"/> object.</returns>
-        public override object Value => setValue switch
+        public override object? Value => setValue switch
         {
             Values.Value1 => value1,
             Values.Value2 => value2,
@@ -69,7 +69,7 @@
 
         /// <summary>Gets the type of the current <see cref="AnyOf{T1, T2}"/> object.</summary>
         /// <returns>The type of the current <see cref="AnyOf{T1, T2}"/> object.</returns>
-        public override Type Type => setValue switch
+        public override Type? Type => setValue switch
         {
             Values.Value1 => typeof(T1),
             Values.Value2 => typeof(T2),
@@ -81,14 +81,14 @@
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>An <see cref="AnyOf{T1, T2}"/> object that holds the value.</returns>
-        public static implicit operator AnyOf<T1, T2>(T1 value) => value == null ? null : new AnyOf<T1, T2>(value);
+        public static implicit operator AnyOf<T1, T2>?(T1? value) => value == null ? null : new AnyOf<T1, T2>(value);
 
         /// <summary>
         /// Converts a value of type <c>T2</c> to an <see cref="AnyOf{T1, T2}"/> object.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>An <see cref="AnyOf{T1, T2}"/> object that holds the value.</returns>
-        public static implicit operator AnyOf<T1, T2>(T2 value) => value == null ? null : new AnyOf<T1, T2>(value);
+        public static implicit operator AnyOf<T1, T2>?(T2? value) => value == null ? null : new AnyOf<T1, T2>(value);
 
         /// <summary>
         /// Converts an <see cref="AnyOf{T1, T2}"/> object to a value of type <c>T1</c>.
@@ -98,7 +98,7 @@
         /// A value of type <c>T1</c>. If the <see cref="AnyOf{T1, T2}"/> object currently
         /// holds a value of a different type, the default value for type <c>T1</c> is returned.
         /// </returns>
-        public static implicit operator T1(AnyOf<T1, T2> anyOf) => anyOf.value1;
+        public static implicit operator T1?(AnyOf<T1, T2> anyOf) => anyOf.value1;
 
         /// <summary>
         /// Converts a value of type <c>T2</c> to an <see cref="AnyOf{T1, T2}"/> object.
@@ -108,7 +108,7 @@
         /// A value of type <c>T2</c>. If the <see cref="AnyOf{T1, T2}"/> object currently
         /// holds a value of a different type, the default value for type <c>T2</c> is returned.
         /// </returns>
-        public static implicit operator T2(AnyOf<T1, T2> anyOf) => anyOf.value2;
+        public static implicit operator T2?(AnyOf<T1, T2> anyOf) => anyOf.value2;
     }
 
     /// <summary>
@@ -123,9 +123,9 @@
     /// <typeparam name="T3">The third possible type of the value.</typeparam>
     public class AnyOf<T1, T2, T3> : AnyOf
     {
-        private readonly T1 value1;
-        private readonly T2 value2;
-        private readonly T3 value3;
+        private readonly T1? value1;
+        private readonly T2? value2;
+        private readonly T3? value3;
         private readonly Values setValue;
 
         /// <summary>
@@ -170,7 +170,7 @@
 
         /// <summary>Gets the value of the current <see cref="AnyOf{T1, T2, T3}"/> object.</summary>
         /// <returns>The value of the current <see cref="AnyOf{T1, T2, T3}"/> object.</returns>
-        public override object Value => setValue switch
+        public override object? Value => setValue switch
         {
             Values.Value1 => value1,
             Values.Value2 => value2,
@@ -180,7 +180,7 @@
 
         /// <summary>Gets the type of the current <see cref="AnyOf{T1, T2, T3}"/> object.</summary>
         /// <returns>The type of the current <see cref="AnyOf{T1, T2, T3}"/> object.</returns>
-        public override Type Type => setValue switch
+        public override Type? Type => setValue switch
         {
             Values.Value1 => typeof(T1),
             Values.Value2 => typeof(T2),
@@ -193,21 +193,21 @@
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>An <see cref="AnyOf{T1, T2, T3}"/> object that holds the value.</returns>
-        public static implicit operator AnyOf<T1, T2, T3>(T1 value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
+        public static implicit operator AnyOf<T1, T2, T3>?(T1? value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
 
         /// <summary>
         /// Converts a value of type <c>T2</c> to an <see cref="AnyOf{T1, T2, T3}"/> object.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>An <see cref="AnyOf{T1, T2, T3}"/> object that holds the value.</returns>
-        public static implicit operator AnyOf<T1, T2, T3>(T2 value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
+        public static implicit operator AnyOf<T1, T2, T3>?(T2? value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
 
         /// <summary>
         /// Converts a value of type <c>T3</c> to an <see cref="AnyOf{T1, T2, T3}"/> object.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>An <see cref="AnyOf{T1, T2, T3}"/> object that holds the value.</returns>
-        public static implicit operator AnyOf<T1, T2, T3>(T3 value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
+        public static implicit operator AnyOf<T1, T2, T3>?(T3? value) => value == null ? null : new AnyOf<T1, T2, T3>(value);
 
         /// <summary>
         /// Converts an <see cref="AnyOf{T1, T2, T3}"/> object to a value of type <c>T1</c>.
@@ -217,7 +217,7 @@
         /// A value of type <c>T1</c>. If the <see cref="AnyOf{T1, T2, T3}"/> object currently
         /// holds a value of a different type, the default value for type <c>T3</c> is returned.
         /// </returns>
-        public static implicit operator T1(AnyOf<T1, T2, T3> anyOf) => anyOf.value1;
+        public static implicit operator T1?(AnyOf<T1, T2, T3> anyOf) => anyOf.value1;
 
         /// <summary>
         /// Converts an <see cref="AnyOf{T1, T2, T3}"/> object to a value of type <c>T2</c>.
@@ -227,7 +227,7 @@
         /// A value of type <c>T2</c>. If the <see cref="AnyOf{T1, T2, T3}"/> object currently
         /// holds a value of a different type, the default value for type <c>T3</c> is returned.
         /// </returns>
-        public static implicit operator T2(AnyOf<T1, T2, T3> anyOf) => anyOf.value2;
+        public static implicit operator T2?(AnyOf<T1, T2, T3> anyOf) => anyOf.value2;
 
         /// <summary>
         /// Converts an <see cref="AnyOf{T1, T2, T3}"/> object to a value of type <c>T3</c>.
@@ -237,6 +237,6 @@
         /// A value of type <c>T3</c>. If the <see cref="AnyOf{T1, T2, T3}"/> object currently
         /// holds a value of a different type, the default value for type <c>T3</c> is returned.
         /// </returns>
-        public static implicit operator T3(AnyOf<T1, T2, T3> anyOf) => anyOf.value3;
+        public static implicit operator T3?(AnyOf<T1, T2, T3> anyOf) => anyOf.value3;
     }
 }

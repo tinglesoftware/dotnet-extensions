@@ -7,10 +7,10 @@
     {
         /// <summary>Gets the value of the current <see cref="IAnyOf"/> object.</summary>
         /// <returns>The value of the current <see cref="IAnyOf"/> object.</returns>
-        object Value { get; }
+        object? Value { get; }
 
         /// <summary>Gets the type of the current <see cref="IAnyOf"/> object.</summary>
         /// <returns>The type of the current <see cref="IAnyOf"/> object.</returns>
-        Type Type { get; }
+        Type? Type { get; }
     }
 }
