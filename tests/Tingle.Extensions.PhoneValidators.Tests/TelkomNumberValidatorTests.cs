@@ -105,7 +105,7 @@ namespace Tingle.Extensions.PhoneValidators.Tests
         class TestModel
         {
             [TelkomPhoneNumber]
-            public string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
         }
     }
 }

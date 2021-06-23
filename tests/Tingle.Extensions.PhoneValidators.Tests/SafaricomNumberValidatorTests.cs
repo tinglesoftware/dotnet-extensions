@@ -134,7 +134,7 @@ namespace Tingle.Extensions.PhoneValidators.Tests
         class TestModel
         {
             [SafaricomPhoneNumber]
-            public string PhoneNumber { get; set; }
+            public string? PhoneNumber { get; set; }
         }
     }
 }

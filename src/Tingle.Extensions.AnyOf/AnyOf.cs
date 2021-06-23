@@ -36,7 +36,7 @@
         /// Initializes a new instance of the <see cref="AnyOf{T1, T2}"/> class with type <c>T1</c>.
         /// </summary>
         /// <param name="value">The value to hold.</param>
-        public AnyOf(T1 value)
+        public AnyOf(T1? value)
         {
             value1 = value;
             setValue = Values.Value1;
@@ -46,7 +46,7 @@
         /// Initializes a new instance of the <see cref="AnyOf{T1, T2}"/> class with type <c>T2</c>.
         /// </summary>
         /// <param name="value">The value to hold.</param>
-        public AnyOf(T2 value)
+        public AnyOf(T2? value)
         {
             value2 = value;
             setValue = Values.Value2;
@@ -133,7 +133,7 @@
         /// <c>T1</c>.
         /// </summary>
         /// <param name="value">The value to hold.</param>
-        public AnyOf(T1 value)
+        public AnyOf(T1? value)
         {
             value1 = value;
             setValue = Values.Value1;
@@ -144,7 +144,7 @@
         /// <c>T2</c>.
         /// </summary>
         /// <param name="value">The value to hold.</param>
-        public AnyOf(T2 value)
+        public AnyOf(T2? value)
         {
             value2 = value;
             setValue = Values.Value2;
@@ -155,7 +155,7 @@
         /// <c>T3</c>.
         /// </summary>
         /// <param name="value">The value to hold.</param>
-        public AnyOf(T3 value)
+        public AnyOf(T3? value)
         {
             value3 = value;
             setValue = Values.Value3;

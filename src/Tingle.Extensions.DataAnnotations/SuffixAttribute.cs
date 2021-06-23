@@ -30,6 +30,6 @@
         public override string FormatErrorMessage(string name) => string.Format(ErrorMessageString, name, suffix);
 
         /// <inheritdoc/>
-        public override bool IsValid(object? value) => value is not string s || string.IsNullOrEmpty(s) || s.EndsWith(suffix, Comparison);
+        public override bool IsValid(object? value) => value is not string s || s == null || s.EndsWith(suffix, Comparison);
     }
 }

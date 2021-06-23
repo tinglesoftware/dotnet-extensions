@@ -7,7 +7,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models
     public class Child : IValidatableObject
     {
         [Required(ErrorMessage = "Child Parent is required")]
-        public Parent Parent { get; set; }
+        public Parent? Parent { get; set; }
 
         [Required(ErrorMessage = "Child PropertyA is required")]
         [Range(0, 10, ErrorMessage = "Child PropertyA not within range")]
@@ -17,7 +17,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models
         [Range(0, 10, ErrorMessage = "Child PropertyB not within range")]
         public int? PropertyB { get; set; }
 
-        public IEnumerable<GrandChild> GrandChildren { get; set; }
+        public IEnumerable<GrandChild>? GrandChildren { get; set; }
 
         [SaveValidationContext]
         public bool HasNoRealValidation { get; set; }

@@ -37,7 +37,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel
         {
             [KRAPin]
-            public string KRAPinNumber { get; set; }
+            public string? KRAPinNumber { get; set; }
         }
     }
 }

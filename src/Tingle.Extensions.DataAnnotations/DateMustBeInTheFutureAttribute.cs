@@ -14,8 +14,8 @@
         /// <inheritdoc/>
         public override bool IsValid(object? value)
         {
-            return (value is DateTimeOffset dto && dto < DateTimeOffset.UtcNow)
-                || (value is DateTime dt && dt < DateTime.UtcNow);
+            return !((value is DateTimeOffset dto && dto < DateTimeOffset.UtcNow)
+                  || (value is DateTime dt && dt < DateTime.UtcNow));
         }
     }
 }

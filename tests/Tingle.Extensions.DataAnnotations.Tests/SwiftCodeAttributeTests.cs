@@ -39,7 +39,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel
         {
             [SwiftCode]
-            public string TransferTo { get; set; }
+            public string? TransferTo { get; set; }
         }
     }
 }

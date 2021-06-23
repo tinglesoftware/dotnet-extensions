@@ -38,7 +38,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel
         {
             [Prefix("test")]
-            public string SomeValue { get; set; }
+            public string? SomeValue { get; set; }
         }
     }
 }

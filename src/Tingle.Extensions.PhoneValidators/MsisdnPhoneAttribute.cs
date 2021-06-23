@@ -17,6 +17,7 @@ namespace System.ComponentModel.DataAnnotations
         public override bool IsValid(object? value)
         {
             if (value is not string s || string.IsNullOrEmpty(s)) return true;
+            if (s.StartsWith("+")) return false;
             try
             {
                 var prepended = "+" + s;

@@ -167,19 +167,19 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel3
         {
             [AllowedValues("blue", "green", "yellow")]
-            public string SomeValue { get; set; }
+            public string? SomeValue { get; set; }
         }
 
         class TestModel4
         {
             [AllowedValues("blue", "green", "yellow")]
-            public List<string> SomeValues { get; set; }
+            public List<string>? SomeValues { get; set; }
         }
 
         class TestModel5
         {
             [AllowedValues("blue", "green", "yellow")]
-            public List<string> SomeValues { get; set; }
+            public List<string>? SomeValues { get; set; }
         }
 
         class TestModel6
@@ -191,10 +191,10 @@ namespace Tingle.Extensions.DataAnnotations.Tests
             public float? SomeFloatValue { get; set; }
 
             [AllowedValues("blue", "green", "yellow")]
-            public string SomeStringValue { get; set; }
+            public string? SomeStringValue { get; set; }
 
             [AllowedValues("blue", "green", "yellow")]
-            public List<string> SomeStringValues { get; set; }
+            public List<string>? SomeStringValues { get; set; }
         }
     }
 }

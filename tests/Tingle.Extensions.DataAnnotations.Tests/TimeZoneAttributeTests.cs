@@ -43,7 +43,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
         class TestModel
         {
             [TimeZone]
-            public string SomeValue { get; set; }
+            public string? SomeValue { get; set; }
         }
     }
 }

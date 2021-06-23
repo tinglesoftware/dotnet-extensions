@@ -4,6 +4,6 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models
 {
     public class ClassWithDictionary
     {
-        public List<Dictionary<string, Child>> Objects { get; set; }
+        public List<Dictionary<string, Child>>? Objects { get; set; }
     }
 }

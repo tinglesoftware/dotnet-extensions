@@ -43,7 +43,7 @@ namespace Tingle.Extensions.PhoneValidators.Tests
         class TestModel1
         {
             [MsisdnPhone]
-            public string SomePhoneNumber { get; set; }
+            public string? SomePhoneNumber { get; set; }
         }
     }
 }

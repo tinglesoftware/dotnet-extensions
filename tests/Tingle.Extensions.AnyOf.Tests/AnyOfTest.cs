@@ -18,48 +18,33 @@ namespace Tingle.Extensions.AnyOf.Tests
         public static readonly IEnumerable<object[]> variant2TypesTestData = new List<object[]>
         {
             new object []{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string>(default(int)),
-                    WantValue = default(int),
-                    WantType = typeof(int),
-                },
+                new TestCase(new AnyOf<int, string>(default(int)),
+                             default(int),
+                             typeof(int)),
             },
 
             new object []{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string>(234),
-                    WantValue = 234,
-                    WantType = typeof(int),
-                },
+                new TestCase(new AnyOf<int, string>(234),
+                             234,
+                             typeof(int)),
             },
 
             new object []{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string>(default(string)),
-                    WantValue = default(string),
-                    WantType = typeof(string),
-                },
+                new TestCase(new AnyOf<int, string>(default(string?)),
+                             default(string?),
+                             typeof(string)),
             },
 
             new object []{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string>("Hello!"),
-                    WantValue = "Hello!",
-                    WantType = typeof(string),
-                },
+                new TestCase(new AnyOf<int, string>("Hello!"),
+                             "Hello!",
+                             typeof(string)),
             },
 
             new object []{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int?, string>(default(int?)),
-                    WantValue = default(int?),
-                    WantType = typeof(int?),
-                },
+                new TestCase(new AnyOf<int?, string>(default(int?)),
+                             default(int?),
+                             typeof(int?)),
             },
         };
 
@@ -76,67 +61,46 @@ namespace Tingle.Extensions.AnyOf.Tests
         {
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string, SomeClass>(default(int)),
-                    WantValue = default(int),
-                    WantType = typeof(int),
-                },
+                new TestCase(new AnyOf<int, string, SomeClass>(default(int)),
+                             default(int),
+                             typeof(int)),
             };
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string, SomeClass>(234),
-                    WantValue = 234,
-                    WantType = typeof(int),
-                },
+                new TestCase(new AnyOf<int, string, SomeClass>(234),
+                             234,
+                             typeof(int)),
             };
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string, SomeClass>(default(string)),
-                    WantValue = default(string),
-                    WantType = typeof(string),
-                },
+                new TestCase(new AnyOf<int, string, SomeClass>(default(string)),
+                             default(string),
+                             typeof(string)),
             };
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int, string, SomeClass>("Hello!"),
-                    WantValue = "Hello!",
-                    WantType = typeof(string),
-                },
+                new TestCase(new AnyOf<int, string, SomeClass>("Hello!"),
+                             "Hello!",
+                             typeof(string)),
             };
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int?, string, SomeClass>(default(int?)),
-                    WantValue = default(int?),
-                    WantType = typeof(int?),
-                },
+                new TestCase(new AnyOf<int?, string, SomeClass>(default(int?)),
+                             default(int?),
+                             typeof(int?)),
             };
 
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int?, string, SomeClass>(default(SomeClass)),
-                    WantValue = default(SomeClass),
-                    WantType = typeof(SomeClass),
-                },
+                new TestCase(new AnyOf<int?, string, SomeClass>(default(SomeClass)),
+                             default(SomeClass),
+                             typeof(SomeClass)),
             };
 
             var someClass = new SomeClass { SomeString = "foo" };
             yield return new object[]{
-                new TestCase
-                {
-                    AnyOf = new AnyOf<int?, string, SomeClass>(someClass),
-                    WantValue = someClass,
-                    WantType = typeof(SomeClass),
-                },
+                new TestCase(new AnyOf<int?, string, SomeClass>(someClass),
+                             someClass,
+                             typeof(SomeClass)),
             };
         }
 
@@ -153,33 +117,40 @@ namespace Tingle.Extensions.AnyOf.Tests
         {
             new object []{new Container(),},
             new object []{new Container { AnyOf2 = null },},
-            new object []{new Container { AnyOf2 = (AnyOf<int, string>)null },},
-            new object []{new Container { AnyOf2 = (string)null },},
+            new object []{new Container { AnyOf2 = null },},
+            new object []{new Container { AnyOf2 = null },},
             new object []{new Container { AnyOf3 = null },},
-            new object []{new Container { AnyOf3 = (AnyOf<int, string, SomeClass>)null },},
-            new object []{new Container { AnyOf3 = (string)null },},
-            new object []{new Container { AnyOf3 = (SomeClass)null },},
+            new object []{new Container { AnyOf3 = null },},
+            new object []{new Container { AnyOf3 = null },},
+            new object []{new Container { AnyOf3 = null },},
         };
 
         private class TestCase
         {
+            public TestCase(IAnyOf anyOf, object? wantValue, Type wantType)
+            {
+                AnyOf = anyOf ?? throw new ArgumentNullException(nameof(anyOf));
+                WantValue = wantValue;
+                WantType = wantType ?? throw new ArgumentNullException(nameof(wantType));
+            }
+
             public IAnyOf AnyOf { get; set; }
 
-            public object WantValue { get; set; }
+            public object? WantValue { get; set; }
 
             public Type WantType { get; set; }
         }
 
         private class SomeClass
         {
-            public string SomeString { get; set; }
+            public string? SomeString { get; set; }
         }
 
         private class Container
         {
-            public AnyOf<int, string> AnyOf2 { get; set; }
+            public AnyOf<int, string>? AnyOf2 { get; set; }
 
-            public AnyOf<int, string, SomeClass> AnyOf3 { get; set; }
+            public AnyOf<int, string, SomeClass>? AnyOf3 { get; set; }
         }
     }
 }

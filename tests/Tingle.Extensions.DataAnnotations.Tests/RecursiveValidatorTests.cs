@@ -121,7 +121,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
             };
             var validationResults = new List<ValidationResult>();
 
-            var contextItems = new Dictionary<object, object> { { "key", 12345 } };
+            var contextItems = new Dictionary<object, object?> { { "key", 12345 } };
 
             RecursiveValidator.TryValidateObjectRecursive(parent, validationResults, contextItems);
 
@@ -215,7 +215,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests
             var parent = new Parent { PropertyA = 1, PropertyB = 1 };
             var classWithNullableEnumeration = new ClassWithNullableEnumeration
             {
-                Objects = new List<Child>
+                Objects = new List<Child?>
                 {
                     null,
                     new Child
