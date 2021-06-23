@@ -10,16 +10,17 @@ namespace Tingle.Extensions.Json
     public class VersionConverter : JsonConverter<Version>
     {
         /// <inheritdoc/>
-        public override Version Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Version? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             // only support from string
+            if (reader.TokenType == JsonTokenType.Null) return default;
             if (reader.TokenType != JsonTokenType.String)
             {
                 throw new InvalidOperationException("Only strings are supported");
             }
-                var s = reader.GetString();
-                return Version.Parse(s);
 
+            var s = reader.GetString();
+            return Version.Parse(s);
         }
 
         /// <inheritdoc/>

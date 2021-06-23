@@ -23,7 +23,7 @@ namespace Tingle.Extensions.JsonPatch.Helpers
             return "/" + GetPath(expr.Body, caseTransformType, true);
         }
 
-        private static string GetPath(Expression expr, CaseTransformType caseTransformType, bool firstTime)
+        private static string? GetPath(Expression expr, CaseTransformType caseTransformType, bool firstTime)
         {
             switch (expr.NodeType)
             {
@@ -58,7 +58,7 @@ namespace Tingle.Extensions.JsonPatch.Helpers
                     return GetPath(((UnaryExpression)expr).Operand, caseTransformType, false);
 
                 case ExpressionType.MemberAccess:
-                    var memberExpression = expr as MemberExpression;
+                    var memberExpression = (MemberExpression)expr;
 
                     if (ContinueWithSubPath(memberExpression.Expression.NodeType, false))
                     {
@@ -74,7 +74,7 @@ namespace Tingle.Extensions.JsonPatch.Helpers
                         if (jsonPropertyAttribute.Length > 0)
                         {
                             // get value
-                            var castedAttribrute = jsonPropertyAttribute[0] as JsonPropertyNameAttribute;
+                            var castedAttribrute = (JsonPropertyNameAttribute)jsonPropertyAttribute[0];
                             return left + "/" + CaseTransform(castedAttribrute.Name, caseTransformType);
                         }
 
@@ -92,7 +92,7 @@ namespace Tingle.Extensions.JsonPatch.Helpers
                         if (jsonPropertyAttribute.Length > 0)
                         {
                             // get value
-                            var castedAttribrute = jsonPropertyAttribute[0] as JsonPropertyNameAttribute;
+                            var castedAttribrute = (JsonPropertyNameAttribute)jsonPropertyAttribute[0];
                             return CaseTransform(castedAttribrute.Name, caseTransformType);
                         }
 
@@ -131,11 +131,9 @@ namespace Tingle.Extensions.JsonPatch.Helpers
         {
             var converted = Expression.Convert(expression, typeof(object));
             var fakeParameter = Expression.Parameter(typeof(object), null);
-            var lambda = Expression.Lambda<Func<object, object>>(converted, fakeParameter);
-            Func<object, object> func;
+            var lambda = Expression.Lambda<Func<object?, object>>(converted, fakeParameter);
 
-            func = lambda.Compile();
-
+            var func = lambda.Compile();
             return Convert.ToString(func(null), CultureInfo.InvariantCulture);
         }
 

@@ -5,13 +5,13 @@ namespace Tingle.Extensions.JsonPatch.Exceptions
 {
     public class JsonPatchException : Exception
     {
-        public Operation FailedOperation { get; private set; }
-        public object AffectedObject { get; private set; }
+        public Operation? FailedOperation { get; private set; }
+        public object? AffectedObject { get; private set; }
 
 
         public JsonPatchException() { }
 
-        public JsonPatchException(JsonPatchError jsonPatchError, Exception innerException)
+        public JsonPatchException(JsonPatchError jsonPatchError, Exception? innerException)
             : base(jsonPatchError.ErrorMessage, innerException)
         {
             FailedOperation = jsonPatchError.Operation;
@@ -20,6 +20,6 @@ namespace Tingle.Extensions.JsonPatch.Exceptions
 
         public JsonPatchException(JsonPatchError jsonPatchError) : this(jsonPatchError, null) { }
 
-        public JsonPatchException(string message, Exception innerException) : base(message, innerException) { }
+        public JsonPatchException(string message, Exception? innerException) : base(message, innerException) { }
     }
 }

@@ -8,16 +8,16 @@ namespace Tingle.Extensions.JsonPatch.Operations
     public class Operation : OperationBase
     {
         [JsonPropertyName("value")]
-        public object value { get; set; }
+        public object? value { get; set; }
 
         public Operation() { }
 
-        public Operation(string op, string path, string from, object value) : base(op, path, from)
+        public Operation(string op, string path, string? from, object? value) : base(op, path, from)
         {
             this.value = value;
         }
 
-        public Operation(string op, string path, string from) : base(op, path, from) { }
+        public Operation(string op, string path, string? from) : base(op, path, from) { }
 
         public void Apply(object objectToApplyTo, IObjectAdapter adapter)
         {

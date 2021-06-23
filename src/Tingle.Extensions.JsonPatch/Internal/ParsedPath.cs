@@ -26,7 +26,7 @@ namespace Tingle.Extensions.JsonPatch.Internal
             _segments = ParsePath(path);
         }
 
-        public string LastSegment
+        public string? LastSegment
         {
             get
             {
