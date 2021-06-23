@@ -21,7 +21,7 @@ namespace Tingle.Extensions.Processing
         /// </summary>
         /// <param name="batchSize">the maximum number of items in a batch</param>
         /// <param name="handler">the handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
-        public SplitAndBatchProcessor(int batchSize = 10, Func<List<T>, CancellationToken, Task> handler = null)
+        public SplitAndBatchProcessor(int batchSize = 10, Func<List<T>, CancellationToken, Task>? handler = null)
         {
             this.batchSize = batchSize;
             this.handler = handler ?? ((s, c) => Task.CompletedTask);

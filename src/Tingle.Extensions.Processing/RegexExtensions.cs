@@ -15,10 +15,17 @@
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">the input is null</exception>
         /// <exception cref="RegexMatchTimeoutException">a time-out occurred. For more information about time-outs, see the Remarks section.</exception>
-        public static bool Match(this Regex regex, string input, out Match match)
+        public static bool Match(this Regex regex, string input, out Match? match)
         {
-            match = regex.Match(input);
-            return match.Success;
+            var m = regex.Match(input);
+            if (m.Success)
+            {
+                match = m;
+                return true;
+            }
+
+            match = default;
+            return false;
         }
     }
 }
