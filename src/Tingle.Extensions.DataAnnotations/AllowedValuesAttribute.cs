@@ -26,19 +26,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         public AllowedValuesAttribute(params object[] allowedValues) : this(allowedValues.AsEnumerable()) { }
 
-        /// <summary>
-        /// Validates the specified object.
-        /// </summary>
-        /// <param name="value">The object to validate.</param>
-        /// <param name="validationContext">
-        /// The <see cref="ValidationContext"/> object that describes
-        /// the context where the validation checks are performed. This parameter cannot
-        /// be null.
-        /// </param>
-        /// <exception cref="ValidationException">Validation failed.</exception>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        /// <inheritdoc/>
+        public override bool IsValid(object? value)
         {
-            if (value is null) return ValidationResult.Success;
+            if (value is null) return true;
 
             // if the value is an enumerable, create values from each, otherwise its just the value
             var values = !(value is string) && value is IEnumerable ie
@@ -49,16 +40,8 @@ namespace System.ComponentModel.DataAnnotations
             var unknown = values.Where(o => !allowedValues.Contains(o, comparer: comparer))
                                 .ToList();
 
-            // if there are any, create validation error
-            if (unknown.Any())
-            {
-                var em = string.Format(ErrorMessageString, string.Join(",", unknown), validationContext.DisplayName);
-                return new ValidationResult(errorMessage: em,
-                                            memberNames: new string[] { validationContext.MemberName });
-            }
-
-            // any other value type just passes
-            return ValidationResult.Success;
+            // succeed only if there no unknown values
+            return !unknown.Any();
         }
     }
 }

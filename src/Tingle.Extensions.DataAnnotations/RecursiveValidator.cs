@@ -24,7 +24,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <exception cref="ArgumentNullException">instance is null.</exception>
         public static bool TryValidateObject(object instance,
                                              ICollection<ValidationResult> validationResults,
-                                             IDictionary<object, object> validationContextItems = null)
+                                             IDictionary<object, object?>? validationContextItems = null)
         {
             var context = new ValidationContext(instance, null, validationContextItems);
             return Validator.TryValidateObject(instance: instance,
@@ -42,7 +42,7 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <exception cref="ValidationException">instance is not valid.</exception>
         /// <exception cref="ArgumentNullException">instance is null.</exception>
-        public static void ValidateObject(object instance, IDictionary<object, object> validationContextItems = null)
+        public static void ValidateObject(object instance, IDictionary<object, object?>? validationContextItems = null)
         {
             var context = new ValidationContext(instance, null, validationContextItems);
             Validator.ValidateObject(instance: instance,
@@ -63,7 +63,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <exception cref="ArgumentNullException">instance is null.</exception>
         public static bool TryValidateObjectRecursive(object instance,
                                                       ICollection<ValidationResult> validationResults,
-                                                      IDictionary<object, object> validationContextItems = null)
+                                                      IDictionary<object, object?>? validationContextItems = null)
         {
             return TryValidateObjectRecursive(instance: instance,
                                               validationResults: validationResults,
@@ -80,7 +80,7 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <exception cref="ValidationException">instance is not valid.</exception>
         /// <exception cref="ArgumentNullException">instance is null.</exception>
-        public static void ValidateObjectRecursive(object instance, IDictionary<object, object> validationContextItems = null)
+        public static void ValidateObjectRecursive(object instance, IDictionary<object, object?>? validationContextItems = null)
         {
             ValidateObjectRecursive(instance: instance,
                                     validatedObjects: new HashSet<object>(),
@@ -90,7 +90,7 @@ namespace System.ComponentModel.DataAnnotations
         private static bool TryValidateObjectRecursive(object instance,
                                                        ICollection<ValidationResult> validationResults,
                                                        ISet<object> validatedObjects,
-                                                       IDictionary<object, object> validationContextItems = null)
+                                                       IDictionary<object, object?>? validationContextItems = null)
         {
             //short-circuit to avoid infinit loops on cyclical object graphs
             if (validatedObjects.Contains(instance))
@@ -152,7 +152,7 @@ namespace System.ComponentModel.DataAnnotations
 
         private static void ValidateObjectRecursive(object instance,
                                                     ISet<object> validatedObjects,
-                                                    IDictionary<object, object> validationContextItems = null)
+                                                    IDictionary<object, object?>? validationContextItems = null)
         {
             //short-circuit to avoid infinit loops on cyclical object graphs
             if (validatedObjects.Contains(instance))
