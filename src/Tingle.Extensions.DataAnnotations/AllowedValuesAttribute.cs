@@ -11,7 +11,6 @@ namespace System.ComponentModel.DataAnnotations
     public class AllowedValuesAttribute : ValidationAttribute
     {
         private readonly IEnumerable<object> allowedValues;
-        private readonly IEqualityComparer<object> comparer = EqualityComparer<object>.Default;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.
@@ -26,6 +25,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         public AllowedValuesAttribute(params object[] allowedValues) : this(allowedValues.AsEnumerable()) { }
 
+        /// <summary>
+        /// An equality comparer to compare values.
+        /// Defaults to <see cref="EqualityComparer{T}.Default"/>.
+        /// </summary>
+        public IEqualityComparer<object> Comparer { get; set; } = EqualityComparer<object>.Default;
+
         /// <inheritdoc/>
         public override bool IsValid(object? value)
         {
@@ -37,7 +42,7 @@ namespace System.ComponentModel.DataAnnotations
                 : new List<object> { value };
 
             // find the values not allowed
-            var unknown = values.Where(o => !allowedValues.Contains(o, comparer: comparer))
+            var unknown = values.Where(o => !allowedValues.Contains(o, comparer: Comparer))
                                 .ToList();
 
             // succeed only if there no unknown values
