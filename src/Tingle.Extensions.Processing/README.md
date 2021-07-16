@@ -18,7 +18,10 @@ Regex rg = new Regex(pattern);
 // Long string  
 string authors = "Mahesh Chand, Raj Kumar, Mike Gold, Allen O'Neill, Marshal Troll";
 
-bool isMatch = rg.Match(authors, out Match? match);
+if(rg.Match(authors, out Match? match))
+{
+    // your logic here...
+}
 ```
 
 ## Set a Timeout For Tasks
