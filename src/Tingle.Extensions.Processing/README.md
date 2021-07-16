@@ -28,9 +28,29 @@ You can set the amount of time to wait for a task. If the specified timeout is e
 Below is a sample usage:
 
 ```cs
-var task = Task.Run(() => DoExpensiveOperation(someParameter));
+var task = Task.Run(() => DoExpensiveOperationAsync(someParameter));
 await task.WithTimeout(TimeSpan.FromSeconds(10));
 ```
+
+## Attach a Fault Action To a Task
+
+Sometimes execution of tasks can result in unhandled exceptions. This is normally indicated by the `Status` property transitioning to `TaskStatus.Faulted`. With this functionality, you can attach an `Action<Task>` or `Action<Task<TResult>>` that'll be executed if this happens.
+
+Below is a sample usage:
+
+```cs
+
+Task HandleFaultAsync()
+{
+    //...Your logic here
+    return Task.CompletedTask;
+}
+
+var task = Task.Run(() => DoExpensiveOperationThatMayThrowAsync(someParameter));
+await task.OnFault(HandleFaultAsync);
+```
+
+An override of the `OnFault` method can allow the object state to be passed along for use by the continuation action.
 
 ## Reading from embedded resources
 
