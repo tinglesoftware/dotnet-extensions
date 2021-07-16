@@ -4,6 +4,23 @@ This library provides various processing functionalities that are commonly encou
 
 The various functionalities will be described using examples below.
 
+## Simplified Regex Matching
+
+A simple one liner that searches the specified input string for the first occurrence that matches the regular expression.
+
+```cs
+// Create a pattern for a word that starts with letter "M"  
+string pattern = @"\b[M]\w+";
+
+// Create a Regex  
+Regex rg = new Regex(pattern);
+
+// Long string  
+string authors = "Mahesh Chand, Raj Kumar, Mike Gold, Allen O'Neill, Marshal Troll";
+
+bool isMatch = rg.Match(authors, out Match? match);
+```
+
 ## Reading from embedded resources
 
 There are often times when we as developers need to read from files that have been included when compiling the assembly output.
