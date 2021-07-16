@@ -21,6 +21,17 @@ string authors = "Mahesh Chand, Raj Kumar, Mike Gold, Allen O'Neill, Marshal Tro
 bool isMatch = rg.Match(authors, out Match? match);
 ```
 
+## Set a Timeout For Tasks
+
+You can set the amount of time to wait for a task. If the specified timeout is exceeded a `TimeoutException` will be thrown. This can be convenient especially when you have expensive operations being awaited.
+
+Below is a sample usage:
+
+```cs
+var task = Task.Run(() => DoExpensiveOperation(someParameter));
+await task.WithTimeout(TimeSpan.FromSeconds(10));
+```
+
 ## Reading from embedded resources
 
 There are often times when we as developers need to read from files that have been included when compiling the assembly output.
