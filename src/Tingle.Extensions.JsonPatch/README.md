@@ -44,7 +44,7 @@ A JSON Patch document has an array of operations. Each operation identifies a pa
 Let us create `JsonPatchDocument<Customer>` instance to demonstrate the various patching functionalities we provide.
 
 ```cs
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 // Define operations here...
 ```
 
@@ -61,7 +61,7 @@ var order = new Order
     Quantity = 10
 };
 
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Add(x => x.Name, "Ben")
         .Add(y => y.Orders, order);
 ```
@@ -71,7 +71,7 @@ patchDoc.Add(x => x.Name, "Ben")
 Let us set the `Name` to null and delete `orders[0]`
 
 ```cs
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Remove(x => x.Name, null)
         .Remove(y => y.Orders, 0);
 ```
@@ -87,7 +87,7 @@ var order = new Order
     Quantity = 1
 };
 
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Replace(x => x.Name, null)
         .Replace(y => y.Orders, order, 0);
 ```
@@ -99,7 +99,7 @@ The `Replace` operation can also be used to replace items in a dictionary by the
 Let us Move `orders[1]` to before `orders[0]` and set `AlternateName` from the `Name` value.
 
 ```cs
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Move(x => x.Orders, 0, y => y.Orders, 1) // swap the orders
         .Move(x => x.Name, y => y.AlternateName); // set AlternateName to Name while leaving Name as null
 ```
@@ -111,7 +111,7 @@ This operation is fundamentally the same as `Move` without the final `Remove` st
 Let us in the example below copy the value of `Name` to the `AlternateName` and insert a copy of `orders[1]` before `orders[0]`.
 
 ```cs
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Copy(x => x.Orders, 1, y => y.Orders, 0)
         .Copy(x => x.Name, y => y.AlternateName);
 ```
@@ -123,7 +123,7 @@ This operation is is commonly used to prevent an update when there's a concurren
 The following sample patch document has no effect if the initial value of `Name` is "John", because the test fails:
 
 ```cs
-var patchDoc= new JsonPatchDocument<Customer>();
+var patchDoc = new JsonPatchDocument<Customer>();
 patchDoc.Test(x => x.Name, "Andrew")
         .Add(x => x.Name, "Ben");
 ```
