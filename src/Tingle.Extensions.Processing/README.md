@@ -1,6 +1,6 @@
 # Tingle.Extensions.Processing
 
-This library provides various processing functionalities that are commonly encountered by developers. 
+This library provides various processing functionalities that are commonly encountered by developers.
 
 The various functionalities will be described using examples below.
 
@@ -9,13 +9,13 @@ The various functionalities will be described using examples below.
 A simple one liner that searches the specified input string for the first occurrence that matches the regular expression.
 
 ```cs
-// Create a pattern for a word that starts with letter "M"  
+// Create a pattern for a word that starts with letter "M"
 string pattern = @"\b[M]\w+";
 
-// Create a Regex  
+// Create a Regex
 Regex rg = new Regex(pattern);
 
-// Long string  
+// Long string
 string authors = "Mahesh Chand, Raj Kumar, Mike Gold, Allen O'Neill, Marshal Troll";
 
 if(rg.Match(authors, out Match? match))
@@ -103,7 +103,7 @@ Here we are also providing the `Samples` parameter as the folder name where the 
 
 ## Sequential Batch Processing
 
-There are scenarios when we need to do some sort of processing of items in an `IEnumerable` but wish to do so in a parallel fashion without splitting up the items so as to ensure processing order of items is guaranteed. 
+There are scenarios when we need to do some sort of processing of items in an `IEnumerable` but wish to do so in a parallel fashion without splitting up the items so as to ensure processing order of items is guaranteed.
 
 Let us look at an example of how we can help to accomplish this.
 
@@ -134,7 +134,7 @@ Therefore, we can process the `tokens` in a squential manner. By default, `Seque
 
 ## Split and Batch Processing
 
-With this functionality, you can split a list of items and then process the splits in parallel. For example, a list of 2,000 items with a batchSize of 100 to produce 20 batches which would be processed in parallel. 
+With this functionality, you can split a list of items and then process the splits in parallel. For example, a list of 2,000 items with a batchSize of 100 to produce 20 batches which would be processed in parallel.
 
 However, unlike the Sequential Batch Processing described above, the processing order isn't guaranteed.
 
@@ -156,7 +156,3 @@ await processor.ProcessAsync(items: tokens, cancellationToken);
 ```
 
 The list of `tokens` will be split into batches of 10 and then the slices will be processed in parallel. The batch size is set to 10 by default but a developer can change this to suit their own specific requirements.
-
-
-
-
