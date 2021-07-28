@@ -10,12 +10,22 @@ There are two classes in this library namely `AnyOf<T1,T2>` and `AnyOf<T1,T2,T3>
 This class holds a value of one of two different types.  
 
 ### Example 1 
-A connection string can either be a string or a credentials object. 
+Let's assume that to access a particular service, you require to provide a `Credential` that can either be a connection string or an `AccessToken` object. The `Credential` is therefore of type `AnyOf<string, AccessToken>`
 
 ```csharp
-using System;
+//the token access object
+public class AccessToken 
+{
+   //token properties go here 
+}
 
-//example goes here
+//usage
+public class ConnectionManager 
+{
+  public AnyOf<string, AccessToken> Credential { get; set; }
+
+  //other properties and methods go here
+}
 
 ```  
 
@@ -25,7 +35,7 @@ This generic class can hold a value of on of three different types.
 
 ### Example 2 
 
-Suppose the connection string in _Example 1_ supports three different types: 
+Suppose the `Credential` in _Example 1_ supports three different types: 
 
 ```csharp
 using System;
