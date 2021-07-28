@@ -35,12 +35,22 @@ This generic class can hold a value of on of three different types.
 
 ### Example 2 
 
-Suppose the `Credential` in _Example 1_ supports three different types: 
+Suppose the `Credential` in _Example 1_ supports a third type, a `DigitalCertificate`. The `Credential` will therefore be of type `AnyOf<string, AccessToken, DigitalCertificate>`. 
 
 ```csharp
-using System;
+//digital certificate object
+public class DigitalCertificate
+{
+  //certificate properties
+}
 
-//example goes here
+//usage
+public class ConnectionManager 
+{
+  public AnyOf<string, AccessToken, DigitalCertificate> Credential { get; set; }
+
+  //other properties and methods go here
+}
 
 ```
  
