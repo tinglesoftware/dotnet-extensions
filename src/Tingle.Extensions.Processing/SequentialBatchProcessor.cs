@@ -35,7 +35,9 @@ namespace Tingle.Extensions.Processing
         /// <returns></returns>
         protected virtual async Task HandleAsync(T item, CancellationToken cancellationToken = default)
         {
+#pragma warning disable CAC001 // ConfigureAwaitChecker
             await handler(item, cancellationToken);
+#pragma warning restore CAC001 // ConfigureAwaitChecker
         }
 
         /// <summary>
@@ -52,12 +54,12 @@ namespace Tingle.Extensions.Processing
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // wait for the handle to be ready
-                await concurrencyLimiter.WaitAsync(cancellationToken);
+                await concurrencyLimiter.WaitAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
                     // handle the item
-                    await HandleAsync(item, cancellationToken);
+                    await HandleAsync(item, cancellationToken).ConfigureAwait(false);
                 }
                 finally
                 {
