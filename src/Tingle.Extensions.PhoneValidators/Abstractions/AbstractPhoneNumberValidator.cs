@@ -29,7 +29,7 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         }
 
         /// <inheritdoc/>
-        public IEnumerable<string>? MakePossibleValues(string phoneNumber)
+        public IEnumerable<string> MakePossibleValues(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber))
             {
