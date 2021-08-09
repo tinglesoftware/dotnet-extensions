@@ -1,4 +1,6 @@
-﻿namespace System.Text.RegularExpressions
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System.Text.RegularExpressions
 {
     /// <summary>
     /// Extension methods for <see cref="Regex"/>
@@ -15,8 +17,13 @@
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">the input is null</exception>
         /// <exception cref="RegexMatchTimeoutException">a time-out occurred. For more information about time-outs, see the Remarks section.</exception>
-        public static bool Match(this Regex regex, string input, out Match? match)
+        public static bool Match(this Regex regex, string input, [NotNullWhen(true)] out Match? match)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                throw new ArgumentException($"'{nameof(input)}' cannot be null or whitespace.", nameof(input));
+            }
+
             var m = regex.Match(input);
             if (m.Success)
             {

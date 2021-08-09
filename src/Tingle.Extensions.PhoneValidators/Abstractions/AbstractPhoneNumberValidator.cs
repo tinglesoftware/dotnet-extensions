@@ -22,16 +22,19 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         internal abstract Regex RegularExpression { get; }
 
         /// <inheritdoc/>
-        public bool IsValid(string phoneNumber)
+        public bool IsValid(string? phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return false;
             return RegularExpression.Match(phoneNumber).Success;
         }
 
         /// <inheritdoc/>
-        public IEnumerable<string>? MakePossibleValues(string phoneNumber)
+        public IEnumerable<string> MakePossibleValues(string phoneNumber)
         {
-            if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                throw new ArgumentException($"'{nameof(phoneNumber)}' cannot be null or whitespace.", nameof(phoneNumber));
+            }
 
             var match = RegularExpression.Match(phoneNumber);
             if (!match.Success) return Array.Empty<string>();
@@ -43,23 +46,25 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         /// <inheritdoc/>
         public string? ToMsisdn(string phoneNumber)
         {
-            if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                throw new ArgumentException($"'{nameof(phoneNumber)}' cannot be null or whitespace.", nameof(phoneNumber));
+            }
 
             var match = RegularExpression.Match(phoneNumber);
-            if (match.Success) return $"{CountryPrefix}{match.Groups[1].Value}";
-
-            return null;
+            return match.Success ? $"{CountryPrefix}{match.Groups[1].Value}" : null;
         }
 
         /// <inheritdoc/>
         public string? ToE164(string phoneNumber)
         {
-            if (string.IsNullOrWhiteSpace(phoneNumber)) return null;
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                throw new ArgumentException($"'{nameof(phoneNumber)}' cannot be null or whitespace.", nameof(phoneNumber));
+            }
 
             var match = RegularExpression.Match(phoneNumber);
-            if (match.Success) return $"+{CountryPrefix}{match.Groups[1].Value}";
-
-            return null;
+            return match.Success ? $"+{CountryPrefix}{match.Groups[1].Value}" : null;
         }
     }
 }

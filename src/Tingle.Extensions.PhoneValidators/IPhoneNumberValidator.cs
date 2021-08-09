@@ -12,7 +12,7 @@ namespace Tingle.Extensions.PhoneValidators
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        bool IsValid(string phoneNumber);
+        bool IsValid(string? phoneNumber);
 
         /// <summary>
         /// Make an <see href="https://en.wikipedia.org/wiki/MSISDN">MSISDN</see> version of a phone number.
@@ -26,7 +26,7 @@ namespace Tingle.Extensions.PhoneValidators
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        IEnumerable<string>? MakePossibleValues(string phoneNumber);
+        IEnumerable<string> MakePossibleValues(string phoneNumber);
 
         /// <summary>
         /// Make an <see href="https://en.wikipedia.org/wiki/E.164">E.164</see> version of a phone number.
