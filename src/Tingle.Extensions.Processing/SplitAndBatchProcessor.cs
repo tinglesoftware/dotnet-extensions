@@ -35,7 +35,9 @@ namespace Tingle.Extensions.Processing
         /// <returns></returns>
         protected virtual async Task HandleAsync(List<T> batch, CancellationToken cancellationToken = default)
         {
+#pragma warning disable CAC001 // ConfigureAwaitChecker
             await handler(batch, cancellationToken);
+#pragma warning restore CAC001 // ConfigureAwaitChecker
         }
 
         /// <summary>
@@ -59,7 +61,7 @@ namespace Tingle.Extensions.Processing
             }
 
             // wait for all tasks in parallel
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
         }
     }
 }

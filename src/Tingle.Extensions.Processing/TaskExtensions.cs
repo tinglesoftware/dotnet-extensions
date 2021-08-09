@@ -94,6 +94,7 @@
                     break;
             }
         }
+
         #endregion
 
         #region Timeout
@@ -111,10 +112,12 @@
 
             using (var cts = new CancellationTokenSource())
             {
-                if (task == await Task.WhenAny(task, Task.Delay(timeout, cts.Token)))
+                if (task == await Task.WhenAny(task, Task.Delay(timeout, cts.Token)).ConfigureAwait(false))
                 {
                     cts.Cancel();
+#pragma warning disable CAC001 // ConfigureAwaitChecker
                     return await task;
+#pragma warning restore CAC001 // ConfigureAwaitChecker
                 }
             }
 
@@ -133,10 +136,12 @@
 
             using (var cts = new CancellationTokenSource())
             {
-                if (task == await Task.WhenAny(task, Task.Delay(timeout, cts.Token)))
+                if (task == await Task.WhenAny(task, Task.Delay(timeout, cts.Token)).ConfigureAwait(false))
                 {
                     cts.Cancel();
+#pragma warning disable CAC001 // ConfigureAwaitChecker
                     await task;
+#pragma warning restore CAC001 // ConfigureAwaitChecker
                     return;
                 }
             }

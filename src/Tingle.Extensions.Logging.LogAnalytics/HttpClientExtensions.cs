@@ -26,7 +26,7 @@ namespace System.Net.Http
                                        workspaceKey: workspaceKey,
                                        payload: payload,
                                        logType: logType,
-                                       generated: generated);
+                                       generated: generated).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -66,12 +66,12 @@ namespace System.Net.Http
             request.Content.Headers.ContentType = new MediaTypeHeaderValue(JsonContentType);
 
             // make the request and get a response
-            var response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             // if the request was not successful, throw an exception
             if (!response.IsSuccessStatusCode)
             {
-                var body = await response.Content.ReadAsStringAsync();
+                var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 throw new LogAnalyticsLoggerException(body);
             }
         }
