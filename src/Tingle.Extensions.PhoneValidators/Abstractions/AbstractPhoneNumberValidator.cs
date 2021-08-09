@@ -22,7 +22,7 @@ namespace Tingle.Extensions.PhoneValidators.Abstractions
         internal abstract Regex RegularExpression { get; }
 
         /// <inheritdoc/>
-        public bool IsValid(string phoneNumber)
+        public bool IsValid(string? phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber)) return false;
             return RegularExpression.Match(phoneNumber).Success;
