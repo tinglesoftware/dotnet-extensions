@@ -1,6 +1,6 @@
 # Tingle.Extensions.Caching.MongoDB
 
-This folder contains an implementation of IDistributedCache using MongoDB.
+This folder contains an implementation of `IDistributedCache` using MongoDB that can also be leveraged in ASP.NET Core as a Session State Provider.
 
 ## MongoClient initialization
 
