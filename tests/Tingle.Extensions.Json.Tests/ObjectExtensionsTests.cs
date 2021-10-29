@@ -3,6 +3,7 @@ using Xunit;
 
 namespace Tingle.Extensions.Json.Tests
 {
+    [Obsolete("Code under test is obsolete")]
     public class ObjectExtensionsTests
     {
         [Fact]
@@ -14,18 +15,6 @@ namespace Tingle.Extensions.Json.Tests
             Assert.Equal(tt1.Value1, tt2.Value1);
             Assert.Equal(tt1.Value2, tt2.Value2);
         }
-
-        // TODO: enable once officially supported https://github.com/dotnet/runtime/issues/29538
-        //[Fact]
-        //public void JsonCopyTo_Works()
-        //{
-        //    var tt1 = new TestType1 { Value1 = 13, Value2 = "cake1" };
-        //    var tt2 = new TestType2();
-        //    tt1.JsonCopyTo(tt2);
-        //    Assert.Equal(tt1.Value1, tt2.Value1);
-        //    Assert.Equal(tt1.Value2, tt2.Value2);
-        //    Assert.Null(tt2.Value3);
-        //}
 
         [Fact]
         public void JsonConvertTo_Works()
