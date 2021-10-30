@@ -36,26 +36,6 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Add a converter for <see cref="TimeSpan"/>
-        /// </summary>
-        /// <param name="options">the options to add the converter to</param>
-        /// <returns></returns>
-        public static JsonSerializerOptions AddConverterForTimeSpan(this JsonSerializerOptions options)
-        {
-            return options.AddConverterForType<TimeSpanConverter, TimeSpan>();
-        }
-
-        /// <summary>
-        /// Add a converter for <see cref="Version"/>
-        /// </summary>
-        /// <param name="options">the options to add the converter to</param>
-        /// <returns></returns>
-        public static JsonSerializerOptions AddConverterForVersion(this JsonSerializerOptions options)
-        {
-            return options.AddConverterForType<VersionConverter, Version>();
-        }
-
-        /// <summary>
         /// Add a converter the enum/string converter <see cref="JsonStringEnumConverter"/>
         /// </summary>
         /// <param name="options">the options to add the converter to</param>
@@ -77,9 +57,7 @@ namespace System.Text.Json
         public static JsonSerializerOptions AddKnownConverters(this JsonSerializerOptions options,
                                                                JsonNamingPolicy? namingPolicy = null)
         {
-            return options.AddConverterForTimeSpan()
-                          .AddConverterForVersion()
-                          .AddConverterForEnumsAsStrings(namingPolicy: namingPolicy);
+            return options.AddConverterForEnumsAsStrings(namingPolicy: namingPolicy);
         }
     }
 }
