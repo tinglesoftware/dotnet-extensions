@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31313.79
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9546186D-D4E1-4EDB-956E-1F81C7F4DB72}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,8 +34,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Caching.MongoDB.Tests", "tests\Tingle.Extensions.Caching.MongoDB.Tests\Tingle.Extensions.Caching.MongoDB.Tests.csproj", "{0EA063C6-9A97-4DE8-9344-5D2BDD301134}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnotations.Tests", "tests\Tingle.Extensions.DataAnnotations.Tests\Tingle.Extensions.DataAnnotations.Tests.csproj", "{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Json.Tests", "tests\Tingle.Extensions.Json.Tests\Tingle.Extensions.Json.Tests.csproj", "{99C35F03-61F8-4472-8010-31F5295FB5C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.JsonPatch.Tests", "tests\Tingle.Extensions.JsonPatch.Tests\Tingle.Extensions.JsonPatch.Tests.csproj", "{B82E2980-E145-4341-BAE0-8FAE1F110D0C}"
 EndProject
@@ -98,10 +96,6 @@ Global
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99C35F03-61F8-4472-8010-31F5295FB5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99C35F03-61F8-4472-8010-31F5295FB5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99C35F03-61F8-4472-8010-31F5295FB5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99C35F03-61F8-4472-8010-31F5295FB5C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B82E2980-E145-4341-BAE0-8FAE1F110D0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B82E2980-E145-4341-BAE0-8FAE1F110D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B82E2980-E145-4341-BAE0-8FAE1F110D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -130,7 +124,6 @@ Global
 		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E} = {815F0941-3B70-4705-A583-AF627559595C}
 		{0EA063C6-9A97-4DE8-9344-5D2BDD301134} = {815F0941-3B70-4705-A583-AF627559595C}
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD} = {815F0941-3B70-4705-A583-AF627559595C}
-		{99C35F03-61F8-4472-8010-31F5295FB5C4} = {815F0941-3B70-4705-A583-AF627559595C}
 		{B82E2980-E145-4341-BAE0-8FAE1F110D0C} = {815F0941-3B70-4705-A583-AF627559595C}
 		{526B37AD-256A-445A-9A42-E5C53989B11E} = {815F0941-3B70-4705-A583-AF627559595C}
 		{A2A259BA-50B5-4232-A518-BCA291CC9DCF} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}

@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Tingle.Extensions.Json\Tingle.Extensions.Json.csproj" />
-  </ItemGroup>
-
-</Project>
