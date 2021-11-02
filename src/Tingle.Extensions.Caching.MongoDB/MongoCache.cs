@@ -69,7 +69,7 @@ namespace Tingle.Extensions.Caching.MongoDB
             // If using sliding expiration then replace item with one that has updated values
             if (entry.IsSlidingExpiration.GetValueOrDefault())
             {
-                entry.ExpiresAt = entry.ExpiresAt?.AddSeconds(entry.TimeToLive ?? 0);
+                entry.ExpiresAt = DateTime.UtcNow.AddSeconds(entry.TimeToLive ?? 0);
                 collection!.ReplaceOne(filter, entry);
             }
 
@@ -92,7 +92,7 @@ namespace Tingle.Extensions.Caching.MongoDB
             // If using sliding expiration then replace item with one that has updated values
             if (entry.IsSlidingExpiration.GetValueOrDefault())
             {
-                entry.ExpiresAt = entry.ExpiresAt?.AddSeconds(entry.TimeToLive ?? 0);
+                entry.ExpiresAt = DateTime.UtcNow.AddSeconds(entry.TimeToLive ?? 0);
                 await collection!.ReplaceOneAsync(filter, entry, cancellationToken: token).ConfigureAwait(false);
             }
 
