@@ -56,7 +56,7 @@
         /// <param name="task">the task to be attached to</param>
         /// <param name="faultAction">the action to be executed</param>
         /// <param name="state">the state to be passed along</param>
-        public static void OnFault(this Task task, Action<Task, object> faultAction, object state)
+        public static void OnFault(this Task task, Action<Task, object?> faultAction, object? state)
         {
             switch (task.Status)
             {
@@ -79,7 +79,7 @@
         /// <param name="task">the task to be attached to</param>
         /// <param name="faultAction">the action to be executed</param>
         /// <param name="state">the state to be passed along</param>
-        public static void OnFault<TResult>(this Task<TResult> task, Action<Task<TResult>, object> faultAction, object state)
+        public static void OnFault<TResult>(this Task<TResult> task, Action<Task<TResult>, object?> faultAction, object? state)
         {
             switch (task.Status)
             {
