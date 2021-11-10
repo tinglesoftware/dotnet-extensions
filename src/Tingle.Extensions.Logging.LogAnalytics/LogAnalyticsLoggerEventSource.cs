@@ -10,7 +10,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
     internal class LogAnalyticsLoggerEventSource : EventSource
     {
         public static readonly LogAnalyticsLoggerEventSource Log = new();
-        public readonly string ApplicationName;
+        public readonly string? ApplicationName;
 
         private LogAnalyticsLoggerEventSource()
         {
@@ -18,14 +18,14 @@ namespace Tingle.Extensions.Logging.LogAnalytics
         }
 
         [Event(1, Message = "Sending log to LogAnalyticsLoggerProvider has failed. Error: {0}", Level = EventLevel.Error)]
-        public void FailedToLog(string error, string? applicationName = null) => WriteEvent(1, error, applicationName ?? ApplicationName);
+        public void FailedToLog(string error, string? applicationName = null) => WriteEvent(1, error, applicationName ?? ApplicationName ?? "Unknown application");
 
         [NonEvent]
-        private static string GetApplicationName()
+        private static string? GetApplicationName()
         {
             try
             {
-                return Assembly.GetEntryAssembly().GetName().Name;
+                return Assembly.GetEntryAssembly()?.GetName().Name!;
             }
             catch
             {
