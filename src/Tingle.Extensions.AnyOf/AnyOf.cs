@@ -15,7 +15,7 @@
 
         /// <summary>Returns a string that represents the current object.</summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString() => Value == null ? "AnyOf(null)" : Value.ToString();
+        public override string? ToString() => Value == null ? "AnyOf(null)" : Value.ToString();
     }
 
     /// <summary>

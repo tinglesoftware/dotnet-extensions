@@ -17,7 +17,7 @@ namespace Tingle.Extensions.JsonPatch.Converters
         {
             var modelType = typeToConvert.GetGenericArguments()[0];
             var conveterType = typeof(TypedJsonPatchDocumentConverterInner<>).MakeGenericType(modelType);
-            return (JsonConverter)Activator.CreateInstance(conveterType);
+            return (JsonConverter?)Activator.CreateInstance(conveterType);
         }
 
         internal class TypedJsonPatchDocumentConverterInner<T> : JsonConverter<JsonPatchDocument<T>> where T : class
