@@ -14,7 +14,7 @@ namespace Tingle.Extensions.Processing
         /// <typeparam name="T">The type whose namespace is used to scope the manifest resource name.</typeparam>
         /// <param name="resourceName">The case-sensitive name of the manifest resource being requested.</param>
         /// <returns></returns>
-        public static Stream GetResourceAsStream<T>(string resourceName) => typeof(T).Assembly.GetManifestResourceStream(resourceName);
+        public static Stream? GetResourceAsStream<T>(string resourceName) => typeof(T).Assembly.GetManifestResourceStream(resourceName);
 
         /// <summary>
         /// Get's the content of an embedded resource as a string
@@ -22,11 +22,15 @@ namespace Tingle.Extensions.Processing
         /// <typeparam name="T">The type whose namespace is used to scope the manifest resource name.</typeparam>
         /// <param name="resourceName">The case-sensitive name of the manifest resource being requested.</param>
         /// <returns></returns>
-        public static Task<string> GetResourceAsStringAsync<T>(string resourceName)
+        public static async Task<string?> GetResourceAsStringAsync<T>(string resourceName)
         {
-            using var st = GetResourceAsStream<T>(resourceName);
-            using var reader = new StreamReader(st);
-            return reader.ReadToEndAsync();
+            var st = GetResourceAsStream<T>(resourceName);
+            if (st is null) return  null;
+            using (st)
+            {
+                using var reader = new StreamReader(st);
+                return await reader.ReadToEndAsync().ConfigureAwait(false);
+            }
         }
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Tingle.Extensions.Processing
         /// <param name="folder">The case-sensitive name of the folder the resource is placed in e.g. Files</param>
         /// <param name="fileName">The case-sensitive name of the file e.g. file.json</param>
         /// <returns></returns>
-        public static Task<string> GetResourceAsStringAsync<T>(string folder, string fileName)
+        public static Task<string?> GetResourceAsStringAsync<T>(string folder, string fileName)
             => GetResourceAsStringAsync<T>(string.Join(".", typeof(T).Namespace, folder, fileName));
 
         /// <summary>
@@ -46,7 +50,7 @@ namespace Tingle.Extensions.Processing
         /// <param name="folder">The case-sensitive name of the folder the resource is placed in e.g. Files</param>
         /// <param name="fileName">The case-sensitive name of the file e.g. file.json</param>
         /// <returns></returns>
-        public static Stream GetResourceAsStream<T>(string folder, string fileName)
+        public static Stream? GetResourceAsStream<T>(string folder, string fileName)
             => GetResourceAsStream<T>(string.Join(".", typeof(T).Namespace, folder, fileName));
     }
 }

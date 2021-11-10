@@ -39,7 +39,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
         public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;
 
         ///<inheritdoc/>
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
             // ensure the formatter is not null
             if (formatter == null)
@@ -55,7 +55,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
                     var message = formatter(state, exception);
 
                     // Prepare the data to log
-                    var data = new Dictionary<string, object>
+                    var data = new Dictionary<string, object?>
                     {
                         ["Message"] = message,
                         ["CategoryName"] = categoryName,
@@ -69,7 +69,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
                     // Populate the exception information if there's one
                     if (exception != null)
                     {
-                        data["Exception"] = new Dictionary<string, string>
+                        data["Exception"] = new Dictionary<string, string?>
                         {
                             ["Message"] = exception.Message,
                             ["StackTrace"] = exception.StackTrace,
@@ -123,7 +123,7 @@ namespace Tingle.Extensions.Logging.LogAnalytics
 
                     // Create payload in JSON and key from Base64
                     var payload = System.Text.Json.JsonSerializer.Serialize(data);
-                    var key = Convert.FromBase64String(options.WorkspaceKey);
+                    var key = Convert.FromBase64String(options.WorkspaceKey!);
                     var tsk = httpClient.UploadAsync(workspaceId: options.WorkspaceId!,
                                                      workspaceKey: key,
                                                      payload: payload,
