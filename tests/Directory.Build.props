@@ -3,7 +3,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., '$(MSBuildThisFileName)$(MSBuildThisFileExtension)'))\$(MSBuildThisFileName)$(MSBuildThisFileExtension)" />
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
