@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Tingle.Extensions.DataAnnotations.Tests.Models;
+﻿namespace Tingle.Extensions.DataAnnotations.Tests.Models;
 
 public class ClassWithDictionary
 {

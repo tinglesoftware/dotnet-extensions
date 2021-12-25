@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Tingle.Extensions.PhoneValidators;
+﻿namespace Tingle.Extensions.PhoneValidators;
 
 /// <summary>
 /// Abstraction for validating phone numbers

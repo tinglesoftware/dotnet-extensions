@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tingle.Extensions.Logging.LogAnalytics;
+﻿namespace Tingle.Extensions.Logging.LogAnalytics;
 
 /// <summary>
 /// An empty scope without any logic.

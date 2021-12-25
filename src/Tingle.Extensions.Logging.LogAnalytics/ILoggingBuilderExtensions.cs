@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
 using Tingle.Extensions.Logging.LogAnalytics;
 
 namespace Microsoft.Extensions.Logging;

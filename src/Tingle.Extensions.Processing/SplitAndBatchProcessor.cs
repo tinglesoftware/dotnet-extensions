@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Tingle.Extensions.Processing;
+﻿namespace Tingle.Extensions.Processing;
 
 /// <summary>
 /// A processor that splits a list of items and processes sections (splits) in parallel.

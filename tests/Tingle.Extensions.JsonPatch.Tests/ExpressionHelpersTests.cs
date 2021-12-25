@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Tingle.Extensions.JsonPatch.Helpers;
-using Xunit;
+﻿using Tingle.Extensions.JsonPatch.Helpers;
 
 namespace Tingle.Extensions.JsonPatch.Tests;
 

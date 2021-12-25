@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Tingle.Extensions.PhoneValidators.Safaricom;
-using Xunit;
 
 namespace Tingle.Extensions.PhoneValidators.Tests;
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using System;
 using Tingle.Extensions.Caching.MongoDB;
 
 namespace Microsoft.Extensions.DependencyInjection;

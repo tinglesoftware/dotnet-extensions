@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using Xunit;
 
 namespace Tingle.Extensions.Caching.MongoDB.Tests;
 

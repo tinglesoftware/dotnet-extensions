@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Tingle.Extensions.JsonPatch.Tests;
+﻿namespace Tingle.Extensions.JsonPatch.Tests;
 
 public class AnotherDTO
 {

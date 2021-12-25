@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Net.Http;
 
 namespace Tingle.Extensions.Logging.LogAnalytics;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using Tingle.Extensions.JsonPatch.Exceptions;
 using Tingle.Extensions.JsonPatch.Properties;
 

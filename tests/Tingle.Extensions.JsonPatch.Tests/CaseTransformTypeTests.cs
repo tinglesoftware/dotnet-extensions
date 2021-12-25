@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Helpers;
-using Xunit;
 
 namespace Tingle.Extensions.JsonPatch.Tests;
 

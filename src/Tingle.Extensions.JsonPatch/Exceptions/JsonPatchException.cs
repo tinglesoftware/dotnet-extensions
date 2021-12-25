@@ -1,5 +1,4 @@
-﻿using System;
-using Tingle.Extensions.JsonPatch.Operations;
+﻿using Tingle.Extensions.JsonPatch.Operations;
 
 namespace Tingle.Extensions.JsonPatch.Exceptions;
 

@@ -2,10 +2,6 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Tingle.Extensions.Caching.MongoDB;
 

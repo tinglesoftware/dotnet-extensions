@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-
-namespace Tingle.Extensions.Processing;
+﻿namespace Tingle.Extensions.Processing;
 
 /// <summary>
 /// Helper for accessing embedded resources

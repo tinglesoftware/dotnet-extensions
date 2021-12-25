@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Xunit;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Tingle.Extensions.DataAnnotations.Tests;
 

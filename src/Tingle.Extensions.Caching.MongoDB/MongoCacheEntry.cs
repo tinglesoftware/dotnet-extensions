@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
 
 namespace Tingle.Extensions.Caching.MongoDB;
 
