@@ -1,10 +1,9 @@
-﻿namespace Tingle.Extensions.JsonPatch.Helpers
+﻿namespace Tingle.Extensions.JsonPatch.Helpers;
+
+public enum CaseTransformType
 {
-    public enum CaseTransformType
-    {
-        LowerCase,
-        UpperCase,
-        CamelCase,
-        OriginalCase,
-    }
+    LowerCase,
+    UpperCase,
+    CamelCase,
+    OriginalCase,
 }

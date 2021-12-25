@@ -1,114 +1,109 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
-namespace Tingle.Extensions.Caching.MongoDB.Tests
+namespace Tingle.Extensions.Caching.MongoDB.Tests;
+
+public class MongoCacheE2ETests
 {
-    public class MongoCacheE2ETests
+    [Fact]
+    public async Task InitializeCollectionIfNotExists()
     {
-        [Fact]
-        public async Task InitializeCollectionIfNotExists()
+        using var dbFixture = new MongoDbFixture();
+        const string sessionId = "sessionId";
+        const int ttl = 1400;
+
+        IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
         {
-            using var dbFixture = new MongoDbFixture();
-            const string sessionId = "sessionId";
-            const int ttl = 1400;
+            CollectionName = "session",
+            DatabaseName = dbFixture.DatabaseName,
+            MongoClient = dbFixture.Client,
+        });
 
-            IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
-            {
-                CollectionName = "session",
-                DatabaseName = dbFixture.DatabaseName,
-                MongoClient = dbFixture.Client,
-            });
-
-            var cache = new MongoCache(options);
-            var cacheOptions = new DistributedCacheEntryOptions
-            {
-                SlidingExpiration = TimeSpan.FromSeconds(ttl)
-            };
-            await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
-
-            // Verify that container has been created
-            Assert.Contains("session", await dbFixture.Database!.ListCollectionNames().ToListAsync());
-            var collection = dbFixture.Database.GetCollection<MongoCacheEntry>("session");
-            var indexes = await collection.Indexes.List().ToListAsync();
-            Assert.Single(indexes.Where(b => b["name"] != "_id_"));
-        }
-
-        [Fact]
-        public async Task StoreEntryData()
+        var cache = new MongoCache(options);
+        var cacheOptions = new DistributedCacheEntryOptions
         {
-            using var dbFixture = new MongoDbFixture();
-            const string sessionId = "sessionId";
-            const int ttl = 1400;
+            SlidingExpiration = TimeSpan.FromSeconds(ttl)
+        };
+        await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
 
-            IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
-            {
-                CollectionName = "session",
-                DatabaseName = dbFixture.DatabaseName,
-                MongoClient = dbFixture.Client,
-            });
+        // Verify that container has been created
+        Assert.Contains("session", await dbFixture.Database!.ListCollectionNames().ToListAsync());
+        var collection = dbFixture.Database.GetCollection<MongoCacheEntry>("session");
+        var indexes = await collection.Indexes.List().ToListAsync();
+        Assert.Single(indexes.Where(b => b["name"] != "_id_"));
+    }
 
-            var cache = new MongoCache(options);
-            var cacheOptions = new DistributedCacheEntryOptions
-            {
-                SlidingExpiration = TimeSpan.FromSeconds(ttl)
-            };
-            byte[] data = new byte[4] { 1, 2, 3, 4 };
-            await cache.SetAsync(sessionId, data, cacheOptions);
+    [Fact]
+    public async Task StoreEntryData()
+    {
+        using var dbFixture = new MongoDbFixture();
+        const string sessionId = "sessionId";
+        const int ttl = 1400;
 
-            // Verify that container has been created
-
-            var collection = dbFixture.GetCollection<MongoCacheEntry>("session");
-            var filter = Builders<MongoCacheEntry>.Filter.Eq(e => e.Key, sessionId);
-            var storedSession = await collection.Find(filter).SingleAsync();
-            Assert.Equal(sessionId, storedSession.Key);
-            Assert.Equal(data, storedSession.Content);
-        }
-
-        [Fact]
-        public async Task GetSessionData()
+        IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
         {
-            using var dbFixture = new MongoDbFixture();
-            const string sessionId = "sessionId";
-            const int ttl = 1400;
-            byte[] data = new byte[1] { 1 };
+            CollectionName = "session",
+            DatabaseName = dbFixture.DatabaseName,
+            MongoClient = dbFixture.Client,
+        });
 
-            IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
-            {
-                CollectionName = "session",
-                DatabaseName = dbFixture.DatabaseName,
-                MongoClient = dbFixture.Client,
-            });
-
-            var cache = new MongoCache(options);
-            var cacheOptions = new DistributedCacheEntryOptions
-            {
-                SlidingExpiration = TimeSpan.FromSeconds(ttl)
-            };
-            await cache.SetAsync(sessionId, data, cacheOptions);
-
-            Assert.Equal(data, await cache.GetAsync(sessionId));
-        }
-
-        [Fact]
-        public async Task GetSessionData_WhenNotExists()
+        var cache = new MongoCache(options);
+        var cacheOptions = new DistributedCacheEntryOptions
         {
-            using var dbFixture = new MongoDbFixture();
-            const string sessionId = "sessionId";
+            SlidingExpiration = TimeSpan.FromSeconds(ttl)
+        };
+        byte[] data = new byte[4] { 1, 2, 3, 4 };
+        await cache.SetAsync(sessionId, data, cacheOptions);
 
-            IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
-            {
-                CollectionName = "session",
-                DatabaseName = dbFixture.DatabaseName,
-                MongoClient = dbFixture.Client,
-            });
+        // Verify that container has been created
 
-            var cache = new MongoCache(options);
-            Assert.Null(await cache.GetAsync(sessionId));
-        }
+        var collection = dbFixture.GetCollection<MongoCacheEntry>("session");
+        var filter = Builders<MongoCacheEntry>.Filter.Eq(e => e.Key, sessionId);
+        var storedSession = await collection.Find(filter).SingleAsync();
+        Assert.Equal(sessionId, storedSession.Key);
+        Assert.Equal(data, storedSession.Content);
+    }
+
+    [Fact]
+    public async Task GetSessionData()
+    {
+        using var dbFixture = new MongoDbFixture();
+        const string sessionId = "sessionId";
+        const int ttl = 1400;
+        byte[] data = new byte[1] { 1 };
+
+        IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
+        {
+            CollectionName = "session",
+            DatabaseName = dbFixture.DatabaseName,
+            MongoClient = dbFixture.Client,
+        });
+
+        var cache = new MongoCache(options);
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = TimeSpan.FromSeconds(ttl)
+        };
+        await cache.SetAsync(sessionId, data, cacheOptions);
+
+        Assert.Equal(data, await cache.GetAsync(sessionId));
+    }
+
+    [Fact]
+    public async Task GetSessionData_WhenNotExists()
+    {
+        using var dbFixture = new MongoDbFixture();
+        const string sessionId = "sessionId";
+
+        IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
+        {
+            CollectionName = "session",
+            DatabaseName = dbFixture.DatabaseName,
+            MongoClient = dbFixture.Client,
+        });
+
+        var cache = new MongoCache(options);
+        Assert.Null(await cache.GetAsync(sessionId));
     }
 }

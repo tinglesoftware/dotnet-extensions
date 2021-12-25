@@ -1,16 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Tingle.Extensions.JsonPatch.Tests
+namespace Tingle.Extensions.JsonPatch.Tests;
+
+public class JsonPropertyDTO
 {
-    public class JsonPropertyDTO
-    {
-        [JsonPropertyName("AnotherName")]
-        public string? Name { get; set; }
-    }
+    [JsonPropertyName("AnotherName")]
+    public string? Name { get; set; }
+}
 
 
-    public class JsonPropertyWithAnotherNameDTO
-    {
-        public string? AnotherName { get; set; }
-    }
+public class JsonPropertyWithAnotherNameDTO
+{
+    public string? AnotherName { get; set; }
 }
