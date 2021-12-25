@@ -17,13 +17,13 @@ public class MongoCacheTests
 
         IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions() { });
         // Database
-        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        Assert.Throws<InvalidOperationException>(() => new MongoCache(options));
         options.Value.DatabaseName = "something";
         // Container
-        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        Assert.Throws<InvalidOperationException>(() => new MongoCache(options));
         options.Value.CollectionName = "something";
         // ConnectionString or MongoClient
-        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        Assert.Throws<InvalidOperationException>(() => new MongoCache(options));
 
         // Verify that it creates with all parameters
         _ = new MongoCache(Options.Create(new MongoCacheOptions()
