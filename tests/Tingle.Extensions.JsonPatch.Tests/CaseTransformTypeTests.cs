@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Helpers;
 using Xunit;
 
@@ -12,7 +13,7 @@ public class CaseTransformTypeTests
         var patchDoc = new JsonPatchDocument<SimpleDTO>(CaseTransformType.UpperCase);
         patchDoc.Add(o => o.StringProperty, "B");
 
-        var options = new JsonSerializerOptions { IgnoreNullValues = true };
+        var options = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, };
         var result = JsonSerializer.Serialize(patchDoc, options);
 
         Assert.Equal("[{\"value\":\"B\",\"path\":\"/STRINGPROPERTY\",\"op\":\"add\"}]", result);
@@ -24,7 +25,7 @@ public class CaseTransformTypeTests
         var patchDoc = new JsonPatchDocument<SimpleDTO>(CaseTransformType.CamelCase);
         patchDoc.Add(o => o.StringProperty, "B");
 
-        var options = new JsonSerializerOptions { IgnoreNullValues = true };
+        var options = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, };
         var result = JsonSerializer.Serialize(patchDoc, options);
 
         Assert.Equal("[{\"value\":\"B\",\"path\":\"/stringProperty\",\"op\":\"add\"}]", result);
@@ -36,7 +37,7 @@ public class CaseTransformTypeTests
         var patchDoc = new JsonPatchDocument<SimpleDTO>(CaseTransformType.OriginalCase);
         patchDoc.Add(o => o.StringProperty, "B");
 
-        var options = new JsonSerializerOptions { IgnoreNullValues = true };
+        var options = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, };
         var result = JsonSerializer.Serialize(patchDoc, options);
 
         Assert.Equal("[{\"value\":\"B\",\"path\":\"/StringProperty\",\"op\":\"add\"}]", result);
@@ -48,7 +49,7 @@ public class CaseTransformTypeTests
         var patchDoc = new JsonPatchDocument<SimpleDTO>();
         patchDoc.Add(o => o.StringProperty, "B");
 
-        var options = new JsonSerializerOptions { IgnoreNullValues = true };
+        var options = new JsonSerializerOptions { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, };
         var result = JsonSerializer.Serialize(patchDoc, options);
 
         Assert.Equal("[{\"value\":\"B\",\"path\":\"/stringproperty\",\"op\":\"add\"}]", result);
