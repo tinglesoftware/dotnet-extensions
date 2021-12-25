@@ -843,7 +843,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
         }
     }
 
-    private string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
+    private static string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
     {
         var propertyInfo = memberExpression.Expression.Type.GetProperty(memberExpression.Member.Name);
         var targetAttr = propertyInfo?.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false)
