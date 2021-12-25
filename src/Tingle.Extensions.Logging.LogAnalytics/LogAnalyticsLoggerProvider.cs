@@ -27,7 +27,7 @@ public sealed class LogAnalyticsLoggerProvider : ILoggerProvider, ISupportExtern
     /// </exception>
     public LogAnalyticsLoggerProvider(IOptions<LogAnalyticsLoggerOptions> optionsAccessor)
     {
-        options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(options));
+        options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
         httpClient = new HttpClient();
     }
 
