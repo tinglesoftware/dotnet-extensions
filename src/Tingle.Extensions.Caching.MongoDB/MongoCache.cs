@@ -34,7 +34,7 @@ public class MongoCache : IDistributedCache
 
         if (string.IsNullOrWhiteSpace(options.ConnectionString) && options.MongoClient == null)
         {
-            throw new ArgumentNullException("You need to specify either a ConnectionString or an existing MongoClient in the MongoCacheOptions.");
+            throw new InvalidOperationException($"You need to specify either a {nameof(options.ConnectionString)} or an existing {nameof(options.MongoClient)} in the {nameof(MongoCacheOptions)}.");
         }
 
         // attempt to pull from the database name from the connection string
@@ -46,12 +46,12 @@ public class MongoCache : IDistributedCache
 
         if (string.IsNullOrWhiteSpace(options.DatabaseName))
         {
-            throw new ArgumentNullException(nameof(optionsAccessor.Value.DatabaseName));
+            throw new InvalidOperationException($"You need to specify either a database name in the {nameof(options.ConnectionString)} or the {nameof(MongoCacheOptions)}.");
         }
 
         if (string.IsNullOrWhiteSpace(options.CollectionName))
         {
-            throw new ArgumentNullException(nameof(optionsAccessor.Value.CollectionName));
+            throw new InvalidOperationException($"You need to specify either a collection name in the {nameof(options.ConnectionString)} or the {nameof(MongoCacheOptions)}.");
         }
     }
 
