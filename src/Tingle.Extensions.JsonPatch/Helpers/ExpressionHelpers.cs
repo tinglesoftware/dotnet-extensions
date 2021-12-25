@@ -143,7 +143,7 @@ public static class ExpressionHelpers
         if (string.IsNullOrWhiteSpace(propertyName)) return propertyName;
         string result = type switch
         {
-            CaseTransformType.CamelCase => char.ToLowerInvariant(propertyName[0]) + propertyName.Substring(1),
+            CaseTransformType.CamelCase => char.ToLowerInvariant(propertyName[0]) + propertyName[1..],
             CaseTransformType.LowerCase => propertyName.ToLowerInvariant(),
             CaseTransformType.UpperCase => propertyName.ToUpperInvariant(),
             CaseTransformType.OriginalCase => propertyName,

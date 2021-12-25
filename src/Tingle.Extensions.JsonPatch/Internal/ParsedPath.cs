@@ -33,7 +33,7 @@ public readonly struct ParsedPath
                 return null;
             }
 
-            return _segments[_segments.Length - 1];
+            return _segments[^1];
         }
     }
 
