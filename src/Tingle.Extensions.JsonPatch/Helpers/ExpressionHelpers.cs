@@ -43,7 +43,7 @@ public static class ExpressionHelpers
             case ExpressionType.Call:
                 var methodCallExpression = (MethodCallExpression)expr;
 
-                if (ContinueWithSubPath(methodCallExpression.Object.NodeType, false))
+                if (ContinueWithSubPath(methodCallExpression.Object!.NodeType, false))
                 {
                     var leftFromMemberCallExpression = GetPath(methodCallExpression.Object, caseTransformType, false);
                     return leftFromMemberCallExpression + "/" +
@@ -60,7 +60,7 @@ public static class ExpressionHelpers
             case ExpressionType.MemberAccess:
                 var memberExpression = (MemberExpression)expr;
 
-                if (ContinueWithSubPath(memberExpression.Expression.NodeType, false))
+                if (ContinueWithSubPath(memberExpression.Expression!.NodeType, false))
                 {
                     var left = GetPath(memberExpression.Expression, caseTransformType, false);
 
@@ -134,7 +134,7 @@ public static class ExpressionHelpers
         var lambda = Expression.Lambda<Func<object?, object>>(converted, fakeParameter);
 
         var func = lambda.Compile();
-        return Convert.ToString(func(null), CultureInfo.InvariantCulture);
+        return Convert.ToString(func(null), CultureInfo.InvariantCulture)!;
     }
 
     public static string CaseTransform(string propertyName, CaseTransformType type)

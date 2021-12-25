@@ -819,7 +819,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
 
             case ExpressionType.Call:
                 var methodCallExpression = (MethodCallExpression)expr;
-                listOfSegments.AddRange(GetPathSegments(methodCallExpression.Object));
+                listOfSegments.AddRange(GetPathSegments(methodCallExpression.Object!));
                 listOfSegments.Add(ExpressionHelpers.CaseTransform(EvaluateExpression(methodCallExpression.Arguments[0]), CaseTransformType));
                 return listOfSegments;
 
@@ -829,7 +829,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
 
             case ExpressionType.MemberAccess:
                 var memberExpression = (MemberExpression)expr;
-                listOfSegments.AddRange(GetPathSegments(memberExpression.Expression));
+                listOfSegments.AddRange(GetPathSegments(memberExpression.Expression!));
                 // Get property name, respecting JsonProperty attribute
                 listOfSegments.Add(ExpressionHelpers.CaseTransform(GetPropertyNameFromMemberExpression(memberExpression), CaseTransformType));
                 return listOfSegments;
@@ -845,7 +845,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
 
     private static string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
     {
-        var propertyInfo = memberExpression.Expression.Type.GetProperty(memberExpression.Member.Name);
+        var propertyInfo = memberExpression.Expression!.Type.GetProperty(memberExpression.Member.Name);
         var targetAttr = propertyInfo?.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false)
                                       .OfType<JsonPropertyNameAttribute>()
                                       .FirstOrDefault();
@@ -872,6 +872,6 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
         var lambda = Expression.Lambda<Func<object?, object>>(converted, fakeParameter);
         var func = lambda.Compile();
 
-        return Convert.ToString(func(null), CultureInfo.InvariantCulture);
+        return Convert.ToString(func(null), CultureInfo.InvariantCulture)!;
     }
 }
