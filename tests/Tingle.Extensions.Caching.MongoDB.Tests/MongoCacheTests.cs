@@ -3,44 +3,43 @@ using MongoDB.Driver;
 using System;
 using Xunit;
 
-namespace Tingle.Extensions.Caching.MongoDB.Tests
+namespace Tingle.Extensions.Caching.MongoDB.Tests;
+
+public class MongoCacheTests
 {
-    public class MongoCacheTests
+    [Fact]
+    public void RequiredParameters()
     {
-        [Fact]
-        public void RequiredParameters()
-        {
-            // Null-check
+        // Null-check
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            Assert.Throws<ArgumentNullException>(() => new MongoCache(null));
+        Assert.Throws<ArgumentNullException>(() => new MongoCache(null));
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
-            IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions() { });
-            // Database
-            Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
-            options.Value.DatabaseName = "something";
-            // Container
-            Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
-            options.Value.CollectionName = "something";
-            // ConnectionString or MongoClient
-            Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions() { });
+        // Database
+        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        options.Value.DatabaseName = "something";
+        // Container
+        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
+        options.Value.CollectionName = "something";
+        // ConnectionString or MongoClient
+        Assert.Throws<ArgumentNullException>(() => new MongoCache(options));
 
-            // Verify that it creates with all parameters
-            _ = new MongoCache(Options.Create(new MongoCacheOptions()
-            {
-                DatabaseName = "something",
-                CollectionName = "something",
-                ConnectionString = "mongodb://localhost:27017/myapp"
-            }));
+        // Verify that it creates with all parameters
+        _ = new MongoCache(Options.Create(new MongoCacheOptions()
+        {
+            DatabaseName = "something",
+            CollectionName = "something",
+            ConnectionString = "mongodb://localhost:27017/myapp"
+        }));
 
-            _ = new MongoCache(Options.Create(new MongoCacheOptions()
-            {
-                DatabaseName = "something",
-                CollectionName = "something",
-                MongoClient = new MongoClient("mongodb://localhost:27017/myapp")
-            }));
-        }
-
-        // We need a lot more unit tests here
+        _ = new MongoCache(Options.Create(new MongoCacheOptions()
+        {
+            DatabaseName = "something",
+            CollectionName = "something",
+            MongoClient = new MongoClient("mongodb://localhost:27017/myapp")
+        }));
     }
+
+    // We need a lot more unit tests here
 }

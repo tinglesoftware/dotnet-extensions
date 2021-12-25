@@ -3,65 +3,64 @@ using System.Linq;
 using Tingle.Extensions.JsonPatch.Helpers;
 using Xunit;
 
-namespace Tingle.Extensions.JsonPatch.Tests
+namespace Tingle.Extensions.JsonPatch.Tests;
+
+public class ExpressionHelpersTests
 {
-    public class ExpressionHelpersTests
+    [Fact]
+    public void CaseTransform_AllCaseTransformTypesAreImplemented()
     {
-        [Fact]
-        public void CaseTransform_AllCaseTransformTypesAreImplemented()
+        var propertyName = "MyPropertyName";
+        foreach (var value in Enum.GetValues(typeof(CaseTransformType)).Cast<CaseTransformType>())
         {
-            var propertyName = "MyPropertyName";
-            foreach (var value in Enum.GetValues(typeof(CaseTransformType)).Cast<CaseTransformType>())
-            {
-                ExpressionHelpers.CaseTransform(propertyName, value);
-            }
-
-            //assert no exception is thrown
+            ExpressionHelpers.CaseTransform(propertyName, value);
         }
 
-        [Fact]
-        public void CaseTransform_CamelCaseReturnsCorrectly()
-        {
-            var propertyName = "MyPropertyName";
-            var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.CamelCase);
+        //assert no exception is thrown
+    }
 
-            Assert.Equal("myPropertyName", result);
-        }
+    [Fact]
+    public void CaseTransform_CamelCaseReturnsCorrectly()
+    {
+        var propertyName = "MyPropertyName";
+        var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.CamelCase);
 
-        [Fact]
-        public void CaseTransform_SingleCharacterCamelCaseReturnsCorrectly()
-        {
-            var propertyName = "M";
-            var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.CamelCase);
+        Assert.Equal("myPropertyName", result);
+    }
 
-            Assert.Equal("m", result);
-        }
+    [Fact]
+    public void CaseTransform_SingleCharacterCamelCaseReturnsCorrectly()
+    {
+        var propertyName = "M";
+        var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.CamelCase);
 
-        [Fact]
-        public void CaseTransform_LowerCaseReturnsCorrectly()
-        {
-            var propertyName = "MyPropertyName";
-            var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.LowerCase);
+        Assert.Equal("m", result);
+    }
 
-            Assert.Equal("mypropertyname", result);
-        }
+    [Fact]
+    public void CaseTransform_LowerCaseReturnsCorrectly()
+    {
+        var propertyName = "MyPropertyName";
+        var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.LowerCase);
 
-        [Fact]
-        public void CaseTransform_UpperCaseReturnsCorrectly()
-        {
-            var propertyName = "MyPropertyName";
-            var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.UpperCase);
+        Assert.Equal("mypropertyname", result);
+    }
 
-            Assert.Equal("MYPROPERTYNAME", result);
-        }
+    [Fact]
+    public void CaseTransform_UpperCaseReturnsCorrectly()
+    {
+        var propertyName = "MyPropertyName";
+        var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.UpperCase);
 
-        [Fact]
-        public void CaseTransform_OriginalCaseReturnsCorrectly()
-        {
-            var propertyName = "MyPropertyName";
-            var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.OriginalCase);
+        Assert.Equal("MYPROPERTYNAME", result);
+    }
 
-            Assert.Equal("MyPropertyName", result);
-        }
+    [Fact]
+    public void CaseTransform_OriginalCaseReturnsCorrectly()
+    {
+        var propertyName = "MyPropertyName";
+        var result = ExpressionHelpers.CaseTransform(propertyName, CaseTransformType.OriginalCase);
+
+        Assert.Equal("MyPropertyName", result);
     }
 }

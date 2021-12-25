@@ -1,36 +1,35 @@
 ﻿using System.Diagnostics.Tracing;
 using System.Reflection;
 
-namespace Tingle.Extensions.Logging.LogAnalytics
+namespace Tingle.Extensions.Logging.LogAnalytics;
+
+/// <summary>
+/// EventSource for reporting errors and warnings from Logging module.
+/// </summary>
+[EventSource(Name = "Tingle-LogAnalytics-LoggerProvider")]
+internal class LogAnalyticsLoggerEventSource : EventSource
 {
-    /// <summary>
-    /// EventSource for reporting errors and warnings from Logging module.
-    /// </summary>
-    [EventSource(Name = "Tingle-LogAnalytics-LoggerProvider")]
-    internal class LogAnalyticsLoggerEventSource : EventSource
+    public static readonly LogAnalyticsLoggerEventSource Log = new();
+    public readonly string? ApplicationName;
+
+    private LogAnalyticsLoggerEventSource()
     {
-        public static readonly LogAnalyticsLoggerEventSource Log = new();
-        public readonly string? ApplicationName;
+        ApplicationName = GetApplicationName();
+    }
 
-        private LogAnalyticsLoggerEventSource()
+    [Event(1, Message = "Sending log to LogAnalyticsLoggerProvider has failed. Error: {0}", Level = EventLevel.Error)]
+    public void FailedToLog(string error, string? applicationName = null) => WriteEvent(1, error, applicationName ?? ApplicationName ?? "Unknown application");
+
+    [NonEvent]
+    private static string? GetApplicationName()
+    {
+        try
         {
-            ApplicationName = GetApplicationName();
+            return Assembly.GetEntryAssembly()?.GetName().Name!;
         }
-
-        [Event(1, Message = "Sending log to LogAnalyticsLoggerProvider has failed. Error: {0}", Level = EventLevel.Error)]
-        public void FailedToLog(string error, string? applicationName = null) => WriteEvent(1, error, applicationName ?? ApplicationName ?? "Unknown application");
-
-        [NonEvent]
-        private static string? GetApplicationName()
+        catch
         {
-            try
-            {
-                return Assembly.GetEntryAssembly()?.GetName().Name!;
-            }
-            catch
-            {
-                return "Unknown";
-            }
+            return "Unknown";
         }
     }
 }

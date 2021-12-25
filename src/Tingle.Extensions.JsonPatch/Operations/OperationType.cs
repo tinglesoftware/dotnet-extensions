@@ -1,13 +1,12 @@
-﻿namespace Tingle.Extensions.JsonPatch.Operations
+﻿namespace Tingle.Extensions.JsonPatch.Operations;
+
+public enum OperationType
 {
-    public enum OperationType
-    {
-        Add,
-        Remove,
-        Replace,
-        Move,
-        Copy,
-        Test,
-        Invalid
-    }
+    Add,
+    Remove,
+    Replace,
+    Move,
+    Copy,
+    Test,
+    Invalid
 }
