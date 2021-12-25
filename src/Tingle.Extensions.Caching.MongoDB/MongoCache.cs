@@ -83,7 +83,7 @@ public class MongoCache : IDistributedCache
 
         if (key == null) throw new ArgumentNullException(nameof(key));
 
-        await ConnectAsync().ConfigureAwait(false);
+        await ConnectAsync(token).ConfigureAwait(false);
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var entry = await collection.Find(filter).SingleOrDefaultAsync(cancellationToken: token).ConfigureAwait(false);
@@ -119,7 +119,7 @@ public class MongoCache : IDistributedCache
 
         if (key == null) throw new ArgumentNullException(nameof(key));
 
-        await ConnectAsync().ConfigureAwait(false);
+        await ConnectAsync(token).ConfigureAwait(false);
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var entry = await collection.Find(filter).SingleOrDefaultAsync(cancellationToken: token).ConfigureAwait(false);
@@ -145,7 +145,7 @@ public class MongoCache : IDistributedCache
 
         if (key == null) throw new ArgumentNullException(nameof(key));
 
-        await ConnectAsync().ConfigureAwait(false);
+        await ConnectAsync(token).ConfigureAwait(false);
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         await collection!.DeleteOneAsync(filter, cancellationToken: token).ConfigureAwait(false);
@@ -175,7 +175,7 @@ public class MongoCache : IDistributedCache
         if (value == null) throw new ArgumentNullException(nameof(value));
         if (options == null) throw new ArgumentNullException(nameof(options));
 
-        await ConnectAsync().ConfigureAwait(false);
+        await ConnectAsync(token).ConfigureAwait(false);
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var item = BuildMongoCacheEntry(key, value, options);
