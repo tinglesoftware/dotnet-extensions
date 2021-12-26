@@ -29,7 +29,7 @@ public sealed class E164PhoneAttribute : ValidationAttribute
         {
             var regions = PhoneNumberUtil.GetInstance().GetSupportedRegions();
             if (!regions.Contains(this.defaultRegion))
-                throw new ArgumentOutOfRangeException(nameof(defaultRegion), $"'{defaultRegion}' is a known region");
+                throw new ArgumentOutOfRangeException(nameof(defaultRegion), $"'{defaultRegion}' is not a known region");
         }
     }
 
