@@ -4,7 +4,7 @@ using Tingle.Extensions.PhoneValidators.Airtel;
 namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
-/// Specifies that a data field value is a well-formed Airtel phone number.
+/// Specifies that a data field value is a well-formed Airtel phone number or a list of well-formed Airtel phone numbers.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class AirtelPhoneNumberAttribute : ValidationAttribute

@@ -4,7 +4,7 @@ using Tingle.Extensions.PhoneValidators.Telkom;
 namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
-/// Specifies that a data field value is a well-formed Telkom phone number.
+/// Specifies that a data field value is a well-formed Telkom phone number or a list of well-formed Telkom phone numbers.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class TelkomPhoneNumberAttribute : ValidationAttribute

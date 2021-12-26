@@ -4,7 +4,7 @@ using Tingle.Extensions.PhoneValidators.Safaricom;
 namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
-/// Specifies that a data field value is a well-formed Safaricom phone number.
+/// Specifies that a data field value is a well-formed Safaricom phone number or a list of well-formed Safaricom phone numbers.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class SafaricomPhoneNumberAttribute : ValidationAttribute
