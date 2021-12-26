@@ -17,5 +17,21 @@ public sealed class AirtelPhoneNumberAttribute : ValidationAttribute
     public AirtelPhoneNumberAttribute() : base("The field {0} must be a valid Airtel phone number.") { }
 
     /// <inheritdoc/>
-    public override bool IsValid(object? value) => value is not string s || string.IsNullOrEmpty(s) || regex.Match(s).Success;
+    public override bool IsValid(object? value)
+    {
+        if (value is string s && !string.IsNullOrEmpty(s)) return IsValidByRegEx(s);
+
+        if (value is IEnumerable<string> values)
+        {
+            foreach (var v in values)
+            {
+                if (v is not string str || string.IsNullOrEmpty(str) || !IsValidByRegEx(v))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsValidByRegEx(string value) => regex.IsMatch(value);
 }
