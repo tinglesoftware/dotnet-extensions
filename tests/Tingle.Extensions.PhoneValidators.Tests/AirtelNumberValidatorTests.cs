@@ -19,18 +19,18 @@ public class AirtelNumberValidatorTests
     }
 
     [Theory]
-    [InlineData("0733491887", true)]
-    [InlineData("+254733491887", true)]
-    [InlineData("+254101491887", true)]
-    [InlineData("254733491887", true)]
-    [InlineData("254100491887", true)]
-    [InlineData("733491887", true)]
-    [InlineData("102491887", true)]
-    [InlineData("00733491887", false)]
-    [InlineData("256733491887", false)]
+    [InlineData("0733000000", true)]
+    [InlineData("+254733000000", true)]
+    [InlineData("+254101000000", true)]
+    [InlineData("254733000000", true)]
+    [InlineData("254100000000", true)]
+    [InlineData("733000000", true)]
+    [InlineData("102000000", true)]
+    [InlineData("00733000000", false)]
+    [InlineData("256733000000", false)]
     [InlineData("25473349188", false)]
     [InlineData("25410049188", false)]
-    [InlineData("0728837078", false)]
+    [InlineData("0722000000", false)]
     public void IsValid_Works(string phoneNumber, bool expected)
     {
         var actual = validator.IsValid(phoneNumber);
@@ -38,16 +38,16 @@ public class AirtelNumberValidatorTests
     }
 
     [Theory]
-    [InlineData("0733491887", "254733491887")]
-    [InlineData("0102491887", "254102491887")]
-    [InlineData("+254733491887", "254733491887")]
-    [InlineData("+254102491887", "254102491887")]
-    [InlineData("254733491887", "254733491887")]
-    [InlineData("254100491887", "254100491887")]
-    [InlineData("733491887", "254733491887")]
-    [InlineData("101491887", "254101491887")]
-    [InlineData("256733491887", null)]
-    [InlineData("0728837078", null)]
+    [InlineData("0733000000", "254733000000")]
+    [InlineData("0102000000", "254102000000")]
+    [InlineData("+254733000000", "254733000000")]
+    [InlineData("+254102000000", "254102000000")]
+    [InlineData("254733000000", "254733000000")]
+    [InlineData("254100000000", "254100000000")]
+    [InlineData("733000000", "254733000000")]
+    [InlineData("101000000", "254101000000")]
+    [InlineData("256733000000", null)]
+    [InlineData("0722000000", null)]
     public void ToMsisdn_Works(string phoneNumber, string expectedResponse)
     {
         var actualResult = validator.ToMsisdn(phoneNumber);
@@ -55,10 +55,10 @@ public class AirtelNumberValidatorTests
     }
 
     [Theory]
-    [InlineData("254733491887", new string[] { "254733491887", "0733491887", "733491887" })]
-    [InlineData("254100491887", new string[] { "254100491887", "0100491887", "100491887" })]
-    [InlineData("733491887", new string[] { "254733491887", "0733491887", "733491887" })]
-    [InlineData("102491887", new string[] { "254102491887", "0102491887", "102491887" })]
+    [InlineData("254733000000", new string[] { "254733000000", "0733000000", "733000000" })]
+    [InlineData("254100000000", new string[] { "254100000000", "0100000000", "100000000" })]
+    [InlineData("733000000", new string[] { "254733000000", "0733000000", "733000000" })]
+    [InlineData("102000000", new string[] { "254102000000", "0102000000", "102000000" })]
     [InlineData("0722759406", new string[] { })]
     public void MakePossibleValues_Works(string phoneNumber, string[] expectedValues)
     {
@@ -67,16 +67,16 @@ public class AirtelNumberValidatorTests
     }
 
     [Theory]
-    [InlineData("0733491887", "+254733491887")]
-    [InlineData("0102491887", "+254102491887")]
-    [InlineData("+254733491887", "+254733491887")]
-    [InlineData("+254102491887", "+254102491887")]
-    [InlineData("254733491887", "+254733491887")]
-    [InlineData("254100491887", "+254100491887")]
-    [InlineData("733491887", "+254733491887")]
-    [InlineData("101491887", "+254101491887")]
-    [InlineData("256733491887", null)]
-    [InlineData("0728837078", null)]
+    [InlineData("0733000000", "+254733000000")]
+    [InlineData("0102000000", "+254102000000")]
+    [InlineData("+254733000000", "+254733000000")]
+    [InlineData("+254102000000", "+254102000000")]
+    [InlineData("254733000000", "+254733000000")]
+    [InlineData("254100000000", "+254100000000")]
+    [InlineData("733000000", "+254733000000")]
+    [InlineData("101000000", "+254101000000")]
+    [InlineData("256733000000", null)]
+    [InlineData("0722000000", null)]
     public void ToE164_Works(string phoneNumber, string expectedResponse)
     {
         var actualResult = validator.ToE164(phoneNumber);
@@ -84,13 +84,13 @@ public class AirtelNumberValidatorTests
     }
 
     [Theory]
-    [InlineData("0733491887", true)]
-    [InlineData("254733491887", true)]
-    [InlineData("+254733491887", true)]
-    [InlineData("102491887", true)]
-    [InlineData("733491887", true)]
+    [InlineData("0733000000", true)]
+    [InlineData("254733000000", true)]
+    [InlineData("+254733000000", true)]
+    [InlineData("102000000", true)]
+    [InlineData("733000000", true)]
     [InlineData("0722759406", false)]
-    [InlineData("256733491887", false)]
+    [InlineData("256733000000", false)]
     [InlineData("", true)]
     [InlineData(null, true)]
     [InlineData("A", false)]

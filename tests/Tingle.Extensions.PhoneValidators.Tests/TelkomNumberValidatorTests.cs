@@ -26,7 +26,7 @@ public class TelkomNumberValidatorTests
     [InlineData("00772313817", false)]
     [InlineData("256772313817", false)]
     [InlineData("25477231381", false)]
-    [InlineData("0728837078", false)]
+    [InlineData("0722000000", false)]
     public void IsValid_Works(string phoneNumber, bool expected)
     {
         var actual = validator.IsValid(phoneNumber);
@@ -39,7 +39,7 @@ public class TelkomNumberValidatorTests
     [InlineData("254772313817", "254772313817")]
     [InlineData("772313817", "254772313817")]
     [InlineData("256772313817", null)]
-    [InlineData("0728837078", null)]
+    [InlineData("0722000000", null)]
     public void ToMsisdn_Works(string phoneNumber, string expectedResponse)
     {
         var actualResult = validator.ToMsisdn(phoneNumber);
@@ -62,7 +62,7 @@ public class TelkomNumberValidatorTests
     [InlineData("254772313817", "+254772313817")]
     [InlineData("772313817", "+254772313817")]
     [InlineData("256772313817", null)]
-    [InlineData("0728837078", null)]
+    [InlineData("0722000000", null)]
     public void ToE164_Works(string phoneNumber, string expectedResponse)
     {
         var actualResult = validator.ToE164(phoneNumber);
