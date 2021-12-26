@@ -79,9 +79,9 @@ public class TelkomNumberValidatorTests
     [InlineData("", true)]
     [InlineData(null, true)]
     [InlineData("A", false)]
-    public void TelkomPhoneNumber_Validation_Works(string testPin, bool expected)
+    public void Attribute_Validation_Works_ForSingle(string testPhoneNumber, bool expected)
     {
-        var obj = new TestModel { PhoneNumber = testPin };
+        var obj = new TestModel1 { PhoneNumber = testPhoneNumber };
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -93,16 +93,51 @@ public class TelkomNumberValidatorTests
         {
             var val = Assert.Single(results);
             var memeberName = Assert.Single(val.MemberNames);
-            Assert.Equal(nameof(TestModel.PhoneNumber), memeberName);
+            Assert.Equal(nameof(TestModel1.PhoneNumber), memeberName);
             Assert.NotNull(val.ErrorMessage);
             Assert.NotEmpty(val.ErrorMessage);
             Assert.Contains("must be a valid Telkom phone number.", val.ErrorMessage);
         }
     }
 
-    class TestModel
+    [Theory]
+    [InlineData("0772313817,254772313817", true)]
+    [InlineData("+254772313817,772313817", true)]
+    [InlineData("+254772313817,0722759406", false)]
+    [InlineData("+254772313817,256772313817", false)]
+    [InlineData("", false)]
+    [InlineData(null, true)]
+    [InlineData("A", false)]
+    public void Attribute_Validation_Works_ForList(string testPhoneNumbers, bool expected)
+    {
+        var obj = new TestModel2 { PhoneNumbers = testPhoneNumbers?.Split(',') };
+        var context = new ValidationContext(obj);
+        var results = new List<ValidationResult>();
+        var actual = Validator.TryValidateObject(obj, context, results, true);
+        Assert.Equal(expected, actual);
+
+        // if expected it to pass, the results should be empty
+        if (expected) Assert.Empty(results);
+        else
+        {
+            var val = Assert.Single(results);
+            var memeberName = Assert.Single(val.MemberNames);
+            Assert.Equal(nameof(TestModel2.PhoneNumbers), memeberName);
+            Assert.NotNull(val.ErrorMessage);
+            Assert.NotEmpty(val.ErrorMessage);
+            Assert.Contains("must be a valid Telkom phone number.", val.ErrorMessage);
+        }
+    }
+
+    class TestModel1
     {
         [TelkomPhoneNumber]
         public string? PhoneNumber { get; set; }
+    }
+
+    class TestModel2
+    {
+        [TelkomPhoneNumber]
+        public IList<string>? PhoneNumbers { get; set; }
     }
 }
