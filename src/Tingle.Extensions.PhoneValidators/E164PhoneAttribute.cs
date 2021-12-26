@@ -3,7 +3,7 @@
 namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
-/// Specifies that a data field value is a well-formed E.164 phone number.
+/// Specifies that a data field value is a well-formed E.164 phone number or a list of well-formed E.164 phone numbers.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class E164PhoneAttribute : ValidationAttribute
@@ -36,11 +36,26 @@ public sealed class E164PhoneAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
-        if (value is not string s || string.IsNullOrEmpty(s)) return true;
+        if (value is string s && !string.IsNullOrEmpty(s)) return IsValid(s);
+
+        if (value is IEnumerable<string> values)
+        {
+            foreach (var v in values)
+            {
+                if (v is not string str || string.IsNullOrEmpty(str) || !IsValid(v))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsValid(string value)
+    {
         try
         {
             var phoneNumberUtil = PhoneNumberUtil.GetInstance();
-            _ = phoneNumberUtil.Parse(numberToParse: s, defaultRegion: defaultRegion);
+            _ = phoneNumberUtil.Parse(numberToParse: value, defaultRegion: defaultRegion);
             return true;
         }
         catch (Exception ex) when (ex is NumberParseException)
