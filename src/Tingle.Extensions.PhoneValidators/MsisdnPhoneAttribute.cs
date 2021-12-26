@@ -16,11 +16,27 @@ public sealed class MsisdnPhoneAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
-        if (value is not string s || string.IsNullOrEmpty(s)) return true;
-        if (s.StartsWith("+")) return false;
+        if (value is string s && !string.IsNullOrEmpty(s)) return IsValidMsisdn(s);
+
+        if (value is IEnumerable<string> values)
+        {
+            foreach (var v in values)
+            {
+                if (v is not string str || string.IsNullOrEmpty(str) || !IsValidMsisdn(v))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsValidMsisdn(string value)
+    {
+        if (value.StartsWith("+")) return false;
+
         try
         {
-            var prepended = "+" + s;
+            var prepended = "+" + value;
             var phoneNumberUtil = PhoneNumberUtil.GetInstance();
             _ = phoneNumberUtil.Parse(numberToParse: prepended, defaultRegion: null);
             return true;
