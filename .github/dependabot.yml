@@ -16,6 +16,8 @@ updates:
       # Ignore patch updates for some packages
       - dependency-name: "Microsoft.*"
         update-types: ["version-update:semver-patch"]
+      - dependency-name: "System.*"
+        update-types: ["version-update:semver-patch"]
       - dependency-name: "MongoDB.*"
         update-types: ["version-update:semver-patch"]
   - package-ecosystem: "github-actions" # See documentation for possible values
