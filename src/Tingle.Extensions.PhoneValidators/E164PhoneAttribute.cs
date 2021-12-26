@@ -36,13 +36,13 @@ public sealed class E164PhoneAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
-        if (value is string s && !string.IsNullOrEmpty(s)) return IsValid(s);
+        if (value is string s && !string.IsNullOrEmpty(s)) return IsValidE164(s);
 
         if (value is IEnumerable<string> values)
         {
             foreach (var v in values)
             {
-                if (v is not string str || string.IsNullOrEmpty(str) || !IsValid(v))
+                if (v is not string str || string.IsNullOrEmpty(str) || !IsValidE164(v))
                     return false;
             }
         }
@@ -50,7 +50,7 @@ public sealed class E164PhoneAttribute : ValidationAttribute
         return true;
     }
 
-    private bool IsValid(string value)
+    private bool IsValidE164(string value)
     {
         try
         {
