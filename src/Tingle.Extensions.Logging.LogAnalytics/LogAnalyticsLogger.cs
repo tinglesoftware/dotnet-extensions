@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 
 namespace Tingle.Extensions.Logging.LogAnalytics;
@@ -10,6 +11,10 @@ namespace Tingle.Extensions.Logging.LogAnalytics;
 /// <seealso cref="ILogger" />
 public class LogAnalyticsLogger : ILogger
 {
+    private static readonly Assembly assembly = Assembly.GetEntryAssembly();
+    private static readonly string ApplicationName = assembly.GetName().Name;
+    private static readonly string ApplicationVersion = assembly.GetName().Version.ToString();
+
     private readonly HttpClient httpClient;
     private readonly string categoryName;
     private readonly LogAnalyticsLoggerOptions options;
@@ -56,7 +61,9 @@ public class LogAnalyticsLogger : ILogger
                 {
                     ["Message"] = message,
                     ["CategoryName"] = categoryName,
-                    ["LogLevel"] = logLevel.ToString()
+                    ["LogLevel"] = logLevel.ToString(),
+                    ["ApplicationName"] = ApplicationName,
+                    ["ApplicationVersion"] = ApplicationVersion,
                 };
 
                 // Populate the event information
