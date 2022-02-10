@@ -11,9 +11,9 @@ namespace Tingle.Extensions.Logging.LogAnalytics;
 /// <seealso cref="ILogger" />
 public class LogAnalyticsLogger : ILogger
 {
-    private static readonly Assembly assembly = Assembly.GetEntryAssembly();
-    private static readonly string ApplicationName = assembly.GetName().Name;
-    private static readonly string ApplicationVersion = assembly.GetName().Version.ToString();
+    private static readonly AssemblyName? EntryAssemblyName = Assembly.GetEntryAssembly()?.GetName();
+    private static readonly string? ApplicationName = EntryAssemblyName?.Name;
+    private static readonly string? ApplicationVersion = EntryAssemblyName?.Version?.ToString();
 
     private readonly HttpClient httpClient;
     private readonly string categoryName;
