@@ -39,7 +39,7 @@ public class SplitAndBatchProcessor<T>
         // example: if we have 50 batches and a batchSize of 100 items, we'll have process 5,000
         //          messages in total but only 50 at a time in parallel
 #if NET6_0_OR_GREATER
-        var batches = items.Chunk(batchSize).ToList();
+        var batches = items.Chunk(batchSize);
 #else
         var list = items.ToList();
         var count = list.Count / batchSize + (list.Count % batchSize > 0 ? 1 : 0);
