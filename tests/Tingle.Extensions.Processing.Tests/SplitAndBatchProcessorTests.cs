@@ -16,7 +16,6 @@ public class SplitAndBatchProcessorTests
         });
         await processor.ProcessAsync(numbers);
         Assert.Equal(20, invocations);
-        Assert.Equal(100, processed.Count);
         Assert.Equal(numbers, processed.OrderBy(x => x));
     }
 }
