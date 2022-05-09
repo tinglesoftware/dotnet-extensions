@@ -9,14 +9,14 @@
 public class SplitAndBatchProcessor<T>
 {
     private readonly int batchSize;
-    private readonly Func<List<T>, CancellationToken, Task> handler;
+    private readonly Func<IEnumerable<T>, CancellationToken, Task> handler;
 
     /// <summary>
     /// Creates a processor for bulk items
     /// </summary>
     /// <param name="batchSize">the maximum number of items in a batch</param>
     /// <param name="handler">the handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
-    public SplitAndBatchProcessor(int batchSize = 10, Func<List<T>, CancellationToken, Task>? handler = null)
+    public SplitAndBatchProcessor(int batchSize = 10, Func<IEnumerable<T>, CancellationToken, Task>? handler = null)
     {
         this.batchSize = batchSize;
         this.handler = handler ?? ((s, c) => Task.CompletedTask);
@@ -28,7 +28,7 @@ public class SplitAndBatchProcessor<T>
     /// <param name="batch">the portion of items to be handled</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected virtual async Task HandleAsync(List<T> batch, CancellationToken cancellationToken = default)
+    protected virtual async Task HandleAsync(IEnumerable<T> batch, CancellationToken cancellationToken = default)
     {
 #pragma warning disable CAC001 // ConfigureAwaitChecker
         await handler(batch, cancellationToken);
@@ -41,17 +41,18 @@ public class SplitAndBatchProcessor<T>
     /// <param name="items">the items to be batched</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task ProcessAsync(List<T> items, CancellationToken cancellationToken = default)
+    public async Task ProcessAsync(IEnumerable<T> items, CancellationToken cancellationToken = default)
     {
         var tasks = new List<Task>();
 
         // we group them into batches then we parallelize the batches
         // example: if we have 50 batches and a batchSize of 100 items, we'll have process 5,000
         //          messages in total but only 50 at a time in parallel
-        var batchesCount = items.Count / batchSize + (items.Count % batchSize > 0 ? 1 : 0);
+        var list = items.ToList();
+        var batchesCount = list.Count / batchSize + (list.Count % batchSize > 0 ? 1 : 0);
         for (var i = 0; i < batchesCount; i++)
         {
-            var batch = items.GetRange(i * batchSize, Math.Min(batchSize, items.Count - i * batchSize));
+            var batch = list.GetRange(i * batchSize, Math.Min(batchSize, list.Count - i * batchSize));
             tasks.Add(HandleAsync(batch, cancellationToken));
         }
 
