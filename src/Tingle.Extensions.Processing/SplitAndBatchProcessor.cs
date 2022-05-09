@@ -11,21 +11,17 @@ public class SplitAndBatchProcessor<T>
     private readonly int batchSize;
     private readonly Func<IEnumerable<T>, CancellationToken, Task> handler;
 
-    /// <summary>
-    /// Creates a processor for bulk items
-    /// </summary>
-    /// <param name="batchSize">the maximum number of items in a batch</param>
-    /// <param name="handler">the handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
+    /// <summary>Creates an instance of <see cref="SplitAndBatchProcessor{T}"/>.</summary>
+    /// <param name="batchSize">The maximum number of items in a batch</param>
+    /// <param name="handler">The handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
     public SplitAndBatchProcessor(int batchSize = 10, Func<IEnumerable<T>, CancellationToken, Task>? handler = null)
     {
         this.batchSize = batchSize;
         this.handler = handler ?? ((s, c) => Task.CompletedTask);
     }
 
-    /// <summary>
-    /// Handles a batch of data
-    /// </summary>
-    /// <param name="batch">the portion of items to be handled</param>
+    /// <summary>Handle a batch of items.</summary>
+    /// <param name="batch">The batch of items to be handled.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected virtual async Task HandleAsync(IEnumerable<T> batch, CancellationToken cancellationToken = default)
@@ -35,10 +31,8 @@ public class SplitAndBatchProcessor<T>
 #pragma warning restore CAC001 // ConfigureAwaitChecker
     }
 
-    /// <summary>
-    /// Split the items and process them in parallel
-    /// </summary>
-    /// <param name="items">the items to be batched</param>
+    /// <summary>Split the items and process them in parallel.</summary>
+    /// <param name="items">The items to be processed.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task ProcessAsync(IEnumerable<T> items, CancellationToken cancellationToken = default)

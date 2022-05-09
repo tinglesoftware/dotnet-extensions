@@ -1,7 +1,7 @@
 ﻿namespace Tingle.Extensions.Processing;
 
 /// <summary>
-/// A processor that processes a list of items sequentially but can be parallelized without splitting.
+/// A processor that processes a list of items sequentially based on a concurrency limit.
 /// The processing order the items is guaranteed.
 /// </summary>
 /// <typeparam name="T"></typeparam>
@@ -10,11 +10,9 @@ public class SequentialBatchProcessor<T>
     private readonly SemaphoreSlim concurrencyLimiter;
     private readonly Func<T, CancellationToken, Task> handler;
 
-    /// <summary>
-    /// Creates a processor for bulk items
-    /// </summary>
-    /// <param name="concurrencyLimit">the maximum number of concurrent items</param>
-    /// <param name="handler">the handler for item in the data. This handler shall be awaited.</param>
+    /// <summary>Creates an instance of <see cref="SequentialBatchProcessor{T}"/>.</summary>
+    /// <param name="concurrencyLimit">The maximum number of concurrent items</param>
+    /// <param name="handler">The handler for item in the data. This handler shall be awaited.</param>
     public SequentialBatchProcessor(int concurrencyLimit = 1, Func<T, CancellationToken, Task>? handler = null)
     {
         concurrencyLimiter = new SemaphoreSlim(1, concurrencyLimit);
@@ -22,10 +20,8 @@ public class SequentialBatchProcessor<T>
     }
 
 
-    /// <summary>
-    /// Handles an items in the data
-    /// </summary>
-    /// <param name="item">the item to be handled</param>
+    /// <summary>Handle a single item.</summary>
+    /// <param name="item">The item to be handled.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected virtual async Task HandleAsync(T item, CancellationToken cancellationToken = default)
@@ -35,10 +31,8 @@ public class SequentialBatchProcessor<T>
 #pragma warning restore CAC001 // ConfigureAwaitChecker
     }
 
-    /// <summary>
-    /// Split the items and process them in parallel
-    /// </summary>
-    /// <param name="items">the items to be processed</param>
+    /// <summary>Process items based on concurrency limit.</summary>
+    /// <param name="items">The items to be processed.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task ProcessAsync(IEnumerable<T> items, CancellationToken cancellationToken = default)
