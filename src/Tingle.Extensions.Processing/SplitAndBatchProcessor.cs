@@ -37,20 +37,24 @@ public class SplitAndBatchProcessor<T>
     /// <returns></returns>
     public async Task ProcessAsync(IEnumerable<T> items, CancellationToken cancellationToken = default)
     {
-        var tasks = new List<Task>();
-
         // we group them into batches then we parallelize the batches
         // example: if we have 50 batches and a batchSize of 100 items, we'll have process 5,000
         //          messages in total but only 50 at a time in parallel
+#if NET6_0_OR_GREATER
+        var batches = items.Chunk(batchSize).ToList();
+#else
         var list = items.ToList();
-        var batchesCount = list.Count / batchSize + (list.Count % batchSize > 0 ? 1 : 0);
-        for (var i = 0; i < batchesCount; i++)
+        var count = list.Count / batchSize + (list.Count % batchSize > 0 ? 1 : 0);
+        var batches = new List<IReadOnlyCollection<T>>();
+        for (var i = 0; i < count; i++)
         {
             var batch = list.GetRange(i * batchSize, Math.Min(batchSize, list.Count - i * batchSize));
-            tasks.Add(HandleAsync(batch, cancellationToken));
+            batches.Add(batch);
         }
+#endif
 
         // wait for all tasks in parallel
+        var tasks = batches.Select(b => HandleAsync(b, cancellationToken));
         await Task.WhenAll(tasks).ConfigureAwait(false);
     }
 }
