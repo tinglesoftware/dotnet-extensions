@@ -26,9 +26,7 @@ public class SplitAndBatchProcessor<T>
     /// <returns></returns>
     protected virtual async Task HandleAsync(IEnumerable<T> batch, CancellationToken cancellationToken = default)
     {
-#pragma warning disable CAC001 // ConfigureAwaitChecker
-        await handler(batch, cancellationToken);
-#pragma warning restore CAC001 // ConfigureAwaitChecker
+        await handler(batch, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>Split the items and process them in parallel.</summary>

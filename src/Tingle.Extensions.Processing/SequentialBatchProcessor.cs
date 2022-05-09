@@ -19,16 +19,13 @@ public class SequentialBatchProcessor<T>
         this.handler = handler ?? ((s, c) => Task.CompletedTask);
     }
 
-
     /// <summary>Handle a single item.</summary>
     /// <param name="item">The item to be handled.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     protected virtual async Task HandleAsync(T item, CancellationToken cancellationToken = default)
     {
-#pragma warning disable CAC001 // ConfigureAwaitChecker
-        await handler(item, cancellationToken);
-#pragma warning restore CAC001 // ConfigureAwaitChecker
+        await handler(item, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>Process items based on concurrency limit.</summary>
