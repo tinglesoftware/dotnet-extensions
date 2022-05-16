@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Authentication handlers for Microsoft.Extensions.Http</Description>
+    <Description>Authentication handlers for use with HttpClient and Microsoft.Extensions.Http</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);HttpClient;Authentication;HttpClient-Authentication</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
