@@ -120,7 +120,7 @@ Task DoStuffAsync(string token, CancellationToken ct)
 Let us now define a list of strings that require to be processed
 
 ```csharp
-var tokens = new List<string> { "value_1", "value_2", "value_3"}; 
+var tokens = new List<string> { "value_1", "value_2", "value_3"};
 ```
 
 Now let us tie it all up together to show how we can process `tokens` sequentially.
