@@ -8,8 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9546186D-D4E
 		src\Directory.Build.props = src\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.AnyOf", "src\Tingle.Extensions.AnyOf\Tingle.Extensions.AnyOf.csproj", "{3FB76745-2584-462C-933F-7EC527184AF7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Caching.MongoDB", "src\Tingle.Extensions.Caching.MongoDB\Tingle.Extensions.Caching.MongoDB.csproj", "{0C6BE46B-FFBF-497C-82D9-6148364D24E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnotations", "src\Tingle.Extensions.DataAnnotations\Tingle.Extensions.DataAnnotations.csproj", "{51FA6572-8EB6-4291-8D02-BB736057A50E}"
@@ -28,8 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{815F0941
 	ProjectSection(SolutionItems) = preProject
 		tests\Directory.Build.props = tests\Directory.Build.props
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.AnyOf.Tests", "tests\Tingle.Extensions.AnyOf.Tests\Tingle.Extensions.AnyOf.Tests.csproj", "{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Caching.MongoDB.Tests", "tests\Tingle.Extensions.Caching.MongoDB.Tests\Tingle.Extensions.Caching.MongoDB.Tests.csproj", "{0EA063C6-9A97-4DE8-9344-5D2BDD301134}"
 EndProject
@@ -56,10 +52,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3FB76745-2584-462C-933F-7EC527184AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FB76745-2584-462C-933F-7EC527184AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FB76745-2584-462C-933F-7EC527184AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FB76745-2584-462C-933F-7EC527184AF7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C6BE46B-FFBF-497C-82D9-6148364D24E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C6BE46B-FFBF-497C-82D9-6148364D24E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C6BE46B-FFBF-497C-82D9-6148364D24E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,10 +80,6 @@ Global
 		{A803DE4B-B050-48F2-82A1-8E947D8FB96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A803DE4B-B050-48F2-82A1-8E947D8FB96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A803DE4B-B050-48F2-82A1-8E947D8FB96C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0EA063C6-9A97-4DE8-9344-5D2BDD301134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EA063C6-9A97-4DE8-9344-5D2BDD301134}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EA063C6-9A97-4DE8-9344-5D2BDD301134}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -125,7 +113,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3FB76745-2584-462C-933F-7EC527184AF7} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{0C6BE46B-FFBF-497C-82D9-6148364D24E8} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{51FA6572-8EB6-4291-8D02-BB736057A50E} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{D0C66D3A-ED1F-486E-AA19-BDBB19025368} = {815F0941-3B70-4705-A583-AF627559595C}
@@ -133,7 +120,6 @@ Global
 		{FDA94A72-2875-4D9B-B1A0-12AF90E8423B} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{F46ADD04-B716-4E9B-9799-7C47DDDB08FC} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{A803DE4B-B050-48F2-82A1-8E947D8FB96C} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
-		{EDEDE7E3-A4DF-46BC-9B80-441B54DC001E} = {815F0941-3B70-4705-A583-AF627559595C}
 		{0EA063C6-9A97-4DE8-9344-5D2BDD301134} = {815F0941-3B70-4705-A583-AF627559595C}
 		{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD} = {815F0941-3B70-4705-A583-AF627559595C}
 		{47F95938-964A-47FE-A0D6-1EDD0893455B} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}

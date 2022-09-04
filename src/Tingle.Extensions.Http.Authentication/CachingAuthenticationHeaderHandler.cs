@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using AnyOfTypes;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
@@ -86,7 +87,7 @@ public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderH
     {
         cache = null;
 
-        var value = Cache?.Value;
+        var value = Cache?.CurrentValue;
         var key = CacheKey;
         if (value is null || string.IsNullOrWhiteSpace(key))
         {
