@@ -45,12 +45,12 @@ public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderH
     /// <returns></returns>
     protected async Task<string?> GetTokenFromCacheAsync(CancellationToken cancellationToken)
     {
-        if (TryGetCache(out var cache))
+        if (TryGetCache(out var cache, out var key))
         {
             return cache switch
             {
-                IMemoryCache memoryCache => memoryCache.Get<string>(CacheKey),
-                IDistributedCache distributedCache => await distributedCache.GetStringAsync(CacheKey, cancellationToken).ConfigureAwait(false),
+                IMemoryCache memoryCache => memoryCache.Get<string>(key),
+                IDistributedCache distributedCache => await distributedCache.GetStringAsync(key, cancellationToken).ConfigureAwait(false),
                 _ => null,
             };
         }
@@ -67,28 +67,28 @@ public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderH
     /// <returns></returns>
     protected async Task SetTokenInCacheAsync(string value, DateTimeOffset expiresOn, CancellationToken cancellationToken)
     {
-        if (TryGetCache(out var cache))
+        if (TryGetCache(out var cache, out var key))
         {
             if (cache is IMemoryCache memoryCache)
             {
                 var options = new MemoryCacheEntryOptions { AbsoluteExpiration = expiresOn };
-                memoryCache.Set(CacheKey, value, options);
+                memoryCache.Set(key, value, options);
             }
             else if (cache is IDistributedCache distributedCache)
             {
                 var options = new DistributedCacheEntryOptions { AbsoluteExpiration = expiresOn };
-                await distributedCache.SetStringAsync(key: CacheKey, value: value, options: options, token: cancellationToken).ConfigureAwait(false);
+                await distributedCache.SetStringAsync(key: key, value: value, options: options, token: cancellationToken).ConfigureAwait(false);
             }
             else throw new NotSupportedException();
         }
     }
 
-    private bool TryGetCache([NotNullWhen(true)] out object? cache, bool throwOnUnknownType = true)
+    private bool TryGetCache([NotNullWhen(true)] out object? cache, [NotNullWhen(true)] out string? key, bool throwOnUnknownType = true)
     {
         cache = null;
 
         var value = Cache?.CurrentValue;
-        var key = CacheKey;
+        key = CacheKey;
         if (value is null || string.IsNullOrWhiteSpace(key))
         {
             if (cache is not null && string.IsNullOrWhiteSpace(key))
