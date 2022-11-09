@@ -42,7 +42,7 @@ public sealed class E164PhoneAttribute : ValidationAttribute
         {
             foreach (var v in values)
             {
-                if (v is not string str || string.IsNullOrEmpty(str) || !IsValidE164(v))
+                if (string.IsNullOrEmpty(v) || !IsValidE164(v))
                     return false;
             }
         }
