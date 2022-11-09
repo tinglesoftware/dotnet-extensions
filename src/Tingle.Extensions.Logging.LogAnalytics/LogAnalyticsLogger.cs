@@ -35,7 +35,7 @@ public class LogAnalyticsLogger : ILogger
     internal IExternalScopeProvider? ExternalScopeProvider { get; set; }
 
     ///<inheritdoc/>
-    public IDisposable BeginScope<TState>(TState state) => ExternalScopeProvider?.Push(state) ?? NullScope.Instance;
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull => ExternalScopeProvider?.Push(state) ?? NullScope.Instance;
 
     ///<inheritdoc/>
     public bool IsEnabled(LogLevel logLevel) => logLevel != LogLevel.None;
