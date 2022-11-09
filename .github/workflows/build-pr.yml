@@ -25,8 +25,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: |
-          5.x
-          6.x
+          7.x
 
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.8.0
