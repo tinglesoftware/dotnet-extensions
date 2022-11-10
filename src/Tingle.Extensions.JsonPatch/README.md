@@ -118,7 +118,7 @@ patchDoc.Copy(x => x.Orders, 1, y => y.Orders, 0)
 
 ## Test Operation
 
-This operation is is commonly used to prevent an update when there's a concurrency conflict.
+This operation is commonly used to prevent an update when there's a concurrency conflict.
 
 The following sample patch document has no effect if the initial value of `Name` is "John", because the test fails:
 

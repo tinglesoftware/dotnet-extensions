@@ -2,7 +2,7 @@
 
 /// <summary>
 /// A processor that splits a list of items and processes sections (splits) in parallel.
-/// For example, a list of 2,000 items with a batchSize of 100 to produce 20 bacthes which would be processed in parallel.
+/// For example, a list of 2,000 items with a batchSize of 100 to produce 20 batches which would be processed in parallel.
 /// The processing order the items is not guaranteed.
 /// </summary>
 /// <typeparam name="T"></typeparam>

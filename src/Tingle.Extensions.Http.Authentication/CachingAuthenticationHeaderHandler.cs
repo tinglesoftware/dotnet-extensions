@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Tingle.Extensions.Http.Authentication;
 
 /// <summary>
-/// Authentication provider that caches the authentiaction parameter via <see cref="Cache"/>.
+/// Authentication provider that caches the authentication parameter via <see cref="Cache"/>.
 /// </summary>
 public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderHandler
 {

@@ -90,7 +90,7 @@ public static class RecursiveValidator
                                                    ISet<object> validatedObjects,
                                                    IDictionary<object, object?>? validationContextItems = null)
     {
-        //short-circuit to avoid infinit loops on cyclical object graphs
+        // short-circuit to avoid infinite loops on cyclical object graphs
         if (validatedObjects.Contains(instance))
         {
             return true;
@@ -152,7 +152,7 @@ public static class RecursiveValidator
                                                 ISet<object> validatedObjects,
                                                 IDictionary<object, object?>? validationContextItems = null)
     {
-        //short-circuit to avoid infinit loops on cyclical object graphs
+        // short-circuit to avoid infinite loops on cyclical object graphs
         if (validatedObjects.Contains(instance))
         {
             return;

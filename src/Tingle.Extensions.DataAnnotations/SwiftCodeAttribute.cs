@@ -7,11 +7,11 @@
 /// The code consists of 4 separate section, and the format arrange in the following manner: <c>AAAA BB CC DDD</c>.
 /// <code>The first 4 characters ("AAAA") specify the institution. Only letters.</code>
 /// <code>
-/// The next 2 characters("BB") specify the country where the instituion's located.The code follows the format
+/// The next 2 characters("BB") specify the country where the institution's located.The code follows the format
 /// of ISO 3166-1 alpha-2 country code. Only letters.
 /// </code>
 /// <code>
-/// The next 2 characters ("CC") specify the instiution's location. Can be letters and digits.
+/// The next 2 characters ("CC") specify the institution's location. Can be letters and digits.
 /// Passive participants will have "1" in the second character.
 /// </code>
 /// <code>

@@ -130,7 +130,7 @@ var processor = new SequentialBatchProcessor<string>(concurrencyLimit: 1, handle
 await processor.ProcessAsync(tokens, cancellationToken);
 ```
 
-Therefore, we can process the `tokens` in a squential manner. By default, `SequentialBatchProcessor<T>`'s constructor has the concurrency limit set to 1. If you wish to increase the number of items handled concurrently, you can increae this limit to a higher value.
+Therefore, we can process the `tokens` in a sequential manner. By default, `SequentialBatchProcessor<T>`'s constructor has the concurrency limit set to 1. If you wish to increase the number of items handled concurrently, you can increase this limit to a higher value.
 
 ## Split and Batch Processing
 

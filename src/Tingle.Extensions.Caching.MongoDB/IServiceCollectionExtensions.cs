@@ -4,7 +4,7 @@ using Tingle.Extensions.Caching.MongoDB;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Extension methods for setting up Redis distributed cache related services in an <see cref="IServiceCollection" />.
+/// Extension methods for setting up Mongo distributed cache related services in an <see cref="IServiceCollection" />.
 /// </summary>
 public static class IServiceCollectionExtensions
 {

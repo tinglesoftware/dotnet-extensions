@@ -6,7 +6,7 @@ public class SuffixAttributeTests
 {
     [Theory]
     [InlineData("the worLd", true)]
-    [InlineData("I dont belong to this worLd", true)]
+    [InlineData("I don't belong to this worLd", true)]
     [InlineData("who cares about the worLd anyway", false)]
     [InlineData(null, true)]
     [InlineData("", false)]

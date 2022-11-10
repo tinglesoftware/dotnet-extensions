@@ -489,7 +489,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
     }
 
     /// <summary>
-    /// Copy the value at specified location to the target location. Will esult in, for example:
+    /// Copy the value at specified location to the target location. Will result in, for example:
     /// { "op": "copy", "from": "/a/b/c", "path": "/a/b/e" }
     /// </summary>
     /// <param name="from">source location</param>
