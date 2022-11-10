@@ -94,8 +94,13 @@ public class RecursiveValidatorTests
     public void TryValidateObjectRecursive_returns_errors_when_grandchild_class_has_invalid_properties()
     {
         var parent = new Parent { PropertyA = 1, PropertyB = 1 };
-        parent.Child = new Child { Parent = parent, PropertyA = 1, PropertyB = 1 };
-        parent.Child.GrandChildren = new[] { new GrandChild { PropertyA = 11, PropertyB = 11 } };
+        parent.Child = new Child
+        {
+            Parent = parent,
+            PropertyA = 1,
+            PropertyB = 1,
+            GrandChildren = new[] { new GrandChild { PropertyA = 11, PropertyB = 11 } }
+        };
         var validationResults = new List<ValidationResult>();
 
         var result = RecursiveValidator.TryValidateObjectRecursive(parent, validationResults);

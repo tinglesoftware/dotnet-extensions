@@ -243,10 +243,7 @@ public class MongoCache : IDistributedCache
         await connectionLock.WaitAsync(token).ConfigureAwait(false);
         try
         {
-            if (collection == null)
-            {
-                collection = await MongoCollectionInitializeAsync().ConfigureAwait(false);
-            }
+            collection ??= await MongoCollectionInitializeAsync().ConfigureAwait(false);
         }
         finally
         {
@@ -261,10 +258,7 @@ public class MongoCache : IDistributedCache
         connectionLock.Wait();
         try
         {
-            if (collection == null)
-            {
-                collection = MongoCollectionInitialize();
-            }
+            collection ??= MongoCollectionInitialize();
         }
         finally
         {
