@@ -46,7 +46,7 @@ public static class IServiceCollectionExtensions
     /// </param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddMongoCache(this IServiceCollection services,
-                                                   string connectionString,
+                                                   string? connectionString,
                                                    string? databaseName = null,
                                                    string collectionName = "Cache")
     {
