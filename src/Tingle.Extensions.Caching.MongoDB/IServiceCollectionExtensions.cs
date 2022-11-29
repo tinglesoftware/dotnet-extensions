@@ -38,10 +38,12 @@ public static class IServiceCollectionExtensions
     /// </param>
     /// <param name="databaseName">
     /// The database name to store the cache.
+    /// This value is set in <see cref="MongoCacheOptions.DatabaseName"/>.
     /// When <see langword="null"/>, the value is extracted from the <paramref name="connectionString"/>.
     /// </param>
     /// <param name="collectionName">
     /// The collection name to store the cache.
+    /// This value is set in <see cref="MongoCacheOptions.CollectionName"/>.
     /// Defaults to <c>Cache</c>
     /// </param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
