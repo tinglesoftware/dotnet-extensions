@@ -10,7 +10,7 @@ namespace Tingle.Extensions.Caching.MongoDB;
 /// Distributed cache implementation over MongoDB.
 /// </summary>
 /// <remarks>
-/// This implementation is highly influenced by CosmosCache
+/// This implementation is highly inspired by CosmosCache
 /// https://github.com/Azure/Microsoft.Extensions.Caching.Cosmos
 /// </remarks>
 public class MongoCache : IDistributedCache, IDisposable
