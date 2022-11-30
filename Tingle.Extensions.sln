@@ -37,14 +37,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.JsonPatch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PhoneValidators.Tests", "tests\Tingle.Extensions.PhoneValidators.Tests\Tingle.Extensions.PhoneValidators.Tests.csproj", "{526B37AD-256A-445A-9A42-E5C53989B11E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Processing.Tests", "tests\Tingle.Extensions.Processing.Tests\Tingle.Extensions.Processing.Tests.csproj", "{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}"
 	ProjectSection(SolutionItems) = preProject
 		samples\Directory.Build.props = samples\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyticsSample", "samples\LogAnalyticsSample\LogAnalyticsSample.csproj", "{A2A259BA-50B5-4232-A518-BCA291CC9DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSessionState", "samples\AspNetCoreSessionState\AspNetCoreSessionState.csproj", "{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Processing.Tests", "tests\Tingle.Extensions.Processing.Tests\Tingle.Extensions.Processing.Tests.csproj", "{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyticsSample", "samples\LogAnalyticsSample\LogAnalyticsSample.csproj", "{A2A259BA-50B5-4232-A518-BCA291CC9DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,14 +102,18 @@ Global
 		{526B37AD-256A-445A-9A42-E5C53989B11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526B37AD-256A-445A-9A42-E5C53989B11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526B37AD-256A-445A-9A42-E5C53989B11E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A259BA-50B5-4232-A518-BCA291CC9DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,8 +131,9 @@ Global
 		{47F95938-964A-47FE-A0D6-1EDD0893455B} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
 		{B82E2980-E145-4341-BAE0-8FAE1F110D0C} = {815F0941-3B70-4705-A583-AF627559595C}
 		{526B37AD-256A-445A-9A42-E5C53989B11E} = {815F0941-3B70-4705-A583-AF627559595C}
-		{A2A259BA-50B5-4232-A518-BCA291CC9DCF} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 		{978023EA-2ED5-4A28-96AD-4BB914EF2BE5} = {815F0941-3B70-4705-A583-AF627559595C}
+		{CEF2A8D5-771F-42A1-B61D-9DEA4AB1921C} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
+		{A2A259BA-50B5-4232-A518-BCA291CC9DCF} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9323FCA-8E8B-4176-A463-87D202EC4552}
