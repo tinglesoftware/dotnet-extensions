@@ -9,6 +9,10 @@ namespace Tingle.Extensions.Caching.MongoDB;
 /// <summary>
 /// Distributed cache implementation over MongoDB.
 /// </summary>
+/// <remarks>
+/// This implementation is highly influenced by CosmosCache
+/// https://github.com/Azure/Microsoft.Extensions.Caching.Cosmos
+/// </remarks>
 public class MongoCache : IDistributedCache, IDisposable
 {
     private readonly SemaphoreSlim connectionLock = new(initialCount: 1, maxCount: 1);
