@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
 using Tingle.Extensions.Caching.MongoDB;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,17 @@ public static class IServiceCollectionExtensions
 
         services.AddOptions();
         services.Configure(setupAction);
-        services.Add(ServiceDescriptor.Singleton<IDistributedCache, MongoCache>());
+        services.Add(ServiceDescriptor.Singleton<IDistributedCache, MongoCache>((IServiceProvider provider) =>
+        {
+            var optionsMonitor = provider.GetService<IOptionsMonitor<MongoCacheOptions>>();
+            if (optionsMonitor != null)
+            {
+                return new MongoCache(optionsMonitor);
+            }
+
+            var options = provider.GetRequiredService<IOptions<MongoCacheOptions>>();
+            return new MongoCache(options);
+        }));
 
         return services;
     }
