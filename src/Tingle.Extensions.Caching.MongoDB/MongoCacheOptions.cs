@@ -9,7 +9,7 @@ namespace Tingle.Extensions.Caching.MongoDB;
 public class MongoCacheOptions : IOptions<MongoCacheOptions>
 {
     /// <summary>
-    /// Gets or sets the connection string to build a mongo client.
+    /// Gets or sets the connection string to build a Mongo client.
     /// Either use this or provide an existing <see cref="MongoClient"/>.
     /// </summary>
     public string? ConnectionString { get; set; }
