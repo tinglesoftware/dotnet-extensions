@@ -9,14 +9,15 @@ namespace Tingle.Extensions.Caching.MongoDB;
 /// <summary>
 /// Distributed cache implementation over MongoDB.
 /// </summary>
-public class MongoCache : IDistributedCache
+public class MongoCache : IDistributedCache, IDisposable
 {
     private readonly SemaphoreSlim connectionLock = new(initialCount: 1, maxCount: 1);
     private readonly IDisposable? monitorListener;
     private MongoCacheOptions options;
-    private bool initializedClient;
     private IMongoClient? client;
     private IMongoCollection<MongoCacheEntry>? collection;
+    private bool initializedClient;
+    private bool disposed = false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MongoCache"/> class.
@@ -42,8 +43,25 @@ public class MongoCache : IDistributedCache
         }
 
         Initialize(optionsMonitor.CurrentValue);
-
         monitorListener = optionsMonitor.OnChange(OnOptionsChange);
+    }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        if (disposed) return;
+
+        if (initializedClient && client != null)
+        {
+            if (client is IDisposable d)
+            {
+                d.Dispose();
+            }
+        }
+
+        monitorListener?.Dispose();
+
+        disposed = true;
     }
 
     /// <inheritdoc/>
@@ -263,6 +281,7 @@ public class MongoCache : IDistributedCache
 
         options = optionsAccessor.Value;
     }
+
     private async Task ConnectAsync(CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();

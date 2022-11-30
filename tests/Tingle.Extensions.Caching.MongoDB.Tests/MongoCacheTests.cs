@@ -10,7 +10,7 @@ public class MongoCacheTests
     {
         // Null-check
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-        Assert.Throws<ArgumentNullException>(() => new MongoCache(null));
+        Assert.Throws<ArgumentNullException>(() => new MongoCache((IOptions<MongoCacheOptions>)null!));
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions() { });
