@@ -1,6 +1,7 @@
 # Tingle.Extensions.Caching.MongoDB
 
 This folder contains an implementation of `IDistributedCache` using MongoDB that can also be leveraged in ASP.NET Core as a Session State Provider.
+This implementation is highly inspired by [CosmosCache](https://github.com/Azure/Microsoft.Extensions.Caching.Cosmos).
 
 ## MongoClient initialization
 
