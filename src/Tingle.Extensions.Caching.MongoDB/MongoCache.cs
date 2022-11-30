@@ -61,7 +61,7 @@ public class MongoCache : IDistributedCache
         if (entry.IsSlidingExpiration.GetValueOrDefault())
         {
             entry.ExpiresAt = DateTime.UtcNow.AddSeconds(entry.TimeToLive ?? 0);
-            collection!.ReplaceOne(filter, entry);
+            collection.ReplaceOne(filter, entry);
         }
 
         return entry.Content;
@@ -101,7 +101,7 @@ public class MongoCache : IDistributedCache
         var entry = collection.Find(filter).SingleOrDefault();
         if (entry == null) return;
         var r_opt = new ReplaceOptions { IsUpsert = true };
-        collection!.ReplaceOne(filter, entry, r_opt);
+        collection.ReplaceOne(filter, entry, r_opt);
     }
 
     /// <inheritdoc/>
@@ -128,7 +128,7 @@ public class MongoCache : IDistributedCache
         Connect();
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
-        collection!.DeleteOne(filter);
+        collection.DeleteOne(filter);
     }
 
     /// <inheritdoc/>
@@ -156,7 +156,7 @@ public class MongoCache : IDistributedCache
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var item = BuildMongoCacheEntry(key, value, options);
         var r_opt = new ReplaceOptions { IsUpsert = true };
-        collection!.ReplaceOne(filter, item, r_opt);
+        collection.ReplaceOne(filter, item, r_opt);
     }
 
     /// <inheritdoc/>
@@ -280,6 +280,7 @@ public class MongoCache : IDistributedCache
         }
     }
 
+    [MemberNotNull(nameof(collection))]
     private void Connect()
     {
         if (collection != null) return;
