@@ -104,6 +104,7 @@ public class MongoCache : IDistributedCache
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var entry = collection.Find(filter).SingleOrDefault();
+        if (entry == null) return;
         var r_opt = new ReplaceOptions { IsUpsert = true };
         collection!.ReplaceOne(filter, entry, r_opt);
     }
@@ -119,6 +120,7 @@ public class MongoCache : IDistributedCache
 
         var filter = Builders<MongoCacheEntry>.Filter.Eq(c => c.Key, key);
         var entry = await collection.Find(filter).SingleOrDefaultAsync(cancellationToken: token).ConfigureAwait(false);
+        if (entry == null) return;
         var r_opt = new ReplaceOptions { IsUpsert = true };
         await collection!.ReplaceOneAsync(filter, entry, r_opt, cancellationToken: token).ConfigureAwait(false);
     }
