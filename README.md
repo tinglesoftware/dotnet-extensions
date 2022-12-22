@@ -1,6 +1,6 @@
 # .NET convenience extension libraries
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/tinglesoftware/dotnet-extensions/Build%20and%20Publish?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tinglesoftware/dotnet-extensions/build-release.yml?branch=main&style=flat-square)
 
 This repository contains projects/libraries for adding useful functionality to dotnet when running real world applications in production. We have been using this packages at [Tingle](https://tingle.software) for years and thought it is better if we shared them.
 
