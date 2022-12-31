@@ -3,13 +3,13 @@ name: Build PR
 on:
   pull_request:
     branches:
-      - main
+    - main
     paths-ignore:
-      - README.md
-      - '**/README.md'
-      - LICENSE
-      - CHANGELOG.md
-      - docs/**
+    - README.md
+    - '**/README.md'
+    - LICENSE
+    - CHANGELOG.md
+    - docs/**
 
 jobs:
   Build:
@@ -22,7 +22,7 @@ jobs:
       mongo:
         image: mongo
         ports:
-          - 27017:27017
+        - 27017:27017
 
     steps:
     - name: Checkout
