@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tingle.AspNetCore.JsonPatch.NewtonsoftJson\Tingle.AspNetCore.JsonPatch.NewtonsoftJson.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -6,6 +6,7 @@ on:
       - main
     paths-ignore:
       - README.md
+      - '**/README.md'
       - LICENSE
       - CHANGELOG.md
       - docs/**
@@ -16,6 +17,12 @@ jobs:
     env:
       buildConfiguration: 'Release'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+    services:
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
 
     steps:
     - name: Checkout
