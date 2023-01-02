@@ -120,11 +120,7 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
 
         // make the request
         using var response = await backChannel.SendAsync(request, cancellationToken).ConfigureAwait(false);
-#if NET5_0_OR_GREATER
-            var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-#else
-        var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-#endif
+        var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         Logger?.LogTrace("OAuth token response:\n\n{Response}\n\n{Body}", response.ToString(), body);
         response.EnsureSuccessStatusCode(); // ensure it succeeded
         return JsonSerializer.Deserialize<OAuthTokenResponse>(body);

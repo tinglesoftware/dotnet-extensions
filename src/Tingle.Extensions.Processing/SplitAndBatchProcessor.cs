@@ -38,18 +38,7 @@ public class SplitAndBatchProcessor<T>
         // we group them into batches then we parallelize the batches
         // example: if we have 50 batches and a batchSize of 100 items, we'll have process 5,000
         //          messages in total but only 50 at a time in parallel
-#if NET6_0_OR_GREATER
         var batches = items.Chunk(batchSize);
-#else
-        var list = items.ToList();
-        var count = list.Count / batchSize + (list.Count % batchSize > 0 ? 1 : 0);
-        var batches = new List<IReadOnlyCollection<T>>();
-        for (var i = 0; i < count; i++)
-        {
-            var batch = list.GetRange(i * batchSize, Math.Min(batchSize, list.Count - i * batchSize));
-            batches.Add(batch);
-        }
-#endif
 
         // wait for all tasks in parallel
         var tasks = batches.Select(b => HandleAsync(b, cancellationToken));
