@@ -5,12 +5,12 @@ on:
     # branches:
     #   - main
     tags:
-      - '*'
+    - '*'
     paths-ignore:
-      - README.md
-      - LICENSE
-      - CHANGELOG.md
-      - docs/**
+    - README.md
+    - LICENSE
+    - CHANGELOG.md
+    - docs/**
   workflow_dispatch:
     inputs:
       reason:
@@ -24,6 +24,12 @@ jobs:
     env:
       buildConfiguration: 'Release'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+    services:
+      mongo:
+        image: mongo
+        ports:
+        - 27017:27017
 
     steps:
     - name: Checkout

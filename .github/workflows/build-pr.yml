@@ -3,12 +3,13 @@ name: Build PR
 on:
   pull_request:
     branches:
-      - main
+    - main
     paths-ignore:
-      - README.md
-      - LICENSE
-      - CHANGELOG.md
-      - docs/**
+    - README.md
+    - '**/README.md'
+    - LICENSE
+    - CHANGELOG.md
+    - docs/**
 
 jobs:
   Build:
@@ -16,6 +17,12 @@ jobs:
     env:
       buildConfiguration: 'Release'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+    services:
+      mongo:
+        image: mongo
+        ports:
+        - 27017:27017
 
     steps:
     - name: Checkout

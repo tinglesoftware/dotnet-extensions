@@ -3,8 +3,8 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., '$(MSBuildThisFileName)$(MSBuildThisFileExtension)'))\$(MSBuildThisFileName)$(MSBuildThisFileExtension)" />
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFrameworks>net7.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);CA1822;CA1031;IDE0060;IDE0059</NoWarn>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

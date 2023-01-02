@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tingle.AspNetCore.DataProtection.MongoDB\Tingle.AspNetCore.DataProtection.MongoDB.csproj" />
+  </ItemGroup>
+
+</Project>
