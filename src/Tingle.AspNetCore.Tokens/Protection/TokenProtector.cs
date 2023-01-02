@@ -117,7 +117,7 @@ internal class TokenProtector<T> : ITokenProtector<T>
     protected virtual string Serialize(T value)
     {
         return options.UseConversionInsteadOfJson
-            ? Convert.ToString(value)!
+            ? TypeDescriptor.GetConverter(typeof(T)).ConvertToInvariantString(value)!
             : System.Text.Json.JsonSerializer.Serialize(value);
     }
 }
