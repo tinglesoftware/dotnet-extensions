@@ -33,6 +33,6 @@ public sealed class ApprovedIPNetworkRequirement : IAuthorizationRequirement
             addr = addr.MapToIPv4();
         }
 
-        return networks.Contains(addr);
+        return networks.Any(n => n.Contains(addr));
     }
 }

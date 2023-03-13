@@ -83,8 +83,9 @@ public static class AuthorizationPolicyBuilderExtensions
     /// Networks used are retrieved using <see cref="AzureIPNetworks.AzureIPsHelper"/>.
     /// </summary>
     /// <param name="builder">The instance to add to</param>
-    /// <param name="serviceId">
-    /// (Optional) The identifier of the service whose IP ranges to allow.
+    /// <param name="cloud">The Azure Cloud which to allow.</param>
+    /// <param name="service">
+    /// (Optional) The name of the service whose IP ranges to allow.
     /// When not provided(null), IPs from all services are added.
     /// </param>
     /// <param name="region">
@@ -92,25 +93,15 @@ public static class AuthorizationPolicyBuilderExtensions
     /// When not provided(null), IPs from all regions are added.
     /// </param>
     public static AuthorizationPolicyBuilder RequireAzureIPNetworks(this AuthorizationPolicyBuilder builder,
-                                                                    string? serviceId = null,
+                                                                    AzureIPNetworks.AzureCloud cloud = AzureIPNetworks.AzureCloud.Public,
+                                                                    string? service = null,
                                                                     string? region = null)
     {
-        var ranges = AzureIPNetworks.AzureIPsHelper.GetAzureCloudIpsAsync().GetAwaiter().GetResult();
-        // TODO: remove this suppression when no longer needed
-#pragma warning disable CS8604 // Possible null reference argument.
-        var tags = ranges.Values.AsEnumerable();
-#pragma warning restore CS8604 // Possible null reference argument.
-
-        // if the service identifier is provided, only retain networks for that service
-        if (serviceId != null) tags = tags.Where(t => t.Id == serviceId);
-
-        // if the region is provided, only retain networks for that region
-        if (region != null) tags = tags.Where(t => t.Properties?.Region == region);
-
-        // get the networks
-        var networks = tags.SelectMany(t => t.Properties?.AddressPrefixes ?? Array.Empty<string>())
-                           .Select(r => IPNetwork.Parse(r))
-                           .ToArray();
+        var networks = AzureIPNetworks.AzureIPsHelper.GetNetworksAsync(cloud, service, region)
+                                                     .AsTask()
+                                                     .GetAwaiter()
+                                                     .GetResult()
+                                                     .ToArray();
 
         // create the requirement and add it to the builder
         return builder.RequireApprovedNetworks(networks);

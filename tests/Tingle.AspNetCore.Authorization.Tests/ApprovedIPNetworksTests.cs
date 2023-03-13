@@ -86,13 +86,13 @@ public class ApprovedIPNetworksTests
 
         // now filter by known service tag
         builder = new AuthorizationPolicyBuilder();
-        builder.RequireAzureIPNetworks(serviceId: "AppService");
+        builder.RequireAzureIPNetworks(service: "AzureAppService");
         r = Assert.Single(builder.Requirements);
         _ = Assert.IsAssignableFrom<ApprovedIPNetworkRequirement>(r);
 
         // now filter by unknown service tag
         builder = new AuthorizationPolicyBuilder();
-        builder.RequireAzureIPNetworks(serviceId: "MyService");
+        builder.RequireAzureIPNetworks(service: "MyService");
         Assert.Empty(builder.Requirements);
     }
 }
