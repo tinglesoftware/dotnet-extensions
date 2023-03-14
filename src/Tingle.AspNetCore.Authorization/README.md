@@ -10,9 +10,9 @@ Below are some of the functionalities that the library provides to aid with auth
 
 ### User Defined IPs
 
-It is a common scenario whereby we may require to only allow HTTP requests from certain IPs. 
+It is a common scenario whereby we may require to only allow HTTP requests from certain IPs.
 
-In appsettings.json...
+In appsettings.json ...
 
 ```json
 {
@@ -23,30 +23,24 @@ In appsettings.json...
 }
 ```
 
-### Sample Usage Dependency Injection
+In Program.cs ...
 
 ```cs
-public void ConfigureServices(IServiceCollection services)
+builder.Services.AddAuthorization(options =>
 {
-    ...
-
-    services.AddAuthorization(options => 
+        options.AddPolicy("my_auth_policy", policy =>
     {
-         options.AddPolicy("my_auth_policy", policy =>
-        {
-            policy.AddAuthenticationSchemes("my_auth_scheme")
-                    .RequireAuthenticatedUser()
-                    .RequireApprovedNetworks(Configuration.GetSection("AllowedNetworks"));
-        });
+        policy.AddAuthenticationSchemes("my_auth_scheme")
+              .RequireAuthenticatedUser()
+              .RequireApprovedNetworks(Configuration.GetSection("AllowedNetworks"));
     });
+});
 
-    // add accessor for HttpContext i.e. implementation of IHttpContextAccessor
-    services.AddHttpContextAccessor();
+// add accessor for HttpContext i.e. implementation of IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
 
-    // add IAuthorizationHandler for approved networks
-    services.AddApprovedNetworksHandler();
-    ...
-}
+// add IAuthorizationHandler for approved networks
+builder.Services.AddApprovedNetworksHandler();
 ```
 
 Details of the implementation of `my_auth_scheme` authentication scheme have been omitted here since it is beyond the scope of this discussion. More details on how to handle authentication in ASP.NET Core can be found [here](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-7.0).
@@ -73,7 +67,7 @@ Is that it?...Wait there's more!
 
 Alternatively, you can provide a list of fully qualified domain names and each of them will be resolved to the list of IP addresses. Let us see how to do this with an example:
 
-In appsettings.json...
+In appsettings.json ...
 
 ```json
 {
@@ -81,52 +75,66 @@ In appsettings.json...
 }
 ```
 
-### Sample Usage Dependency Injection
+In Program.cs ...
 
 ```cs
-public void ConfigureServices(IServiceCollection services)
+builder.Services.AddAuthorization(options =>
 {
-    ...
-
-    services.AddAuthorization(options => 
+        options.AddPolicy("my_auth_policy", policy =>
     {
-         options.AddPolicy("my_auth_policy", policy =>
-        {
-            policy.AddAuthenticationSchemes("my_auth_scheme")
-                    .RequireAuthenticatedUser()
-                    .RequireNetworkFromDns(Configuration.GetSection("AllowedDomains"));
-        });
+        policy.AddAuthenticationSchemes("my_auth_scheme")
+              .RequireAuthenticatedUser()
+              .RequireNetworkFromDns(Configuration.GetSection("AllowedDomains"));
     });
+});
 
-    // same as the first example
-    ...
-}
+// add accessor for HttpContext i.e. implementation of IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// add IAuthorizationHandler for approved networks
+builder.Services.AddApprovedNetworksHandler();
 ```
 
 ### Azure IPs
 
 For developers who are working with Microsoft Azure and they'd wish to allow all their IP addresses they can do that easily as demonstrated below:
 
-### Sample Usage Dependency Injection
+In Program.cs
 
 ```cs
-public void ConfigureServices(IServiceCollection services)
+builder.Services.AddAuthorization(options =>
 {
-    ...
-
-    services.AddAuthorization(options => 
+        options.AddPolicy("my_auth_policy", policy =>
     {
-         options.AddPolicy("my_auth_policy", policy =>
-        {
-            policy.AddAuthenticationSchemes("my_auth_scheme")
-                    .RequireAuthenticatedUser()
-                    .RequireAzureIPNetworks();
-        });
+        policy.AddAuthenticationSchemes("my_auth_scheme")
+              .RequireAuthenticatedUser()
+              .RequireAzureIPNetworks();
     });
+});
 
-    // same as the first example
-    ...
-}
+// add accessor for HttpContext i.e. implementation of IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// add IAuthorizationHandler for approved networks
+builder.Services.AddApprovedNetworksHandler();
 ```
 
-If you however do not wish to allow the entire range of Azure IPs, you can provide `serviceId` and `region` parameters to `RequireAzureIPNetworks` to scope the range of IPs based on the Azure service id and/or region.
+If you however do not wish to allow the entire range of Azure IPs in a given cloud, you can provide `service` and `region` parameters to `RequireAzureIPNetworks` to scope the range of IPs based on the Azure service and/or region. For example:
+
+```cs
+builder.Services.AddAuthorization(options =>
+{
+        options.AddPolicy("my_auth_policy", policy =>
+    {
+        policy.AddAuthenticationSchemes("my_auth_scheme")
+              .RequireAuthenticatedUser()
+              .RequireAzureIPNetworks(cloud: AzureCloud.Public, service: "AzureAppService", region: "westeurope");
+    });
+});
+
+// add accessor for HttpContext i.e. implementation of IHttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// add IAuthorizationHandler for approved networks
+builder.Services.AddApprovedNetworksHandler();
+```
