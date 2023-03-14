@@ -25,12 +25,6 @@ jobs:
       buildConfiguration: 'Release'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
-    services:
-      mongo:
-        image: mongo
-        ports:
-        - 27017:27017
-
     steps:
     - name: Checkout
       uses: actions/checkout@v3
