@@ -1,6 +1,6 @@
 # Tingle.Extensions.JsonPatch
 
-The primary goal of this library is to provide functionalities to perform [JsonPatch](https://tools.ietf.org/html/rfc6902) operations on documents using `System.Text.Json` library. We'll show how to do this in some examples below.
+The primary goal of this library is to provide functionalities to perform [JsonPatch](https://tools.ietf.org/html/rfc6902) operations on documents using `System.Text.Json` library on clients (not server side). We'll show how to do this in some examples below.
 
 Let us first define a class representing a customer with orders.
 
