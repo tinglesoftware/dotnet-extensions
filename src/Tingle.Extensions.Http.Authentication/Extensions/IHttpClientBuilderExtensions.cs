@@ -54,7 +54,7 @@ public static class IHttpClientBuilderExtensions
 
     #region ApiKey (Query/Header)
 
-    /// <summary>Adds shared key authentication handler.</summary>
+    /// <summary>Adds API key authentication handler.</summary>
     /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
     /// <param name="authenticationValue">The value to be used for authentication</param>
     /// <param name="queryParameterName">The query parameter name to be used</param>
