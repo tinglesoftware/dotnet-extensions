@@ -108,26 +108,44 @@ public static class IHttpClientBuilderExtensions
     /// <summary>Adds shared key authentication handler.</summary>
     /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
     /// <param name="key">The base64 encoded pre-shared key (PSK).</param>
+    /// <param name="scheme">The scheme to use in header.</param>
+    /// <param name="dateHeaderName">The name of the date header..</param>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-    public static IHttpClientBuilder AddSharedKeyAuthenticationHandler(this IHttpClientBuilder builder, string key)
+    public static IHttpClientBuilder AddSharedKeyAuthenticationHandler(this IHttpClientBuilder builder,
+                                                                       string key,
+                                                                       string scheme = "SharedKey",
+                                                                       string dateHeaderName = "x-ts-date")
     {
         if (string.IsNullOrWhiteSpace(key))
         {
             throw new ArgumentException($"'{nameof(key)}' cannot be null or whitespace.", nameof(key));
         }
 
-        return builder.AddAuthenticationHandler(() => new SharedKeyAuthenticationHandler(key: key));
+        return builder.AddAuthenticationHandler(() => new SharedKeyAuthenticationHandler(key: key)
+        {
+            Scheme = scheme,
+            DateHeaderName = dateHeaderName,
+        });
     }
 
     /// <summary>Adds shared key authentication handler.</summary>
     /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
     /// <param name="key">The bytes representing the pre-shared key (PSK)</param>
+    /// <param name="scheme">The scheme to use in header.</param>
+    /// <param name="dateHeaderName">The name of the date header..</param>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-    public static IHttpClientBuilder AddSharedKeyAuthenticationHandler(this IHttpClientBuilder builder, byte[] key)
+    public static IHttpClientBuilder AddSharedKeyAuthenticationHandler(this IHttpClientBuilder builder,
+                                                                       byte[] key,
+                                                                       string scheme = "SharedKey",
+                                                                       string dateHeaderName = "x-ts-date")
     {
         if (key is null) throw new ArgumentNullException(nameof(key));
 
-        return builder.AddAuthenticationHandler(() => new SharedKeyAuthenticationHandler(key: key));
+        return builder.AddAuthenticationHandler(() => new SharedKeyAuthenticationHandler(key: key)
+        {
+            Scheme = scheme,
+            DateHeaderName = dateHeaderName,
+        });
     }
 
     #endregion

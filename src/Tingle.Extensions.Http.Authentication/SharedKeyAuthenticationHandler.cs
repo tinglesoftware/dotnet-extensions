@@ -67,9 +67,7 @@ public class SharedKeyAuthenticationHandler : AuthenticationHeaderHandler
     /// </summary>
     public override string Scheme { get; set; } = "SharedKey";
 
-    /// <summary>
-    /// The header name for the date header name
-    /// </summary>
+    /// <summary>The name of the date header.</summary>
     public virtual string DateHeaderName { get; set; } = "x-ts-date";
 
     /// <inheritdoc/>
