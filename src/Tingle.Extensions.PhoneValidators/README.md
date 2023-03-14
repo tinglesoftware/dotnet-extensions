@@ -1,6 +1,6 @@
 # Tingle.Extensions.PhoneValidators
 
-This library is used to validate if a phone number is valid. Currently, only Kenyan phone numbers can be validated. It can also be used to convert phone numbers from E.164 format or local format to MSISDN format.
+This library is used to validate if a phone number is valid. It can also be used to convert Kenyan phone numbers phone numbers between E.164, local, and MSISDN formats.
 Where needed simply inject `IEnumerable<IPhoneNumberValidator>` to get all validators available.
 However, it is advised that you inject the implementation required, for example inject `SafaricomPhoneValidator` to validate Safaricom phone numbers.
 
@@ -15,9 +15,13 @@ public class SetPhoneNumberModel
     public string UserId { get; set; }
 
     [Required]
-    [Phone] // useful for generating docs in Swagger
-    [E164Phone] // ensures a phone in E.164 format
-    public string Phone { get; set; }
+    [E164Phone] // ensures value is in E.164 format
+    [DataType(DataType.PhoneNumber)] // useful for generating docs in OpenAPI
+    public string Primary { get; set; }
+
+    [E164Phone] // ensures all values are in E.164 format
+    [DataType(DataType.PhoneNumber)] // useful for generating docs in OpenAPI
+    public IList<string> Alternatives { get; set; }
 }
 ```
 
