@@ -3,6 +3,8 @@
 This library adds support for custom authentication via the Authorization header when using `HttpClient`. In some cases, setting the header once is not sufficient. Instead you may want to refresh the token only after it expires.
 This functionality builds upon the `DelegatingHandler` and hence can be used via DI using `IHttpClientBuilder` or without by wrapping inner handlers.
 
+Also see [sample](./samples/HttpAuthenticationSample).
+
 The supported authentication patterns:
 
 ## API Key in the `Authorization` header
