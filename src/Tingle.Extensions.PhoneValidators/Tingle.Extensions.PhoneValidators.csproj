@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>Validation handlers for phone numbers either via attributes or resolvable services with support for specific MNOs (Mobile Network Providers).</Description>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageTags>$(PackageTags);Validation;DataAnnotations</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="libphonenumber-csharp" Version="8.13.0" />

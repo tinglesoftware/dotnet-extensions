@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Summary>JSON Patch (RFC 6902) support for .NET to easily generate JSON Patch documents.</Summary>
     <Description>
       JSON Patch (https://tools.ietf.org/html/rfc6902) defines a JSON document structure for expressing a
@@ -22,5 +23,9 @@
     </Description>
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.Text.Json" Version="7.0.0" />
+  </ItemGroup>
 
 </Project>
