@@ -33,14 +33,14 @@ public class JsonPropertyNameTests
         options.Converters.Add(new JsonStringEnumConverter(options.PropertyNamingPolicy));
 
         var parts = new[]{
-                @"{""value"":""animals"",""path"":""/description"",""op"":""replace""}",
-                @"{""path"":""/status"",""op"":""remove""}",
-                @"{""value"":""justCrap"",""path"":""/kind"",""op"":""replace""}",
-                @"{""value"":""science"",""path"":""/tags/-"",""op"":""add""}",
-                @"{""value"":""research"",""path"":""/metadata/purpose"",""op"":""add""}",
-                @"{""value"":""nutrition"",""path"":""/metadata/purpose"",""op"":""replace""}",
-                @"{""path"":""/metadata/purpose"",""op"":""remove""}",
-            };
+            @"{""value"":""animals"",""path"":""/description"",""op"":""replace""}",
+            @"{""path"":""/status"",""op"":""remove""}",
+            @"{""value"":""justCrap"",""path"":""/kind"",""op"":""replace""}",
+            @"{""value"":""science"",""path"":""/tags/-"",""op"":""add""}",
+            @"{""value"":""research"",""path"":""/metadata/purpose"",""op"":""add""}",
+            @"{""value"":""nutrition"",""path"":""/metadata/purpose"",""op"":""replace""}",
+            @"{""path"":""/metadata/purpose"",""op"":""remove""}",
+        };
         var expected = $"[{string.Join(",", parts)}]";
 
         var document = new JsonPatchDocument<AnotherDTO>();
@@ -69,11 +69,11 @@ public class JsonPropertyNameTests
         options.Converters.Add(new JsonStringEnumConverter(options.PropertyNamingPolicy));
 
         var parts = new[]{
-                @"{""value"":""animals"",""path"":""/description"",""op"":""replace""}",
-                @"{""path"":""/status"",""op"":""remove""}",
-                @"{""value"":""justCrap"",""path"":""/kind"",""op"":""replace""}",
-                @"{""value"":""science"",""path"":""/tags/-"",""op"":""add""}",
-            };
+            @"{""value"":""animals"",""path"":""/description"",""op"":""replace""}",
+            @"{""path"":""/status"",""op"":""remove""}",
+            @"{""value"":""justCrap"",""path"":""/kind"",""op"":""replace""}",
+            @"{""value"":""science"",""path"":""/tags/-"",""op"":""add""}",
+        };
         var json = $"[{string.Join(",", parts)}]";
 
         var document = JsonSerializer.Deserialize<JsonPatchDocument<AnotherDTO>>(json, options);
