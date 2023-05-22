@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Operations;
 
@@ -14,11 +15,13 @@ internal class TypedJsonPatchDocumentConverter : JsonConverterFactory
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var modelType = typeToConvert.GetGenericArguments()[0];
+#pragma warning disable IL2055 // Either the type on which the MakeGenericType is called can't be statically determined, or the type parameters to be used for generic arguments can't be statically determined.
         var conveterType = typeof(TypedJsonPatchDocumentConverterInner<>).MakeGenericType(modelType);
+#pragma warning restore IL2055 // Either the type on which the MakeGenericType is called can't be statically determined, or the type parameters to be used for generic arguments can't be statically determined.
         return (JsonConverter?)Activator.CreateInstance(conveterType);
     }
 
-    internal class TypedJsonPatchDocumentConverterInner<T> : JsonConverter<JsonPatchDocument<T>> where T : class
+    internal class TypedJsonPatchDocumentConverterInner<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T> : JsonConverter<JsonPatchDocument<T>> where T : class
     {
         /// <inheritdoc/>
         public override JsonPatchDocument<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

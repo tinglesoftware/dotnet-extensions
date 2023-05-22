@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Converters;
@@ -9,7 +10,7 @@ using Tingle.Extensions.JsonPatch.Properties;
 namespace Tingle.Extensions.JsonPatch;
 
 [JsonConverter(typeof(TypedJsonPatchDocumentConverter))]
-public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
+public class JsonPatchDocument<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TModel> : IJsonPatchDocument where TModel : class
 {
     public List<Operation<TModel>> Operations { get; private set; }
 
@@ -842,7 +843,9 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
 
     private static string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
     {
+#pragma warning disable IL2075 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
         var propertyInfo = memberExpression.Expression!.Type.GetProperty(memberExpression.Member.Name);
+#pragma warning restore IL2075 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
         var targetAttr = propertyInfo?.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false)
                                       .OfType<JsonPropertyNameAttribute>()
                                       .FirstOrDefault();

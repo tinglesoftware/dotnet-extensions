@@ -1,10 +1,11 @@
-﻿using Tingle.Extensions.JsonPatch.Adapters;
+﻿using System.Diagnostics.CodeAnalysis;
+using Tingle.Extensions.JsonPatch.Adapters;
 using Tingle.Extensions.JsonPatch.Exceptions;
 using Tingle.Extensions.JsonPatch.Properties;
 
 namespace Tingle.Extensions.JsonPatch.Operations;
 
-public class Operation<TModel> : Operation where TModel : class
+public class Operation<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TModel> : Operation where TModel : class
 {
     public Operation() { }
 
