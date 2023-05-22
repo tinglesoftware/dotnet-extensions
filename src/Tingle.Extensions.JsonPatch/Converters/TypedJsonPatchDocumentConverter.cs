@@ -28,15 +28,27 @@ public class TypedJsonPatchDocumentConverter : JsonConverterFactory
         {
             if (reader.TokenType == JsonTokenType.Null) return default;
 
-            var operations = JsonSerializer.Deserialize<List<Operation<T>>>(ref reader, options);
-            return new JsonPatchDocument<T>(operations ?? new List<Operation<T>>());
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            var ops = JsonSerializer.Deserialize<List<Operation>>(ref reader, options);
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            var operations = ops?.Select(o => new Operation<T>
+            {
+                path = o.path,
+                op = o.op,
+                from = o.from,
+                value = o.value,
+            }).ToList() ?? new List<Operation<T>>();
+            return new JsonPatchDocument<T>(operations);
         }
 
         /// <inheritdoc/>
         public override void Write(Utf8JsonWriter writer, JsonPatchDocument<T> value, JsonSerializerOptions options)
         {
             // we write an array of the operations
-            JsonSerializer.Serialize(writer, value.Operations, options);
+            var ops = value.Operations.Select(o => (Operation)o).ToList();
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            JsonSerializer.Serialize(writer, ops, options);
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
         }
     }
 }

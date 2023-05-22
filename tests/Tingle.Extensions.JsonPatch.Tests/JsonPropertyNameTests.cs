@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+using Tingle.Extensions.JsonPatch.Converters;
 using Tingle.Extensions.JsonPatch.Operations;
 
 namespace Tingle.Extensions.JsonPatch.Tests;
@@ -29,6 +31,7 @@ public class JsonPropertyNameTests
             WriteIndented = false,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            TypeInfoResolver = JsonTypeInfoResolver.Combine(JsonPatchSerializerContext.Default, new DefaultJsonTypeInfoResolver()),
         };
         options.Converters.Add(new JsonStringEnumConverter(options.PropertyNamingPolicy));
 
