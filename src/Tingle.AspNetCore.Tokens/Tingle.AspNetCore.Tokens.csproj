@@ -4,6 +4,10 @@
     <Description>Convenience for producing and consuming continuation tokens in AspNetCore</Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);tokens;continuation;continuationtokens;expiringtokens</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Tingle.AspNetCore.Tokens.Tests" />
   </ItemGroup>

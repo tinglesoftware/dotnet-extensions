@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
-    <Description>Helpers for making processing of bulk in memory tasks e.g. in a background thread/task</Description>
+    <Description>Helpers for making processing of bulk in-memory tasks e.g. in a background thread/task</Description>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTags>$(PackageTags);Processing</PackageTags>
+    <PackageTags>$(PackageTags);processing;batch;batching</PackageTags>
   </PropertyGroup>
 
 </Project>

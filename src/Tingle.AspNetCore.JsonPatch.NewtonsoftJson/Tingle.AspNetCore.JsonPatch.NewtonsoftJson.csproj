@@ -4,6 +4,10 @@
     <Description>Extensions to ensure immutable types aren't modified or removed during JSON PATCH operations</Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);jsonpatch;patch;json;newtonsoft;newtonsoftjson</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.0" />
   </ItemGroup>

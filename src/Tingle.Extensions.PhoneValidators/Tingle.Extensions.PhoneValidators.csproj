@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTags>$(PackageTags);Validation;DataAnnotations</PackageTags>
+    <PackageTags>$(PackageTags);validation;dataannotations;phonevalidators;phones</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">

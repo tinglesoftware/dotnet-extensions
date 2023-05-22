@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
-    <Description>Authentication handlers for use with HttpClient and Microsoft.Extensions.Http</Description>
+    <Description>Authentication handlers for use with HttpClient and Microsoft.Extensions.Http such as Shared Key, API Key and OAuth</Description>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTags>$(PackageTags);HttpClient;Authentication;HttpClient-Authentication</PackageTags>
+    <PackageTags>$(PackageTags);httpclient;authentication;httpclient-authentication</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
