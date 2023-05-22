@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc;
@@ -109,11 +110,11 @@ public static class JsonPatchDocumentExtensions
     /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="prefix">The prefix to use when looking up values in <see cref="ModelStateDictionary"/>.</param>
-    public static void ApplyToSafely<T>(this JsonPatchDocument<T> patchDoc,
-                                        T objectToApplyTo,
-                                        ModelStateDictionary modelState,
-                                        string prefix)
-        where T : class
+    public static void ApplyToSafely<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(
+        this JsonPatchDocument<T> patchDoc,
+        T objectToApplyTo,
+        ModelStateDictionary modelState,
+        string prefix) where T : class
     {
         if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
         if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
