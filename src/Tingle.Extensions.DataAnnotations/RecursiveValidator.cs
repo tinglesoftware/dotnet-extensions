@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace System.ComponentModel.DataAnnotations;
@@ -20,6 +21,7 @@ public static class RecursiveValidator
     /// </param>
     /// <returns>true if the object validates; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">instance is null.</exception>
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     public static bool TryValidateObject(object instance,
                                          ICollection<ValidationResult> validationResults,
                                          IDictionary<object, object?>? validationContextItems = null)
@@ -40,6 +42,7 @@ public static class RecursiveValidator
     /// </param>
     /// <exception cref="ValidationException">instance is not valid.</exception>
     /// <exception cref="ArgumentNullException">instance is null.</exception>
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     public static void ValidateObject(object instance, IDictionary<object, object?>? validationContextItems = null)
     {
         var context = new ValidationContext(instance, null, validationContextItems);
@@ -59,6 +62,7 @@ public static class RecursiveValidator
     /// </param>
     /// <returns>true if the object validates; otherwise, false.</returns>
     /// <exception cref="ArgumentNullException">instance is null.</exception>
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     public static bool TryValidateObjectRecursive(object instance,
                                                   ICollection<ValidationResult> validationResults,
                                                   IDictionary<object, object?>? validationContextItems = null)
@@ -78,6 +82,7 @@ public static class RecursiveValidator
     /// </param>
     /// <exception cref="ValidationException">instance is not valid.</exception>
     /// <exception cref="ArgumentNullException">instance is null.</exception>
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     public static void ValidateObjectRecursive(object instance, IDictionary<object, object?>? validationContextItems = null)
     {
         ValidateObjectRecursive(instance: instance,
@@ -85,6 +90,7 @@ public static class RecursiveValidator
                                 validationContextItems: validationContextItems);
     }
 
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     private static bool TryValidateObjectRecursive(object instance,
                                                    ICollection<ValidationResult> validationResults,
                                                    ISet<object> validatedObjects,
@@ -148,6 +154,7 @@ public static class RecursiveValidator
         return result;
     }
 
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     private static void ValidateObjectRecursive(object instance,
                                                 ISet<object> validatedObjects,
                                                 IDictionary<object, object?>? validationContextItems = null)

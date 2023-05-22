@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
 using Tingle.AspNetCore.Authorization;
@@ -69,6 +70,8 @@ public static class AuthorizationPolicyBuilderExtensions
     /// It must be bindable to an instance of <c>List&lt;string&gt;</c>
     /// </param>
     /// <returns></returns>
+    [RequiresDynamicCode("Binding strongly typed objects to configuration values requires generating dynamic code at runtime, for example instantiating generic types.")]
+    [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
     public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, IConfiguration section)
     {
         var list = new List<string>();

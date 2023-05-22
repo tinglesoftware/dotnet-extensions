@@ -1,10 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Operations;
 
 namespace Tingle.Extensions.JsonPatch.Converters;
 
-internal class TypedJsonPatchDocumentConverter : JsonConverterFactory
+public class TypedJsonPatchDocumentConverter : JsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
     {
@@ -14,26 +15,40 @@ internal class TypedJsonPatchDocumentConverter : JsonConverterFactory
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var modelType = typeToConvert.GetGenericArguments()[0];
+#pragma warning disable IL2055 // Either the type on which the MakeGenericType is called can't be statically determined, or the type parameters to be used for generic arguments can't be statically determined.
         var conveterType = typeof(TypedJsonPatchDocumentConverterInner<>).MakeGenericType(modelType);
+#pragma warning restore IL2055 // Either the type on which the MakeGenericType is called can't be statically determined, or the type parameters to be used for generic arguments can't be statically determined.
         return (JsonConverter?)Activator.CreateInstance(conveterType);
     }
 
-    internal class TypedJsonPatchDocumentConverterInner<T> : JsonConverter<JsonPatchDocument<T>> where T : class
+    public class TypedJsonPatchDocumentConverterInner<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T> : JsonConverter<JsonPatchDocument<T>> where T : class
     {
         /// <inheritdoc/>
         public override JsonPatchDocument<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.Null) return default;
 
-            var operations = JsonSerializer.Deserialize<List<Operation<T>>>(ref reader, options);
-            return new JsonPatchDocument<T>(operations ?? new List<Operation<T>>());
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            var ops = JsonSerializer.Deserialize<List<Operation>>(ref reader, options);
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            var operations = ops?.Select(o => new Operation<T>
+            {
+                path = o.path,
+                op = o.op,
+                from = o.from,
+                value = o.value,
+            }).ToList() ?? new List<Operation<T>>();
+            return new JsonPatchDocument<T>(operations);
         }
 
         /// <inheritdoc/>
         public override void Write(Utf8JsonWriter writer, JsonPatchDocument<T> value, JsonSerializerOptions options)
         {
             // we write an array of the operations
-            JsonSerializer.Serialize(writer, value.Operations, options);
+            var ops = value.Operations.Select(o => (Operation)o).ToList();
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+            JsonSerializer.Serialize(writer, ops, options);
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
         }
     }
 }
