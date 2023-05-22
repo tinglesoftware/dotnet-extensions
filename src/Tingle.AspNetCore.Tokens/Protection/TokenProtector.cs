@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 
 namespace Tingle.AspNetCore.Tokens.Protection;
@@ -10,6 +11,8 @@ namespace Tingle.AspNetCore.Tokens.Protection;
 /// Default implementation for <see cref="ITokenProtector{T}"/>
 /// </summary>
 /// <typeparam name="T">The type on which to perform operations.</typeparam>
+[RequiresUnreferencedCode(MessageStrings.TokenProtectorUnreferencedCodeMessage)]
+[RequiresDynamicCode(MessageStrings.TokenProtectorRequiresDynamicCodeMessage)]
 internal class TokenProtector<T> : ITokenProtector<T>
 {
     private readonly IDataProtector protector;

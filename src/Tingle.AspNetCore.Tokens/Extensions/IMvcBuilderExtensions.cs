@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
+using Tingle.AspNetCore.Tokens;
 using Tingle.AspNetCore.Tokens.Binders;
 using Tingle.AspNetCore.Tokens.Protection;
 
@@ -28,6 +30,8 @@ public static class IMvcBuilderExtensions
     /// An <see cref="Action{T}"/> to further configure instances of <see cref="TokenProtectorOptions"/>.
     /// </param>
     /// <returns>The modified builder.</returns>
+    [RequiresUnreferencedCode(MessageStrings.TokenProtectorUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.TokenProtectorRequiresDynamicCodeMessage)]
     public static IMvcBuilder AddTokens(this IMvcBuilder builder, Action<TokenProtectorOptions>? configure = null)
     {
         // Register the protector services
