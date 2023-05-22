@@ -5,7 +5,7 @@ using Tingle.Extensions.JsonPatch.Operations;
 
 namespace Tingle.Extensions.JsonPatch.Converters;
 
-internal class TypedJsonPatchDocumentConverter : JsonConverterFactory
+public class TypedJsonPatchDocumentConverter : JsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
     {
@@ -21,7 +21,7 @@ internal class TypedJsonPatchDocumentConverter : JsonConverterFactory
         return (JsonConverter?)Activator.CreateInstance(conveterType);
     }
 
-    internal class TypedJsonPatchDocumentConverterInner<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T> : JsonConverter<JsonPatchDocument<T>> where T : class
+    public class TypedJsonPatchDocumentConverterInner<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T> : JsonConverter<JsonPatchDocument<T>> where T : class
     {
         /// <inheritdoc/>
         public override JsonPatchDocument<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
