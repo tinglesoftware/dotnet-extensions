@@ -1,4 +1,8 @@
-﻿namespace System.ComponentModel.DataAnnotations;
+﻿#if !NET6_0_OR_GREATER
+using TimeZoneConverter;
+#endif
+
+namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
 /// Specifies that a data field value is a well-formed timezone identifier.
@@ -17,11 +21,15 @@ public class TimeZoneAttribute : ValidationAttribute
     {
         if (value is not string s || string.IsNullOrEmpty(s)) return true;
 
+#if NET6_0_OR_GREATER
         try
         {
             _ = TimeZoneInfo.FindSystemTimeZoneById(s);
             return true;
         }
         catch (TimeZoneNotFoundException) { return false; }
+#else
+        return TZConvert.TryGetTimeZoneInfo(windowsOrIanaTimeZoneId: s, out _);
+#endif
     }
 }

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>
       Distributed cache implementation of Microsoft.Extensions.Caching.Distributed.IDistributedCache using MongoDB.
       For more information, refer to https://www.mongodb.com/.
