@@ -24,6 +24,10 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);jsonpatch;patch;json</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
     <PackageReference Include="System.Text.Json" Version="7.0.0" />
   </ItemGroup>

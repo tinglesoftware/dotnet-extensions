@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Extra validation attributes for application specific scenarios.</Description>
+    <Description>Extra validation attributes for application specific scenarios such as dates in the past/future, ratings, prefixes, swift code, and timezones.</Description>
     <NoWarn>$(NoWarn);CA1813</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTags>$(PackageTags);Validation;DataAnnotations</PackageTags>
+    <PackageTags>$(PackageTags);validation;dataannotations</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
