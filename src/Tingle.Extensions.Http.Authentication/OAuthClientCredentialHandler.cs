@@ -123,13 +123,13 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
         var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         Logger?.LogTrace("OAuth token response:\n\n{Response}\n\n{Body}", response.ToString(), body);
         response.EnsureSuccessStatusCode(); // ensure it succeeded
-        return JsonSerializer.Deserialize<OAuthTokenResponse>(body);
+        return JsonSerializer.Deserialize(body, CustomJsonSerializerContext.Default.OAuthTokenResponse);
     }
 
     /// <summary>
     /// Represents a response from an OAuth request
     /// </summary>
-    protected class OAuthTokenResponse
+    protected internal class OAuthTokenResponse
     {
         /// <summary>
         /// The access token
