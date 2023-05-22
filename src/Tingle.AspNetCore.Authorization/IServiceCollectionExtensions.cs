@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics.CodeAnalysis;
 using Tingle.AspNetCore.Authorization;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -15,9 +16,9 @@ public static class IServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="lifetime">The lifetime of the service.</param>
     /// <returns></returns>
-    public static IServiceCollection AddAuthorizationHandler<THandler>(this IServiceCollection services,
-                                                                       ServiceLifetime lifetime = ServiceLifetime.Singleton)
-        where THandler : class, IAuthorizationHandler
+    public static IServiceCollection AddAuthorizationHandler<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(
+        this IServiceCollection services,
+        ServiceLifetime lifetime = ServiceLifetime.Singleton) where THandler : class, IAuthorizationHandler
     {
         var sd = ServiceDescriptor.Describe(serviceType: typeof(IAuthorizationHandler),
                                             implementationType: typeof(THandler),
