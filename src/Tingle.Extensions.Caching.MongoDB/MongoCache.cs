@@ -368,6 +368,7 @@ public class MongoCache : IDistributedCache, IDisposable
 
     private IMongoCollection<MongoCacheEntry> MongoCollectionInitialize()
     {
+        initializedClient = options.MongoClient == null;
         client = GetClientInstance();
 
         var database = client.GetDatabase(options.DatabaseName);
