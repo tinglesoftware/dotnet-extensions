@@ -353,7 +353,7 @@ public class MongoCache : IDistributedCache, IDisposable
                 var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
 
                 var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
-                var ci_opt = new CreateIndexOptions
+                var ci_opt = new CreateIndexOptions<MongoCacheEntry>
                 {
                     Name = "DefaultExpireAfterSecondsIndex",
                     ExpireAfter = TimeSpan.Zero, // expire/remove immediately
@@ -382,7 +382,7 @@ public class MongoCache : IDistributedCache, IDisposable
                 var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
 
                 var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
-                var ci_opt = new CreateIndexOptions
+                var ci_opt = new CreateIndexOptions<MongoCacheEntry>
                 {
                     Name = "DefaultExpireAfterSecondsIndex",
                     ExpireAfter = TimeSpan.Zero, // expire/remove immediately
