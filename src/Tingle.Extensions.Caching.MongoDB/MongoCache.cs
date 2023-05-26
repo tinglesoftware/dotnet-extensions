@@ -345,21 +345,29 @@ public class MongoCache : IDistributedCache, IDisposable
         var database = client.GetDatabase(options.DatabaseName);
         if (options.CreateIfNotExists)
         {
-            // if the collection does not exist, create it
-            var collectionNames = await database.ListCollectionNames().ToListAsync().ConfigureAwait(false);
-            if (!collectionNames.Contains(options.CollectionName, StringComparer.OrdinalIgnoreCase))
+            try
             {
-                await database.CreateCollectionAsync(options.CollectionName).ConfigureAwait(false);
-                var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
-
-                var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
-                var ci_opt = new CreateIndexOptions<MongoCacheEntry>
+                // if the collection does not exist, create it
+                var collectionNames = await database.ListCollectionNames().ToListAsync().ConfigureAwait(false);
+                if (!collectionNames.Contains(options.CollectionName, StringComparer.OrdinalIgnoreCase))
                 {
-                    Name = "DefaultExpireAfterSecondsIndex",
-                    ExpireAfter = TimeSpan.Zero, // expire/remove immediately
-                };
-                var model = new CreateIndexModel<MongoCacheEntry>(keys, ci_opt);
-                await collection.Indexes.CreateOneAsync(model).ConfigureAwait(false);
+                    await database.CreateCollectionAsync(options.CollectionName).ConfigureAwait(false);
+                    var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
+
+                    var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
+                    var ci_opt = new CreateIndexOptions<MongoCacheEntry>
+                    {
+                        Name = "DefaultExpireAfterSecondsIndex",
+                        ExpireAfter = TimeSpan.Zero, // expire/remove immediately
+                    };
+                    var model = new CreateIndexModel<MongoCacheEntry>(keys, ci_opt);
+                    await collection.Indexes.CreateOneAsync(model).ConfigureAwait(false);
+                }
+            }
+            catch (MongoCommandException mce) when (mce.Code is 48 or 68 || mce.CodeName is "NamespaceExists" or "IndexAlreadyExists")
+            {
+                // The index/collection already exists (usually has been created by another replica/instance)
+                // Error codes at https://github.com/mongodb/mongo/blob/7a2ebc4ec22dac88f599cf7b1180f50f61644f90/src/mongo/base/error_codes.yml
             }
         }
 
@@ -374,21 +382,29 @@ public class MongoCache : IDistributedCache, IDisposable
         var database = client.GetDatabase(options.DatabaseName);
         if (options.CreateIfNotExists)
         {
-            // if the collection does not exist, create it
-            var collectionNames = database.ListCollectionNames().ToList();
-            if (!collectionNames.Contains(options.CollectionName, StringComparer.OrdinalIgnoreCase))
+            try
             {
-                database.CreateCollection(options.CollectionName);
-                var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
-
-                var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
-                var ci_opt = new CreateIndexOptions<MongoCacheEntry>
+                // if the collection does not exist, create it
+                var collectionNames = database.ListCollectionNames().ToList();
+                if (!collectionNames.Contains(options.CollectionName, StringComparer.OrdinalIgnoreCase))
                 {
-                    Name = "DefaultExpireAfterSecondsIndex",
-                    ExpireAfter = TimeSpan.Zero, // expire/remove immediately
-                };
-                var model = new CreateIndexModel<MongoCacheEntry>(keys, ci_opt);
-                collection.Indexes.CreateOne(model);
+                    database.CreateCollection(options.CollectionName);
+                    var collection = database.GetCollection<MongoCacheEntry>(options.CollectionName);
+
+                    var keys = Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt);
+                    var ci_opt = new CreateIndexOptions<MongoCacheEntry>
+                    {
+                        Name = "DefaultExpireAfterSecondsIndex",
+                        ExpireAfter = TimeSpan.Zero, // expire/remove immediately
+                    };
+                    var model = new CreateIndexModel<MongoCacheEntry>(keys, ci_opt);
+                    collection.Indexes.CreateOne(model);
+                }
+            }
+            catch (MongoCommandException mce) when (mce.Code is 48 or 68 || mce.CodeName is "NamespaceExists" or "IndexAlreadyExists")
+            {
+                // The index/collection already exists (usually has been created by another replica/instance)
+                // Error codes at https://github.com/mongodb/mongo/blob/7a2ebc4ec22dac88f599cf7b1180f50f61644f90/src/mongo/base/error_codes.yml
             }
         }
 
