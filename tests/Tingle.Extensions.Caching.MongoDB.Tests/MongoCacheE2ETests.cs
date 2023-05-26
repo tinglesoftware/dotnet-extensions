@@ -27,11 +27,48 @@ public class MongoCacheE2ETests
         };
         await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
 
-        // Verify that container has been created
+        // Verify that collection has been created
         Assert.Contains("session", await dbFixture.Database!.ListCollectionNames().ToListAsync());
         var collection = dbFixture.Database.GetCollection<MongoCacheEntry>("session");
         var indexes = await collection.Indexes.List().ToListAsync();
         Assert.Single(indexes.Where(b => b["name"] != "_id_"));
+    }
+
+    [Fact]
+    public async Task UsesExistingCollection()
+    {
+        using var dbFixture = new MongoDbFixture();
+        const string sessionId = "sessionId";
+        const int ttl = 1400;
+
+        // ensure there are no collections
+        Assert.Empty(await dbFixture.Database!.ListCollectionNames().ToListAsync());
+
+        // create own collection (different index name means the one we create here is used)
+        var collection = dbFixture.GetCollection<MongoCacheEntry>("Cache")!;
+        var model = new CreateIndexModel<MongoCacheEntry>(
+            Builders<MongoCacheEntry>.IndexKeys.Ascending(x => x.ExpiresAt),
+            new CreateIndexOptions<MongoCacheEntry> { Name = "NotDefaultName", ExpireAfter = TimeSpan.Zero, });
+        await collection.Indexes.CreateOneAsync(model);
+
+        var cache = new MongoCache(Options.Create(new MongoCacheOptions()
+        {
+            DatabaseName = dbFixture.DatabaseName,
+            MongoClient = dbFixture.Client,
+            CreateIfNotExists = false, // collection has already been created
+        }));
+        Assert.Null(await cache.GetAsync(sessionId));
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = TimeSpan.FromSeconds(ttl)
+        };
+        await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
+
+        // Verify that collection was not created
+        Assert.Equal("Cache", Assert.Single(await dbFixture.Database!.ListCollectionNames().ToListAsync()));
+        var indexes = await collection.Indexes.List().ToListAsync();
+        var ix = Assert.Single(indexes.Where(b => b["name"] != "_id_"));
+        Assert.Equal(model.Options.Name, ix["name"]);
     }
 
     [Fact]
@@ -56,8 +93,7 @@ public class MongoCacheE2ETests
         byte[] data = new byte[4] { 1, 2, 3, 4 };
         await cache.SetAsync(sessionId, data, cacheOptions);
 
-        // Verify that container has been created
-
+        // Verify that collection has been created
         var collection = dbFixture.GetCollection<MongoCacheEntry>("session");
         var filter = Builders<MongoCacheEntry>.Filter.Eq(e => e.Key, sessionId);
         var storedSession = await collection.Find(filter).SingleAsync();
