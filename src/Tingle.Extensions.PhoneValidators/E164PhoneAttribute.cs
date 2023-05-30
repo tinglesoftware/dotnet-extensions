@@ -6,7 +6,7 @@ namespace System.ComponentModel.DataAnnotations;
 /// Specifies that a data field value is a well-formed E.164 phone number or a list of well-formed E.164 phone numbers.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public sealed class E164PhoneAttribute : ValidationAttribute
+public sealed class E164PhoneAttribute : DataTypeAttribute
 {
     private readonly string? defaultRegion;
 
@@ -20,8 +20,10 @@ public sealed class E164PhoneAttribute : ValidationAttribute
     /// If the number is guaranteed to start with a '+' followed by the country calling
     /// code, then "ZZ" or null can be supplied.
     /// </param>
-    public E164PhoneAttribute(string? defaultRegion = null) : base("The field {0} must be a valid E.164 phone number.")
+    public E164PhoneAttribute(string? defaultRegion = null) : base(DataType.PhoneNumber)
     {
+        ErrorMessage = "The field {0} must be a valid E.164 phone number.";
+
         this.defaultRegion = defaultRegion?.ToUpperInvariant();
 
         // when the region is specified, it must be supported
