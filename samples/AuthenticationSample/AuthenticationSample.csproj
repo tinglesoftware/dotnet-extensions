@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tingle.AspNetCore.Authentication\Tingle.AspNetCore.Authentication.csproj" />
+  </ItemGroup>
+
+</Project>
