@@ -28,7 +28,7 @@ In Program.cs ...
 ```cs
 builder.Services.AddAuthorization(options =>
 {
-        options.AddPolicy("my_auth_policy", policy =>
+    options.AddPolicy("my_auth_policy", policy =>
     {
         policy.AddAuthenticationSchemes("my_auth_scheme")
               .RequireAuthenticatedUser()
@@ -80,7 +80,7 @@ In Program.cs ...
 ```cs
 builder.Services.AddAuthorization(options =>
 {
-        options.AddPolicy("my_auth_policy", policy =>
+    options.AddPolicy("my_auth_policy", policy =>
     {
         policy.AddAuthenticationSchemes("my_auth_scheme")
               .RequireAuthenticatedUser()
@@ -104,7 +104,7 @@ In Program.cs
 ```cs
 builder.Services.AddAuthorization(options =>
 {
-        options.AddPolicy("my_auth_policy", policy =>
+    options.AddPolicy("my_auth_policy", policy =>
     {
         policy.AddAuthenticationSchemes("my_auth_scheme")
               .RequireAuthenticatedUser()
@@ -124,7 +124,7 @@ If you however do not wish to allow the entire range of Azure IPs in a given clo
 ```cs
 builder.Services.AddAuthorization(options =>
 {
-        options.AddPolicy("my_auth_policy", policy =>
+    options.AddPolicy("my_auth_policy", policy =>
     {
         policy.AddAuthenticationSchemes("my_auth_scheme")
               .RequireAuthenticatedUser()
