@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>Extra validation attributes for application specific scenarios such as dates in the past/future, ratings, prefixes, swift code, and timezones.</Description>
     <NoWarn>$(NoWarn);CA1813</NoWarn>
   </PropertyGroup>
