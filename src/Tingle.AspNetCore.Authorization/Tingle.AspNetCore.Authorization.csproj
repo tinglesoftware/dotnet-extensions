@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Convenience authorization functionality such as approval of IPs in AspNetCore</Description>
@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="AzureIPNetworks" Version="1.4.0" />
+    <PackageReference Include="AzureIPNetworks" Version="1.5.0" />
   </ItemGroup>
 
 </Project>
