@@ -100,11 +100,11 @@ public static class AuthorizationPolicyBuilderExtensions
                                                                     string? service = null,
                                                                     string? region = null)
     {
-        var networks = AzureIPNetworks.AzureIPsHelper.GetNetworksAsync(cloud, service, region)
-                                                     .AsTask()
-                                                     .GetAwaiter()
-                                                     .GetResult()
-                                                     .ToArray();
+        var networks = AzureIPNetworks.AzureIPsProvider.Local.GetNetworksAsync(cloud, service, region)
+                                                             .AsTask()
+                                                             .GetAwaiter()
+                                                             .GetResult()
+                                                             .ToArray();
 
         // create the requirement and add it to the builder
         return builder.RequireApprovedNetworks(networks);
