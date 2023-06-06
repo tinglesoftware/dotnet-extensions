@@ -50,6 +50,12 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
     /// </summary>
     public virtual string? Resource { get; set; }
 
+    /// <summary>
+    /// The duration of before expiry of the token that it should be renewed.
+    /// Defaults to 10 seconds; minumum 5 seconds.
+    /// </summary>
+    public virtual TimeSpan RenewalThreshold { get; set; } = TimeSpan.FromSeconds(5);
+
     /// <inheritdoc/>
     protected override async Task<string?> GetParameterAsync(HttpRequestMessage request,
                                                              CancellationToken cancellationToken)
@@ -82,8 +88,9 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
             // bring the expiry time 5 seconds earlier to allow time for renewal
             if (expires is not null)
             {
-                var ex = expires.Value;
-                ex -= TimeSpan.FromSeconds(5);
+                var threshold = Math.Abs(RenewalThreshold.Ticks);
+                threshold = Math.Max(TimeSpan.FromSeconds(5).Ticks, threshold); // minimum of seconds
+                var ex = expires.Value - TimeSpan.FromTicks(threshold);
                 await SetTokenInCacheAsync(token, ex, cancellationToken).ConfigureAwait(false);
             }
         }
