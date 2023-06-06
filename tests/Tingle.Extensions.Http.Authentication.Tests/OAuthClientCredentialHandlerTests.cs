@@ -13,7 +13,7 @@ public class OAuthClientCredentialHandlerTests
     private readonly IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
 
     [Fact]
-    public async Task OAuthProvider_Works_WithoutCache()
+    public async Task Works_WithoutCache()
     {
         // Prepare
         var resp = new DummyResponse
@@ -50,7 +50,7 @@ public class OAuthClientCredentialHandlerTests
     }
 
     [Fact]
-    public async Task OAuthProvider_Works_WithoutCacheKey()
+    public async Task Works_WithoutCacheKey()
     {
         // Prepare
         var resp = new DummyResponse
@@ -87,7 +87,7 @@ public class OAuthClientCredentialHandlerTests
     }
 
     [Fact]
-    public async Task OAuthProvider_Works_WithCache_ExpiresOn()
+    public async Task Works_WithCache_ExpiresOn()
     {
         // Prepare
         var resp = new DummyResponse
@@ -124,7 +124,7 @@ public class OAuthClientCredentialHandlerTests
     }
 
     [Fact]
-    public async Task OAuthProvider_Works_WithCache_ExpiresIn()
+    public async Task Works_WithCache_ExpiresIn()
     {
         // Prepare
         var resp = new DummyResponse
@@ -161,7 +161,7 @@ public class OAuthClientCredentialHandlerTests
     }
 
     [Fact]
-    public async Task OAuthProvider_BadResponse_Throws_HttpRequestException()
+    public async Task BadResponse_Throws_HttpRequestException()
     {
         // Prepare
         var resp = new DummyResponse
@@ -194,6 +194,30 @@ public class OAuthClientCredentialHandlerTests
         Assert.Equal(0, Assert.IsType<MemoryCache>(cache).Count);
         Assert.Null(cache.Get<string>(CacheKey));
         Assert.StartsWith("Response status code does not indicate success: 400 (Bad Request)", ex.Message);
+    }
+
+    [Fact]
+    public void CalculateCacheEntryExpiry_Works()
+    {
+        var handler = new OAuthClientCredentialHandler
+        {
+            AuthenticationEndpoint = AuthEndpoint,
+            CacheKey = CacheKey,
+            ClientId = Guid.NewGuid().ToString(),
+            ClientSecret = Guid.NewGuid().ToString(),
+            Resource = "https://localhost/",
+            RenewalThreshold = TimeSpan.FromMinutes(7),
+        };
+
+        // works with time higher than 5 seconds
+        var expiresOn = DateTimeOffset.UtcNow.AddSeconds(3600);
+        var cacheExpiry = handler.CalculateCacheEntryExpiry(expiresOn);
+        Assert.Equal(TimeSpan.FromMinutes(7), expiresOn - cacheExpiry);
+
+        // ensures not less than 5 seconds
+        handler.RenewalThreshold = TimeSpan.FromSeconds(4);
+        cacheExpiry = handler.CalculateCacheEntryExpiry(expiresOn);
+        Assert.Equal(TimeSpan.FromSeconds(5), expiresOn - cacheExpiry);
     }
 
     struct DummyResponse

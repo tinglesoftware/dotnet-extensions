@@ -88,9 +88,7 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
             // bring the expiry time 5 seconds earlier to allow time for renewal
             if (expires is not null)
             {
-                var threshold = Math.Abs(RenewalThreshold.Ticks);
-                threshold = Math.Max(TimeSpan.FromSeconds(5).Ticks, threshold); // minimum of seconds
-                var ex = expires.Value - TimeSpan.FromTicks(threshold);
+                var ex = CalculateCacheEntryExpiry(expires.Value);
                 await SetTokenInCacheAsync(token, ex, cancellationToken).ConfigureAwait(false);
             }
         }
@@ -135,6 +133,13 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
         Logger?.LogTrace("OAuth token response:\n\n{Response}\n\n{Body}", response.ToString(), body);
         response.EnsureSuccessStatusCode(); // ensure it succeeded
         return JsonSerializer.Deserialize(body, CustomJsonSerializerContext.Default.OAuthTokenResponse);
+    }
+
+    internal DateTimeOffset CalculateCacheEntryExpiry(DateTimeOffset expiresOn)
+    {
+        var threshold = Math.Abs(RenewalThreshold.Ticks);
+        threshold = Math.Max(TimeSpan.FromSeconds(5).Ticks, threshold); // minimum of 5 seconds
+        return expiresOn - TimeSpan.FromTicks(threshold);
     }
 
     /// <summary>
