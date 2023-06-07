@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Tingle.Extensions.Http.Authentication.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AnyOf" Version="0.3.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />

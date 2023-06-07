@@ -43,7 +43,7 @@ public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderH
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected async Task<string?> GetTokenFromCacheAsync(CancellationToken cancellationToken)
+    protected virtual async Task<string?> GetTokenFromCacheAsync(CancellationToken cancellationToken)
     {
         if (TryGetCache(out var cache, out var key))
         {
@@ -65,7 +65,7 @@ public abstract class CachingAuthenticationHeaderHandler : AuthenticationHeaderH
     /// <param name="expiresOn"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected async Task SetTokenInCacheAsync(string value, DateTimeOffset expiresOn, CancellationToken cancellationToken)
+    protected virtual async Task SetTokenInCacheAsync(string value, DateTimeOffset expiresOn, CancellationToken cancellationToken)
     {
         if (TryGetCache(out var cache, out var key))
         {
