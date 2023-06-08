@@ -10,7 +10,7 @@ public class GreaterThanZeroAttributeTests
     [InlineData(-1, false)]
     public void GreaterThanZero_Validation_Works(int testPin, bool expected)
     {
-        var obj = new TestModel { MyValue = testPin };
+        var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -29,9 +29,5 @@ public class GreaterThanZeroAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [GreaterThanZero]
-        public int MyValue { get; set; }
-    }
+    record TestModel([property: GreaterThanZero] int MyValue);
 }

@@ -15,7 +15,7 @@ public class SwiftCodeAttributeTests
     [InlineData("A", false)]
     public void SwiftCode_Validation_Works(string testPin, bool expected)
     {
-        var obj = new TestModel { TransferTo = testPin };
+        var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -34,9 +34,5 @@ public class SwiftCodeAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [SwiftCode]
-        public string? TransferTo { get; set; }
-    }
+    record TestModel([property: SwiftCode] string? TransferTo);
 }

@@ -13,7 +13,7 @@ public class Base64AttributeTests
     [InlineData("A", false)]
     public void Base64_Validation_Works(string testKey, bool expected)
     {
-        var obj = new TestModel { SomeKey = testKey };
+        var obj = new TestModel(testKey);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -32,9 +32,5 @@ public class Base64AttributeTests
         }
     }
 
-    class TestModel
-    {
-        [Base64]
-        public string? SomeKey { get; set; }
-    }
+    record TestModel([property: Base64] string? SomeKey);
 }

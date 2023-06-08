@@ -14,7 +14,7 @@ public class PrefixAttributeTests
     [InlineData("A", false)]
     public void Prefix_Validation_Works(string testPin, bool expected)
     {
-        var obj = new TestModel { SomeValue = testPin };
+        var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -33,9 +33,5 @@ public class PrefixAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [Prefix("test")]
-        public string? SomeValue { get; set; }
-    }
+    record TestModel([property: Prefix("test")] string? SomeValue);
 }

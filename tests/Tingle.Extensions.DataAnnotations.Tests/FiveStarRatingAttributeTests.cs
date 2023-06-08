@@ -14,7 +14,7 @@ public class FiveStarRatingAttributeTests
     [InlineData(0.234, true)]
     public void FiveStarRating_Validation_Works(float testPin, bool expected)
     {
-        var obj = new TestModel { SomeRating = testPin };
+        var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -33,9 +33,5 @@ public class FiveStarRatingAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [FiveStarRating]
-        public float SomeRating { get; set; }
-    }
+    record TestModel([property: FiveStarRating] float SomeRating);
 }

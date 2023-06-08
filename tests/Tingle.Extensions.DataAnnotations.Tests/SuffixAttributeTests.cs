@@ -13,7 +13,7 @@ public class SuffixAttributeTests
     [InlineData("A", false)]
     public void Suffix_Validation_Works(string testValue, bool expected)
     {
-        var obj = new TestModel { SomeValue = testValue };
+        var obj = new TestModel(testValue);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -32,9 +32,5 @@ public class SuffixAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [Suffix("worLd")]
-        public string? SomeValue { get; set; }
-    }
+    record TestModel([property: Suffix("worLd")] string? SomeValue);
 }

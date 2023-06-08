@@ -13,7 +13,7 @@ public class KRAPinAttributeTests
     [InlineData("A", false)]
     public void KRAPin_Validation_Works(string testPin, bool expected)
     {
-        var obj = new TestModel { KRAPinNumber = testPin };
+        var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -32,9 +32,5 @@ public class KRAPinAttributeTests
         }
     }
 
-    class TestModel
-    {
-        [KRAPin]
-        public string? KRAPinNumber { get; set; }
-    }
+    record TestModel([property: KRAPin] string? KRAPinNumber);
 }

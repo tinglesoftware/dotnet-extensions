@@ -7,7 +7,7 @@ public class DateMustBeInTheFutureAttributeTests
     [Fact]
     public void DateMustBeInTheFuture_Validation_Works_For_DateTime()
     {
-        var obj = new TestModel1 { SomeDate = DateTime.UtcNow.AddMinutes(1) };
+        var obj = new TestModel1(DateTime.UtcNow.AddMinutes(1));
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -15,8 +15,8 @@ public class DateMustBeInTheFutureAttributeTests
         Assert.Empty(results);
 
         // now test for a date in the past
-        obj.SomeDate = DateTime.UtcNow.AddMinutes(-1);
-        //context = new ValidationContext(obj);
+        obj = new TestModel1(DateTime.UtcNow.AddMinutes(-1));
+        context = new ValidationContext(obj);
         results = new List<ValidationResult>();
         actual = Validator.TryValidateObject(obj, context, results, true);
         Assert.False(actual);
@@ -31,7 +31,7 @@ public class DateMustBeInTheFutureAttributeTests
     [Fact]
     public void DateMustBeInTheFuture_Validation_Works_For_DateTimeOffset()
     {
-        var obj = new TestModel2 { SomeDate = DateTimeOffset.UtcNow.AddMinutes(1) };
+        var obj = new TestModel2(DateTimeOffset.UtcNow.AddMinutes(1));
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -39,8 +39,8 @@ public class DateMustBeInTheFutureAttributeTests
         Assert.Empty(results);
 
         // now test for a date in the past
-        obj.SomeDate = DateTimeOffset.UtcNow.AddMinutes(-1);
-        //context = new ValidationContext(obj);
+        obj = new TestModel2(DateTimeOffset.UtcNow.AddMinutes(-1));
+        context = new ValidationContext(obj);
         results = new List<ValidationResult>();
         actual = Validator.TryValidateObject(obj, context, results, true);
         Assert.False(actual);
@@ -55,7 +55,7 @@ public class DateMustBeInTheFutureAttributeTests
     [Fact]
     public void DateMustBeInTheFuture_Validation_IgnoresNonDateField()
     {
-        var obj = new TestModel3 { SomeField1 = Guid.NewGuid().ToString(), SomeField2 = new Random().Next(0, int.MaxValue) };
+        var obj = new TestModel3(Guid.NewGuid().ToString(), new Random().Next(0, int.MaxValue));
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
@@ -63,24 +63,8 @@ public class DateMustBeInTheFutureAttributeTests
         Assert.Empty(results);
     }
 
-    class TestModel1
-    {
-        [DateMustBeInTheFuture]
-        public DateTime SomeDate { get; set; }
-    }
-
-    class TestModel2
-    {
-        [DateMustBeInTheFuture]
-        public DateTimeOffset SomeDate { get; set; }
-    }
-
-    class TestModel3
-    {
-        [DateMustBeInTheFuture]
-        public string? SomeField1 { get; set; }
-
-        [DateMustBeInTheFuture]
-        public int SomeField2 { get; set; }
-    }
+    record TestModel1([property: DateMustBeInTheFuture] DateTime SomeDate);
+    record TestModel2([property: DateMustBeInTheFuture] DateTimeOffset SomeDate);
+    record TestModel3([property: DateMustBeInTheFuture] string? SomeField1,
+                      [property: DateMustBeInTheFuture] int SomeField2);
 }
