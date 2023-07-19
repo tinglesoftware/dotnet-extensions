@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.31.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.32.0" />
   </ItemGroup>
 
   <ItemGroup>
