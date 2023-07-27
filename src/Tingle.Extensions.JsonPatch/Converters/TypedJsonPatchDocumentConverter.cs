@@ -3,6 +3,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.JsonPatch.Operations;
 
+#if NETCOREAPP
+#else
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#endif
+
 namespace Tingle.Extensions.JsonPatch.Converters;
 
 public class TypedJsonPatchDocumentConverter : JsonConverterFactory
