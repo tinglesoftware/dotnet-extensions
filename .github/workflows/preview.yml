@@ -72,7 +72,7 @@ jobs:
         dotnet pack
         --configuration $buildConfiguration
         --no-build
-        --verbosity Detailed
+        --verbosity normal
         --output $GITHUB_WORKSPACE/drop
         -p:PackageVersion=$GITVERSION_NUGETVERSION
 
