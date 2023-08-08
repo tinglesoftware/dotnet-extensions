@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Tingle.Extensions.Http.Authentication.Tests;
 
@@ -11,6 +12,34 @@ public class OAuthClientCredentialHandlerTests
     private const string CacheKey = "cakes";
 
     private readonly IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
+
+    [Fact]
+    public void OAuthTokenResponse_Deserializes_ExpiresIn_MultipleTypes()
+    {
+        // works with int
+        var json = new JsonObject { ["access_token"] = "123", ["expires_in"] = 3599, };
+        var response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
+        Assert.NotNull(response);
+        Assert.Equal("123", response.AccessToken);
+        Assert.Equal(3599, response.ExpiresIn);
+        Assert.Null(response.ExpiresOn);
+
+        // tests works with quoted strings
+        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = "3599", };
+        response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
+        Assert.NotNull(response);
+        Assert.Equal("123", response.AccessToken);
+        Assert.Equal(3599, response.ExpiresIn);
+        Assert.Null(response.ExpiresOn);
+
+        // tests works with quoted strings
+        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = null, };
+        response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
+        Assert.NotNull(response);
+        Assert.Equal("123", response.AccessToken);
+        Assert.Null(response.ExpiresIn);
+        Assert.Null(response.ExpiresOn);
+    }
 
     [Fact]
     public async Task Works_WithoutCache()
