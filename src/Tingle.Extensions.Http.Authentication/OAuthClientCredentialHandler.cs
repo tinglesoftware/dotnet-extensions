@@ -103,19 +103,33 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
     /// <param name="backChannel">the HTTP client to be used to make any necessary requests</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    protected virtual async Task<OAuthTokenResponse?> RequestOAuthTokenAsync(HttpRequestMessage message,
-                                                                             HttpClient backChannel,
-                                                                             CancellationToken cancellationToken)
+    protected virtual Task<OAuthTokenResponse?> RequestOAuthTokenAsync(HttpRequestMessage message,
+                                                                       HttpClient backChannel,
+                                                                       CancellationToken cancellationToken)
     {
-        Logger?.LogDebug("Requesting OAuth token");
-
         var parameters = new Dictionary<string, string?>
         {
             ["client_id"] = ClientId,
             ["client_secret"] = ClientSecret,
             ["resource"] = Resource,
             ["grant_type"] = "client_credentials"
-        }.Select(kvp => new KeyValuePair<string?, string?>(kvp.Key, kvp.Value));
+        };
+
+        return RequestOAuthTokenAsync(parameters, backChannel, cancellationToken);
+    }
+
+    /// <summary>
+    /// Requests an OAuth token
+    /// </summary>
+    /// <param name="parameters">the paramters for the OAauth request</param>
+    /// <param name="backChannel">the HTTP client to be used to make any necessary requests</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    protected virtual async Task<OAuthTokenResponse?> RequestOAuthTokenAsync(IReadOnlyDictionary<string, string?> parameters,
+                                                                             HttpClient backChannel,
+                                                                             CancellationToken cancellationToken)
+    {
+        Logger?.LogDebug("Requesting OAuth token");
 
         // prepare the request
         var request = new HttpRequestMessage(HttpMethod.Post, AuthenticationEndpoint)
