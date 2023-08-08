@@ -14,26 +14,26 @@ public class OAuthClientCredentialHandlerTests
     private readonly IMemoryCache cache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
 
     [Fact]
-    public void OAuthTokenResponse_Deserializes_ExpiresIn_MultipleTypes()
+    public void OAuthTokenResponse_Deserializes_MultipleTypes()
     {
         // works with int
-        var json = new JsonObject { ["access_token"] = "123", ["expires_in"] = 3599, };
+        var json = new JsonObject { ["access_token"] = "123", ["expires_in"] = 3599, ["expires_on"] = 1691507550, };
         var response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
         Assert.NotNull(response);
         Assert.Equal("123", response.AccessToken);
         Assert.Equal(3599, response.ExpiresIn);
-        Assert.Null(response.ExpiresOn);
+        Assert.Equal(1691507550, response.ExpiresOn);
 
         // tests works with quoted strings
-        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = "3599", };
+        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = "3599", ["expires_on"] = "1691507550", };
         response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
         Assert.NotNull(response);
         Assert.Equal("123", response.AccessToken);
         Assert.Equal(3599, response.ExpiresIn);
-        Assert.Null(response.ExpiresOn);
+        Assert.Equal(1691507550, response.ExpiresOn);
 
         // tests works with quoted strings
-        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = null, };
+        json = new JsonObject { ["access_token"] = "123", ["expires_in"] = null, ["expires_on"] = null, };
         response = JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.OAuthTokenResponse);
         Assert.NotNull(response);
         Assert.Equal("123", response.AccessToken);
