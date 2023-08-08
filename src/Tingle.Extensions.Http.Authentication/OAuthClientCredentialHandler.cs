@@ -73,9 +73,9 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
 
             DateTimeOffset? expires = null;
 
-            if (!string.IsNullOrWhiteSpace(response.ExpiresOn))
+            if (response.ExpiresOn is not null)
             {
-                var expires_on_long = long.Parse(response.ExpiresOn);
+                var expires_on_long = response.ExpiresOn.Value;
                 expires = DateTimeOffset.FromUnixTimeSeconds(expires_on_long);
             }
             else if (response.ExpiresIn is not null)
@@ -171,7 +171,8 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
         /// The time the token expires (written as time since Epoch)
         /// </summary>
         [JsonPropertyName("expires_on")]
-        public virtual string? ExpiresOn { get; set; }
+        [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
+        public virtual long? ExpiresOn { get; set; }
 
         /// <summary>
         /// The duration of the token from now in seconds
