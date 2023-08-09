@@ -121,7 +121,7 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
     /// <summary>
     /// Requests an OAuth token
     /// </summary>
-    /// <param name="parameters">the paramters for the OAauth request</param>
+    /// <param name="parameters">the parameters for the OAauth request</param>
     /// <param name="backChannel">the HTTP client to be used to make any necessary requests</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
