@@ -2,10 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
-using Moq;
 using System.Security.Cryptography;
 using Tingle.AspNetCore.Tokens.Protection;
-using Xunit;
 
 namespace Tingle.AspNetCore.Tokens.Tests;
 
@@ -17,7 +15,7 @@ public class TokenProtectorTests
     public void Protection_Works()
     {
         var rnd = new Random();
-        var options = CreateOptions();
+        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
         AssertValueEncryptDecrypt(options, Guid.NewGuid());                                  // Guid
         AssertValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue));            // int
@@ -32,7 +30,7 @@ public class TokenProtectorTests
     public void Protection_With_UseConversionInsteadOfJson_Works()
     {
         var rnd = new Random();
-        var options = CreateOptions(new TokenProtectorOptions { UseConversionInsteadOfJson = true, });
+        var options = new OptionsSnapshot<TokenProtectorOptions>(new() { UseConversionInsteadOfJson = true, });
 
         AssertValueEncryptDecrypt(options, Guid.NewGuid());                                        // Guid
         AssertValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue));                  // int
@@ -47,7 +45,7 @@ public class TokenProtectorTests
     public void TimeLimited_Protection_Works()
     {
         var rnd = new Random();
-        var options = CreateOptions();
+        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
         // test with absolute expiration
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
@@ -74,7 +72,7 @@ public class TokenProtectorTests
     public void TimeLimited_Protection_Works_On_DataClass()
     {
         var d = TestDataClass.CreateRandom();
-        var options = CreateOptions();
+        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
         AssertTimeLimitedValueEncryptDecrypt(options, d, expiration);
@@ -89,7 +87,7 @@ public class TokenProtectorTests
         var d = TestDataClass.CreateRandom();
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
 
-        var options = CreateOptions();
+        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
         var ctc = new TokenProtector<TestDataClass>(protectionProvider, options);
         var enc = ctc.Protect(d, expiration);
 
@@ -141,10 +139,11 @@ public class TokenProtectorTests
         Assert.Equal(datum, actual);
     }
 
-    private static IOptionsSnapshot<TokenProtectorOptions> CreateOptions(TokenProtectorOptions? options = null)
+    private class OptionsSnapshot<TOptions> : IOptionsSnapshot<TOptions> where TOptions : class
     {
-        var mock = new Mock<IOptionsSnapshot<TokenProtectorOptions>>(MockBehavior.Strict);
-        mock.Setup(m => m.Value).Returns(options ?? new TokenProtectorOptions { });
-        return mock.Object;
+        public OptionsSnapshot(TOptions value) => Value = value;
+
+        public TOptions Value { get; }
+        public TOptions Get(string? name) => Value;
     }
 }

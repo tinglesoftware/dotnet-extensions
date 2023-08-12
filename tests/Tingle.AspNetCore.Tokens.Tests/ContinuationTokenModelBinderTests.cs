@@ -4,11 +4,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
-using Moq;
 using System.Globalization;
 using Tingle.AspNetCore.Tokens.Binders;
 using Tingle.AspNetCore.Tokens.Protection;
-using Xunit;
 
 namespace Tingle.AspNetCore.Tokens.Tests;
 
@@ -34,12 +32,10 @@ public class ContinuationTokenModelBinderTests
 
         // prepare the model binder provider context
         var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(ContinuationToken<TestDataClass>));
-        var binderProviderContextMock = new Mock<ModelBinderProviderContext>();
-        binderProviderContextMock.SetupGet(c => c.Metadata).Returns(modelMetadata);
-        binderProviderContextMock.SetupGet(c => c.Services).Returns(serviceProvider);
+        var binderProviderContext = new DummyModelBinderProviderContext(modelMetadata, serviceProvider);
 
         // get the binder
-        binder = binderProvider.GetBinder(binderProviderContextMock.Object)!;
+        binder = binderProvider.GetBinder(binderProviderContext)!;
     }
 
     [Fact]
@@ -268,5 +264,22 @@ public class ContinuationTokenModelBinderTests
 
         };
         return bindingContext;
+    }
+
+    private class DummyModelBinderProviderContext : ModelBinderProviderContext
+    {
+        public DummyModelBinderProviderContext(ModelMetadata metadata, IServiceProvider serviceProvider)
+        {
+            Metadata = metadata;
+            //Services = serviceProvider;
+        }
+
+        public override BindingInfo BindingInfo => throw new NotImplementedException();
+
+        public override ModelMetadata Metadata { get; }
+
+        public override IModelMetadataProvider MetadataProvider => throw new NotImplementedException();
+
+        public override IModelBinder CreateBinder(ModelMetadata metadata) => throw new NotImplementedException();
     }
 }

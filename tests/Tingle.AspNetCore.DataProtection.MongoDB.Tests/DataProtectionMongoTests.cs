@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System.Xml.Linq;
-using Xunit;
 
 namespace Tingle.AspNetCore.DataProtection.MongoDB.Tests;
 

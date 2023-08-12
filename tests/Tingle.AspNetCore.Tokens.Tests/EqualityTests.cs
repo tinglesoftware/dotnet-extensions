@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Xunit;
 
 namespace Tingle.AspNetCore.Tokens.Tests;
 

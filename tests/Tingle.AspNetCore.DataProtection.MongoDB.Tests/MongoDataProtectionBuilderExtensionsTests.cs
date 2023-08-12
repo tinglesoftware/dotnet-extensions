@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using Xunit;
 
 namespace Tingle.AspNetCore.DataProtection.MongoDB.Tests;
 

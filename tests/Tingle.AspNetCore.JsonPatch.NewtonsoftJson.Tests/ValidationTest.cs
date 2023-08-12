@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
-using Xunit;
 
 namespace Tingle.AspNetCore.JsonPatch.NewtonsoftJson.Tests;
 

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
-using Moq;
 using Tingle.AspNetCore.Tokens.Binders;
-using Xunit;
 
 namespace Tingle.AspNetCore.Tokens.Tests;
 
@@ -59,10 +57,22 @@ public class TokensModelBinderProviderTests
     private static ModelBinderProviderContext GetBinderProviderContext(Type modelType)
     {
         var metadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType);
-        var context = new Mock<ModelBinderProviderContext>();
+        return new DummyModelBinderProviderContext(metadata);
+    }
 
-        context.SetupGet(c => c.Metadata).Returns(metadata);
+    private class DummyModelBinderProviderContext : ModelBinderProviderContext
+    {
+        public DummyModelBinderProviderContext(ModelMetadata metadata)
+        {
+            Metadata = metadata;
+        }
 
-        return context.Object;
+        public override BindingInfo BindingInfo => throw new NotImplementedException();
+
+        public override ModelMetadata Metadata { get; }
+
+        public override IModelMetadataProvider MetadataProvider => throw new NotImplementedException();
+
+        public override IModelBinder CreateBinder(ModelMetadata metadata) => throw new NotImplementedException();
     }
 }
