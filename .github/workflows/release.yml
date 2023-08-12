@@ -44,7 +44,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
 
     - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.9.0
+      uses: supercharge/mongodb-github-action@v1.10.0
       with:
         mongodb-version: '6'
 
