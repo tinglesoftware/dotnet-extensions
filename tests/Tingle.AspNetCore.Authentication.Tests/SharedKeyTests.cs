@@ -120,7 +120,7 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
             try
             {
                 await next();
-                Assert.False(true, "Expected exception is not thrown");
+                Assert.Fail("Expected exception is not thrown");
             }
             catch (Exception)
             {
