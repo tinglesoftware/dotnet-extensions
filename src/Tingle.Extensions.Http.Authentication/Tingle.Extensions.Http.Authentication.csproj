@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>Authentication handlers for use with HttpClient and Microsoft.Extensions.Http such as Shared Key, API Key and OAuth</Description>
   </PropertyGroup>
 

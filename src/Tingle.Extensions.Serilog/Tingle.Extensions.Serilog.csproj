@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>
 Extensions for working with Serilog.
 Including easier registration when working with different host setups, and general basics.

@@ -28,6 +28,14 @@
     <VersionPrefix Condition="'$(GITVERSION_NUGETVERSION)' != ''">$(GITVERSION_NUGETVERSION)</VersionPrefix>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.Extensions.'))">
+    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>

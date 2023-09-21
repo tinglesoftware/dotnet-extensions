@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
     <Description>Validation handlers for phone numbers either via attributes or resolvable services with support for specific MNOs (Mobile Network Providers).</Description>
   </PropertyGroup>
 

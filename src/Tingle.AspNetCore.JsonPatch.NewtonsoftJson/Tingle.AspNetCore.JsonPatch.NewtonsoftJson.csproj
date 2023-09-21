@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <Description>Extensions to ensure immutable types aren't modified or removed during JSON PATCH operations</Description>
   </PropertyGroup>
 
