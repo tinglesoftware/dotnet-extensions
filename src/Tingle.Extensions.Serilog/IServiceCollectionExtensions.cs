@@ -19,7 +19,7 @@ public static class IServiceCollectionExtensions
     /// </remarks>
     public static SerilogBuilder AddSerilog(this IServiceCollection services)
     {
-        ArgumentNullException.ThrowIfNull(services);
+        if (services == null) throw new ArgumentNullException(nameof(services));
         return new SerilogBuilder(services);
     }
 
@@ -38,7 +38,7 @@ public static class IServiceCollectionExtensions
     /// </remarks>
     public static IServiceCollection AddSerilog(this IServiceCollection services, Action<SerilogBuilder>? setupAction = null)
     {
-        ArgumentNullException.ThrowIfNull(services);
+        if (services == null) throw new ArgumentNullException(nameof(services));
 
         var builder = services.AddSerilog();
 

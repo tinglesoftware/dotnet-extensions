@@ -41,7 +41,7 @@ public static class IHostBuilderExtensions
     /// </remarks>
     public static IHostBuilder UseSerilog(this IHostBuilder builder, Action<HostBuilderContext, SerilogBuilder>? setupAction = null)
     {
-        ArgumentNullException.ThrowIfNull(builder);
+        if (builder == null) throw new ArgumentNullException(nameof(builder));
 
         return builder.ConfigureServices((context, services) => services.AddSerilog(builder => setupAction?.Invoke(context, builder)));
     }

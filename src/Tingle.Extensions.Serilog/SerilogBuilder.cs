@@ -35,7 +35,7 @@ public class SerilogBuilder
     /// <param name="configure"></param>
     public SerilogBuilder ConfigureDestructuring(Action<DestructuringOptionsBuilder> configure)
     {
-        ArgumentNullException.ThrowIfNull(configure);
+        if (configure == null) throw new ArgumentNullException(nameof(configure));
         return Configure(options => options.ConfigureDestructuringOptions.Add(configure));
     }
 
@@ -43,7 +43,7 @@ public class SerilogBuilder
     /// <param name="configure"></param>
     public SerilogBuilder ConfigureSensitiveDataMasking(Action<SensitiveDataEnricherOptions> configure)
     {
-        ArgumentNullException.ThrowIfNull(configure);
+        if (configure == null) throw new ArgumentNullException(nameof(configure));
         return Configure(options => options.ConfigureSensitiveDataEnricherOptions.Add(configure));
     }
 
@@ -51,7 +51,7 @@ public class SerilogBuilder
     /// <param name="configure"></param>
     public SerilogBuilder ConfigureLoggerConfiguration(Action<LoggerConfiguration> configure)
     {
-        ArgumentNullException.ThrowIfNull(configure);
+        if (configure == null) throw new ArgumentNullException(nameof(configure));
         return Configure(options => options.ConfigureLoggerConfiguration.Add(configure));
     }
 
