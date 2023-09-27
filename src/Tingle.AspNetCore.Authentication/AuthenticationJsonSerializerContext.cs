@@ -3,4 +3,4 @@
 namespace Tingle.AspNetCore.Authentication;
 
 [JsonSerializable(typeof(AddressClaim))]
-internal partial class CustomJsonSerializerContext : JsonSerializerContext { }
+internal partial class AuthenticationJsonSerializerContext : JsonSerializerContext { }

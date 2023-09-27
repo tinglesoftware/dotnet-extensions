@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using SC = Tingle.Extensions.Http.Authentication.AuthenticationJsonSerializerContext;
 
 namespace Tingle.Extensions.Http.Authentication;
 
@@ -146,7 +147,7 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
 #endif
         Logger?.LogTrace("OAuth token response:\n\n{Response}\n\n{Body}", response.ToString(), body);
         response.EnsureSuccessStatusCode(); // ensure it succeeded
-        return JsonSerializer.Deserialize(body, CustomJsonSerializerContext.Default.OAuthTokenResponse);
+        return JsonSerializer.Deserialize(body, SC.Default.OAuthTokenResponse);
     }
 
     internal DateTimeOffset CalculateCacheEntryExpiry(DateTimeOffset expiresOn)

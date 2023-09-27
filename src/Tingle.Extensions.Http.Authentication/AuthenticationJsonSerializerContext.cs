@@ -3,4 +3,4 @@
 namespace Tingle.Extensions.Http.Authentication;
 
 [JsonSerializable(typeof(OAuthClientCredentialHandler.OAuthTokenResponse))]
-internal partial class CustomJsonSerializerContext : JsonSerializerContext { }
+internal partial class AuthenticationJsonSerializerContext : JsonSerializerContext { }

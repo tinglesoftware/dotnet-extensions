@@ -1,4 +1,5 @@
 ﻿using Tingle.AspNetCore.Authentication;
+using SC = Tingle.AspNetCore.Authentication.AuthenticationJsonSerializerContext;
 
 namespace System.Security.Claims;
 
@@ -195,6 +196,6 @@ public static class ClaimsPrincipalExtensions
         if (principal == null) throw new ArgumentNullException(nameof(principal));
         var json = principal.GetAddress();
         if (string.IsNullOrWhiteSpace(json)) return default;
-        return Text.Json.JsonSerializer.Deserialize(json, CustomJsonSerializerContext.Default.AddressClaim);
+        return Text.Json.JsonSerializer.Deserialize(json, SC.Default.AddressClaim);
     }
 }
