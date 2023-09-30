@@ -5,6 +5,10 @@
     <Description>Clients for sending push notifications via FCM, APNS etc</Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);push;notifications;push-notifications;apns;fcm</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Tingle.Extensions.PushNotifications.Tests" />
   </ItemGroup>

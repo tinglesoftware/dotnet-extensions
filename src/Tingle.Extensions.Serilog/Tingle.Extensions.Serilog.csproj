@@ -7,6 +7,10 @@ Including easier registration when working with different host setups, and gener
 </Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);serilog;serilog-builder</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Tingle.Extensions.Serilog.Tests" />
   </ItemGroup>
