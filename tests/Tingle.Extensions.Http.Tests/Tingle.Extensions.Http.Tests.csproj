@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tingle.Extensions.Http\Tingle.Extensions.Http.csproj" />
+  </ItemGroup>
+
+</Project>
