@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
-    <Description>Basics for push notifications via FCM, APNS etc</Description>
+    <Description>Clients for sending push notifications via FCM, APNS etc</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Shared layer for API clients of Tingle services or service made by Tingle</Description>
+    <Description>Light weight abstraction around `HttpClient` which can be used to build custom client with response wrapping semantics.</Description>
   </PropertyGroup>
 
   <ItemGroup>
