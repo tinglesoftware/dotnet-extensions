@@ -55,13 +55,12 @@ public static class IServiceCollectionExtensions
         var builder = services.AddNotifier<ApnsNotifier, ApnsNotifierOptions>(configure)
                               .AddAuthenticationHandler<ApnsAuthenticationHandler>();
 
-        // APNS requires TLS 1.2
-        builder.ConfigurePrimaryHttpMessageHandler(() =>
+        // APNS requires TLS 1.2 or later
+        // https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns#2947606
+        builder.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
         {
-            return new HttpClientHandler
-            {
-                SslProtocols = System.Security.Authentication.SslProtocols.Tls12
-            };
+            SslProtocols = System.Security.Authentication.SslProtocols.Tls12
+                         | System.Security.Authentication.SslProtocols.Tls13,
         });
 
         return builder;
