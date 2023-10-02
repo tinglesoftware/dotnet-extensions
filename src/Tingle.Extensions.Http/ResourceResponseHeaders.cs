@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Tingle.Extensions.Http;
+﻿namespace Tingle.Extensions.Http;
 
 /// <summary>
 /// HTTP Response headers parsed from a <see cref="HttpResponseMessage"/>
@@ -20,50 +18,31 @@ public class ResourceResponseHeaders : Dictionary<string, IEnumerable<string>>
     /// <param name="data">The headers.</param>
     public ResourceResponseHeaders(IDictionary<string, IEnumerable<string>> data) : base(data, StringComparer.OrdinalIgnoreCase)
     {
-        PopulateKnownHeaders(this);
+        string? GetHeaderValue(string headerName) => TryGetValue(headerName, out var values) ? values.FirstOrDefault() : default;
+
+        ContentLength = GetHeaderValue("Content-Length");
+        ContentType = GetHeaderValue("Content-Type");
+        TraceId = GetHeaderValue("Trace-Id") ?? GetHeaderValue("X-Trace-Id");
+        RequestId = GetHeaderValue("Request-Id") ?? GetHeaderValue("X-Request-Id");
+        ContinuationToken = GetHeaderValue("Continuation-Token") ?? GetHeaderValue("X-Continuation-Token");
+        SessionToken = GetHeaderValue("Session-Token") ?? GetHeaderValue("X-Session-Token");
     }
-
-    /// <summary>Value for <c>X-Continuation-Token</c> header.</summary>
-    [KnownHeader("X-Continuation-Token")]
-    public virtual string? ContinuationToken { get; private set; }
-
-    /// <summary>Value for <c>X-Trace-Id</c> header.</summary>
-    [KnownHeader("X-Trace-Id")]
-    public virtual string? TraceId { get; private set; }
 
     /// <summary>Value for <c>Content-Length</c> header.</summary>
-    [KnownHeader("Content-Length")]
-    public virtual string? ContentLength { get; private set; }
+    public virtual string? ContentLength { get; }
 
     /// <summary>Value for <c>Content-Type</c> header.</summary>
-    [KnownHeader("Content-Type")]
-    public virtual string? ContentType { get; private set; }
+    public virtual string? ContentType { get; }
 
-    /// <summary>Value for <c></c> header.</summary>
-    [KnownHeader("X-Session-Token")]
-    public virtual string? SessionToken { get; private set; }
+    /// <summary>Value for <c>Trace-Id</c> or <c>X-Trace-Id</c> header.</summary>
+    public virtual string? TraceId { get; }
 
-    internal static void PopulateKnownHeaders(ResourceResponseHeaders instance)
-    {
-        // get the properties
-        var type = instance.GetType();
-        var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-        var properties = type.GetProperties(flags);
+    /// <summary>Value for <c>Request-Id</c> or <c>X-Request-Id</c> header.</summary>
+    public virtual string? RequestId { get; }
 
-        // work on each property
-        foreach (var prop in properties)
-        {
-            // check if the property is annotated
-            var attr = prop.GetCustomAttribute<KnownHeaderAttribute>(false);
-            if (attr is not null)
-            {
-                // set the property value if the header is present
-                var headerName = attr.Name;
-                if (instance.TryGetValue(headerName, out var values))
-                {
-                    prop.SetValue(instance, values.FirstOrDefault());
-                }
-            }
-        }
-    }
+    /// <summary>Value for <c>Continuation-Token</c> or <c>X-Continuation-Token</c> header.</summary>
+    public virtual string? ContinuationToken { get; }
+
+    /// <summary>Value for <c>Session-Token</c> or <c>X-Session-Token</c> header.</summary>
+    public virtual string? SessionToken { get; }
 }
