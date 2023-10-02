@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 using System.Text.Json.Serialization.Metadata;
 using Tingle.Extensions.Http;
@@ -22,8 +23,8 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
     public ApnsNotifier(HttpClient httpClient, IOptionsSnapshot<ApnsNotifierOptions> optionsAccessor) : base(httpClient, optionsAccessor) { }
 
     /// <summary>Send a push notification via Apple Push Notification Service (APNS).</summary>
-    /// <param name="header">The header for the notification</param>
-    /// <param name="data">The data</param>
+    /// <param name="header">The header for the notification.</param>
+    /// <param name="data">The data.</param>
     /// <param name="cancellationToken">The token to cancel the request.</param>
     public virtual Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync(ApnsMessageHeader header,
                                                                                             ApnsMessageData data,
@@ -31,15 +32,50 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
         => SendAsync(header, data, SC.Default.ApnsMessageData, cancellationToken);
 
     /// <summary>Send a push notification with custom data via Apple Push Notification Service (APNS).</summary>
-    /// <param name="header">The header for the notification</param>
-    /// <param name="data">The data</param>
+    /// <param name="header">The header for the notification.</param>
+    /// <param name="data">The customized data.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
+    public virtual Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync<TData>(ApnsMessageHeader header,
+                                                                                                   TData data,
+                                                                                                   CancellationToken cancellationToken = default)
+        where TData : ApnsMessageData
+    {
+        // ensure we have the aps node
+        if (data == null) throw new ArgumentNullException(nameof(data));
+        if (data.Aps == null) throw new ArgumentException($"{nameof(data.Aps)} cannot be null", nameof(data));
+
+        var content = MakeJsonContent(data);
+        return SendAsync(header, content, cancellationToken);
+    }
+
+    /// <summary>Send a push notification with custom data via Apple Push Notification Service (APNS).</summary>
+    /// <param name="header">The header for the notification.</param>
+    /// <param name="data">The customized data.</param>
     /// <param name="jsonTypeInfo">Metadata about the <typeparamref name="TData"/> to convert.</param>
     /// <param name="cancellationToken">The token to cancel the request.</param>
-    public virtual async Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync<TData>(ApnsMessageHeader header,
-                                                                                                         TData data,
-                                                                                                         JsonTypeInfo<TData> jsonTypeInfo,
-                                                                                                         CancellationToken cancellationToken = default)
+    public virtual Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync<TData>(ApnsMessageHeader header,
+                                                                                                   TData data,
+                                                                                                   JsonTypeInfo<TData> jsonTypeInfo,
+                                                                                                   CancellationToken cancellationToken = default)
         where TData : ApnsMessageData
+    {
+        // ensure we have the aps node
+        if (data == null) throw new ArgumentNullException(nameof(data));
+        if (data.Aps == null) throw new ArgumentException($"{nameof(data.Aps)} cannot be null", nameof(data));
+
+        var content = MakeJsonContent(data, jsonTypeInfo);
+        return SendAsync(header, content, cancellationToken);
+    }
+
+    /// <summary>Send a push notification via Apple Push Notification Service (APNS).</summary>
+    /// <param name="header">The header for the notification.</param>
+    /// <param name="content">The <see cref="HttpContent"/> to use in the body.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    protected virtual async Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync(ApnsMessageHeader header,
+                                                                                                     HttpContent content,
+                                                                                                     CancellationToken cancellationToken = default)
     {
         // infer the endpoint from the provided environment
         var endpoint = new Uri(header.Environment == ApnsEnvironment.Production ? ProductionBaseUrl : DevelopmentBaseUrl);
@@ -50,16 +86,15 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
             throw new ArgumentException($"{nameof(header.DeviceToken)} cannot be null", nameof(header));
         }
 
-        // ensure we have the aps node
-        if (data == null) throw new ArgumentNullException(nameof(data));
-        if (data.Aps == null) throw new ArgumentException($"{nameof(data.Aps)} cannot be null", nameof(data));
+        // ensure we have the content
+        if (content == null) throw new ArgumentNullException(nameof(content));
 
         var path = $"/3/device/{header.DeviceToken}";
         var uri = new Uri(endpoint, path);
         var request = new HttpRequestMessage(HttpMethod.Post, uri)
         {
             Version = new Version(2, 0), // APNs requires HTTP/2
-            Content = MakeJsonContent(data, jsonTypeInfo),
+            Content = content,
         };
 
         // specify the header for content we can accept
