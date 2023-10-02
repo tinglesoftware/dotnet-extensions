@@ -105,9 +105,9 @@ public class ResourceResponse<TResource, TProblem>
 
         return new HttpApiResponseException(message: message,
                                             response: Response,
+                                            headers: Headers,
                                             resource: Resource,
-                                            problem: Problem,
-                                            headers: Headers);
+                                            problem: Problem);
     }
 
     /// <summary>The token to use to fetch more data.</summary>

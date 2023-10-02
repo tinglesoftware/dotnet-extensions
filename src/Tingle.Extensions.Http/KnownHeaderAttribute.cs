@@ -1,8 +1,6 @@
 ﻿namespace Tingle.Extensions.Http;
 
-/// <summary>
-/// Represents a known header
-/// </summary>
+/// <summary>Represents a known header.</summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 internal sealed class KnownHeaderAttribute : Attribute
 {

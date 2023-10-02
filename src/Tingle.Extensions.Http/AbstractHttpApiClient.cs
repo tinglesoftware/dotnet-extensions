@@ -25,8 +25,8 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     protected TOptions Options { get; private set; }
 
     /// <summary>Send a request and download the response to a stream.</summary>
-    /// <param name="request">The request to make</param>
-    /// <param name="destination">The stream to copy to</param>
+    /// <param name="request">The request to make.</param>
+    /// <param name="destination">The stream to copy the response to.</param>
     /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 81920.</param>
     /// <param name="cancellationToken">The token to cancel the request.</param>
     /// <returns></returns>
@@ -37,9 +37,9 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
         => DownloadToStreamAsync(request, destination, SC.Default.HttpApiResponseProblem, bufferSize, cancellationToken);
 
     /// <summary>Send a request and download the response to a stream.</summary>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
-    /// <param name="request">The request to make</param>
-    /// <param name="destination">The stream to copy to</param>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
+    /// <param name="destination">The stream to copy the response to.</param>
     /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 81920.</param>
     /// <param name="cancellationToken">The token to cancel the request.</param>
     /// <returns></returns>
@@ -71,9 +71,9 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     }
 
     /// <summary>Send a request and download the response to a stream.</summary>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
-    /// <param name="request">The request to make</param>
-    /// <param name="destination">The stream to copy to</param>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
+    /// <param name="destination">The stream to copy the response to.</param>
     /// <param name="problemJsonTypeInfo">Metadata about the <typeparamref name="TProblem"/> to convert.</param>
     /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 81920.</param>
     /// <param name="cancellationToken">The token to cancel the request.</param>
@@ -105,10 +105,10 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     }
 
     /// <summary>Send a request and extract the response.</summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken">The token to cancel the request</param>
-    /// <returns></returns>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>A <see cref="ResourceResponse{TResource}"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     protected virtual async Task<ResourceResponse<TResource>> SendAsync<TResource>(HttpRequestMessage request, CancellationToken cancellationToken = default)
@@ -119,11 +119,11 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     }
 
     /// <summary>Send a request and extract the response.</summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <param name="request"></param>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
     /// <param name="jsonTypeInfo">Metadata about the <typeparamref name="TResource"/> to convert.</param>
-    /// <param name="cancellationToken">The token to cancel the request</param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>A <see cref="ResourceResponse{TResource}"/> instance.</returns>
     protected virtual async Task<ResourceResponse<TResource>> SendAsync<TResource>(HttpRequestMessage request,
                                                                                    JsonTypeInfo<TResource> jsonTypeInfo,
                                                                                    CancellationToken cancellationToken = default)
@@ -134,11 +134,11 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     }
 
     /// <summary>Send a request and extract the response.</summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken">The token to cancel the request</param>
-    /// <returns></returns>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>A <see cref="ResourceResponse{TResource, TProblem}"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     protected virtual async Task<ResourceResponse<TResource, TProblem>> SendAsync<TResource, TProblem>(HttpRequestMessage request, CancellationToken cancellationToken = default)
@@ -149,13 +149,13 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     }
 
     /// <summary>Send a request and extract the response.</summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
-    /// <param name="request"></param>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
+    /// <param name="request">The request to make.</param>
     /// <param name="resourceJsonTypeInfo">Metadata about the <typeparamref name="TResource"/> to convert.</param>
     /// <param name="problemJsonTypeInfo">Metadata about the <typeparamref name="TProblem"/> to convert.</param>
-    /// <param name="cancellationToken">The token to cancel the request</param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>A <see cref="ResourceResponse{TResource, TProblem}"/> instance.</returns>
     protected virtual async Task<ResourceResponse<TResource, TProblem>> SendAsync<TResource, TProblem>(HttpRequestMessage request,
                                                                                                        JsonTypeInfo<TResource> resourceJsonTypeInfo,
                                                                                                        JsonTypeInfo<TProblem> problemJsonTypeInfo,
@@ -170,11 +170,16 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     /// Extracts the resource and problem from the response message. The resource is only extracted for successful requests according
     /// to <see cref="HttpResponseMessage.IsSuccessStatusCode"/>, otherwise the problem is extracted.
     /// </summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
     /// <param name="response">The response message to be used for extraction</param>
-    /// <param name="cancellationToken">The token to cancel the request</param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>
+    /// A nullable <typeparamref name="TResource"/> and <typeparamref name="TProblem"/> depending on the response status.
+    /// <br/>
+    /// The <typeparamref name="TResource"/> instance is only populated for successful responses
+    /// while the <typeparamref name="TProblem"/> instance is only populated in all other scenarios.
+    /// </returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     protected virtual async Task<(TResource?, TProblem?)> ExtractResponseAsync<TResource, TProblem>(HttpResponseMessage response, CancellationToken cancellationToken)
@@ -201,13 +206,18 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     /// Extracts the resource and problem from the response message. The resource is only extracted for successful requests according
     /// to <see cref="HttpResponseMessage.IsSuccessStatusCode"/>, otherwise the problem is extracted.
     /// </summary>
-    /// <typeparam name="TResource">The type or resource to be extracted</typeparam>
-    /// <typeparam name="TProblem">The type of problem to be extracted</typeparam>
+    /// <typeparam name="TResource">The type or resource to be extracted.</typeparam>
+    /// <typeparam name="TProblem">The type of problem to be extracted.</typeparam>
     /// <param name="response">The response message to be used for extraction</param>
     /// <param name="resourceJsonTypeInfo">Metadata about the <typeparamref name="TResource"/> to convert.</param>
     /// <param name="problemJsonTypeInfo">Metadata about the <typeparamref name="TProblem"/> to convert.</param>
-    /// <param name="cancellationToken">the token to cancel the request</param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
+    /// <returns>
+    /// A nullable <typeparamref name="TResource"/> and <typeparamref name="TProblem"/> depending on the response status.
+    /// <br/>
+    /// The <typeparamref name="TResource"/> instance is only populated for successful responses
+    /// while the <typeparamref name="TProblem"/> instance is only populated in all other scenarios.
+    /// </returns>
     protected virtual async Task<(TResource?, TProblem?)> ExtractResponseAsync<TResource, TProblem>(HttpResponseMessage response,
                                                                                                     JsonTypeInfo<TResource> resourceJsonTypeInfo,
                                                                                                     JsonTypeInfo<TProblem> problemJsonTypeInfo,
@@ -233,31 +243,31 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
 
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
     /// <typeparam name="TValue">The type of the value to serialize.</typeparam>
-    /// <param name="value">the object to to write</param>
-    /// <returns></returns>
+    /// <param name="value">The object to to write</param>
+    /// <returns>A <see cref="JsonContent"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     protected virtual HttpContent MakeJsonContent<TValue>(TValue value) => JsonContent.Create(value, options: Options.SerializerOptions);
 
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
-    /// <param name="value">the object to to write</param>
+    /// <param name="value">The object to to write</param>
     /// <param name="valueType">The type of the value to serialize.</param>
-    /// <returns></returns>
+    /// <returns>A <see cref="JsonContent"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     protected virtual HttpContent MakeJsonContent(object value, Type valueType) => JsonContent.Create(value, valueType, options: Options.SerializerOptions);
 
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
     /// <typeparam name="TValue">The type of the value to serialize.</typeparam>
-    /// <param name="value">the object to to write</param>
+    /// <param name="value">The object to to write</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
-    /// <returns></returns>
+    /// <returns>A <see cref="JsonContent"/> instance.</returns>
     protected virtual HttpContent MakeJsonContent<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo) => TingleJsonContent.Create(value, jsonTypeInfo);
 
     /// <summary>Reads the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.</summary>
     /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
     /// <param name="content">The <see cref="HttpContent"/> from the response.</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">The token to cancel the read operation.</param>
     /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
@@ -272,7 +282,7 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
     /// <param name="content">The <see cref="HttpContent"/> from the response.</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">The token to cancel the read operation.</param>
     /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
     protected virtual Task<TValue?> DeserializeAsync<TValue>(HttpContent content, JsonTypeInfo<TValue> jsonTypeInfo, CancellationToken cancellationToken)
     {

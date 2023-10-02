@@ -3,29 +3,21 @@ using System.Text.Encodings.Web;
 
 namespace Tingle.Extensions.Http;
 
-/// <summary>
-/// Collection of helper methods for handling queries
-/// </summary>
+/// <summary>Collection of helper methods for handling queries.</summary>
 public static class QueryHelper
 {
-    /// <summary>
-    /// Make a query string using the given query key and value.
-    /// </summary>
+    /// <summary>Make a query string using the given query key and value.</summary>
     /// <param name="name">The name of the query key.</param>
     /// <param name="value">The query value.</param>
-    /// <returns>The query.</returns>
+    /// <returns>The query string.</returns>
     public static string MakeQueryString(string name, string value) => AddQueryString(string.Empty, name, value);
 
-    /// <summary>
-    /// Make a query string using the given keys and values.
-    /// </summary>
+    /// <summary>Make a query string using the given keys and values.</summary>
     /// <param name="queryString">A collection of name value query pairs to use.</param>
-    /// <returns>The query.</returns>
+    /// <returns>The query string.</returns>
     public static string MakeQueryString(IDictionary<string, string> queryString) => AddQueryString(string.Empty, queryString);
 
-    /// <summary>
-    /// Append the given query key and value to the URI.
-    /// </summary>
+    /// <summary>Append the given query key and value to the URI.</summary>
     /// <param name="uri">The base URI.</param>
     /// <param name="name">The name of the query key.</param>
     /// <param name="value">The query value.</param>
@@ -39,9 +31,7 @@ public static class QueryHelper
         return AddQueryString(uri, new[] { new KeyValuePair<string, string>(name, value) });
     }
 
-    /// <summary>
-    /// Append the given query keys and values to the URI.
-    /// </summary>
+    /// <summary>Append the given query keys and values to the URI.</summary>
     /// <param name="uri">The base URI.</param>
     /// <param name="queryString">A collection of name value query pairs to append.</param>
     /// <returns>The combined result.</returns>

@@ -10,7 +10,7 @@ public static class IServiceCollectionExtensions
 {
     /// <summary>Add a HTTP API client implemented via <see cref="AbstractHttpApiClient{TOptions}"/>.</summary>
     /// <param name="services">the collection to be added to</param>
-    /// <param name="configure"></param>
+    /// <param name="configure">Action to configure options.</param>
     /// <typeparam name="TClient">The client type. The type specified will be registered in the service collection as a transient service.</typeparam>
     /// <typeparam name="TOptions"></typeparam>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
@@ -35,7 +35,7 @@ public static class IServiceCollectionExtensions
 
     /// <summary>Add a HTTP API client implemented via <see cref="AbstractHttpApiClient{TOptions}"/>.</summary>
     /// <param name="services">the collection to be added to</param>
-    /// <param name="configure"></param>
+    /// <param name="configure">Action to configure options.</param>
     /// <typeparam name="TClient">The client resolution type.</typeparam>
     /// <typeparam name="TImplementation">The client implementation type. The type specified will be registered in the service collection as a transient service.</typeparam>
     /// <typeparam name="TOptions"></typeparam>
