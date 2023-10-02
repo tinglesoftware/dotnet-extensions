@@ -49,7 +49,7 @@ public class ResourceResponseTests
     {
         var response = new HttpResponseMessage(HttpStatusCode.NotFound);
         response.Headers.Date = new DateTimeOffset(DateTimeOffset.UtcNow.Date, TimeSpan.Zero);
-        response.Content = new StringContent(string.Empty);
+        response.Content = new StringContent("{\"status\":404}");
 
         var options = new DummyHttpApiClientOptions
         {
@@ -62,7 +62,7 @@ public class ResourceResponseTests
 
         var message = "The HTTP request failed with code 404 (NotFound)\n"
                    + $"\nHeaders:\n{{\"Date\":[\"{response.Headers.Date:r}\"],\"Content-Type\":[\"text/plain; charset=utf-8\"]}}\n"
-                    + "\nBody:\n";
+                    + "\nBody:\n{\"status\":404}";
         var ex = Assert.Throws<HttpApiResponseException>(rr.EnsureSuccess);
         Assert.Equal(message, ex.Message);
 
