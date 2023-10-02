@@ -5,7 +5,7 @@ namespace Tingle.Extensions.PushNotifications.Apple.Models;
 /// <summary>
 /// Represents a payload for a push notification as specified by Apple
 /// </summary>
-public class ApnsMessagePayload
+public record ApnsMessagePayload
 {
     /// <summary>
     /// Set a value when you want the system to display a standard alert or a banner.

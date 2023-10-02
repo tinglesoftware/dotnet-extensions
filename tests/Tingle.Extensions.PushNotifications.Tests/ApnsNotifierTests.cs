@@ -67,7 +67,7 @@ public class ApnsNotifierTests
         cache.Set("apns:tokens:cake:cake", "cake-token");
         var client = sp.GetRequiredService<ApnsNotifier>();
 
-        var rr = await client.SendAsync(new ApnsMessageHeader { DeviceToken = "cake" }, new ApnsMessageData { });
+        var rr = await client.SendAsync(new ApnsMessageHeader { DeviceToken = "cake" }, new ApnsMessageData(new ApnsMessagePayload { }));
         Assert.Equal("bearer cake-token", header);
     }
 
@@ -112,17 +112,11 @@ public class ApnsNotifierTests
 
         var header = new ApnsMessageHeader
         {
-            DeviceToken = configuration.GetValue<string>("ApnsTest:DeviceToken"),
+            DeviceToken = configuration.GetValue<string>("ApnsTest:DeviceToken")!,
             Environment = configuration.GetValue<ApnsEnvironment?>("ApnsTest:Environment") ?? ApnsEnvironment.Development,
             PushType = ApnsPushType.Background,
         };
-        var data = new ApnsMessageData
-        {
-            Aps = new ApnsMessagePayload
-            {
-                ContentAvailable = 1
-            },
-        };
+        var data = new ApnsMessageData(new ApnsMessagePayload { ContentAvailable = 1, });
 
         var resp = await client.SendAsync(header, data, default);
         resp.EnsureSuccess();

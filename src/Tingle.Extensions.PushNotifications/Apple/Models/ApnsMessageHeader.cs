@@ -53,5 +53,5 @@ public sealed class ApnsMessageHeader
     /// <summary>
     /// The token for the device to send the message to
     /// </summary>
-    public string? DeviceToken { get; set; }
+    public required string DeviceToken { get; set; }
 }

@@ -4,13 +4,7 @@ namespace Tingle.Extensions.PushNotifications.Apple.Models;
 
 /// <summary>
 /// Represents the data actually sent to the device.
-/// If you need to send more information, inherit from this class.
+/// If you need to send more information, inherit from this type.
 /// </summary>
-public class ApnsMessageData
-{
-    /// <summary>
-    /// The payload for the push as specified by Apple
-    /// </summary>
-    [JsonPropertyName("aps")]
-    public ApnsMessagePayload Aps { get; set; } = new ApnsMessagePayload { };
-}
+/// <param name="Aps">The payload for the push as specified by Apple </param>
+public record ApnsMessageData([property: JsonPropertyName("aps")] ApnsMessagePayload Aps);
