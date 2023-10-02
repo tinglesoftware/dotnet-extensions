@@ -18,9 +18,18 @@ internal class FirebaseAuthenticationHandler : OAuthClientCredentialHandler
 
     private readonly FirebaseNotifierOptions options;
 
+    /// <summary>Creates an instance of <see cref="FirebaseAuthenticationHandler"/>.</summary>
+    /// <param name="cache">The <see cref="IMemoryCache"/> for storing generated tokens for their lifetime.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="FirebaseNotifierOptions"/>.</param>
+    /// <param name="logger">The <see cref="ILogger"/> to use.</param>
     public FirebaseAuthenticationHandler(IMemoryCache cache, IOptionsSnapshot<FirebaseNotifierOptions> optionsAccessor, ILogger<FirebaseAuthenticationHandler> logger)
         : this(cache, optionsAccessor, logger, null) { }
 
+    /// <summary>Creates an instance of <see cref="FirebaseAuthenticationHandler"/>.</summary>
+    /// <param name="cache">The <see cref="IMemoryCache"/> for storing generated tokens for their lifetime.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="FirebaseNotifierOptions"/>.</param>
+    /// <param name="logger">The <see cref="ILogger"/> to use.</param>
+    /// <param name="backChannel">An optional <see cref="HttpClient"/> to use when making authentication requests.</param>
     internal FirebaseAuthenticationHandler(IMemoryCache cache, IOptionsSnapshot<FirebaseNotifierOptions> optionsAccessor, ILogger<FirebaseAuthenticationHandler> logger, HttpClient? backChannel)
         : base(backChannel)
     {

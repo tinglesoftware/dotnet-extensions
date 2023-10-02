@@ -16,6 +16,10 @@ internal class ApnsAuthenticationHandler : CachingAuthenticationHeaderHandler
 {
     private readonly ApnsNotifierOptions options;
 
+    /// <summary>Creates an instance of <see cref="ApnsAuthenticationHandler"/>.</summary>
+    /// <param name="cache">The <see cref="IMemoryCache"/> for storing generated tokens for their lifetime.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="ApnsNotifierOptions"/>.</param>
+    /// <param name="logger">The <see cref="ILogger"/> to use.</param>
     public ApnsAuthenticationHandler(IMemoryCache cache, IOptionsSnapshot<ApnsNotifierOptions> optionsAccessor, ILogger<ApnsAuthenticationHandler> logger)
     {
         Scheme = "bearer";

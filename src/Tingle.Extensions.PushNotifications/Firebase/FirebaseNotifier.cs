@@ -12,20 +12,15 @@ namespace Tingle.Extensions.PushNotifications.Firebase;
 /// </summary>
 public class FirebaseNotifier : AbstractHttpApiClient<FirebaseNotifierOptions>
 {
-    /// <summary>
-    /// Creates an instance of <see cref="FcmLegacyNotifier"/>
-    /// </summary>
-    /// <param name="httpClient">the client for making requests</param>
-    /// <param name="optionsAccessor">the accessor for the configuration options</param>
+    /// <summary>Creates an instance of <see cref="FcmLegacyNotifier"/>.</summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="FirebaseNotifierOptions"/>.</param>
     public FirebaseNotifier(HttpClient httpClient, IOptionsSnapshot<FirebaseNotifierOptions> optionsAccessor)
         : base(httpClient, optionsAccessor) { }
 
-    /// <summary>
-    /// Send a push notifications via Firebase Cloud Messaging (FCM)
-    /// </summary>
-    /// <param name="message">the message</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <summary>Send a push notifications via Firebase Cloud Messaging (FCM).</summary>
+    /// <param name="message">The message.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
     public virtual async Task<ResourceResponse<FirebaseResponse, FirebaseResponseProblem>> SendAsync(FirebaseRequest message,
                                                                                                      CancellationToken cancellationToken = default)
     {

@@ -16,18 +16,15 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
     internal const string ProductionBaseUrl = "https://api.push.apple.com:443";
     internal const string DevelopmentBaseUrl = "https://api.development.push.apple.com:443";
 
-    /// <summary>
-    /// Creates an instance of <see cref="ApnsNotifier"/>
-    /// </summary>
-    /// <param name="httpClient">the client for making requests</param>
-    /// <param name="optionsAccessor">the accessor for the configuration options</param>
+    /// <summary>Creates an instance of <see cref="ApnsNotifier"/>.</summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="ApnsNotifierOptions"/>.</param>
     public ApnsNotifier(HttpClient httpClient, IOptionsSnapshot<ApnsNotifierOptions> optionsAccessor) : base(httpClient, optionsAccessor) { }
 
     /// <summary>Send a push notification via Apple Push Notification Service (APNS).</summary>
     /// <param name="header">The header for the notification</param>
     /// <param name="data">The data</param>
     /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     public virtual Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync(ApnsMessageHeader header,
                                                                                             ApnsMessageData data,
                                                                                             CancellationToken cancellationToken = default)
@@ -38,7 +35,6 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
     /// <param name="data">The data</param>
     /// <param name="jsonTypeInfo">Metadata about the <typeparamref name="TData"/> to convert.</param>
     /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     public virtual async Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync<TData>(ApnsMessageHeader header,
                                                                                                          TData data,
                                                                                                          JsonTypeInfo<TData> jsonTypeInfo,

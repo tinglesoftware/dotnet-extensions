@@ -10,14 +10,11 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public static class IServiceCollectionExtensions
 {
-    /// <summary>
-    /// Add notification services for Firebase Cloud Messaging (FCM) using the legacy HTTP API.
-    /// </summary>
-    /// <param name="services">the services collection in which to register the services</param>
-    /// <param name="configure">action to configure options</param>
-    /// <returns></returns>
-    public static IHttpClientBuilder AddFcmLegacyNotifier(this IServiceCollection services,
-                                                          Action<FcmLegacyNotifierOptions>? configure = null)
+    /// <summary>Add notification services for Firebase Cloud Messaging (FCM) using the legacy HTTP API.</summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add to.</param>
+    /// <param name="configure">Action to configure <see cref="FcmLegacyNotifierOptions"/> instances.</param>
+    /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
+    public static IHttpClientBuilder AddFcmLegacyNotifier(this IServiceCollection services, Action<FcmLegacyNotifierOptions>? configure = null)
     {
         // configure authentication
         services.AddTransient<FcmLegacyAuthenticationHandler>();
@@ -29,14 +26,11 @@ public static class IServiceCollectionExtensions
         return builder;
     }
 
-    /// <summary>
-    /// Add notification services for Firebase Cloud Messaging (FCM).
-    /// </summary>
-    /// <param name="services">the services collection in which to register the services</param>
-    /// <param name="configure">action to configure options</param>
-    /// <returns></returns>
-    public static IHttpClientBuilder AddFirebaseNotifier(this IServiceCollection services,
-                                                         Action<FirebaseNotifierOptions>? configure = null)
+    /// <summary>Add notification services for Firebase Cloud Messaging (FCM).</summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add to.</param>
+    /// <param name="configure">Action to configure <see cref="FirebaseNotifierOptions"/> instances.</param>
+    /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
+    public static IHttpClientBuilder AddFirebaseNotifier(this IServiceCollection services, Action<FirebaseNotifierOptions>? configure = null)
     {
         // configure authentication
         services.AddTransient<FirebaseAuthenticationHandler>();
@@ -48,14 +42,11 @@ public static class IServiceCollectionExtensions
         return builder;
     }
 
-    /// <summary>
-    /// Add notification services for Apple Push Notification Service (APNS)
-    /// </summary>
-    /// <param name="services">the services collection in which to register the services</param>
-    /// <param name="configure">action to configure options</param>
-    /// <returns></returns>
-    public static IHttpClientBuilder AddApnsNotifier(this IServiceCollection services,
-                                                     Action<ApnsNotifierOptions>? configure = null)
+    /// <summary>Add notification services for Apple Push Notification Service (APNs).</summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add to.</param>
+    /// <param name="configure">Action to configure <see cref="ApnsNotifierOptions"/> instances.</param>
+    /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
+    public static IHttpClientBuilder AddApnsNotifier(this IServiceCollection services, Action<ApnsNotifierOptions>? configure = null)
     {
         // configure authentication
         services.AddTransient<ApnsAuthenticationHandler>();

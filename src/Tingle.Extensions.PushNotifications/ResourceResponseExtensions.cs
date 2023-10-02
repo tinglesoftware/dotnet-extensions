@@ -2,14 +2,10 @@
 
 namespace Tingle.Extensions.PushNotifications;
 
-/// <summary>
-/// Extensions for <see cref="ResourceResponse{TResource, TProblem}"/>
-/// </summary>
+/// <summary>Extensions for <see cref="ResourceResponse{TResource, TProblem}"/>.</summary>
 public static class ResourceResponseExtensions
 {
-    /// <summary>
-    /// Get the request id from the response headers.
-    /// </summary>
+    /// <summary>Get the request id from the response headers.</summary>
     /// <param name="headers"></param>
     /// <returns></returns>
     public static string? GetApnsId(this ResourceResponseHeaders headers)

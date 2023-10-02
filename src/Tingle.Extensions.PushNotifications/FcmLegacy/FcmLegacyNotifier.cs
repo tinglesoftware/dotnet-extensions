@@ -13,20 +13,15 @@ public class FcmLegacyNotifier : AbstractHttpApiClient<FcmLegacyNotifierOptions>
 {
     internal const string BaseUrl = "https://fcm.googleapis.com/fcm/send";
 
-    /// <summary>
-    /// Creates an instance of <see cref="FcmLegacyNotifier"/>
-    /// </summary>
-    /// <param name="httpClient">the client for making requests</param>
-    /// <param name="optionsAccessor">the accessor for the configuration options</param>
+    /// <summary>Creates an instance of <see cref="FcmLegacyNotifier"/>.</summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
+    /// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
     public FcmLegacyNotifier(HttpClient httpClient, IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor)
         : base(httpClient, optionsAccessor) { }
 
-    /// <summary>
-    /// Send a push notifications via Firebase Cloud Messaging (FCM)
-    /// </summary>
-    /// <param name="message">the message</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <summary>Send a push notifications via Firebase Cloud Messaging (FCM).</summary>
+    /// <param name="message">The message.</param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
     public virtual async Task<ResourceResponse<FcmLegacyResponse>> SendAsync(FcmLegacyRequest message,
                                                                              CancellationToken cancellationToken = default)
     {
