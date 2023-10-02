@@ -24,7 +24,7 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
     /// <summary>Send a push notification via Apple Push Notification Service (APNS).</summary>
     /// <param name="header">The header for the notification</param>
     /// <param name="data">The data</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
     public virtual Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync(ApnsMessageHeader header,
                                                                                             ApnsMessageData data,
                                                                                             CancellationToken cancellationToken = default)
@@ -34,7 +34,7 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
     /// <param name="header">The header for the notification</param>
     /// <param name="data">The data</param>
     /// <param name="jsonTypeInfo">Metadata about the <typeparamref name="TData"/> to convert.</param>
-    /// <param name="cancellationToken"></param>
+    /// <param name="cancellationToken">The token to cancel the request.</param>
     public virtual async Task<ResourceResponse<ApnsMessageResponse, ApnsResponseError>> SendAsync<TData>(ApnsMessageHeader header,
                                                                                                          TData data,
                                                                                                          JsonTypeInfo<TData> jsonTypeInfo,
