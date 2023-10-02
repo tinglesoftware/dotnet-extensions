@@ -30,7 +30,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     env:
-      buildConfiguration: 'Release'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
     steps:
@@ -51,15 +50,7 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: >
-        dotnet build
-        --configuration $buildConfiguration
-        --no-restore
+      run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: >
-        dotnet test
-        --configuration $buildConfiguration
-        --no-build
-        --verbosity normal
-        --collect "Code coverage"
+      run: dotnet test --configuration Release --no-build

@@ -66,15 +66,10 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build--configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: >
-        dotnet test
-        --configuration Release
-        --no-build
-        --verbosity normal
-        --collect "Code coverage"
+      run: dotnet test --configuration Release --no-build
 
     - name: Pack
       run: >
