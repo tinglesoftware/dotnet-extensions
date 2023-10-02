@@ -9,6 +9,9 @@ namespace Tingle.Extensions.PushNotifications;
 [JsonSerializable(typeof(Apple.ApnsAuthenticationHandler.ApnsAuthPayload))]
 
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequest))]
+[JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestAndroid))]
+[JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestIos))]
+[JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestWeb))]
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyResponse))]
 
 [JsonSerializable(typeof(Firebase.Models.FirebaseRequest))]
