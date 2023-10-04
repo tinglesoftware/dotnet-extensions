@@ -1,22 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Tingle.Extensions.PhoneValidators.Airtel;
 
 namespace Tingle.Extensions.PhoneValidators.Tests;
 
 public class AirtelNumberValidatorTests
 {
-    private readonly AirtelPhoneNumberValidator validator;
-
-    public AirtelNumberValidatorTests()
-    {
-        var services = new ServiceCollection()
-            .AddAirtelPhoneNumberValidator();
-
-        var provider = services.BuildServiceProvider();
-
-        validator = provider.GetRequiredService<AirtelPhoneNumberValidator>();
-    }
+    private readonly AirtelPhoneNumberValidator validator = new();
 
     [Theory]
     [InlineData("0733000000", true)]
