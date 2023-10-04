@@ -1,22 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Tingle.Extensions.PhoneValidators.Telkom;
 
 namespace Tingle.Extensions.PhoneValidators.Tests;
 
 public class TelkomNumberValidatorTests
 {
-    private readonly TelkomPhoneNumberValidator validator;
-
-    public TelkomNumberValidatorTests()
-    {
-        var services = new ServiceCollection()
-            .AddTelkomPhoneNumberValidator();
-
-        var provider = services.BuildServiceProvider();
-
-        validator = provider.GetRequiredService<TelkomPhoneNumberValidator>();
-    }
+    private readonly TelkomPhoneNumberValidator validator = new();
 
     [Theory]
     [InlineData("0772313817", true)]

@@ -1,22 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Tingle.Extensions.PhoneValidators.Safaricom;
 
 namespace Tingle.Extensions.PhoneValidators.Tests;
 
 public class SafaricomNumberValidatorTests
 {
-    private readonly SafaricomPhoneNumberValidator validator;
-
-    public SafaricomNumberValidatorTests()
-    {
-        var services = new ServiceCollection()
-            .AddSafaricomPhoneNumberValidator();
-
-        var provider = services.BuildServiceProvider();
-
-        validator = provider.GetRequiredService<SafaricomPhoneNumberValidator>();
-    }
+    private readonly SafaricomPhoneNumberValidator validator = new();
 
     [Theory]
     [InlineData("0722000000", true)]
