@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tinglesoftware/dotnet-extensions/release.yml?branch=main&style=flat-square)
 
-This repository contains projects/libraries for adding useful functionality to dotnet and ASP.NET Core when running real world applications in production. We have been using this packages at [Tingle](https://tingle.software) for years and thought it is better if we shared them.
+This repository contains projects/libraries for adding useful functionality to dotnet and ASP.NET Core when running real-world applications in production. We have been using these packages at [Tingle](https://tingle.software) for years and thought it would be better if we shared them.
 
 ## Packages
 
