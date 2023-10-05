@@ -16,7 +16,7 @@ builder.Services.AddHttpClient<MyCustomClient>()
                 .AddApiKeyHeaderAuthenticationHandler("my-api-key-here", scheme: "Bearer");
 ```
 
-This will add an Authorization here -> `Authorization: Bearer my-api-key-here`
+This will add an Authorization header → `Authorization: Bearer my-api-key-here`
 
 ## API Key in the query string
 
@@ -27,11 +27,11 @@ builder.Services.AddHttpClient<MyCustomClient>()
                 .AddApiKeyQueryAuthenticationHandler("my-api-key-here", queryParameterName: "key");
 ```
 
-This will append to the query string of the request before the request is send out. E.g. `https://contoso.com/?key=my-api-key-here`
+This will append to the query string of the request before the request is sent out. E.g. `https://contoso.com/?key=my-api-key-here`
 
 ## Pre-Shared Key (PSK) in the `Authorization` header
 
-This behaves similar to Microsoft's shared key authentication which you can also use in your own projects. Every requests ends up with a different authorization value and can be safer in some situations compared to using OAuth.
+This behaves similar to Microsoft's shared key authentication which you can also use in your own projects. Every request ends up with a different authorization value and can be safer in some situations compared to using OAuth.
 
 ```cs
 builder.Services.AddHttpClient($"{nameof(Worker)}4")

@@ -1,6 +1,6 @@
 ﻿# Tingle.AspNetCore.JsonPatch.NewtonsoftJson
 
-When performing patch operations, it is very likely that some of the updates to the model may try to modify or remove immutable types and thus there is a
+When performing patch operations, it is very likely that some updates to the model may try to modify or remove immutable types and thus there is a
 need to ensure that this is not the case before committing the changes to the persistence layer such as a database.
 
 A sample usage of this functionality is shown below:

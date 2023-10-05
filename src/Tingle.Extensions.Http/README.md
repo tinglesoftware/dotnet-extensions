@@ -1,6 +1,6 @@
 # Tingle.Extensions.Http
 
-This provides a light weight abstraction around `HttpClient` which can be used to build custom client with response wrapping semantics.
+This provides a lightweight abstraction around `HttpClient` which can be used to build custom client with response wrapping semantics.
 
 The default serialization is done using JSON (`System.Text.Json`) but can be overridden to handle XML, SOAP, or any other formats including just changing the serializer to `Newtonsoft.Json`.
 
@@ -29,7 +29,7 @@ public class MyServiceClient : AbstractApiClient<MyServiceClientOptions>
 public class MyServiceClientOptions : AbstractHttpApiClientOptions { }
 ```
 
-Adding to Services Collection
+Adding to services collection
 
 In `Program.cs` add the following code snippet:
 

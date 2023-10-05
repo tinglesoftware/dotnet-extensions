@@ -151,8 +151,6 @@ public class DisbursementController : ControllerBase
     [HttpPost("initiate")]
     public IActionResult Initiate([FromBody] DisbursementInitiateModel model)
     {
-        // do lots of time consuming checks here such as limit per day, forex rules, etc.
-
         // do light weight checks e.g. enough funds in the account
 
         // generate token and send it back in the response

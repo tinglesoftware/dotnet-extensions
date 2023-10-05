@@ -1,9 +1,9 @@
 # Tingle.AspNetCore.Authentication
 
-## SharedKey Authentication
+## Shared Key Authentication
 
-This authentication logic mirrors the one for most Azure services such as Azure storage. Every request provides a different authentication value signed/encrypted with a key shared prioir.
-This can often provide better security as compared to bearer tokens in OAuth/OpenId when introspection is not done on every request or when introspection canbe very expensive.
+This authentication logic mirrors the one for most Azure services such as Azure storage. Every request provides a different authentication value signed/encrypted with a key shared prior.
+This can often provide better security as compared to bearer tokens in OAuth/OpenId when introspection is not done on every request or when introspection can be very expensive.
 
 Most common usage scenario is machine-to-machine authentication where the OAuth flow is expensive (introspection and renewing tokens).
 
@@ -35,7 +35,7 @@ builder.Service.AddAuthorization(options =>
       policy.AddAuthenticationSchemes(SharedKeyDefaults.AuthenticationScheme)
             .RequireAuthenticatedUser();
    });
-}
+});
 
 var app = builder.Build();
 

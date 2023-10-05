@@ -1,6 +1,6 @@
 # Tingle.Extensions.PushNotifications
 
-This library contains light weight clients for sending push notifications to devices via APNS and FCM. It exists either because there is no comprehensive library or the official library cannot be tested by stubbing HTTP requests
+This library contains lightweight clients for sending push notifications to devices via APNS and FCM. It exists either because there is no comprehensive library or the official library cannot be tested by stubbing HTTP requests
 
 ## Apple Push Notification Service (APNs)
 
@@ -80,7 +80,7 @@ async Task SendApnsAsync(CancellationToken cancellationToken = default)
 
 This library is a wrapper around the service, you still need to understand how the service works in order to make correct requests. Make sure to read the [official docs](https://firebase.google.com/docs/cloud-messaging).
 
-### v1 HTTP API
+### V1 HTTP API
 
 In your appsettings.json (or any other configuration store/source you use):
 

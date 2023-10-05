@@ -2,7 +2,7 @@
 
 Authorization refers to the process that determines what a user is able to do. For example, an administrative user is allowed to create a document library, add documents, edit documents, and delete them. A non-administrative user working with the library is only authorized to read the documents.
 
-Authorization is orthogonal and independent from authentication. However, authorization requires an authentication mechanism. Authentication is the process of ascertaining who a user is. Authentication may create one or more identities for the current user.
+Authorization is orthogonal and independent of authentication. However, authorization requires an authentication mechanism. Authentication is the process of ascertaining who a user is. Authentication may create one or more identities for the current user.
 
 Below are some of the functionalities that the library provides to aid with authorization work flows.
 
@@ -61,7 +61,7 @@ public class DummyController : ControllerBase
 }
 ```
 
-Is that it?...Wait there's more!
+Is that it?... Wait there's more!
 
 ### Fully Qualified Domain Names
 
@@ -97,7 +97,7 @@ builder.Services.AddApprovedNetworksHandler();
 
 ### Azure IPs
 
-For developers who are working with Microsoft Azure and they'd wish to allow all their IP addresses they can do that easily as demonstrated below:
+For developers who are working with Microsoft Azure, and they'd wish to allow all their IP addresses they can do that easily as demonstrated below:
 
 In Program.cs
 

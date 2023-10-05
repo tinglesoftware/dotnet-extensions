@@ -32,7 +32,7 @@ An instantiated `Customer` object would then look like this:
             "quantity": 1
         },
         {
-            "item": "C# In A Nuthshell Book",
+            "item": "C# In A Nutshell Book",
             "quantity": 1
         }
     ]
