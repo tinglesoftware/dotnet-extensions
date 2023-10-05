@@ -1,8 +1,6 @@
 # Tingle.Extensions.PhoneValidators
 
 This library is used to validate if a phone number is valid. It can also be used to convert Kenyan phone numbers phone numbers between E.164, local, and MSISDN formats.
-Where needed simply inject `IEnumerable<IPhoneNumberValidator>` to get all validators available.
-However, it is advised that you inject the implementation required, for example inject `SafaricomPhoneValidator` to validate Safaricom phone numbers.
 
 ## Using attributes
 
@@ -16,7 +14,6 @@ public class SetPhoneNumberModel
 
     [Required]
     [E164Phone] // ensures value is in E.164 format
-    [DataType(DataType.PhoneNumber)] // useful for generating docs in OpenAPI
     public string Primary { get; set; }
 
     [E164Phone] // ensures all values are in E.164 format
@@ -55,51 +52,13 @@ The available attributes include:
 
 First add to the services collection before they can be resolved.
 
-```csharp
-public void ConfigureServices(IServicesCollection services)
-{
-    services.AddSafaricomPhoneNumberValidator(); // Safaricom
-    services.AddAirtelPhoneNumberValidator(); // Airetl
-}
-```
-
-### Sample Usage (all possible validators)
-
-```csharp
-[Route("api/v1/[controller]")]
-public class DummyController : ControllerBase
-{
-    private readonly IEnumerable<IPhoneNumberValidator> phoneNumberValidators;
-    public DummyController(IEnumerable<IPhoneNumberValidator> phoneNumberValidators)
-    {
-        this.phoneNumberValidators = phoneNumberValidators ?? throw new ArgumentNullException(nameof(phoneNumberValidators));
-    }
-
-    [HttpGet]
-    public Task<IActionResult> TestAsync([FromQuery] string phoneNumber)
-    {
-        var result = phoneNumberValidators.Any(pv => pv.IsValid(phoneNumber));
-        if (!result) return BadRequest("Invalid Phone number!");
-
-        //Convert to MSISDN format
-        var msisdn = phoneNumberValidators.Any(pv => pv.ToMsisdn(phoneNumber));
-
-        return Ok(msisdn);
-    }
-}
-```
-
 ### Sample Usage (Safaricom validator)
 
 ```csharp
 [Route("api/v1/[controller]")]
 public class DummyController : ControllerBase
 {
-    private readonly SafaricomPhoneNumberValidator phoneNumberValidator;
-    public DummyController(SafaricomPhoneNumberValidator phoneNumberValidator)
-    {
-        this.phoneNumberValidator = phoneNumberValidator ?? throw new ArgumentNullException(nameof(phoneNumberValidator));
-    }
+    private static readonly SafaricomPhoneNumberValidator phoneNumberValidator = new();
 
     [HttpGet]
     public Task<IActionResult> TestAsync([FromQuery] string phoneNumber)
