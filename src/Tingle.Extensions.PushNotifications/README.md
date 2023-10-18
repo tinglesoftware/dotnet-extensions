@@ -21,7 +21,7 @@ builder.Services.AddApnsNotifier(options =>
 
 In your appsettings.json (or any other configuration store/source you use):
 
-```json
+```jsonc
 {
    "Apns:TeamId": "AA0A0AAAA0",
    "Apns:BundleId": "com.apple.iBooks",
@@ -84,7 +84,7 @@ This library is a wrapper around the service, you still need to understand how t
 
 In your appsettings.json (or any other configuration store/source you use):
 
-```json
+```jsonc
 {
    "Firebase:ProjectId": "dummy-id",
    // ....
@@ -161,7 +161,7 @@ builder.Services.AddFcmLegacyNotifier(options =>
 
 In your appsettings.json (or any other configuration store/source you use):
 
-```json
+```jsonc
 {
    "Firebase:Key": "<your-legacy-key-here>",
    // ....
