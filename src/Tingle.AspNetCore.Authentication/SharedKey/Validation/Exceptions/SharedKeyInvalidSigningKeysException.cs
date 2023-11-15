@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
+﻿namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
 
 ///
 [Serializable]
@@ -14,9 +12,6 @@ public class SharedKeyInvalidSigningKeysException : Exception
 
     ///
     public SharedKeyInvalidSigningKeysException(string message, Exception inner) : base(message, inner) { }
-
-    ///
-    protected SharedKeyInvalidSigningKeysException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     /// <summary>
     /// List of invalid keys

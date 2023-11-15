@@ -26,7 +26,11 @@ public static class AuthorizationPolicyBuilderExtensions
         if (!networks.Any()) return builder;
 
         // reduce the networks where possible (referred to as supernetting)
+#if NET8_0_OR_GREATER
+        var reduced = networks;
+#else
         var reduced = IPNetwork.Supernet(networks.ToArray());
+#endif
 
         // add the requirement
         return builder.AddRequirements(new ApprovedIPNetworkRequirement(reduced));
@@ -134,7 +138,11 @@ public static class AuthorizationPolicyBuilderExtensions
                 var ips = Dns.GetHostAddresses(f);
 
                 // parse the IP addresses into IP networks
+#if NET8_0_OR_GREATER
+                var rawNetworks = ips?.Select(ip => IPNetwork.Parse($"{ip}/32")) ?? Array.Empty<IPNetwork>();
+#else
                 var rawNetworks = ips?.Select(ip => IPNetwork.Parse(ip.ToString(), CidrGuess.ClassLess)) ?? Array.Empty<IPNetwork>();
+#endif
 
                 // add networks into the list if there are any
                 if (rawNetworks?.Any() ?? false)
@@ -148,7 +156,7 @@ public static class AuthorizationPolicyBuilderExtensions
         }
 
         // if there are no networks, return
-        if (!networks.Any()) return builder;
+        if (networks.Count == 0) return builder;
 
         // create the requirement and add it to the builder
         return builder.RequireApprovedNetworks(networks);

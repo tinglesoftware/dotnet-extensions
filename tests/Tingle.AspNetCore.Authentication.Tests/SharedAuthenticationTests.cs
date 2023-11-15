@@ -9,8 +9,6 @@ namespace Tingle.AspNetCore.Authentication.Tests;
 
 public abstract class SharedAuthenticationTests<TOptions> where TOptions : AuthenticationSchemeOptions
 {
-    protected TestClock Clock { get; } = new TestClock();
-
     protected abstract string DefaultScheme { get; }
     protected virtual string DisplayName { get; }
     protected abstract Type HandlerType { get; }

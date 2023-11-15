@@ -5,7 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents a reason why an FCM request failed.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FirebaseErrorCode>))]
 public enum FirebaseErrorCode
 {
     /// <summary>

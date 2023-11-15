@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Headers;
 using Tingle.Extensions.Http;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -14,8 +15,9 @@ public static class IServiceCollectionExtensions
     /// <typeparam name="TClient">The client type. The type specified will be registered in the service collection as a transient service.</typeparam>
     /// <typeparam name="TOptions">The options type.</typeparam>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-    public static IHttpClientBuilder AddHttpApiClient<TClient, TOptions>(this IServiceCollection services,
-                                                                         Action<TOptions>? configure = null)
+    public static IHttpClientBuilder AddHttpApiClient<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient, TOptions>(
+        this IServiceCollection services,
+        Action<TOptions>? configure = null)
         where TClient : AbstractHttpApiClient<TOptions>
         where TOptions : AbstractHttpApiClientOptions, new()
     {
@@ -40,8 +42,9 @@ public static class IServiceCollectionExtensions
     /// <typeparam name="TImplementation">The client implementation type. The type specified will be registered in the service collection as a transient service.</typeparam>
     /// <typeparam name="TOptions">The options type.</typeparam>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-    public static IHttpClientBuilder AddHttpApiClient<TClient, TImplementation, TOptions>(this IServiceCollection services,
-                                                                                          Action<TOptions>? configure = null)
+    public static IHttpClientBuilder AddHttpApiClient<TClient, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation, TOptions>(
+        this IServiceCollection services,
+        Action<TOptions>? configure = null)
         where TClient : class
         where TImplementation : AbstractHttpApiClient<TOptions>, TClient
         where TOptions : AbstractHttpApiClientOptions, new()

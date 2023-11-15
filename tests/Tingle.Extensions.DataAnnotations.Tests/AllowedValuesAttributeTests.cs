@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#if !NET8_0_OR_GREATER
+using System.ComponentModel.DataAnnotations;
 
 namespace Tingle.Extensions.DataAnnotations.Tests;
 
@@ -159,3 +160,4 @@ public class AllowedValuesAttributeTests
                       [property: AllowedValues("blue", "green", "yellow")] string? SomeStringValue,
                       [property: AllowedValues("blue", "green", "yellow")] List<string>? SomeStringValues);
 }
+#endif

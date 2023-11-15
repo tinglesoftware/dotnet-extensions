@@ -1,7 +1,7 @@
 # Tingle.AspNetCore.Tokens
 
 This library adds support for generation of continuation tokens in ASP.NET Core with optional expiry. This is particularly useful for pagination, user invite tokens, expiring operation tokens, etc.
-The functionality is availed through the `ContinuationToken<T>` and `TimedContinuationToken<T>` types. These are backed using the [DataProtection sub-system in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-7.0).
+The functionality is availed through the `ContinuationToken<T>` and `TimedContinuationToken<T>` types. These are backed using the [DataProtection sub-system in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-8.0).
 
 See [sample](./samples/TokensSample).
 
@@ -10,7 +10,7 @@ First step is to register the required services.
 ```cs
 var builder = WebApplication.CreateBuilder(args);
 
-// see https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-7.0
+// see https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-8.0
 builder.Services.AddDataProtection();
 
 builder.Services.AddControllers()
