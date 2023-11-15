@@ -13,6 +13,10 @@ updates:
     day: "wednesday"
   open-pull-requests-limit: 10
   groups:
+    microsoft:
+      patterns: ["Microsoft*"]
+    system:
+      patterns: ["System*"]
     xuint:
       patterns: ["Xunit*"]
   ignore:
