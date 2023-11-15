@@ -60,7 +60,7 @@ jobs:
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@v1.10.0
       with:
-        mongodb-version: '6'
+        mongodb-version: '7'
 
     - name: Install dependencies
       run: dotnet restore
