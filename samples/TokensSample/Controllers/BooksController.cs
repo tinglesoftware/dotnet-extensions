@@ -18,7 +18,7 @@ public class BooksController : ControllerBase
         query = query.Take(10); // limit the number of items to pull from the database
 
         var books = query.ToList(); // pull from the database
-        last = books.Any() ? books.Last().Created : null;
+        last = books.Count != 0 ? books.Last().Created : null;
 
         if (last is not null)
         {

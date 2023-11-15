@@ -5,7 +5,7 @@ namespace Tingle.Extensions.PushNotifications.Apple.Models;
 /// <summary>
 /// Represents a reason why an APNs request failed
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ApnsErrorReason>))]
 public enum ApnsErrorReason
 {
     /// <summary>

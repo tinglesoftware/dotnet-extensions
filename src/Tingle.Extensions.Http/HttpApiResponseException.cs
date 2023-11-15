@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Runtime.Serialization;
 
 namespace Tingle.Extensions.Http;
 
@@ -17,9 +16,6 @@ public class HttpApiResponseException : Exception
 
     /// <summary>Creates an instance of <see cref="HttpApiResponseException"/>.</summary>
     public HttpApiResponseException(string message, Exception inner) : base(message, inner) { }
-
-    /// <summary>Creates an instance of <see cref="HttpApiResponseException"/>.</summary>
-    protected HttpApiResponseException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     /// <summary>Creates an instance of <see cref="HttpApiResponseException"/>.</summary>
     public HttpApiResponseException(string message,

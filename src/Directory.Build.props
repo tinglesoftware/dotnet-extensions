@@ -7,7 +7,7 @@
     <Deterministic>true</Deterministic>
     <!--<IsPackable>true</IsPackable>-->
     <Company>Tingle Software</Company>
-    <IsTrimmable>true</IsTrimmable>
+    <IsTrimmable Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsTrimmable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,11 +29,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.Extensions.'))">
-    <TargetFrameworks>netstandard2.1;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

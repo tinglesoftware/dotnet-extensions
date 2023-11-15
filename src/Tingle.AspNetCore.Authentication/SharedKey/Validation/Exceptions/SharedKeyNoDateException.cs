@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
+﻿namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
 
 ///
 [Serializable]
@@ -14,9 +12,6 @@ public class SharedKeyNoDateException : Exception
 
     ///
     public SharedKeyNoDateException(string message, Exception inner) : base(message, inner) { }
-
-    ///
-    protected SharedKeyNoDateException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     /// <summary>
     /// List of possible header names for specifying the time

@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
+﻿namespace Tingle.AspNetCore.Authentication.SharedKey.Validation.Exceptions;
 
 ///
 [Serializable]
@@ -14,9 +12,6 @@ public class SharedKeyTimeWindowExpiredException : Exception
 
     ///
     public SharedKeyTimeWindowExpiredException(string message, Exception inner) : base(message, inner) { }
-
-    ///
-    protected SharedKeyTimeWindowExpiredException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
     /// <summary>
     /// The date supplied

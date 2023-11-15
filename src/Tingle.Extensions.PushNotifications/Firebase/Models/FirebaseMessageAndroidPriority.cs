@@ -3,7 +3,7 @@
 namespace Tingle.Extensions.PushNotifications.Firebase.Models;
 
 ///
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<FirebaseMessageAndroidPriority>))]
 public enum FirebaseMessageAndroidPriority
 {
     /// <summary>

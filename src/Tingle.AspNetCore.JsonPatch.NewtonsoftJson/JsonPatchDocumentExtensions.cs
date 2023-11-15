@@ -19,11 +19,11 @@ public static class JsonPatchDocumentExtensions
     /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="immutableProperties">The properties that are not allowed to changed</param>
-    public static void ApplyToSafely<T>(this JsonPatchDocument<T> patchDoc,
-                                        T objectToApplyTo,
-                                        ModelStateDictionary modelState,
-                                        IEnumerable<string> immutableProperties)
-        where T : class
+    public static void ApplyToSafely<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+        this JsonPatchDocument<T> patchDoc,
+        T objectToApplyTo,
+        ModelStateDictionary modelState,
+        IEnumerable<string> immutableProperties) where T : class
     {
         if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
         if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
@@ -47,12 +47,12 @@ public static class JsonPatchDocumentExtensions
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="prefix">The prefix to use when looking up values in <see cref="ModelStateDictionary"/>.</param>
     /// <param name="immutableProperties">The properties that are not allowed to changed</param>
-    public static void ApplyToSafely<T>(this JsonPatchDocument<T> patchDoc,
-                                        T objectToApplyTo,
-                                        ModelStateDictionary modelState,
-                                        string prefix,
-                                        IEnumerable<string> immutableProperties)
-        where T : class
+    public static void ApplyToSafely<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+        this JsonPatchDocument<T> patchDoc,
+        T objectToApplyTo,
+        ModelStateDictionary modelState,
+        string prefix,
+        IEnumerable<string> immutableProperties) where T : class
     {
         if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
         if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
@@ -88,10 +88,10 @@ public static class JsonPatchDocumentExtensions
     /// <param name="patchDoc">The <see cref="JsonPatchDocument{TModel}"/>.</param>
     /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
-    public static void ApplyToSafely<T>(this JsonPatchDocument<T> patchDoc,
-                                        T objectToApplyTo,
-                                        ModelStateDictionary modelState)
-        where T : class
+    public static void ApplyToSafely<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(
+        this JsonPatchDocument<T> patchDoc,
+        T objectToApplyTo,
+        ModelStateDictionary modelState) where T : class
     {
         if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
         if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));

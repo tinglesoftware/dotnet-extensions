@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if !NET8_0_OR_GREATER
+using System.Collections;
 
 namespace System.ComponentModel.DataAnnotations;
 
@@ -54,3 +55,4 @@ public class AllowedValuesAttribute : ValidationAttribute
         return !unknown.Any();
     }
 }
+#endif

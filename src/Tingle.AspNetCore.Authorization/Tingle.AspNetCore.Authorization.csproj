@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="AzureIPNetworks" Version="1.5.0" />
+    <PackageReference Include="AzureIPNetworks" Version="1.6.0" />
   </ItemGroup>
 
 </Project>
