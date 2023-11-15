@@ -35,9 +35,9 @@ updates:
     update-types: ["version-update:semver-patch"]
   # Ignore major updates for packages used in multi-targeting
   - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
-    update-types: ["version-update:semver-patch"]
+    update-types: ["version-update:semver-major"]
   - dependency-name: "Microsoft.AspNetCore.TestHost"
-    update-types: ["version-update:semver-patch"]
+    update-types: ["version-update:semver-major"]
 - package-ecosystem: "github-actions" # See documentation for possible values
   directory: "/" # Location of package manifests
   schedule:
