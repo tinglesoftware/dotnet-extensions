@@ -17,6 +17,8 @@ updates:
       patterns: ["Microsoft*"]
     system:
       patterns: ["System*"]
+    serilog:
+      patterns: ["Serilog*"]
     xuint:
       patterns: ["Xunit*"]
   ignore:
