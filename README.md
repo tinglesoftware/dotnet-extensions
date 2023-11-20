@@ -1,6 +1,6 @@
 # .NET and ASP.NET Core convenience functionality
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tinglesoftware/dotnet-extensions/release.yml?branch=main&style=flat-square)
+[![GitHub Workflow Status](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/release.yml/badge.svg)](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/release.yml)
 
 This repository contains projects/libraries for adding useful functionality to dotnet and ASP.NET Core when running real-world applications in production. We have been using these packages at [Tingle](https://tingle.software) for years and thought it would be better if we shared them.
 
