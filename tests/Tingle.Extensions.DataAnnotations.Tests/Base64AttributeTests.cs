@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#if !NET8_0_OR_GREATER
+using System.ComponentModel.DataAnnotations;
 
 namespace Tingle.Extensions.DataAnnotations.Tests;
 
@@ -34,3 +35,4 @@ public class Base64AttributeTests
 
     record TestModel([property: Base64] string? SomeKey);
 }
+#endif

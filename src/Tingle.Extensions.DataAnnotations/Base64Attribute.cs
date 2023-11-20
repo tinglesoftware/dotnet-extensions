@@ -1,4 +1,5 @@
-﻿namespace System.ComponentModel.DataAnnotations;
+﻿#if !NET8_0_OR_GREATER
+namespace System.ComponentModel.DataAnnotations;
 
 /// <summary>
 /// Specifies that a data field value is a well-formed base 64 string.
@@ -15,6 +16,7 @@ public class Base64Attribute : ValidationAttribute
     public override bool IsValid(object? value)
     {
         if (value is not string s || string.IsNullOrEmpty(s)) return true;
+
         // attempt to convert from base64
         try
         {
@@ -27,3 +29,4 @@ public class Base64Attribute : ValidationAttribute
         }
     }
 }
+#endif
