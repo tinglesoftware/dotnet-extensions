@@ -4,8 +4,8 @@ Additional data validation attributes in the `System.ComponentModel.DataAnnotati
 
 |AttributeName|Description|Remarks|
 |--|--|--|
-|`AllowedValuesAttribute`|Specifies that a data field value is allowed. When applied on an array, all its elements must be allowed.|Might present in .NET 8 hence be removed here once official.|
-|`Base64Attribute`|Specifies that a data field value is a well-formed base 64 string.|Might present in .NET 8 hence be removed here once official.|
+|`AllowedValuesAttribute`|Specifies that a data field value is allowed. When applied on an array, all its elements must be allowed.|Only for .NET 7 or older.|
+|`Base64Attribute`|Specifies that a data field value is a well-formed base 64 string.|Only for .NET 7 or older.|
 |`DateMustBeInTheFutureAttribute`|Specifies that a data field value is a date in the future.||
 |`DateMustBeInThePastAttribute`|Specifies that a data field value is a date in the past.||
 |`FiveStarRatingAttribute`|Specifies the decimal numeric range for the value of a data field must be between 0 and 5.||
