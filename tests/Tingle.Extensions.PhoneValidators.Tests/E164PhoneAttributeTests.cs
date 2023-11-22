@@ -15,7 +15,7 @@ public class E164PhoneAttributeTests
     [InlineData(null, true)]
     [InlineData("", true)]
     [InlineData("A", false)]
-    public void E164Phone_Validation_Works_ForSingle(string testPhoneNumber, bool expected)
+    public void E164Phone_Validation_Works_ForSingle(string? testPhoneNumber, bool expected)
     {
         var obj = new TestModel1 { SomePhoneNumber = testPhoneNumber };
         var context = new ValidationContext(obj);
@@ -43,7 +43,7 @@ public class E164PhoneAttributeTests
     [InlineData("+254722000000,722000000", false)]
     [InlineData(null, true)]
     [InlineData("", false)]
-    public void E164Phone_Validation_Works_ForList(string testPhoneNumbers, bool expected)
+    public void E164Phone_Validation_Works_ForList(string? testPhoneNumbers, bool expected)
     {
         var obj = new TestModel3 { SomePhoneNumbers = testPhoneNumbers?.Split(','), };
         var context = new ValidationContext(obj);
@@ -75,7 +75,7 @@ public class E164PhoneAttributeTests
     [InlineData(null, true)]
     [InlineData("", true)]
     [InlineData("A", false)]
-    public void E164Phone_Validation_Works_WithRegion(string testPhoneNumber, bool expected)
+    public void E164Phone_Validation_Works_WithRegion(string? testPhoneNumber, bool expected)
     {
         var obj = new TestModel2 { SomePhoneNumber = testPhoneNumber };
         var context = new ValidationContext(obj);

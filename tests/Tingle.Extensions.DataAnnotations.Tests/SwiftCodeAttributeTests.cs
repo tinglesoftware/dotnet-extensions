@@ -13,7 +13,7 @@ public class SwiftCodeAttributeTests
     [InlineData("", true)]
     [InlineData(null, true)]
     [InlineData("A", false)]
-    public void SwiftCode_Validation_Works(string testPin, bool expected)
+    public void SwiftCode_Validation_Works(string? testPin, bool expected)
     {
         var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);

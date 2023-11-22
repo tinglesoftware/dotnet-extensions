@@ -11,7 +11,7 @@ public class KRAPinAttributeTests
     [InlineData("", true)]
     [InlineData(null, true)]
     [InlineData("A", false)]
-    public void KRAPin_Validation_Works(string testPin, bool expected)
+    public void KRAPin_Validation_Works(string? testPin, bool expected)
     {
         var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);

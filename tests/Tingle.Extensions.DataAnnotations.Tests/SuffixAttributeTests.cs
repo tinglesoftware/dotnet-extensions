@@ -11,7 +11,7 @@ public class SuffixAttributeTests
     [InlineData(null, true)]
     [InlineData("", false)]
     [InlineData("A", false)]
-    public void Suffix_Validation_Works(string testValue, bool expected)
+    public void Suffix_Validation_Works(string? testValue, bool expected)
     {
         var obj = new TestModel(testValue);
         var context = new ValidationContext(obj);

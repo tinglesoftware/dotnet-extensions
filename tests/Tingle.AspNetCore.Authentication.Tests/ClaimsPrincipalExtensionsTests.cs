@@ -44,15 +44,15 @@ public class ClaimsPrincipalExtensionsTests
                 null,
                 "+254728837078",
                 true)]
-    public void PrincipalExtensionsWork(string expectedEmail,
+    public void PrincipalExtensionsWork(string? expectedEmail,
                                         bool expectedEmailVerified,
-                                        string expectedUpn,
-                                        string expectedObjectId,
+                                        string? expectedUpn,
+                                        string? expectedObjectId,
                                         string expectedNameId,
                                         string expectedName,
-                                        string expectedPreferredUsername,
-                                        string expectedTenantId,
-                                        string expectedPhoneNumber,
+                                        string? expectedPreferredUsername,
+                                        string? expectedTenantId,
+                                        string? expectedPhoneNumber,
                                         bool expectedPhoneNumberVerified)
     {
         (var token, var key) = CreateStandardTokenAndKey(email: expectedEmail,
@@ -93,15 +93,15 @@ public class ClaimsPrincipalExtensionsTests
     }
 
 
-    private static (string token, SymmetricSecurityKey key) CreateStandardTokenAndKey(string email,
+    private static (string token, SymmetricSecurityKey key) CreateStandardTokenAndKey(string? email,
                                                                                       bool email_verified,
-                                                                                      string upn,
-                                                                                      string objectId,
+                                                                                      string? upn,
+                                                                                      string? objectId,
                                                                                       string nameId,
                                                                                       string name,
-                                                                                      string preferred_username,
-                                                                                      string tenantId,
-                                                                                      string phone_number,
+                                                                                      string? preferred_username,
+                                                                                      string? tenantId,
+                                                                                      string? phone_number,
                                                                                       bool phone_number_verified)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));

@@ -16,7 +16,7 @@ public class TimeZoneAttributeTests
     [InlineData(null, true)]
     [InlineData("", true)]
     [InlineData("A", false)]
-    public void TimeZone_Validation_Works(string testValue, bool expected)
+    public void TimeZone_Validation_Works(string? testValue, bool expected)
     {
         var obj = new TestModel(testValue);
         var context = new ValidationContext(obj);

@@ -12,7 +12,7 @@ public class PrefixAttributeTests
     [InlineData(null, true)]
     [InlineData("", false)]
     [InlineData("A", false)]
-    public void Prefix_Validation_Works(string testPin, bool expected)
+    public void Prefix_Validation_Works(string? testPin, bool expected)
     {
         var obj = new TestModel(testPin);
         var context = new ValidationContext(obj);

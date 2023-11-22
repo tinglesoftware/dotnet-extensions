@@ -47,7 +47,7 @@ public class SafaricomNumberValidatorTests
     [InlineData("111126409", "254111126409")]
     [InlineData("110126409", "254110126409")]
     [InlineData("115278316", "254115278316")]
-    public void ToMsisdn_Works(string phoneNumber, string expectedResponse)
+    public void ToMsisdn_Works(string phoneNumber, string? expectedResponse)
     {
         var actualResult = validator.ToMsisdn(phoneNumber);
         Assert.Equal(expectedResponse, actualResult);
@@ -80,7 +80,7 @@ public class SafaricomNumberValidatorTests
     [InlineData("111126409", "+254111126409")]
     [InlineData("110126409", "+254110126409")]
     [InlineData("115278316", "+254115278316")]
-    public void ToE164_Works(string phoneNumber, string expectedResponse)
+    public void ToE164_Works(string phoneNumber, string? expectedResponse)
     {
         var actualResult = validator.ToE164(phoneNumber);
         Assert.Equal(expectedResponse, actualResult);
@@ -97,7 +97,7 @@ public class SafaricomNumberValidatorTests
     [InlineData("", true)]
     [InlineData(null, true)]
     [InlineData("A", false)]
-    public void Attribute_Validation_Works_ForSingle(string testPhoneNumber, bool expected)
+    public void Attribute_Validation_Works_ForSingle(string? testPhoneNumber, bool expected)
     {
         var obj = new TestModel1 { PhoneNumber = testPhoneNumber };
         var context = new ValidationContext(obj);
@@ -127,7 +127,7 @@ public class SafaricomNumberValidatorTests
     [InlineData("", false)]
     [InlineData(null, true)]
     [InlineData("A", false)]
-    public void Attribute_Validation_Works_ForList(string testPhoneNumbers, bool expected)
+    public void Attribute_Validation_Works_ForList(string? testPhoneNumbers, bool expected)
     {
         var obj = new TestModel2 { PhoneNumbers = testPhoneNumbers?.Split(',') };
         var context = new ValidationContext(obj);

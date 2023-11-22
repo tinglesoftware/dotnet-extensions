@@ -12,7 +12,7 @@ public class Base64AttributeTests
     [InlineData(null, true)]
     [InlineData("", true)]
     [InlineData("A", false)]
-    public void Base64_Validation_Works(string testKey, bool expected)
+    public void Base64_Validation_Works(string? testKey, bool expected)
     {
         var obj = new TestModel(testKey);
         var context = new ValidationContext(obj);
