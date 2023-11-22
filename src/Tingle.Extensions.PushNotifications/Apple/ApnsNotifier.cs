@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json.Serialization.Metadata;
 using Tingle.Extensions.Http;
 using Tingle.Extensions.PushNotifications.Apple.Models;
@@ -65,7 +66,7 @@ public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
         if (data == null) throw new ArgumentNullException(nameof(data));
         if (data.Aps == null) throw new ArgumentException($"{nameof(data.Aps)} cannot be null", nameof(data));
 
-        var content = MakeJsonContent(data, jsonTypeInfo);
+        var content = JsonContent.Create(data, jsonTypeInfo);
         return SendAsync(header, content, cancellationToken);
     }
 

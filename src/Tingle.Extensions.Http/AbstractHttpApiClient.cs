@@ -262,7 +262,7 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     /// <param name="value">The object to to write</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
     /// <returns>A <see cref="JsonContent"/> instance.</returns>
-    protected virtual HttpContent MakeJsonContent<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo) => TingleJsonContent.Create(value, jsonTypeInfo);
+    protected virtual HttpContent MakeJsonContent<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo) => JsonContent.Create(value, jsonTypeInfo);
 
     /// <summary>Reads the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.</summary>
     /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>

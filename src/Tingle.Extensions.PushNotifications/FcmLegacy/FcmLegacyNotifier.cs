@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Net.Http.Json;
 using System.Text.Json.Serialization.Metadata;
 using Tingle.Extensions.Http;
 using Tingle.Extensions.PushNotifications.FcmLegacy.Models;
@@ -53,7 +54,7 @@ public class FcmLegacyNotifier : AbstractHttpApiClient<FcmLegacyNotifierOptions>
                                                                                           CancellationToken cancellationToken = default)
         where TMessage : FcmLegacyRequest
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl) { Content = MakeJsonContent(message, jsonTypeInfo), };
+        var request = new HttpRequestMessage(HttpMethod.Post, BaseUrl) { Content = JsonContent.Create(message, jsonTypeInfo), };
         return await SendAsync(request, SC.Default.FcmLegacyResponse, cancellationToken).ConfigureAwait(false);
     }
 }
