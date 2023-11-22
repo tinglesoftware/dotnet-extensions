@@ -26,14 +26,12 @@ public static class AuthorizationPolicyBuilderExtensions
         if (!networks.Any()) return builder;
 
         // reduce the networks where possible (referred to as supernetting)
-#if NET8_0_OR_GREATER
-        var reduced = networks;
-#else
-        var reduced = IPNetwork.Supernet(networks.ToArray());
+#if !NET8_0_OR_GREATER
+        networks = IPNetwork.Supernet([.. networks]);
 #endif
 
         // add the requirement
-        return builder.AddRequirements(new ApprovedIPNetworkRequirement(reduced));
+        return builder.AddRequirements(new ApprovedIPNetworkRequirement(networks));
     }
 
     /// <summary>
@@ -138,11 +136,7 @@ public static class AuthorizationPolicyBuilderExtensions
                 var ips = Dns.GetHostAddresses(f);
 
                 // parse the IP addresses into IP networks
-#if NET8_0_OR_GREATER
-                var rawNetworks = ips?.Select(ip => IPNetwork.Parse($"{ip}/32")) ?? Array.Empty<IPNetwork>();
-#else
-                var rawNetworks = ips?.Select(ip => IPNetwork.Parse(ip.ToString(), CidrGuess.ClassLess)) ?? Array.Empty<IPNetwork>();
-#endif
+                var rawNetworks = ips?.Select(ip => new IPNetwork(ip, (byte)(ip.AddressFamily is AddressFamily.InterNetwork ? 32 : 128)));
 
                 // add networks into the list if there are any
                 if (rawNetworks?.Any() ?? false)
