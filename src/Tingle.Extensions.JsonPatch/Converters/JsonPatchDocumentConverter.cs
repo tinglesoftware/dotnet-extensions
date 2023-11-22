@@ -15,7 +15,7 @@ public class JsonPatchDocumentConverter : JsonConverter<JsonPatchDocument>
         var targetOperations = JsonSerializer.Deserialize<List<Operation>>(ref reader, options);
 #pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
 
-        return new JsonPatchDocument(targetOperations ?? new List<Operation>());
+        return new JsonPatchDocument(targetOperations ?? []);
     }
 
     /// <inheritdoc/>

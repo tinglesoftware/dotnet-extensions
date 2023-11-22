@@ -38,7 +38,7 @@ public abstract class AbstractPhoneNumberValidator : IPhoneNumberValidator
         if (!match.Success) return Array.Empty<string>();
 
         var linenumber = match.Groups[1].Value;
-        return new string[] { $"{CountryPrefix}{linenumber}", $"0{linenumber}", linenumber };
+        return [$"{CountryPrefix}{linenumber}", $"0{linenumber}", linenumber];
     }
 
     /// <inheritdoc/>

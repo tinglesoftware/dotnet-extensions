@@ -272,7 +272,7 @@ public class SharedKeyHandler : AuthenticationHandler<SharedKeyOptions>
         }
         else
         {
-            exceptions = new[] { authFailure };
+            exceptions = [authFailure];
         }
 
         var messages = new List<string>();

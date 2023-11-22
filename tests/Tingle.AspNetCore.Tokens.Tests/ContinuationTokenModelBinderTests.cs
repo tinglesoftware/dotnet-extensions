@@ -254,7 +254,7 @@ public class ContinuationTokenModelBinderTests
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "model",
             ModelState = new ModelStateDictionary(),
-            ValidationState = new ValidationStateDictionary(),
+            ValidationState = [],
             ActionContext = new ActionContext { HttpContext = httpContext },
             ValueProvider = new QueryStringValueProvider(BindingSource.Query,
                                                          httpContext.Request.Query,

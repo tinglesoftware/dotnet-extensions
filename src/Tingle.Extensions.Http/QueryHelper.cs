@@ -28,7 +28,7 @@ public static class QueryHelper
         if (name == null) throw new ArgumentNullException(nameof(name));
         if (value == null) throw new ArgumentNullException(nameof(value));
 
-        return AddQueryString(uri, new[] { new KeyValuePair<string, string>(name, value) });
+        return AddQueryString(uri, [new KeyValuePair<string, string>(name, value)]);
     }
 
     /// <summary>Append the given query keys and values to the URI.</summary>

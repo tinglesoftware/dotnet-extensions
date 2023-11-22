@@ -109,8 +109,8 @@ public class ClaimsPrincipalExtensionsTests
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, nameId),
-            new Claim("name", name),
+            new(ClaimTypes.NameIdentifier, nameId),
+            new("name", name),
         };
 
         if (!string.IsNullOrEmpty(preferred_username))
@@ -167,11 +167,10 @@ public class ClaimsPrincipalExtensionsTests
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, "1234567890"),
-            new Claim("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
-            new Claim("address", addr_claim_value),
+            new(ClaimTypes.NameIdentifier, "1234567890"),
+            new("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
+            new("address", addr_claim_value),
         };
-
 
         var token = new JwtSecurityToken(issuer: ValidIssuer,
                                          audience: ValidAudience,
@@ -211,8 +210,8 @@ public class ClaimsPrincipalExtensionsTests
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, "1234567890"),
-            new Claim("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
+            new(ClaimTypes.NameIdentifier, "1234567890"),
+            new("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
         };
 
 
@@ -249,9 +248,9 @@ public class ClaimsPrincipalExtensionsTests
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, "1234567890"),
-            new Claim("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
-            new Claim("address", ""),
+            new(ClaimTypes.NameIdentifier, "1234567890"),
+            new("http://schemas.microsoft.com/identity/claims/objectidentifier", "1234567890"),
+            new("address", ""),
         };
 
 

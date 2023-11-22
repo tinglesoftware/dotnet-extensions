@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal class SerilogBuilderOptions
 {
-    public List<Action<DestructuringOptionsBuilder>> ConfigureDestructuringOptions { get; } = new();
-    public List<Action<SensitiveDataEnricherOptions>> ConfigureSensitiveDataEnricherOptions { get; } = new();
-    public List<Action<LoggerConfiguration>> ConfigureLoggerConfiguration { get; } = new();
+    public List<Action<DestructuringOptionsBuilder>> ConfigureDestructuringOptions { get; } = [];
+    public List<Action<SensitiveDataEnricherOptions>> ConfigureSensitiveDataEnricherOptions { get; } = [];
+    public List<Action<LoggerConfiguration>> ConfigureLoggerConfiguration { get; } = [];
 }

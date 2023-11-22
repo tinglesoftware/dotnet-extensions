@@ -8,7 +8,7 @@ namespace Tingle.Extensions.JsonPatch;
 [JsonConverter(typeof(JsonPatchDocumentConverter))]
 public class JsonPatchDocument : IJsonPatchDocument
 {
-    public List<Operation> Operations { get; private set; } = new List<Operation>();
+    public List<Operation> Operations { get; private set; } = [];
 
     public JsonPatchDocument() { }
 

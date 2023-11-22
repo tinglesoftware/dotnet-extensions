@@ -34,8 +34,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(forwardDefault);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         Assert.Equal(0, forwardDefault.AuthenticateCount);
         Assert.Equal(0, forwardDefault.ForbidCount);
@@ -98,8 +97,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
             services.AddSingleton(forwardDefault);
 
             var sp = services.BuildServiceProvider();
-            var context = new DefaultHttpContext();
-            context.RequestServices = sp;
+            var context = new DefaultHttpContext { RequestServices = sp, };
 
             await context.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity("whatever")));
             Assert.Equal(1, specific.SignInCount);
@@ -140,8 +138,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
             services.AddSingleton(forwardDefault);
 
             var sp = services.BuildServiceProvider();
-            var context = new DefaultHttpContext();
-            context.RequestServices = sp;
+            var context = new DefaultHttpContext { RequestServices = sp, };
 
             await context.SignOutAsync();
             Assert.Equal(1, specific.SignOutCount);
@@ -180,8 +177,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(forwardDefault);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.ForbidAsync();
         Assert.Equal(0, specific.SignOutCount);
@@ -219,8 +215,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(forwardDefault);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.AuthenticateAsync();
         Assert.Equal(0, specific.SignOutCount);
@@ -258,8 +253,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(forwardDefault);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.ChallengeAsync();
         Assert.Equal(0, specific.SignOutCount);
@@ -300,8 +294,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(selector);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.AuthenticateAsync();
         Assert.Equal(1, selector.AuthenticateCount);
@@ -369,8 +362,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(selector);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.AuthenticateAsync();
         Assert.Equal(1, forwardDefault.AuthenticateCount);
@@ -443,8 +435,7 @@ public abstract class SharedAuthenticationTests<TOptions> where TOptions : Authe
         services.AddSingleton(selector);
 
         var sp = services.BuildServiceProvider();
-        var context = new DefaultHttpContext();
-        context.RequestServices = sp;
+        var context = new DefaultHttpContext { RequestServices = sp, };
 
         await context.AuthenticateAsync();
         Assert.Equal(1, specific.AuthenticateCount);

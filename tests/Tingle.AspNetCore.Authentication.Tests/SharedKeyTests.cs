@@ -797,8 +797,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
                                                                                    HttpContext httpContext,
                                                                                    SharedKeyOptions options)
         {
-            var constructor = ExceptionType.GetTypeInfo().GetConstructor(new[] { typeof(string) });
-            var exception = (Exception)constructor.Invoke(new[] { ExceptionType.Name });
+            var constructor = ExceptionType.GetTypeInfo().GetConstructor([typeof(string)]);
+            var exception = (Exception)constructor.Invoke([ExceptionType.Name]);
             throw exception;
         }
     }

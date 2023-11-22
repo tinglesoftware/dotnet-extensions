@@ -42,7 +42,7 @@ public class TypedJsonPatchDocumentConverter : JsonConverterFactory
                 op = o.op,
                 from = o.from,
                 value = o.value,
-            }).ToList() ?? new List<Operation<T>>();
+            }).ToList() ?? [];
             return new JsonPatchDocument<T>(operations);
         }
 

@@ -33,7 +33,7 @@ public class FirebaseResponseError
 
     ///
     [JsonPropertyName("details")]
-    public List<FirebaseResponseErrorDetails>? Details { get; set; } = new();
+    public List<FirebaseResponseErrorDetails>? Details { get; set; } = [];
 
     [JsonExtensionData]
     internal IDictionary<string, object>? Extensions { get; set; }

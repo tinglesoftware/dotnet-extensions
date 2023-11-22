@@ -8,7 +8,7 @@ namespace TokensSample.Controllers;
 [ProducesErrorResponseType(typeof(ValidationProblemDetails))]
 public class BooksController : ControllerBase
 {
-    static readonly List<Book> Books = new();
+    static readonly List<Book> Books = [];
 
     [HttpGet]
     public IActionResult List([FromQuery] ContinuationToken<DateTimeOffset>? token)

@@ -17,7 +17,7 @@ public class DateMustBeInThePastAttributeTests
         // now test for a date in the past
         obj = new TestModel1(DateTime.UtcNow.AddMinutes(1));
         context = new ValidationContext(obj);
-        results = new List<ValidationResult>();
+        results = [];
         actual = Validator.TryValidateObject(obj, context, results, true);
         Assert.False(actual);
         var val = Assert.Single(results);
@@ -41,7 +41,7 @@ public class DateMustBeInThePastAttributeTests
         // now test for a date in the past
         obj = new TestModel2(DateTimeOffset.UtcNow.AddMinutes(1));
         context = new ValidationContext(obj);
-        results = new List<ValidationResult>();
+        results = [];
         actual = Validator.TryValidateObject(obj, context, results, true);
         Assert.False(actual);
         var val = Assert.Single(results);

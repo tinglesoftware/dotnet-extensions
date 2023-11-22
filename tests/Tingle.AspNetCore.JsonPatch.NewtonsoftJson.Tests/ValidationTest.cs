@@ -173,9 +173,9 @@ public class ValidationTest
 
         public TestInnerModel? Inner { get; set; }
 
-        public List<string> Tags { get; set; } = new List<string>();
+        public List<string> Tags { get; set; } = [];
 
-        public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Metadata { get; set; } = [];
     }
 
     class TestModel : TestPatchModel

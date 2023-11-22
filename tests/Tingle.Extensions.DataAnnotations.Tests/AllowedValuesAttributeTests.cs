@@ -93,7 +93,7 @@ public class AllowedValuesAttributeTests
     [InlineData("YELLOW", false)]
     public void Works_For_StringArray(string value, bool expected)
     {
-        var obj = new TestModel4(new List<string> { value });
+        var obj = new TestModel4([value]);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);

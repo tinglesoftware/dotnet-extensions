@@ -21,7 +21,7 @@ public class JsonPatchDocument<[DynamicallyAccessedMembers(DynamicallyAccessedMe
 
     public JsonPatchDocument(CaseTransformType caseTransformType)
     {
-        Operations = new List<Operation<TModel>>();
+        Operations = [];
         CaseTransformType = caseTransformType;
     }
 

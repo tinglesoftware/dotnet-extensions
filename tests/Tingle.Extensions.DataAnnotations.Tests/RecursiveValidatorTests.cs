@@ -99,7 +99,7 @@ public class RecursiveValidatorTests
             Parent = parent,
             PropertyA = 1,
             PropertyB = 1,
-            GrandChildren = new[] { new GrandChild { PropertyA = 11, PropertyB = 11 } }
+            GrandChildren = [new GrandChild { PropertyA = 11, PropertyB = 11 }]
         };
         var validationResults = new List<ValidationResult>();
 
@@ -118,7 +118,7 @@ public class RecursiveValidatorTests
         {
             Child = new Child
             {
-                GrandChildren = new[] { new GrandChild() }
+                GrandChildren = [new GrandChild()]
             }
         };
         var validationResults = new List<ValidationResult>();
@@ -139,8 +139,13 @@ public class RecursiveValidatorTests
     public void TryValidateObject_calls_grandchild_IValidatableObject_method()
     {
         var parent = new Parent { PropertyA = 1, PropertyB = 1 };
-        parent.Child = new Child { Parent = parent, PropertyA = 1, PropertyB = 1 };
-        parent.Child.GrandChildren = new[] { new GrandChild { PropertyA = 5, PropertyB = 6 } };
+        parent.Child = new Child
+        {
+            Parent = parent,
+            PropertyA = 1,
+            PropertyB = 1,
+            GrandChildren = [new GrandChild { PropertyA = 5, PropertyB = 6 }]
+        };
         var validationResults = new List<ValidationResult>();
 
         var result = RecursiveValidator.TryValidateObjectRecursive(parent, validationResults);
@@ -154,8 +159,13 @@ public class RecursiveValidatorTests
     public void TryValidateObject_includes_errors_from_all_objects()
     {
         var parent = new Parent { PropertyA = 5, PropertyB = 6 };
-        parent.Child = new Child { Parent = parent, PropertyA = 5, PropertyB = 6 };
-        parent.Child.GrandChildren = new[] { new GrandChild { PropertyA = 5, PropertyB = 6 } };
+        parent.Child = new Child
+        {
+            Parent = parent,
+            PropertyA = 5,
+            PropertyB = 6,
+            GrandChildren = [new GrandChild { PropertyA = 5, PropertyB = 6 }]
+        };
         var validationResults = new List<ValidationResult>();
 
         var result = RecursiveValidator.TryValidateObjectRecursive(parent, validationResults);
@@ -188,20 +198,18 @@ public class RecursiveValidatorTests
         var parent = new Parent { PropertyA = 1, PropertyB = 1 };
         var classWithDictionary = new ClassWithDictionary
         {
-            Objects = new List<Dictionary<string, Child>>
+            Objects =
+            [
+                new Dictionary<string, Child>
                 {
-                    new Dictionary<string, Child>
+                    ["key"] = new Child
                     {
-                        { "key",
-                            new Child
-                            {
-                                Parent = parent,
-                                PropertyA = 1,
-                                PropertyB = 2
-                            }
-                        }
+                        Parent = parent,
+                        PropertyA = 1,
+                        PropertyB = 2
                     }
                 }
+            ]
         };
         var validationResults = new List<ValidationResult>();
 
@@ -217,16 +225,16 @@ public class RecursiveValidatorTests
         var parent = new Parent { PropertyA = 1, PropertyB = 1 };
         var classWithNullableEnumeration = new ClassWithNullableEnumeration
         {
-            Objects = new List<Child?>
+            Objects =
+            [
+                null,
+                new Child
                 {
-                    null,
-                    new Child
-                    {
-                        Parent = parent,
-                        PropertyA = 1,
-                        PropertyB = 2
-                    }
+                    Parent = parent,
+                    PropertyA = 1,
+                    PropertyB = 2
                 }
+            ]
         };
         var validationResults = new List<ValidationResult>();
 
