@@ -11,7 +11,7 @@ public class ResourceResponseHeaders : Dictionary<string, IEnumerable<string>>
 
     /// <summary>Creates an instance of <see cref="ResourceResponseHeaders"/>.</summary>
     /// <param name="response">The original HTTP request.</param>
-    public ResourceResponseHeaders(HttpRequestMessage response) : this(response.Headers.Concat(response.Content.Headers)) { }
+    public ResourceResponseHeaders(HttpRequestMessage response) : this(response.Headers.Concat((response.Content ?? new StringContent(string.Empty)).Headers)) { }
 
     /// <summary>Creates an instance of <see cref="ResourceResponseHeaders"/>.</summary>
     /// <param name="data">The combined headers.</param>

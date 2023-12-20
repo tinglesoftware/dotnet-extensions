@@ -126,7 +126,7 @@ public class ResourceResponse<TResource, TProblem>
     protected string AppendHeaders(string message)
     {
         static string serialize(ResourceResponseHeaders headers) => System.Text.Json.JsonSerializer.Serialize(headers, SC.Default.ResourceResponseHeaders);
-        string serializeRequest() => serialize(new(Response.RequestMessage));
+        string serializeRequest() => serialize(new(Response.RequestMessage ?? new()));
         string serializeResponse() => serialize(Headers);
 
         message = AppendIf(message, o => o.IncludeRequestHeadersInExceptionMessage, serializeRequest, "Request Headers:\n{0}");
@@ -140,7 +140,7 @@ public class ResourceResponse<TResource, TProblem>
     protected string AppendRawBody(string message)
     {
         static string serialize(HttpContent content) => content.ReadAsStringAsync().GetAwaiter().GetResult();
-        string serializeRequest() => serialize(Response.RequestMessage.Content);
+        string serializeRequest() => serialize((Response.RequestMessage ?? new()).Content ?? new StringContent(string.Empty));
         string serializeResponse() => serialize(Response.Content);
 
         message = AppendIf(message, o => o.IncludeRequestBodyInExceptionMessage, serializeRequest, "Request Body:\n{0}");
