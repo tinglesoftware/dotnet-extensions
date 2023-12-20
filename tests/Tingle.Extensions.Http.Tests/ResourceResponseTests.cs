@@ -49,20 +49,26 @@ public class ResourceResponseTests
     {
         var response = new HttpResponseMessage(HttpStatusCode.NotFound);
         response.Headers.Date = new DateTimeOffset(DateTimeOffset.UtcNow.Date, TimeSpan.Zero);
-        response.Content = new StringContent("{\"status\":404}");
+        response.Content = new StringContent("{\"status\":404}", System.Text.Encoding.UTF8, "application/json");
+        response.RequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://localhost") { Content = new StringContent("{\"action\":\"write\"}"), };
 
         var options = new DummyHttpApiClientOptions
         {
-            IncludeHeadersInExceptionMessage = true,
-            IncludeRawBodyInExceptionMessage = true,
+            IncludeRequestHeadersInExceptionMessage = true,
+            IncludeRequestBodyInExceptionMessage = true,
+
+            IncludeResponseHeadersInExceptionMessage = true,
+            IncludeResponseBodyInExceptionMessage = true,
         };
 
         var rr = new ResourceResponse<object>(response, options);
         Assert.Equal(HttpStatusCode.NotFound, rr.StatusCode);
 
         var message = "The HTTP request failed with code 404 (NotFound)\n"
-                   + $"\nHeaders:\n{{\"Date\":[\"{response.Headers.Date:r}\"],\"Content-Type\":[\"text/plain; charset=utf-8\"]}}\n"
-                    + "\nBody:\n{\"status\":404}";
+                    + "\nRequest Headers:\n{\"Content-Type\":[\"text/plain; charset=utf-8\"]}\n"
+                   + $"\nResponse Headers:\n{{\"Date\":[\"{response.Headers.Date:r}\"],\"Content-Type\":[\"application/json; charset=utf-8\"]}}\n"
+                    + "\nRequest Body:\n{\"action\":\"write\"}\n"
+                    + "\nResponse Body:\n{\"status\":404}";
         var ex = Assert.Throws<HttpApiResponseException>(rr.EnsureSuccess);
         Assert.Equal(message, ex.Message);
 

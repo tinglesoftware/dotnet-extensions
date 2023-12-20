@@ -10,6 +10,10 @@ public class ResourceResponseHeaders : Dictionary<string, IEnumerable<string>>
     public ResourceResponseHeaders(HttpResponseMessage response) : this(response.Headers.Concat(response.Content.Headers)) { }
 
     /// <summary>Creates an instance of <see cref="ResourceResponseHeaders"/>.</summary>
+    /// <param name="response">The original HTTP request.</param>
+    public ResourceResponseHeaders(HttpRequestMessage response) : this(response.Headers.Concat(response.Content.Headers)) { }
+
+    /// <summary>Creates an instance of <see cref="ResourceResponseHeaders"/>.</summary>
     /// <param name="data">The combined headers.</param>
     public ResourceResponseHeaders(IEnumerable<KeyValuePair<string, IEnumerable<string>>> data)
         : this(data.ToDictionary(kvp => kvp.Key, kvp => kvp.Value)) { }

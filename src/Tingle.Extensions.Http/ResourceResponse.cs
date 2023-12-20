@@ -125,8 +125,13 @@ public class ResourceResponse<TResource, TProblem>
     /// <returns>The appended message.</returns>
     protected string AppendHeaders(string message)
     {
-        string serialize() => System.Text.Json.JsonSerializer.Serialize(Headers, SC.Default.ResourceResponseHeaders);
-        return AppendIf(message, o => o.IncludeHeadersInExceptionMessage, serialize, "Headers:\n{0}");
+        static string serialize(ResourceResponseHeaders headers) => System.Text.Json.JsonSerializer.Serialize(headers, SC.Default.ResourceResponseHeaders);
+        string serializeRequest() => serialize(new(Response.RequestMessage));
+        string serializeResponse() => serialize(Headers);
+
+        message = AppendIf(message, o => o.IncludeRequestHeadersInExceptionMessage, serializeRequest, "Request Headers:\n{0}");
+        message = AppendIf(message, o => o.IncludeResponseHeadersInExceptionMessage, serializeResponse, "Response Headers:\n{0}");
+        return message;
     }
 
     /// <summary>Append the raw body if present to an error message.</summary>
@@ -134,8 +139,13 @@ public class ResourceResponse<TResource, TProblem>
     /// <returns>The appended message.</returns>
     protected string AppendRawBody(string message)
     {
-        string serialize() => Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-        return AppendIf(message, o => o.IncludeRawBodyInExceptionMessage, serialize, "Body:\n{0}");
+        static string serialize(HttpContent content) => content.ReadAsStringAsync().GetAwaiter().GetResult();
+        string serializeRequest() => serialize(Response.RequestMessage.Content);
+        string serializeResponse() => serialize(Response.Content);
+
+        message = AppendIf(message, o => o.IncludeRequestBodyInExceptionMessage, serializeRequest, "Request Body:\n{0}");
+        message = AppendIf(message, o => o.IncludeResponseBodyInExceptionMessage, serializeResponse, "Response Body:\n{0}");
+        return message;
     }
 
     private string AppendIf(string message, Func<AbstractHttpApiClientOptions, bool> evaluator, Func<string> serialize, string format)

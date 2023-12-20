@@ -74,8 +74,8 @@ public static class IServiceCollectionExtensions
         return services.AddHttpApiClient<TNotifier, TOptions>(options =>
         {
             // include error details in the exception
-            options.IncludeHeadersInExceptionMessage = true;
-            options.IncludeRawBodyInExceptionMessage = true;
+            options.IncludeResponseHeadersInExceptionMessage = true;
+            options.IncludeResponseBodyInExceptionMessage = true;
 
             configure?.Invoke(options);
         });
