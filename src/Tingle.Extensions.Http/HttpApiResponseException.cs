@@ -27,7 +27,9 @@ public class HttpApiResponseException : Exception
         Response = response;
         StatusCode = response.StatusCode;
         ResponseCode = (int)response.StatusCode;
+#pragma warning disable CS0618 // Type or member is obsolete
         Headers = headers;
+#pragma warning restore CS0618 // Type or member is obsolete
         Resource = resource;
         Problem = problem;
     }
@@ -45,6 +47,7 @@ public class HttpApiResponseException : Exception
     /// The list of response headers extracted from <see cref="Response"/>
     /// and its content (<see cref="HttpResponseMessage.Content"/>).
     /// </summary>
+    [Obsolete("Use Response.Headers instead.")]
     public IReadOnlyDictionary<string, IEnumerable<string>>? Headers { get; }
 
     /// <summary>The resource extracted from the response body, if any.</summary>

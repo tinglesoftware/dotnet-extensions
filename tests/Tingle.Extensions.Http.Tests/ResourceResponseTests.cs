@@ -77,9 +77,7 @@ public class ResourceResponseTests
         Assert.Equal(404, ex.ResponseCode);
         Assert.Null(ex.Resource);
         Assert.Null(ex.Problem);
-        Assert.NotNull(ex.Headers);
-        Assert.NotEmpty(ex.Headers);
-        var h1 = ex.Headers!.First();
+        var h1 = ex.Response.Headers.First();
         Assert.Equal("Date", h1.Key);
         var date_str = Assert.Single(h1.Value);
         var date = DateTimeOffset.Parse(date_str);
@@ -114,9 +112,7 @@ public class ResourceResponseTests
         Assert.Equal(202, ex.ResponseCode);
         Assert.Null(ex.Resource);
         Assert.Null(ex.Problem);
-        Assert.NotNull(ex.Headers);
-        Assert.NotEmpty(ex.Headers);
-        var h1 = ex.Headers!.First();
+        var h1 = ex.Response.Headers.First();
         Assert.Equal("Date", h1.Key);
         var date_str = Assert.Single(h1.Value);
         var date = DateTimeOffset.Parse(date_str);
