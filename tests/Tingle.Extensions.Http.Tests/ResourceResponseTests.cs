@@ -66,8 +66,8 @@ public class ResourceResponseTests
 
         var message = "The HTTP request failed with code 404 (NotFound)\n"
                     + "\nRequest Headers:\n{\"Content-Type\":[\"text/plain; charset=utf-8\"]}\n"
-                   + $"\nResponse Headers:\n{{\"Date\":[\"{response.Headers.Date:r}\"],\"Content-Type\":[\"application/json; charset=utf-8\"]}}\n"
                     + "\nRequest Body:\n{\"action\":\"write\"}\n"
+                   + $"\nResponse Headers:\n{{\"Date\":[\"{response.Headers.Date:r}\"],\"Content-Type\":[\"application/json; charset=utf-8\"]}}\n"
                     + "\nResponse Body:\n{\"status\":404}";
         var ex = Assert.Throws<HttpApiResponseException>(rr.EnsureSuccess);
         Assert.Equal(message, ex.Message);

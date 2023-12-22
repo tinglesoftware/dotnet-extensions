@@ -80,7 +80,7 @@ public class ResourceResponse<TResource, TProblem>
 
         throw CreateException($"The HTTP request failed with code {ResponseCode} ({StatusCode})",
                               appendHeaders: true,
-                              appendRawBody: true);
+                              appendBody: true);
     }
 
     /// <summary>Helper method to ensure <see cref="Resource"/> is not null.</summary>
@@ -91,17 +91,32 @@ public class ResourceResponse<TResource, TProblem>
 
         throw CreateException("The HTTP response body was either null or empty.",
                               appendHeaders: true,
-                              appendRawBody: false);
+                              appendBody: false);
     }
 
     /// <summary>
     /// Creates an instance of <see cref="HttpApiResponseException"/>
     /// </summary>
-    protected HttpApiResponseException CreateException(string messagePrefix, bool appendHeaders, bool appendRawBody)
+    protected HttpApiResponseException CreateException(string messagePrefix, bool appendHeaders, bool appendBody)
     {
+        static string serializeHeaders(ResourceResponseHeaders headers) => System.Text.Json.JsonSerializer.Serialize(headers, SC.Default.ResourceResponseHeaders);
+        string serializeRequestHeaders() => serializeHeaders(new(Response.RequestMessage ?? new()));
+        string serializeResponseHeaders() => serializeHeaders(Headers);
+
+        static string serializeBody(HttpContent content) => content.ReadAsStringAsync().GetAwaiter().GetResult();
+        string serializeRequestBody() => serializeBody((Response.RequestMessage ?? new()).Content ?? new StringContent(string.Empty));
+        string serializeResponseBody() => serializeBody(Response.Content);
+
+        string AppendIf(string message, Func<AbstractHttpApiClientOptions, bool> evaluator, Func<string> serialize, string format)
+            => options is not null && evaluator(options) ? message + $"\n\n{string.Format(format, serialize())}" : message;
+
         var message = messagePrefix;
-        if (appendHeaders) message = AppendHeaders(message);
-        if (appendRawBody) message = AppendRawBody(message);
+
+        message = AppendIf(message, o => o.IncludeRequestHeadersInExceptionMessage && appendHeaders, serializeRequestHeaders, "Request Headers:\n{0}");
+        message = AppendIf(message, o => o.IncludeRequestBodyInExceptionMessage && appendBody, serializeRequestBody, "Request Body:\n{0}");
+
+        message = AppendIf(message, o => o.IncludeResponseHeadersInExceptionMessage && appendHeaders, serializeResponseHeaders, "Response Headers:\n{0}");
+        message = AppendIf(message, o => o.IncludeResponseBodyInExceptionMessage && appendBody, serializeResponseBody, "Response Body:\n{0}");
 
         return new HttpApiResponseException(message: message,
                                             response: Response,
@@ -119,41 +134,6 @@ public class ResourceResponse<TResource, TProblem>
     /// Otherwise, true when <see cref="ContinuationToken"/> has a value or false when it doesn't have a value.
     /// </summary>
     public virtual bool? HasMoreResults => typeof(IEnumerable).IsAssignableFrom(typeof(TResource)) ? ContinuationToken != null : null;
-
-    /// <summary>Append the response headers to an error message.</summary>
-    /// <param name="message">The message to append to.</param>
-    /// <returns>The appended message.</returns>
-    protected string AppendHeaders(string message)
-    {
-        static string serialize(ResourceResponseHeaders headers) => System.Text.Json.JsonSerializer.Serialize(headers, SC.Default.ResourceResponseHeaders);
-        string serializeRequest() => serialize(new(Response.RequestMessage ?? new()));
-        string serializeResponse() => serialize(Headers);
-
-        message = AppendIf(message, o => o.IncludeRequestHeadersInExceptionMessage, serializeRequest, "Request Headers:\n{0}");
-        message = AppendIf(message, o => o.IncludeResponseHeadersInExceptionMessage, serializeResponse, "Response Headers:\n{0}");
-        return message;
-    }
-
-    /// <summary>Append the raw body if present to an error message.</summary>
-    /// <param name="message">The message to append to.</param>
-    /// <returns>The appended message.</returns>
-    protected string AppendRawBody(string message)
-    {
-        static string serialize(HttpContent content) => content.ReadAsStringAsync().GetAwaiter().GetResult();
-        string serializeRequest() => serialize((Response.RequestMessage ?? new()).Content ?? new StringContent(string.Empty));
-        string serializeResponse() => serialize(Response.Content);
-
-        message = AppendIf(message, o => o.IncludeRequestBodyInExceptionMessage, serializeRequest, "Request Body:\n{0}");
-        message = AppendIf(message, o => o.IncludeResponseBodyInExceptionMessage, serializeResponse, "Response Body:\n{0}");
-        return message;
-    }
-
-    private string AppendIf(string message, Func<AbstractHttpApiClientOptions, bool> evaluator, Func<string> serialize, string format)
-    {
-        if (evaluator is null) throw new ArgumentNullException(nameof(evaluator));
-
-        return options is not null && evaluator(options) ? message + $"\n\n{string.Format(format, serialize())}" : message;
-    }
 }
 
 /// <summary>Model of a HTTP response to an API with typed Resource.</summary>
