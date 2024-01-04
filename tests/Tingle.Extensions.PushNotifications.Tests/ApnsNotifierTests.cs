@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
@@ -84,45 +83,5 @@ public class ApnsNotifierTests
         // base64 wrapped with headers (PEM)
         parsed = ApnsNotifierOptionsExtensions.ParsePrivateKey(new string(PemEncoding.Write("PRIVATE KEY", key)));
         Assert.Equal<byte>(key, parsed); // sequence equal
-    }
-
-    [Fact]
-    public async Task Works()
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<ApnsNotifierTests>(optional: true) // local debug
-            .AddEnvironmentVariables() // CI-pipeline
-            .Build();
-
-        var services = new ServiceCollection();
-        services.AddLogging(builder => builder.AddXUnit(outputHelper));
-        services.AddMemoryCache();
-        services.AddApnsNotifier(options =>
-        {
-            options.TeamId = configuration["ApnsTest:TeamId"];
-            options.KeyId = configuration["ApnsTest:KeyId"];
-            options.BundleId = configuration["ApnsTest:BundleId"];
-            options.UsePrivateKey(keyId => configuration.GetValue<string>("ApnsTest:PrivateKey")!);
-        });
-
-        var provider = services.BuildServiceProvider(validateScopes: true);
-        using var scope = provider.CreateScope();
-        var sp = scope.ServiceProvider;
-        var client = sp.GetRequiredService<ApnsNotifier>();
-
-        var header = new ApnsMessageHeader
-        {
-            DeviceToken = configuration.GetValue<string>("ApnsTest:DeviceToken")!,
-            Environment = configuration.GetValue<ApnsEnvironment?>("ApnsTest:Environment") ?? ApnsEnvironment.Development,
-            PushType = ApnsPushType.Background,
-        };
-        var data = new ApnsMessageData(new ApnsMessagePayload { ContentAvailable = 1, });
-
-        var resp = await client.SendAsync(header, data, default);
-        resp.EnsureSuccess();
-
-        var id = resp.Headers.GetApnsId();
-        Assert.NotNull(id);
-        Assert.NotEmpty(id);
     }
 }
