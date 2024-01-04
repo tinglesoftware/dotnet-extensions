@@ -19,7 +19,7 @@ updates:
       patterns: ["System*"]
     serilog:
       patterns: ["Serilog*"]
-    xuint:
+    xunit:
       patterns: ["Xunit*"]
   ignore:
   # Ignore patch updates for some packages
