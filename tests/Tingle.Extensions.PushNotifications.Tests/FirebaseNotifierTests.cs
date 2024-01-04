@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text.Json.Nodes;
@@ -130,36 +129,5 @@ public class FirebaseNotifierTests
         var response = await client.SendAsync(model);
         response.EnsureSuccess();
         Assert.Equal("Bearer stupid_token", header);
-    }
-
-    [Fact]
-    public async Task Works()
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<FirebaseNotifierTests>(optional: true) // local debug
-            .AddEnvironmentVariables() // CI-pipeline
-            .Build();
-
-        var services = new ServiceCollection();
-        services.AddLogging(builder => builder.AddXUnit(outputHelper));
-        services.AddMemoryCache();
-        services.AddFirebaseNotifier(options =>
-        {
-            options.ProjectId = configuration.GetValue<string>("FirebaseTest:ProjectId");
-            options.ClientEmail = configuration.GetValue<string>("FirebaseTest:ClientEmail");
-            options.TokenUri = configuration.GetValue<string>("FirebaseTest:TokenUri");
-            options.PrivateKey = configuration.GetValue<string>("FirebaseTest:PrivateKey");
-            options.PrivateKey = options.PrivateKey?.Replace("\\n", "\n"); // CI-pipeline
-        });
-
-        var provider = services.BuildServiceProvider(validateScopes: true);
-        using var scope = provider.CreateScope();
-        var sp = scope.ServiceProvider;
-        var client = sp.GetRequiredService<FirebaseNotifier>();
-
-        var msg = new FirebaseRequestMessage { Token = configuration.GetValue<string>("FirebaseTest:DeviceToken"), };
-        var model = new FirebaseRequest(msg);
-        var response = await client.SendAsync(model);
-        response.EnsureSuccess();
     }
 }
