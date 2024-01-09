@@ -103,7 +103,17 @@ public class ResourceResponse<TResource, TProblem>
         string serializeRequestHeaders() => serializeHeaders(new(Response.RequestMessage ?? new()));
         string serializeResponseHeaders() => serializeHeaders(Headers);
 
-        static string serializeBody(HttpContent content) => content.ReadAsStringAsync().GetAwaiter().GetResult();
+        static string serializeBody(HttpContent content)
+        {
+            try
+            {
+                return content.ReadAsStringAsync().GetAwaiter().GetResult();
+            }
+            catch (ObjectDisposedException)
+            {
+                return "[disposed]";
+            }
+        }
         string serializeRequestBody() => serializeBody((Response.RequestMessage ?? new()).Content ?? new StringContent(string.Empty));
         string serializeResponseBody() => serializeBody(Response.Content);
 
