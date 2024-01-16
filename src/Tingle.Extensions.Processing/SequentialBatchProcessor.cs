@@ -9,7 +9,7 @@
 /// <param name="handler">The handler for item in the data. This handler shall be awaited.</param>
 public class SequentialBatchProcessor<T>(int concurrencyLimit = 1, Func<T, CancellationToken, Task>? handler = null)
 {
-    private readonly SemaphoreSlim concurrencyLimiter = new SemaphoreSlim(1, concurrencyLimit);
+    private readonly SemaphoreSlim concurrencyLimiter = new(1, concurrencyLimit);
     private readonly Func<T, CancellationToken, Task> handler = handler ?? ((s, c) => Task.CompletedTask);
 
     /// <summary>Handle a single item.</summary>
