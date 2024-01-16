@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization.Metadata;
 using SC = Tingle.Extensions.Http.HttpJsonSerializerContext;
@@ -244,25 +245,28 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
     /// <typeparam name="TValue">The type of the value to serialize.</typeparam>
     /// <param name="value">The object to to write</param>
+    /// <param name="mediaType">The media type to use for the content.</param>
     /// <returns>A <see cref="JsonContent"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
-    protected virtual HttpContent MakeJsonContent<TValue>(TValue value) => JsonContent.Create(value, options: Options.SerializerOptions);
+    protected virtual HttpContent MakeJsonContent<TValue>(TValue value, MediaTypeHeaderValue? mediaType = null) => JsonContent.Create(value, mediaType, options: Options.SerializerOptions);
 
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
     /// <param name="value">The object to to write</param>
     /// <param name="valueType">The type of the value to serialize.</param>
+    /// <param name="mediaType">The media type to use for the content.</param>
     /// <returns>A <see cref="JsonContent"/> instance.</returns>
     [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
     [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
-    protected virtual HttpContent MakeJsonContent(object value, Type valueType) => JsonContent.Create(value, valueType, options: Options.SerializerOptions);
+    protected virtual HttpContent MakeJsonContent(object value, Type valueType, MediaTypeHeaderValue? mediaType = null) => JsonContent.Create(value, valueType, mediaType, options: Options.SerializerOptions);
 
     /// <summary>Create <see cref="HttpContent"/> with JSON content from the provided <paramref name="value"/>.</summary>
     /// <typeparam name="TValue">The type of the value to serialize.</typeparam>
     /// <param name="value">The object to to write</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
+    /// <param name="mediaType">The media type to use for the content.</param>
     /// <returns>A <see cref="JsonContent"/> instance.</returns>
-    protected virtual HttpContent MakeJsonContent<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo) => JsonContent.Create(value, jsonTypeInfo);
+    protected virtual HttpContent MakeJsonContent<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo, MediaTypeHeaderValue? mediaType = null) => JsonContent.Create(value, jsonTypeInfo, mediaType);
 
     /// <summary>Reads the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.</summary>
     /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
