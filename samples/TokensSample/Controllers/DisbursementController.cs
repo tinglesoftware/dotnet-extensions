@@ -8,15 +8,8 @@ namespace TokensSample.Controllers;
 [ApiController]
 [Route("/disbursement")]
 [ProducesErrorResponseType(typeof(ValidationProblemDetails))]
-public class DisbursementController : ControllerBase
+public class DisbursementController(ITokenProtector<DisbursementToken> tokenProtector) : ControllerBase
 {
-    private readonly ITokenProtector<DisbursementToken> tokenProtector;
-
-    public DisbursementController(ITokenProtector<DisbursementToken> tokenProtector)
-    {
-        this.tokenProtector = tokenProtector ?? throw new ArgumentNullException(nameof(tokenProtector));
-    }
-
     [HttpPost("initiate")]
     public IActionResult Initiate([FromBody] DisbursementInitiateModel model)
     {

@@ -139,11 +139,9 @@ public class TokenProtectorTests
         Assert.Equal(datum, actual);
     }
 
-    private class OptionsSnapshot<TOptions> : IOptionsSnapshot<TOptions> where TOptions : class
+    private class OptionsSnapshot<TOptions>(TOptions value) : IOptionsSnapshot<TOptions> where TOptions : class
     {
-        public OptionsSnapshot(TOptions value) => Value = value;
-
-        public TOptions Value { get; }
+        public TOptions Value { get; } = value;
         public TOptions Get(string? name) => Value;
     }
 }

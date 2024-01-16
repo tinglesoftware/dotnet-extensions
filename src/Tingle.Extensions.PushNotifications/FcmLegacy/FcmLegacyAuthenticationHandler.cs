@@ -7,16 +7,10 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy;
 /// <summary>
 /// Implementation of <see cref=" AuthenticationHandler"/> for <see cref="FcmLegacyNotifier"/>.
 /// </summary>
-internal class FcmLegacyAuthenticationHandler : AuthenticationHandler
+/// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
+internal class FcmLegacyAuthenticationHandler(IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor) : AuthenticationHandler
 {
-    private readonly FcmLegacyNotifierOptions options;
-
-    /// <summary>Creates an instance of <see cref="FcmLegacyAuthenticationHandler"/>.</summary>
-    /// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
-    public FcmLegacyAuthenticationHandler(IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor)
-    {
-        options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
-    }
+    private readonly FcmLegacyNotifierOptions options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
     /// <inheritdoc/>
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

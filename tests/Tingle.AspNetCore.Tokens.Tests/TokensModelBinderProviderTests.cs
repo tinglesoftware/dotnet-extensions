@@ -60,16 +60,11 @@ public class TokensModelBinderProviderTests
         return new DummyModelBinderProviderContext(metadata);
     }
 
-    private class DummyModelBinderProviderContext : ModelBinderProviderContext
+    private class DummyModelBinderProviderContext(ModelMetadata metadata) : ModelBinderProviderContext
     {
-        public DummyModelBinderProviderContext(ModelMetadata metadata)
-        {
-            Metadata = metadata;
-        }
-
         public override BindingInfo BindingInfo => throw new NotImplementedException();
 
-        public override ModelMetadata Metadata { get; }
+        public override ModelMetadata Metadata { get; } = metadata;
 
         public override IModelMetadataProvider MetadataProvider => throw new NotImplementedException();
 

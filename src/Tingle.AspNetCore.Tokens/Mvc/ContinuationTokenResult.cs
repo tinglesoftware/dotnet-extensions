@@ -9,25 +9,13 @@ namespace Microsoft.AspNetCore.Mvc;
 /// An <see cref="OkObjectResult"/> that supports writing the continuation token to a header before writing the response body
 /// </summary>
 /// <typeparam name="T">The type of data contained</typeparam>
-public class ContinuationTokenResult<T> : OkObjectResult
+/// <param name="value">Contains the errors to be returned to the client.</param>
+/// <param name="token">the token containing the value</param>
+/// <param name="headerName">the name of the header to write the protected token</param>
+public class ContinuationTokenResult<T>([ActionResultObjectValue] object value,
+                                        ContinuationToken<T> token,
+                                        string headerName = TokenDefaults.ContinuationTokenHeaderName) : OkObjectResult(value)
 {
-    private readonly ContinuationToken<T> token;
-    private readonly string headerName;
-
-    /// <summary>
-    /// Creates an instance of <see cref="ContinuationTokenResult{T}"/>.
-    /// </summary>
-    /// <param name="value">Contains the errors to be returned to the client.</param>
-    /// <param name="token">the token containing the value</param>
-    /// <param name="headerName">the name of the header to write the protected token</param>
-    public ContinuationTokenResult([ActionResultObjectValue] object value,
-                                   ContinuationToken<T> token,
-                                   string headerName = TokenDefaults.ContinuationTokenHeaderName) : base(value)
-    {
-        this.token = token;
-        this.headerName = headerName ?? throw new ArgumentNullException(nameof(headerName));
-    }
-
     /// <inheritdoc/>
     public override void OnFormatting(ActionContext context)
     {

@@ -14,15 +14,8 @@ var host = Host.CreateDefaultBuilder(args)
 
 await host.RunAsync();
 
-class Worker : BackgroundService
+class Worker(ILogger<Worker> logger) : BackgroundService
 {
-    private readonly ILogger logger;
-
-    public Worker(ILogger<Worker> logger)
-    {
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)

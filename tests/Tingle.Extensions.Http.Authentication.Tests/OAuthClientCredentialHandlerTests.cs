@@ -262,14 +262,8 @@ public class OAuthClientCredentialHandlerTests
 #pragma warning restore IDE1006 // Naming Styles
     }
 
-    class DummyHttpClientHandler : HttpClientHandler
+    class DummyHttpClientHandler(Func<DummyResponse> modelFunc) : HttpClientHandler
     {
-        private readonly Func<DummyResponse> modelFunc;
-        public DummyHttpClientHandler(Func<DummyResponse> modelFunc)
-        {
-            this.modelFunc = modelFunc ?? throw new ArgumentNullException(nameof(modelFunc));
-        }
-
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             if (request.RequestUri?.ToString() == AuthEndpoint)

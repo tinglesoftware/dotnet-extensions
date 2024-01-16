@@ -18,6 +18,7 @@ namespace Tingle.AspNetCore.Authentication.SharedKey;
 public class SharedKeyHandler : AuthenticationHandler<SharedKeyOptions>
 {
 #if NET8_0_OR_GREATER
+
     /// <summary>
     /// Create an instance of <see cref="SharedKeyHandler"/>
     /// </summary>
@@ -40,6 +41,7 @@ public class SharedKeyHandler : AuthenticationHandler<SharedKeyOptions>
                             ILoggerFactory logger,
                             UrlEncoder encoder,
                             ISystemClock clock) : base(options, logger, encoder, clock) { }
+
 #endif
 
     /// <summary>

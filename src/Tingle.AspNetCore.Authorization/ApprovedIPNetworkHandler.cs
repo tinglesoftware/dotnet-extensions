@@ -7,22 +7,10 @@ namespace Tingle.AspNetCore.Authorization;
 /// <summary>
 /// An <see cref="IAuthorizationHandler"/> that need is called to validate an instance of <see cref="ApprovedIPNetworkRequirement"/>
 /// </summary>
-public class ApprovedIPNetworkHandler : AuthorizationHandler<ApprovedIPNetworkRequirement>
+/// <param name="httpContextAccessor">the accessor that provides the current HTTP context</param>
+/// <param name="logger"></param>
+public class ApprovedIPNetworkHandler(IHttpContextAccessor httpContextAccessor, ILogger<ApprovedIPNetworkHandler> logger) : AuthorizationHandler<ApprovedIPNetworkRequirement>
 {
-    private readonly IHttpContextAccessor httpContextAccessor;
-    private readonly ILogger logger;
-
-    /// <summary>
-    /// Creates an instance of <see cref="ApprovedIPNetworkHandler"/>
-    /// </summary>
-    /// <param name="httpContextAccessor">the accessor that provides the current HTTP context</param>
-    /// <param name="logger"></param>
-    public ApprovedIPNetworkHandler(IHttpContextAccessor httpContextAccessor, ILogger<ApprovedIPNetworkHandler> logger)
-    {
-        this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
     /// <summary>
     /// Makes a decision if authorization is allowed based on a specific requirement.
     /// </summary>

@@ -6,21 +6,16 @@
 /// versus when it actually is null (much like why RemovedPropertyTypeResult is used for returning 
 /// type in the Remove operation).
 /// </summary>
-public class GetValueResult
+public class GetValueResult(object propertyValue, bool hasError)
 {
-    public GetValueResult(object propertyValue, bool hasError)
-    {
-        PropertyValue = propertyValue;
-        HasError = hasError;
-    }
 
     /// <summary>
     /// The value of the property we're trying to get
     /// </summary>
-    public object PropertyValue { get; private set; }
+    public object PropertyValue { get; private set; } = propertyValue;
 
     /// <summary>
     /// HasError: true when an error occurred, the operation didn't complete successfully
     /// </summary>
-    public bool HasError { get; private set; }
+    public bool HasError { get; private set; } = hasError;
 }

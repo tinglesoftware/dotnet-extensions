@@ -5,19 +5,12 @@
 /// The processing order the items is guaranteed.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class SequentialBatchProcessor<T>
+/// <param name="concurrencyLimit">The maximum number of concurrent items</param>
+/// <param name="handler">The handler for item in the data. This handler shall be awaited.</param>
+public class SequentialBatchProcessor<T>(int concurrencyLimit = 1, Func<T, CancellationToken, Task>? handler = null)
 {
-    private readonly SemaphoreSlim concurrencyLimiter;
-    private readonly Func<T, CancellationToken, Task> handler;
-
-    /// <summary>Creates an instance of <see cref="SequentialBatchProcessor{T}"/>.</summary>
-    /// <param name="concurrencyLimit">The maximum number of concurrent items</param>
-    /// <param name="handler">The handler for item in the data. This handler shall be awaited.</param>
-    public SequentialBatchProcessor(int concurrencyLimit = 1, Func<T, CancellationToken, Task>? handler = null)
-    {
-        concurrencyLimiter = new SemaphoreSlim(1, concurrencyLimit);
-        this.handler = handler ?? ((s, c) => Task.CompletedTask);
-    }
+    private readonly SemaphoreSlim concurrencyLimiter = new SemaphoreSlim(1, concurrencyLimit);
+    private readonly Func<T, CancellationToken, Task> handler = handler ?? ((s, c) => Task.CompletedTask);
 
     /// <summary>Handle a single item.</summary>
     /// <param name="item">The item to be handled.</param>

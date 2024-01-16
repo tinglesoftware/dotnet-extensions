@@ -7,15 +7,8 @@ using Xunit.Abstractions;
 
 namespace Tingle.Extensions.Http.Tests;
 
-public class AbstractApiClientTests
+public class AbstractApiClientTests(ITestOutputHelper outputHelper)
 {
-    private readonly ITestOutputHelper outputHelper;
-
-    public AbstractApiClientTests(ITestOutputHelper outputHelper)
-    {
-        this.outputHelper = outputHelper ?? throw new ArgumentNullException(nameof(outputHelper));
-    }
-
     [Fact]
     public async Task ExtractResponseAsync_Get_ApplicationJson_Works()
     {
@@ -153,11 +146,8 @@ public class AbstractApiClientTests
         }
     }
 
-    class TestApiClient : AbstractHttpApiClient<TestApiClientOptions>
+    class TestApiClient(HttpClient httpClient, IOptionsSnapshot<TestApiClientOptions> optionsAccessor) : AbstractHttpApiClient<TestApiClientOptions>(httpClient, optionsAccessor)
     {
-        public TestApiClient(HttpClient httpClient, IOptionsSnapshot<TestApiClientOptions> optionsAccessor)
-            : base(httpClient, optionsAccessor) { }
-
         public Task<ResourceResponse<TestResource>> SendTestOkJsonAppAsync(CancellationToken cancellationToken)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/test/ok/json-app");

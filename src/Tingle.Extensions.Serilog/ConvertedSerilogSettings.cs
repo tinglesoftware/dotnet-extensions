@@ -5,14 +5,9 @@ using Serilog.Configuration;
 
 namespace Tingle.Extensions.Serilog;
 
-internal class ConvertedSerilogSettings : ILoggerSettings
+internal class ConvertedSerilogSettings(IConfiguration configuration) : ILoggerSettings
 {
-    private readonly IConfiguration configuration;
-
-    public ConvertedSerilogSettings(IConfiguration configuration)
-    {
-        this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-    }
+    private readonly IConfiguration configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
     public void Configure(LoggerConfiguration loggerConfiguration)
     {

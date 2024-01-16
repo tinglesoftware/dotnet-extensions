@@ -12,15 +12,12 @@ namespace Tingle.Extensions.PushNotifications.Apple;
 /// <summary>
 /// A push notifier for Apple's Push Notification Service
 /// </summary>
-public class ApnsNotifier : AbstractHttpApiClient<ApnsNotifierOptions>
+/// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
+/// <param name="optionsAccessor">The options accessor for <see cref="ApnsNotifierOptions"/>.</param>
+public class ApnsNotifier(HttpClient httpClient, IOptionsSnapshot<ApnsNotifierOptions> optionsAccessor) : AbstractHttpApiClient<ApnsNotifierOptions>(httpClient, optionsAccessor)
 {
-    internal const string ProductionBaseUrl = "https://api.push.apple.com:443";
-    internal const string DevelopmentBaseUrl = "https://api.development.push.apple.com:443";
-
-    /// <summary>Creates an instance of <see cref="ApnsNotifier"/>.</summary>
-    /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
-    /// <param name="optionsAccessor">The options accessor for <see cref="ApnsNotifierOptions"/>.</param>
-    public ApnsNotifier(HttpClient httpClient, IOptionsSnapshot<ApnsNotifierOptions> optionsAccessor) : base(httpClient, optionsAccessor) { }
+    private const string ProductionBaseUrl = "https://api.push.apple.com:443";
+    private const string DevelopmentBaseUrl = "https://api.development.push.apple.com:443";
 
     /// <summary>Send a push notification via Apple Push Notification Service (APNS).</summary>
     /// <param name="header">The header for the notification.</param>

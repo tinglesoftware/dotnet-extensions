@@ -10,15 +10,11 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy;
 /// <summary>
 /// A push notification handler for Firebase Cloud Messaging Service
 /// </summary>
-public class FcmLegacyNotifier : AbstractHttpApiClient<FcmLegacyNotifierOptions>
+/// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
+/// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
+public class FcmLegacyNotifier(HttpClient httpClient, IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor) : AbstractHttpApiClient<FcmLegacyNotifierOptions>(httpClient, optionsAccessor)
 {
-    internal const string BaseUrl = "https://fcm.googleapis.com/fcm/send";
-
-    /// <summary>Creates an instance of <see cref="FcmLegacyNotifier"/>.</summary>
-    /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
-    /// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
-    public FcmLegacyNotifier(HttpClient httpClient, IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor)
-        : base(httpClient, optionsAccessor) { }
+    private const string BaseUrl = "https://fcm.googleapis.com/fcm/send";
 
     /// <summary>Send a push notifications via Firebase Cloud Messaging (FCM).</summary>
     /// <param name="message">The message.</param>

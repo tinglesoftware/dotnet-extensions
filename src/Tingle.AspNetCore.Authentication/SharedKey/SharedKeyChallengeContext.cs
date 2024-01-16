@@ -6,21 +6,15 @@ namespace Tingle.AspNetCore.Authentication.SharedKey;
 /// <summary>
 /// Context used with <see cref="SharedKeyEvents.OnChallenge"/>
 /// </summary>
-public class SharedKeyChallengeContext : PropertiesContext<SharedKeyOptions>
+/// <param name="context"></param>
+/// <param name="scheme"></param>
+/// <param name="options"></param>
+/// <param name="properties"></param>
+public class SharedKeyChallengeContext(HttpContext context,
+                                 AuthenticationScheme scheme,
+                                 SharedKeyOptions options,
+                                 AuthenticationProperties properties) : PropertiesContext<SharedKeyOptions>(context, scheme, options, properties)
 {
-    /// <summary>
-    /// Creates an instance of <see cref="SharedKeyChallengeContext"/>
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="scheme"></param>
-    /// <param name="options"></param>
-    /// <param name="properties"></param>
-    public SharedKeyChallengeContext(HttpContext context,
-                                     AuthenticationScheme scheme,
-                                     SharedKeyOptions options,
-                                     AuthenticationProperties properties)
-        : base(context, scheme, options, properties) { }
-
     /// <summary>
     /// Any failures encountered during the authentication process.
     /// </summary>

@@ -7,19 +7,11 @@ namespace Tingle.AspNetCore.Authentication.SharedKey;
 /// <summary>
 /// Context used to call <see cref="SharedKeyEvents.OnTokenValidated"/>
 /// </summary>
-public class TokenValidatedContext : ResultContext<SharedKeyOptions>
+/// <param name="context"></param>
+/// <param name="scheme"></param>
+/// <param name="options"></param>
+public class TokenValidatedContext(HttpContext context, AuthenticationScheme scheme, SharedKeyOptions options) : ResultContext<SharedKeyOptions>(context, scheme, options)
 {
-    /// <summary>
-    /// Creates an instance of <see cref="TokenValidatedContext"/>
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="scheme"></param>
-    /// <param name="options"></param>
-    public TokenValidatedContext(HttpContext context, AuthenticationScheme scheme, SharedKeyOptions options)
-        : base(context, scheme, options)
-    {
-    }
-
     /// <summary>
     /// The validation response
     /// </summary>

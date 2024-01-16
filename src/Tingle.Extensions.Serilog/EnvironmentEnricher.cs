@@ -5,17 +5,12 @@ using System.Reflection;
 
 namespace Tingle.Extensions.Serilog;
 
-internal class EnvironmentEnricher : ILogEventEnricher
+internal class EnvironmentEnricher(IHostEnvironment environment) : ILogEventEnricher
 {
-    private readonly IHostEnvironment environment;
+    private readonly IHostEnvironment environment = environment ?? throw new ArgumentNullException(nameof(environment));
 
     private LogEventProperty? applicationName, applicationVersion;
     private LogEventProperty? environmentName, machineName;
-
-    public EnvironmentEnricher(IHostEnvironment environment)
-    {
-        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-    }
 
     public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
     {

@@ -7,18 +7,8 @@ namespace System.ComponentModel.DataAnnotations;
 /// Specifies that a data field value is allowed. When applied on an array, all its elements must be allowed.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public class AllowedValuesAttribute : ValidationAttribute
+public class AllowedValuesAttribute(IEnumerable<object> allowedValues) : ValidationAttribute("The field {0} only permits: {1}.")
 {
-    private readonly IEnumerable<object> allowedValues;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.
-    /// </summary>
-    public AllowedValuesAttribute(IEnumerable<object> allowedValues) : base("The field {0} only permits: {1}.")
-    {
-        this.allowedValues = allowedValues ?? throw new ArgumentNullException(nameof(allowedValues));
-    }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AllowedValuesAttribute"/> class.
     /// </summary>

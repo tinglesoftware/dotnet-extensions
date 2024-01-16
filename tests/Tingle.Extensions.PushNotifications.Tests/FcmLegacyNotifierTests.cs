@@ -6,15 +6,8 @@ using Xunit.Abstractions;
 
 namespace Tingle.Extensions.PushNotifications.Tests;
 
-public class FcmLegacyNotifierTests
+public class FcmLegacyNotifierTests(ITestOutputHelper outputHelper)
 {
-    private readonly ITestOutputHelper outputHelper;
-
-    public FcmLegacyNotifierTests(ITestOutputHelper outputHelper)
-    {
-        this.outputHelper = outputHelper ?? throw new ArgumentNullException(nameof(outputHelper));
-    }
-
     [Fact]
     public void Resolution_Works()
     {

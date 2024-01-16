@@ -7,23 +7,13 @@ namespace Tingle.AspNetCore.DataProtection.MongoDB;
 /// <summary>
 /// An <see cref="IXmlRepository"/> which is backed by Mongo.
 /// </summary>
-public class MongoXmlRepository : IXmlRepository
+/// <param name="databaseFactory">The delegate used to create <see cref="IMongoCollection{TDocument}"/> instances.</param>
+public class MongoXmlRepository(Func<IMongoCollection<DataProtectionKey>> databaseFactory) : IXmlRepository
 {
-    private readonly Func<IMongoCollection<DataProtectionKey>> _collectionFactory;
-
-    /// <summary>
-    /// Creates a <see cref="MongoXmlRepository"/> with keys stored at the given collection.
-    /// </summary>
-    /// <param name="databaseFactory">The delegate used to create <see cref="IMongoCollection{TDocument}"/> instances.</param>
-    public MongoXmlRepository(Func<IMongoCollection<DataProtectionKey>> databaseFactory)
-    {
-        _collectionFactory = databaseFactory ?? throw new ArgumentNullException(nameof(databaseFactory));
-    }
-
     /// <inheritdoc />
     public IReadOnlyCollection<XElement> GetAllElements()
     {
-        var collection = _collectionFactory();
+        var collection = databaseFactory();
         return collection.Find(Builders<DataProtectionKey>.Filter.Empty)
                          .ToList()
                          .Select(key => XElement.Parse(key.Xml ?? throw new InvalidOperationException($"XML data is missing for {key.Id}")))
@@ -40,7 +30,7 @@ public class MongoXmlRepository : IXmlRepository
             Xml = element.ToString(SaveOptions.DisableFormatting)
         };
 
-        var collection = _collectionFactory();
+        var collection = databaseFactory();
         collection.InsertOne(newKey);
     }
 }

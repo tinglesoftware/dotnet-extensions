@@ -6,19 +6,12 @@
 /// The processing order the items is not guaranteed.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class SplitAndBatchProcessor<T>
+/// <param name="batchSize">The maximum number of items in a batch</param>
+/// <param name="handler">The handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
+public class SplitAndBatchProcessor<T>(int batchSize = 10, Func<IEnumerable<T>, CancellationToken, Task>? handler = null)
 {
-    private readonly int batchSize;
-    private readonly Func<IEnumerable<T>, CancellationToken, Task> handler;
-
-    /// <summary>Creates an instance of <see cref="SplitAndBatchProcessor{T}"/>.</summary>
-    /// <param name="batchSize">The maximum number of items in a batch</param>
-    /// <param name="handler">The handler for each batch of data. This handler is not be awaited, so as to ensure parallelism</param>
-    public SplitAndBatchProcessor(int batchSize = 10, Func<IEnumerable<T>, CancellationToken, Task>? handler = null)
-    {
-        this.batchSize = batchSize;
-        this.handler = handler ?? ((s, c) => Task.CompletedTask);
-    }
+    private readonly int batchSize = batchSize;
+    private readonly Func<IEnumerable<T>, CancellationToken, Task> handler = handler ?? ((s, c) => Task.CompletedTask);
 
     /// <summary>Handle a batch of items.</summary>
     /// <param name="batch">The batch of items to be handled.</param>

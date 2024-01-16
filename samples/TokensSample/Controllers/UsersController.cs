@@ -8,15 +8,8 @@ namespace TokensSample.Controllers;
 [ApiController]
 [Route("/users")]
 [ProducesErrorResponseType(typeof(ValidationProblemDetails))]
-public class UsersController : ControllerBase
+public class UsersController(ITokenProtector<InvitationLinkToken> tokenProtector) : ControllerBase
 {
-    private readonly ITokenProtector<InvitationLinkToken> tokenProtector;
-
-    public UsersController(ITokenProtector<InvitationLinkToken> tokenProtector)
-    {
-        this.tokenProtector = tokenProtector ?? throw new ArgumentNullException(nameof(tokenProtector));
-    }
-
     [HttpPost]
     public IActionResult Invite([FromBody] UserCreateModel model)
     {

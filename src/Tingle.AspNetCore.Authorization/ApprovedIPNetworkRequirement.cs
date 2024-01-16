@@ -6,19 +6,9 @@ namespace Tingle.AspNetCore.Authorization;
 /// <summary>
 /// An <see cref="IAuthorizationRequirement"/> that contains IP networks
 /// </summary>
-public sealed class ApprovedIPNetworkRequirement : IAuthorizationRequirement
+/// <param name="networks">the networks allowed</param>
+public sealed class ApprovedIPNetworkRequirement(IList<IPNetwork> networks) : IAuthorizationRequirement
 {
-    private readonly IList<IPNetwork> networks;
-
-    /// <summary>
-    /// Creates and instance of <see cref="ApprovedIPNetworkRequirement"/>
-    /// </summary>
-    /// <param name="networks">the networks allowed</param>
-    public ApprovedIPNetworkRequirement(IList<IPNetwork> networks)
-    {
-        this.networks = networks ?? throw new ArgumentNullException(nameof(networks));
-    }
-
     /// <summary>
     /// Checks is an instance of <see cref="IPAddress"/> is approved
     /// </summary>

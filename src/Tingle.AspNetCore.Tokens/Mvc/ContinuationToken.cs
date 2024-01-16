@@ -7,18 +7,12 @@ namespace Microsoft.AspNetCore.Mvc;
 /// Represents a continuation token's data
 /// </summary>
 /// <typeparam name="T">The type of data contained</typeparam>
+/// <param name="value">The value.</param>
 [JsonConverter(typeof(ContinuationTokenJsonConverter))]
-public class ContinuationToken<T> : IToken, IEquatable<ContinuationToken<T>>
+public class ContinuationToken<T>(T value) : IToken, IEquatable<ContinuationToken<T>>
 {
-    private readonly T value;
+    private readonly T value = value;
     private readonly string? @protected;
-
-    /// <summary>Initializes a new instance of <see cref="ContinuationToken{T}"/>.</summary>
-    /// <param name="value">The value.</param>
-    public ContinuationToken(T value)
-    {
-        this.value = value;
-    }
 
     /// <summary>Initializes a new instance of <see cref="ContinuationToken{T}"/>.</summary>
     /// <param name="value">The value.</param>

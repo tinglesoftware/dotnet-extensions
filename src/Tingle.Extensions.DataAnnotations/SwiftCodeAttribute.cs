@@ -20,18 +20,13 @@
 /// </code>
 /// The default expression used for validation is <c>^[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$</c>
 /// </summary>
+/// <param name="pattern">
+/// The regular expression that is used to validate the data field value.
+/// Defaults to <c>^[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$</c>
+/// </param>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public sealed class SwiftCodeAttribute : RegularExpressionAttribute
+public sealed class SwiftCodeAttribute(string pattern = SwiftCodeAttribute.RegEx) : RegularExpressionAttribute(pattern)
 {
     /// <summary></summary>
     public const string RegEx = @"^([a-zA-Z]{4})([a-zA-Z]{2})([a-zA-Z0-9]{2})([a-zA-Z0-9]{3})?$";
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SwiftCodeAttribute"/> class.
-    /// </summary>
-    /// <param name="pattern">
-    /// The regular expression that is used to validate the data field value.
-    /// Defaults to <c>^[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$</c>
-    /// </param>
-    public SwiftCodeAttribute(string pattern = RegEx) : base(pattern) { }
 }

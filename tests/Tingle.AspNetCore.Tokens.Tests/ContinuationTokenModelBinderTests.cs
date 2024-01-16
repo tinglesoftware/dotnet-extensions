@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using System.Globalization;
@@ -266,17 +265,13 @@ public class ContinuationTokenModelBinderTests
         return bindingContext;
     }
 
-    private class DummyModelBinderProviderContext : ModelBinderProviderContext
+#pragma warning disable CS9113 // Parameter is unread.
+    private class DummyModelBinderProviderContext(ModelMetadata metadata, IServiceProvider serviceProvider) : ModelBinderProviderContext
+#pragma warning restore CS9113 // Parameter is unread.
     {
-        public DummyModelBinderProviderContext(ModelMetadata metadata, IServiceProvider serviceProvider)
-        {
-            Metadata = metadata;
-            //Services = serviceProvider;
-        }
-
         public override BindingInfo BindingInfo => throw new NotImplementedException();
 
-        public override ModelMetadata Metadata { get; }
+        public override ModelMetadata Metadata { get; } = metadata;
 
         public override IModelMetadataProvider MetadataProvider => throw new NotImplementedException();
 

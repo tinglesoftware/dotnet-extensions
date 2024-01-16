@@ -9,15 +9,8 @@ using Xunit.Abstractions;
 
 namespace Tingle.Extensions.PushNotifications.Tests;
 
-public class ApnsNotifierTests
+public class ApnsNotifierTests(ITestOutputHelper outputHelper)
 {
-    private readonly ITestOutputHelper outputHelper;
-
-    public ApnsNotifierTests(ITestOutputHelper outputHelper)
-    {
-        this.outputHelper = outputHelper ?? throw new ArgumentNullException(nameof(outputHelper));
-    }
-
     [Fact]
     public void Resolution_Works()
     {

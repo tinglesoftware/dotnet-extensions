@@ -8,15 +8,8 @@ using Xunit.Abstractions;
 
 namespace Tingle.Extensions.PushNotifications.Tests;
 
-public class FirebaseNotifierTests
+public class FirebaseNotifierTests(ITestOutputHelper outputHelper)
 {
-    private readonly ITestOutputHelper outputHelper;
-
-    public FirebaseNotifierTests(ITestOutputHelper outputHelper)
-    {
-        this.outputHelper = outputHelper ?? throw new ArgumentNullException(nameof(outputHelper));
-    }
-
     [Fact]
     public void Resolution_Works()
     {
