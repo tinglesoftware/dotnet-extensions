@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents a request payload sent to Firebase Cloud Messaging (FCM) using the legacy HTTP API.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyRequest
 {
     /// <summary>
@@ -133,6 +134,7 @@ public class FcmLegacyRequest
 /// Represents a request payload sent to Firebase Cloud Messaging (FCM) using the legacy HTTP API.
 /// </summary>
 /// <typeparam name="TNotification">The type for use with the <see cref="Notification"/> property.</typeparam>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyRequest<TNotification> : FcmLegacyRequest where TNotification : FcmLegacyNotification, new() // using the generic type solves a serialization issue with System.Text.Json
 {
     /// <summary>
@@ -149,14 +151,17 @@ public class FcmLegacyRequest<TNotification> : FcmLegacyRequest where TNotificat
 /// <summary>
 /// Represents a request payload sent to Firebase Cloud Messaging (FCM) using the legacy HTTP API to Android.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyRequestAndroid : FcmLegacyRequest<FcmLegacyNotificationAndroid> { }
 
 /// <summary>
 /// Represents a request payload sent to Firebase Cloud Messaging (FCM) using the legacy HTTP API to iOS.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyRequestIos : FcmLegacyRequest<FcmLegacyNotificationIos> { }
 
 /// <summary>
 /// Represents a request payload sent to Firebase Cloud Messaging (FCM) using the legacy HTTP API to Web.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyRequestWeb : FcmLegacyRequest<FcmLegacyNotificationWeb> { }

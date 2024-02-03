@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents a response payload received from Firebase Cloud Messaging (FCM) in the legacy HTTP API.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyResponse
 {
     /// <summary>

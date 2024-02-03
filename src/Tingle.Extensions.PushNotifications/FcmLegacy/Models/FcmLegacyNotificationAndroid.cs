@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents an <see cref="FcmLegacyNotification"/> for Android in the legacy HTTP API.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyNotificationAndroid : FcmLegacyNotification
 {
     /// <summary>

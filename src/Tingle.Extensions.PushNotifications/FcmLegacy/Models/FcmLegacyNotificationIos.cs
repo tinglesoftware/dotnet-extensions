@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents an <see cref="FcmLegacyNotification"/> for iOS.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyNotificationIos : FcmLegacyNotification
 {
     /// <summary>

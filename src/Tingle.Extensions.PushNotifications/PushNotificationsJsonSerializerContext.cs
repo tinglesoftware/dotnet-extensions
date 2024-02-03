@@ -8,11 +8,13 @@ namespace Tingle.Extensions.PushNotifications;
 [JsonSerializable(typeof(Apple.ApnsAuthenticationHandler.ApnsAuthHeader))]
 [JsonSerializable(typeof(Apple.ApnsAuthenticationHandler.ApnsAuthPayload))]
 
+#pragma warning disable CS0618 // Type or member is obsolete
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequest))]
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestAndroid))]
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestIos))]
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyRequestWeb))]
 [JsonSerializable(typeof(FcmLegacy.Models.FcmLegacyResponse))]
+#pragma warning restore CS0618 // Type or member is obsolete
 
 [JsonSerializable(typeof(Firebase.Models.FirebaseRequest))]
 [JsonSerializable(typeof(Firebase.Models.FirebaseResponse))]
