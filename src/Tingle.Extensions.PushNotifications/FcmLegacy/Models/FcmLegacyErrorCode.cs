@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents a reason why an FCM request failed in the legacy HTTP API.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 [JsonConverter(typeof(JsonStringEnumConverter<FcmLegacyErrorCode>))]
 public enum FcmLegacyErrorCode
 {

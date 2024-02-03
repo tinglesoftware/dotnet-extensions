@@ -12,6 +12,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy;
 /// </summary>
 /// <param name="httpClient">The <see cref="HttpClient"/> for making requests.</param>
 /// <param name="optionsAccessor">The options accessor for <see cref="FcmLegacyNotifierOptions"/>.</param>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyNotifier(HttpClient httpClient, IOptionsSnapshot<FcmLegacyNotifierOptions> optionsAccessor) : AbstractHttpApiClient<FcmLegacyNotifierOptions>(httpClient, optionsAccessor)
 {
     private const string BaseUrl = "https://fcm.googleapis.com/fcm/send";

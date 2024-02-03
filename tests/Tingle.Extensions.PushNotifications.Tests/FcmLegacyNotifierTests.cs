@@ -4,6 +4,8 @@ using Tingle.Extensions.PushNotifications.FcmLegacy;
 using Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 using Xunit.Abstractions;
 
+#pragma warning disable CS0618 // Type or member is obsolete
+
 namespace Tingle.Extensions.PushNotifications.Tests;
 
 public class FcmLegacyNotifierTests(ITestOutputHelper outputHelper)

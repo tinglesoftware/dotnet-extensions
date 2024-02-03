@@ -1,4 +1,5 @@
 ﻿using Tingle.Extensions.Http;
+using Tingle.Extensions.PushNotifications;
 using Tingle.Extensions.PushNotifications.Apple;
 using Tingle.Extensions.PushNotifications.FcmLegacy;
 using Tingle.Extensions.PushNotifications.Firebase;
@@ -14,6 +15,7 @@ public static class IServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> to add to.</param>
     /// <param name="configure">Action to configure <see cref="FcmLegacyNotifierOptions"/> instances.</param>
     /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
+    [Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
     public static IHttpClientBuilder AddFcmLegacyNotifier(this IServiceCollection services, Action<FcmLegacyNotifierOptions>? configure = null)
     {
         // configure authentication

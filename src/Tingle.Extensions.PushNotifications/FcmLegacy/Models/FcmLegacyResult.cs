@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents the result of each sent message using the legacy HTTP API.
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyResult
 {
     /// <summary>

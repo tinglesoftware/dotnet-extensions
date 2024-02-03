@@ -5,6 +5,7 @@ namespace Tingle.Extensions.PushNotifications.FcmLegacy.Models;
 /// <summary>
 /// Represents an <see cref="FcmLegacyNotification"/> for Web (i.e. Chrome).
 /// </summary>
+[Obsolete(MessageStrings.FirebaseLegacyObsoleteMessage)]
 public class FcmLegacyNotificationWeb : FcmLegacyNotification
 {
     /// <summary>
