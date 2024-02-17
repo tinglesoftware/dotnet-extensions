@@ -10,7 +10,6 @@ updates:
   schedule:
     interval: "weekly"
     time: "02:00"
-    day: "wednesday"
   open-pull-requests-limit: 10
   groups:
     microsoft:
