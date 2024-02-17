@@ -24,10 +24,6 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <VersionPrefix Condition="'$(GITVERSION_NUGETVERSION)' != ''">$(GITVERSION_NUGETVERSION)</VersionPrefix>
-  </PropertyGroup>
-
   <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
