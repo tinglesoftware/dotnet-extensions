@@ -9,7 +9,7 @@ The implementation provides two distinct options:
 
 ### Use an existing instance of a MongoClient
 
-This option will make the provider re-use an existing `MongoClient` instance, which won't be disposed when the provider is disposed.
+This option will make the provider reuse an existing `MongoClient` instance, which won't be disposed when the provider is disposed.
 
 ```c-sharp
 services.AddMongoCache((MongoCacheOptions cacheOptions) =>
