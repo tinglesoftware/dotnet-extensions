@@ -1,0 +1,37 @@
+name: Cleanup
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '0 0 */14 * *' # every 14 days
+
+jobs:
+  cleanup-updater:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        suite:
+        - { name: 'Tingle.AspNetCore.Authentication' }
+        - { name: 'Tingle.AspNetCore.Authorization' }
+        - { name: 'Tingle.AspNetCore.DataProtection.MongoDB' }
+        - { name: 'Tingle.AspNetCore.JsonPatch.NewtonsoftJson' }
+        - { name: 'Tingle.AspNetCore.Tokens' }
+        - { name: 'Tingle.Extensions.Caching.MongoDB' }
+        - { name: 'Tingle.Extensions.DataAnnotations' }
+        - { name: 'Tingle.Extensions.Http' }
+        - { name: 'Tingle.Extensions.Http.Authentication' }
+        - { name: 'Tingle.Extensions.JsonPatch' }
+        - { name: 'Tingle.Extensions.PhoneValidators' }
+        - { name: 'Tingle.Extensions.Processing' }
+        - { name: 'Tingle.Extensions.PushNotifications' }
+        - { name: 'Tingle.Extensions.Serilog' }
+
+    steps:
+    - name: Delete old ${{ matrix.suite.name }} packages
+      uses: actions/delete-package-versions@v5
+      with:
+        package-name: ${{ matrix.suite.name }}
+        package-type: 'nuget'
+        min-versions-to-keep: 10
+        delete-only-pre-release-versions: true
