@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
-        "Serilog"
+        "libphonenumber",
+        "Newtonsoft",
+        "Serilog",
+        "Xunit"
     ]
 }
