@@ -1,0 +1,4 @@
+[codespell]
+skip = .git,*.pdf,*.svg,*.csv,pnpm-lock.yaml,*/wwwroot
+# some modules, parts of regexes, and variable names to ignore
+ignore-words-list = aci

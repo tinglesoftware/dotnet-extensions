@@ -53,7 +53,7 @@ public class OAuthClientCredentialHandler : CachingAuthenticationHeaderHandler
 
     /// <summary>
     /// The duration of before expiry of the token that it should be renewed.
-    /// Defaults to 10 seconds; minumum 5 seconds.
+    /// Defaults to 10 seconds; minimum 5 seconds.
     /// </summary>
     public virtual TimeSpan RenewalThreshold { get; set; } = TimeSpan.FromSeconds(5);
 

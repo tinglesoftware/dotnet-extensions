@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Support for storing data proection keys using MongoDB in AspNetCore</Description>
+    <Description>Support for storing data protection keys using MongoDB in AspNetCore</Description>
   </PropertyGroup>
 
   <PropertyGroup>
