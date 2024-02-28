@@ -1,7 +1,7 @@
 # .NET and ASP.NET Core convenience functionality
 
 [![NuGet](https://img.shields.io/nuget/v/Tingle.AspNetCore.Authentication.svg)](https://www.nuget.org/packages/Tingle.AspNetCore.Authentication/)
-[![GitHub Workflow Status](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/release.yml/badge.svg)](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/release.yml)
+[![GitHub Workflow Status](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/build.yml/badge.svg)](https://github.com/tinglesoftware/dotnet-extensions/actions/workflows/build.yml)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![license](https://img.shields.io/github/license/tinglesoftware/dotnet-extensions.svg)](LICENSE)
 
