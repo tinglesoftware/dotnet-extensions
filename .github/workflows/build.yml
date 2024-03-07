@@ -117,9 +117,6 @@ jobs:
     name: Publish (GitHub Packages)
     if: ${{ (github.ref == 'refs/heads/main') || startsWith(github.ref, 'refs/tags') }}
 
-    permissions:
-      packages: write
-
     steps:
     - uses: actions/download-artifact@v4
       with:
