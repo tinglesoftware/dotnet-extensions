@@ -1,6 +1,7 @@
 # Tingle.Extensions.MongoDB
 
-> [!NOTE] The use of `MongoDbContext` will likely be replaced by EfCore support for Mongo [here](https://github.com/mongodb/mongo-efcore-provider).
+> [!CAUTION]
+> The use of `MongoDbContext` will likely be replaced by EntityFrameworkCore support for MongoDB [here](https://github.com/mongodb/mongo-efcore-provider).
 
 `MongoDB` is a cross-platform NoSQL database program which uses JSON like documents with schema.
 
@@ -60,5 +61,7 @@ services.AddHealthChecks()
 ## Extensions
 
 A number of extensions for building indexes or performing operations on collections exist.
-See extensions for building ascending/descending indexes [here](https://github.com/tinglesoftware/dotnet-extensions/blob/main/src/Tingle.Extensions.MongoDB/Extensions/BuildersExtensions.cs)
-See extensions for bulk operations [here](https://github.com/tinglesoftware/dotnet-extensions/blob/main/src/Tingle.Extensions.MongoDB/Extensions/IMongoCollectionExtensions.cs)
+
+See extensions for building ascending/descending indexes [here](https://github.com/tinglesoftware/dotnet-extensions/blob/365b5b13cbb242d039a4ac61a5b9fb341580b04a/src/Tingle.Extensions.MongoDB/Extensions/BuildersExtensions.cs)
+
+See extensions for bulk operations [here](https://github.com/tinglesoftware/dotnet-extensions/blob/365b5b13cbb242d039a4ac61a5b9fb341580b04a/src/Tingle.Extensions.MongoDB/Extensions/IMongoCollectionExtensions.cs)

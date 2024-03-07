@@ -169,10 +169,10 @@ Represents a SWIFT Code broken down into its components. The format of a Swift C
 
 ```cs
 var sw = SwiftCode.Parse("KCBLKENXXXX");
-Console.WriteLine(sw.Institution); // KCBL
-Console.WriteLine(sw.Country); // KE
-Console.WriteLine(sw.Location); // NX
-Console.WriteLine(sw.Branch); // XXX
+Console.WriteLine(sw.Institution); // "KCBL"
+Console.WriteLine(sw.Country); // "KE"
+Console.WriteLine(sw.Location); // "NX"
+Console.WriteLine(sw.Branch); // "XXX"
 ```
 
 ## `Keygen`

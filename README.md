@@ -5,7 +5,7 @@
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![license](https://img.shields.io/github/license/tinglesoftware/dotnet-extensions.svg)](LICENSE)
 
-This repository contains projects/libraries for adding useful functionality to dotnet and ASP.NET Core when running real-world applications in production. We have been using these packages at [Tingle](https://tingle.software) for years and thought it would be better if we shared them.
+This repository contains projects/libraries for adding useful functionality to .NET and ASP.NET Core when running real-world applications in production. We have been using these packages at [Tingle](https://tingle.software) for years and thought it would be better if we shared them.
 
 ## Packages
 
@@ -19,13 +19,14 @@ This repository contains projects/libraries for adding useful functionality to d
 |[`Tingle.Extensions.Caching.MongoDB`](https://www.nuget.org/packages/Tingle.Extensions.Caching.MongoDB/)|Distributed caching implemented with [MongoDB](https://mongodb.com) on top of `IDistributedCache`, inspired by [CosmosCache](https://github.com/Azure/Microsoft.Extensions.Caching.Cosmos). See [docs](./src/Tingle.Extensions.Caching.MongoDB/README.md) and [sample](./samples/AspNetCoreSessionState)|
 |[`Tingle.Extensions.DataAnnotations`](https://www.nuget.org/packages/Tingle.Extensions.DataAnnotations/)|Additional data validation attributes in the `System.ComponentModel.DataAnnotations` namespace. Some of this should have been present in the framework but are very specific to some use cases. For example `FiveStarRatingAttribute`. See [docs](./src/Tingle.Extensions.DataAnnotations/README.md).|
 |[`Tingle.Extensions.Http`](https://www.nuget.org/packages/Tingle.Extensions.Http/)|Lightweight abstraction around `HttpClient` which can be used to build custom client with response wrapping semantics. See [docs](./src/Tingle.Extensions.Http/README.md).|
-|[`Tingle.Extensions.Http.Authentication`](https://www.nuget.org/packages/Tingle.Extensions.Http.Authentication/)|Authentication providers for use with HttpClient and includes support for DI via `Microsoft.Extensions.Http`. See [docs](./src/Tingle.Extensions.Http.Authentication/README.md) and [sample](./samples/HttpAuthenticationSample).|
+|[`Tingle.Extensions.Http.Authentication`](https://www.nuget.org/packages/Tingle.Extensions.Http.Authentication/)|Authentication providers for use with `HttpClient` and includes support for DI via `Microsoft.Extensions.Http`. See [docs](./src/Tingle.Extensions.Http.Authentication/README.md) and [sample](./samples/HttpAuthenticationSample).|
 |[`Tingle.Extensions.JsonPatch`](https://www.nuget.org/packages/Tingle.Extensions.JsonPatch/)|JSON Patch (RFC 6902) support for .NET to easily generate JSON Patch documents using `System.Text.Json` for client applications. See [docs](./src/Tingle.Extensions.JsonPatch/README.md).|
+|[`Tingle.Extensions.MongoDB`](https://www.nuget.org/packages/Tingle.Extensions.MongoDB/)|Extensions for working with MongoDB. See [docs](./src/Tingle.Extensions.MongoDB/README.md) and [sample](./samples/MongoDBSample).|
 |[`Tingle.Extensions.PhoneValidators`](https://www.nuget.org/packages/Tingle.Extensions.PhoneValidators/)|Convenience for validation of phone numbers either via attributes or resolvable services. See [docs](./src/Tingle.Extensions.PhoneValidators/README.md).|
 |[`Tingle.Extensions.Primitives`](https://www.nuget.org/packages/Tingle.Extensions.Primitives/)|Extra primitive types such as `Money`, `Currency`, `Duration` etc. See [docs](./src/Tingle.Extensions.Primitives/README.md).|
 |[`Tingle.Extensions.Processing`](https://www.nuget.org/packages/Tingle.Extensions.Processing/)|Helpers for making processing of bulk in memory tasks. See [docs](./src/Tingle.Extensions.Processing/README.md).|
-|[`Tingle.Extensions.PushNotifications`](https://www.nuget.org/packages/Tingle.Extensions.PushNotifications/)|Clients for sending push notifications via FCM, APNS etc. See [docs](./src/Tingle.Extensions.PushNotifications/README.md).|
-|[`Tingle.Extensions.Serilog`](https://www.nuget.org/packages/Tingle.Extensions.Serilog/)|Extensions for working with [Serilog](https://serilog.net/). Including easier registration when working with different host setups, and general basics. See [docs](./src/Tingle.Extensions.Serilog/README.md) and [sample](./samples/SerilogSample).|
+|[`Tingle.Extensions.PushNotifications`](https://www.nuget.org/packages/Tingle.Extensions.PushNotifications/)|Clients for sending push notifications via FCM, APNs etc. See [docs](./src/Tingle.Extensions.PushNotifications/README.md).|
+|[`Tingle.Extensions.Serilog`](https://www.nuget.org/packages/Tingle.Extensions.Serilog/)|Extensions for working with [`Serilog`](https://serilog.net/). Including easier registration when working with different host setups, and general basics. See [docs](./src/Tingle.Extensions.Serilog/README.md) and [sample](./samples/SerilogSample).|
 
 ### Issues &amp; Comments
 
