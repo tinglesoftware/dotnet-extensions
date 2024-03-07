@@ -5,6 +5,10 @@
     <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);cache;mongo;mongodb;nosql;extensions</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Tingle.Extensions.MongoDB.Tests" />
   </ItemGroup>

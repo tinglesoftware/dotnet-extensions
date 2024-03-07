@@ -5,6 +5,10 @@
     <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageTags>$(PackageTags);primitives;etag;keygen;country;currenty;sequence;bytesize;ksuid,language;money;duration;connectionstring;swift</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Tingle.Extensions.Primitives.Tests" />
   </ItemGroup>
