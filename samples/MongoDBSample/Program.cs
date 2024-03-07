@@ -33,10 +33,36 @@ class Person
 
 class SampleDbContext(MongoDbContextOptions<SampleDbContext> options) : MongoDbContext(options)
 {
-    public IMongoCollection<Person> Persons => Collection<Person>("Persons");
+    private const string ColNamePersons = "Persons";
+
+    public IMongoCollection<Person> Persons => Collection<Person>(ColNamePersons);
 
     protected override void OnConfiguring(MongoDbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
+    }
+
+    protected async override Task EnsureCreatedAsync(IMongoDatabase database, CancellationToken cancellationToken = default)
+    {
+        var names = await database.ListCollectionNames(null, cancellationToken).ToListAsync(cancellationToken);
+
+        if (!names.Contains(ColNamePersons, StringComparer.Ordinal))
+        {
+            var options = new CreateCollectionOptions<Person> { };
+            await database.CreateCollectionAsync(name: ColNamePersons,
+                                                 options: options,
+                                                 cancellationToken: cancellationToken);
+
+            // create indexes
+            await Persons.Indexes.CreateManyAsync(
+                models: [
+                    // definition for Status
+                    new CreateIndexModel<Person>(
+                        Builders<Person>.IndexKeys.Ascending(p => p.Name),
+                        new CreateIndexOptions<Person> { }),
+                ],
+                cancellationToken: cancellationToken);
+        }
+
     }
 }

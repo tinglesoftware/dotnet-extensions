@@ -58,6 +58,31 @@ services.AddHealthChecks()
         .AddMongoDbContextCheck<MyContext>();
 ```
 
+## Database setup
+
+For development and preview environments, databases may need to be created automatically on startup. This can be done using the `MONGO_CREATE_DATABASE` environment variable.
+
+```json
+{
+  "profiles": {
+    "SerilogSample": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development",
+        "MONGO_CREATE_DATABASE": "true"
+      }
+    }
+  }
+}
+```
+
+In the application setup:
+
+```cs
+builder.Services.AddMongoDatabaseSetup<MyContext>(); // remember to override EnsureCreatedAsync(...) as per sample
+```
+
 ## Extensions
 
 A number of extensions for building indexes or performing operations on collections exist.
