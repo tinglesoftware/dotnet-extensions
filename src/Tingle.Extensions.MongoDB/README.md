@@ -1,0 +1,64 @@
+# Tingle.Extensions.MongoDB
+
+> [!NOTE] The use of `MongoDbContext` will likely be replaced by EfCore support for Mongo [here](https://github.com/mongodb/mongo-efcore-provider).
+
+`MongoDB` is a cross-platform NoSQL database program which uses JSON like documents with schema.
+
+To connect to the database, we use the `MongoClient` class to access a `MongoDB` instance and through it, we can select the database we want to use. With the `MongoClient` instance we can drop a database, get a database, or retrieve names of the database from the server. There is no option for creating the database because once you pick/select a database and insert data into it, it automatically creates the database if it did not exist before.
+
+`MongoClient` has a constructor which can accept a connection string or URL as parameters. If the database name is specified in the connection string, a singleton is added to the services. If the database name is specified in the `MongoClient` constructor parameters, it overrides any database name specified in the connection string.
+
+This library provides extensions for working with `MongoDB`. It includes extension methods for `IServiceCollection` and for performing health checks on `MongoDB`.
+
+## Adding to services collection
+
+If a MongoDB client is created that takes a connection string as a parameter, the `GetConnectionString`() function is called which returns the connection string to the MongoDB.
+
+Also, a MongoDB database contains a collection to store data, To get a reference of the collection, it is required to call the `GetCollection`() function of the MongoDB database. The `GetCollection`() function takes a collection name as a parameter and returns a reference to the collection.
+
+Health checks that monitor the performance and functioning of MongoDB are also added to the services as well.
+
+In `Program.cs` add MongoDB services as shown in the code snippet below:
+
+```csharp
+builder.Services.AddMongoDbContext<MyDbContext>(options => options.UseConnectionString(Configuration.GetConnectionString("Mongo")));
+```
+
+## Configuration
+
+If MongoDB client is configured with a connection string, add the `ConnectionStrings` configuration to the configuration file such as appsettings.json as in the example below:
+
+```json
+{
+    "ConnectionStrings:Mongo":"#{ConnectionStringsMongo}#"
+}
+```
+
+## Serializers
+
+|Source Types|BSON Destination Types|
+|--|--|
+|`System.Text.Json.Nodes.JsonObject`|`BsonDocument`|
+|`System.Text.Json.Nodes.JsonArray`|`BsonArray`|
+|`System.Text.Json.JsonElement`|`BsonDocument`, `BsonArray`, or value|
+|`System.Net.IPNetwork` (.NET 8 or later)|`String`|
+|`Tingle.Extensions.Primitives.Duration`|`String`|
+|`Tingle.Extensions.Primitives.Etag`|`Int64`, `Binary` or `String`|
+|`Tingle.Extensions.Primitives.SequenceNumber`|`Int64` or `String`|
+
+## Diagnostics
+
+Events for Mongo are produced on an `ActivitySource` named `MongoDB`. This is done by registering and instance of `IEventSubscriber` named `MongoDbDiagnosticEvents` to the `ClusterConfigurator`. However, this is done automatically when using `MongoDbContext`.
+
+## HealthChecks
+
+```cs
+services.AddHealthChecks()
+        .AddMongoDbContextCheck<MyContext>();
+```
+
+## Extensions
+
+A number of extensions for building indexes or performing operations on collections exist.
+See extensions for building ascending/descending indexes [here](https://github.com/tinglesoftware/dotnet-extensions/blob/main/src/Tingle.Extensions.MongoDB/Extensions/BuildersExtensions.cs)
+See extensions for bulk operations [here](https://github.com/tinglesoftware/dotnet-extensions/blob/main/src/Tingle.Extensions.MongoDB/Extensions/IMongoCollectionExtensions.cs)
