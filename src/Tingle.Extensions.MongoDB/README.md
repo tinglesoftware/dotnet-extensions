@@ -1,6 +1,6 @@
 # Tingle.Extensions.MongoDB
 
-> [!CAUTION]
+> [!IMPORTANT]
 > The use of `MongoDbContext` will likely be replaced by EntityFrameworkCore support for MongoDB [here](https://github.com/mongodb/mongo-efcore-provider).
 
 `MongoDB` is a cross-platform NoSQL database program which uses JSON like documents with schema.
