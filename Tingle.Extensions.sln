@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.JsonPatch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PhoneValidators", "src\Tingle.Extensions.PhoneValidators\Tingle.Extensions.PhoneValidators.csproj", "{F46ADD04-B716-4E9B-9799-7C47DDDB08FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tingle.Extensions.Primitives", "src\Tingle.Extensions.Primitives\Tingle.Extensions.Primitives.csproj", "{3012AF4E-270B-4293-9C7B-51003F00A8D6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Processing", "src\Tingle.Extensions.Processing\Tingle.Extensions.Processing.csproj", "{A803DE4B-B050-48F2-82A1-8E947D8FB96C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PushNotifications", "src\Tingle.Extensions.PushNotifications\Tingle.Extensions.PushNotifications.csproj", "{6A1901A5-D01F-47E2-9ED5-2BE4CCE95100}"
@@ -63,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.JsonPatch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PhoneValidators.Tests", "tests\Tingle.Extensions.PhoneValidators.Tests\Tingle.Extensions.PhoneValidators.Tests.csproj", "{526B37AD-256A-445A-9A42-E5C53989B11E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tingle.Extensions.Primitives.Tests", "tests\Tingle.Extensions.Primitives.Tests\Tingle.Extensions.Primitives.Tests.csproj", "{33E2AC82-DC46-42CA-A41B-0D8D97019402}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Processing.Tests", "tests\Tingle.Extensions.Processing.Tests\Tingle.Extensions.Processing.Tests.csproj", "{978023EA-2ED5-4A28-96AD-4BB914EF2BE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.PushNotifications.Tests", "tests\Tingle.Extensions.PushNotifications.Tests\Tingle.Extensions.PushNotifications.Tests.csproj", "{A8AB6597-DEBB-4828-AE1B-A11FD818E428}"
@@ -87,6 +91,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerilogSample", "samples\SerilogSample\SerilogSample.csproj", "{CFEE0754-9DAF-4AA6-98F3-477F065D7DC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokensSample", "samples\TokensSample\TokensSample.csproj", "{AC04C113-8F75-43BA-8FEE-987475A87C58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generator", "generator", "{9071B0C9-DE4D-411D-A9D3-CB7326CBBD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticDataGenerator", "generator\StaticDataGenerator.csproj", "{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,6 +242,18 @@ Global
 		{AC04C113-8F75-43BA-8FEE-987475A87C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC04C113-8F75-43BA-8FEE-987475A87C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC04C113-8F75-43BA-8FEE-987475A87C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3012AF4E-270B-4293-9C7B-51003F00A8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3012AF4E-270B-4293-9C7B-51003F00A8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3012AF4E-270B-4293-9C7B-51003F00A8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3012AF4E-270B-4293-9C7B-51003F00A8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E2AC82-DC46-42CA-A41B-0D8D97019402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E2AC82-DC46-42CA-A41B-0D8D97019402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E2AC82-DC46-42CA-A41B-0D8D97019402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E2AC82-DC46-42CA-A41B-0D8D97019402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -274,6 +294,9 @@ Global
 		{37ED98F0-3129-49B8-BF60-3BDEBBB34822} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 		{CFEE0754-9DAF-4AA6-98F3-477F065D7DC4} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 		{AC04C113-8F75-43BA-8FEE-987475A87C58} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
+		{3012AF4E-270B-4293-9C7B-51003F00A8D6} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
+		{33E2AC82-DC46-42CA-A41B-0D8D97019402} = {815F0941-3B70-4705-A583-AF627559595C}
+		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78} = {9071B0C9-DE4D-411D-A9D3-CB7326CBBD80}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9323FCA-8E8B-4176-A463-87D202EC4552}

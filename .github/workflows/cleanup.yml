@@ -23,6 +23,7 @@ jobs:
         - { name: 'Tingle.Extensions.Http.Authentication' }
         - { name: 'Tingle.Extensions.JsonPatch' }
         - { name: 'Tingle.Extensions.PhoneValidators' }
+        - { name: 'Tingle.Extensions.Primitives' }
         - { name: 'Tingle.Extensions.Processing' }
         - { name: 'Tingle.Extensions.PushNotifications' }
         - { name: 'Tingle.Extensions.Serilog' }

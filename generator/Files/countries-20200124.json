@@ -1,0 +1,2492 @@
+[
+  {
+    "name": "Afghanistan",
+    "name_safe": "Afghanistan",
+    "continent": "Asia",
+    "code_numeric": "004",
+    "code_2": "AF",
+    "code_3": "AFG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/afg.svg",
+    "currency": "AFN"
+  },
+  {
+    "name": "Åland Islands",
+    "name_safe": "AlandIslands",
+    "continent": "Europe",
+    "code_numeric": "248",
+    "code_2": "AX",
+    "code_3": "ALA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ala.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Albania",
+    "name_safe": "Albania",
+    "continent": "Europe",
+    "code_numeric": "008",
+    "code_2": "AL",
+    "code_3": "ALB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/alb.svg",
+    "currency": "ALL"
+  },
+  {
+    "name": "Algeria",
+    "name_safe": "Algeria",
+    "continent": "Africa",
+    "code_numeric": "012",
+    "code_2": "DZ",
+    "code_3": "DZA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/dza.svg",
+    "currency": "DZD"
+  },
+  {
+    "name": "American Samoa",
+    "name_safe": "AmericanSamoa",
+    "continent": "Oceania",
+    "code_numeric": "016",
+    "code_2": "AS",
+    "code_3": "ASM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/asm.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Andorra",
+    "name_safe": "Andorra",
+    "continent": "Europe",
+    "code_numeric": "020",
+    "code_2": "AD",
+    "code_3": "AND",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/and.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Angola",
+    "name_safe": "Angola",
+    "continent": "Africa",
+    "code_numeric": "024",
+    "code_2": "AO",
+    "code_3": "AGO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ago.svg",
+    "currency": "AOA"
+  },
+  {
+    "name": "Anguilla",
+    "name_safe": "Anguilla",
+    "continent": "North America",
+    "code_numeric": "660",
+    "code_2": "AI",
+    "code_3": "AIA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/aia.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Antarctica",
+    "name_safe": "Antarctica",
+    "continent": "Antarctica",
+    "code_numeric": "010",
+    "code_2": "AQ",
+    "code_3": "ATA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ata.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Antigua and Barbuda",
+    "name_safe": "AntiguaandBarbuda",
+    "continent": "North America",
+    "code_numeric": "028",
+    "code_2": "AG",
+    "code_3": "ATG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/atg.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Argentina",
+    "name_safe": "Argentina",
+    "continent": "South America",
+    "code_numeric": "032",
+    "code_2": "AR",
+    "code_3": "ARG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/arg.svg",
+    "currency": "ARS"
+  },
+  {
+    "name": "Armenia",
+    "name_safe": "Armenia",
+    "continent": "Asia",
+    "code_numeric": "051",
+    "code_2": "AM",
+    "code_3": "ARM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/arm.svg",
+    "currency": "AMD"
+  },
+  {
+    "name": "Aruba",
+    "name_safe": "Aruba",
+    "continent": "North America",
+    "code_numeric": "533",
+    "code_2": "AW",
+    "code_3": "ABW",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/abw.svg",
+    "currency": "AWG"
+  },
+  {
+    "name": "Australia",
+    "name_safe": "Australia",
+    "continent": "Oceania",
+    "code_numeric": "036",
+    "code_2": "AU",
+    "code_3": "AUS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/aus.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Austria",
+    "name_safe": "Austria",
+    "continent": "Europe",
+    "code_numeric": "040",
+    "code_2": "AT",
+    "code_3": "AUT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/aut.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Azerbaijan",
+    "name_safe": "Azerbaijan",
+    "continent": "Asia",
+    "code_numeric": "031",
+    "code_2": "AZ",
+    "code_3": "AZE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/aze.svg",
+    "currency": "AZN"
+  },
+  {
+    "name": "Bahamas",
+    "name_safe": "Bahamas",
+    "continent": "North America",
+    "code_numeric": "044",
+    "code_2": "BS",
+    "code_3": "BHS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bhs.svg",
+    "currency": "BSD"
+  },
+  {
+    "name": "Bahrain",
+    "name_safe": "Bahrain",
+    "continent": "Asia",
+    "code_numeric": "048",
+    "code_2": "BH",
+    "code_3": "BHR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bhr.svg",
+    "currency": "BHD"
+  },
+  {
+    "name": "Bangladesh",
+    "name_safe": "Bangladesh",
+    "continent": "Asia",
+    "code_numeric": "050",
+    "code_2": "BD",
+    "code_3": "BGD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bgd.svg",
+    "currency": "BDT"
+  },
+  {
+    "name": "Barbados",
+    "name_safe": "Barbados",
+    "continent": "North America",
+    "code_numeric": "052",
+    "code_2": "BB",
+    "code_3": "BRB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/brb.svg",
+    "currency": "BBD"
+  },
+  {
+    "name": "Belarus",
+    "name_safe": "Belarus",
+    "continent": "Europe",
+    "code_numeric": "112",
+    "code_2": "BY",
+    "code_3": "BLR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/blr.svg",
+    "currency": "BYN"
+  },
+  {
+    "name": "Belgium",
+    "name_safe": "Belgium",
+    "continent": "Europe",
+    "code_numeric": "056",
+    "code_2": "BE",
+    "code_3": "BEL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bel.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Belize",
+    "name_safe": "Belize",
+    "continent": "North America",
+    "code_numeric": "084",
+    "code_2": "BZ",
+    "code_3": "BLZ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/blz.svg",
+    "currency": "BZD"
+  },
+  {
+    "name": "Benin",
+    "name_safe": "Benin",
+    "continent": "Africa",
+    "code_numeric": "204",
+    "code_2": "BJ",
+    "code_3": "BEN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ben.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Bermuda",
+    "name_safe": "Bermuda",
+    "continent": "North America",
+    "code_numeric": "060",
+    "code_2": "BM",
+    "code_3": "BMU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bmu.svg",
+    "currency": "BMD"
+  },
+  {
+    "name": "Bhutan",
+    "name_safe": "Bhutan",
+    "continent": "Asia",
+    "code_numeric": "064",
+    "code_2": "BT",
+    "code_3": "BTN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/btn.svg",
+    "currency": "BTN"
+  },
+  {
+    "name": "Bolivia",
+    "name_safe": "Bolivia",
+    "continent": "South America",
+    "code_numeric": "068",
+    "code_2": "BO",
+    "code_3": "BOL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bol.svg",
+    "currency": "BOB"
+  },
+  {
+    "name": "Bonaire, Sint Eustatius and Saba",
+    "name_safe": "BonaireSintEustatiusandSaba",
+    "continent": "South America",
+    "code_numeric": "535",
+    "code_2": "BQ",
+    "code_3": "BES",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bes.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "name_safe": "BosniaandHerzegovina",
+    "continent": "Europe",
+    "code_numeric": "070",
+    "code_2": "BA",
+    "code_3": "BIH",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bih.svg",
+    "currency": "BAM"
+  },
+  {
+    "name": "Botswana",
+    "name_safe": "Botswana",
+    "continent": "Africa",
+    "code_numeric": "072",
+    "code_2": "BW",
+    "code_3": "BWA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bwa.svg",
+    "currency": "BWP"
+  },
+  {
+    "name": "Bouvet Island",
+    "name_safe": "BouvetIsland",
+    "continent": "Antarctica",
+    "code_numeric": "074",
+    "code_2": "BV",
+    "code_3": "BVT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bvt.svg",
+    "currency": "NOK"
+  },
+  {
+    "name": "Brazil",
+    "name_safe": "Brazil",
+    "continent": "South America",
+    "code_numeric": "076",
+    "code_2": "BR",
+    "code_3": "BRA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bra.svg",
+    "currency": "BRL"
+  },
+  {
+    "name": "British Indian Ocean Territory",
+    "name_safe": "BritishIndianOceanTerritory",
+    "continent": "Africa",
+    "code_numeric": "086",
+    "code_2": "IO",
+    "code_3": "IOT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/iot.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Brunei Darussalam",
+    "name_safe": "BruneiDarussalam",
+    "continent": "Asia",
+    "code_numeric": "096",
+    "code_2": "BN",
+    "code_3": "BRN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/brn.svg",
+    "currency": "BND"
+  },
+  {
+    "name": "Bulgaria",
+    "name_safe": "Bulgaria",
+    "continent": "Europe",
+    "code_numeric": "100",
+    "code_2": "BG",
+    "code_3": "BGR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bgr.svg",
+    "currency": "BGN"
+  },
+  {
+    "name": "Burkina Faso",
+    "name_safe": "BurkinaFaso",
+    "continent": "Africa",
+    "code_numeric": "854",
+    "code_2": "BF",
+    "code_3": "BFA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bfa.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Burundi",
+    "name_safe": "Burundi",
+    "continent": "Africa",
+    "code_numeric": "108",
+    "code_2": "BI",
+    "code_3": "BDI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/bdi.svg",
+    "currency": "BIF"
+  },
+  {
+    "name": "Cape Verde",
+    "name_safe": "CapeVerde",
+    "continent": "Africa",
+    "code_numeric": "132",
+    "code_2": "CV",
+    "code_3": "CPV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cpv.svg",
+    "currency": "CVE"
+  },
+  {
+    "name": "Cambodia",
+    "name_safe": "Cambodia",
+    "continent": "Asia",
+    "code_numeric": "116",
+    "code_2": "KH",
+    "code_3": "KHM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/khm.svg",
+    "currency": "KHR"
+  },
+  {
+    "name": "Cameroon",
+    "name_safe": "Cameroon",
+    "continent": "Africa",
+    "code_numeric": "120",
+    "code_2": "CM",
+    "code_3": "CMR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cmr.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Canada",
+    "name_safe": "Canada",
+    "continent": "North America",
+    "code_numeric": "124",
+    "code_2": "CA",
+    "code_3": "CAN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/can.svg",
+    "currency": "CAD"
+  },
+  {
+    "name": "Cayman Islands",
+    "name_safe": "CaymanIslands",
+    "continent": "North America",
+    "code_numeric": "136",
+    "code_2": "KY",
+    "code_3": "CYM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cym.svg",
+    "currency": "KYD"
+  },
+  {
+    "name": "Central African Republic",
+    "name_safe": "CentralAfricanRepublic",
+    "continent": "Africa",
+    "code_numeric": "140",
+    "code_2": "CF",
+    "code_3": "CAF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/caf.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Chad",
+    "name_safe": "Chad",
+    "continent": "Africa",
+    "code_numeric": "148",
+    "code_2": "TD",
+    "code_3": "TCD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tcd.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Chile",
+    "name_safe": "Chile",
+    "continent": "South America",
+    "code_numeric": "152",
+    "code_2": "CL",
+    "code_3": "CHL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/chl.svg",
+    "currency": "CLP"
+  },
+  {
+    "name": "China",
+    "name_safe": "China",
+    "continent": "Asia",
+    "code_numeric": "156",
+    "code_2": "CN",
+    "code_3": "CHN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/chn.svg",
+    "currency": "CNY"
+  },
+  {
+    "name": "Christmas Island",
+    "name_safe": "ChristmasIsland",
+    "continent": "Oceania",
+    "code_numeric": "162",
+    "code_2": "CX",
+    "code_3": "CXR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cxr.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Cocos (Keeling) Islands",
+    "name_safe": "CocosKeelingIslands",
+    "continent": "Oceania",
+    "code_numeric": "166",
+    "code_2": "CC",
+    "code_3": "CCK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cck.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Colombia",
+    "name_safe": "Colombia",
+    "continent": "South America",
+    "code_numeric": "170",
+    "code_2": "CO",
+    "code_3": "COL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/col.svg",
+    "currency": "COP"
+  },
+  {
+    "name": "Comoros",
+    "name_safe": "Comoros",
+    "continent": "Africa",
+    "code_numeric": "174",
+    "code_2": "KM",
+    "code_3": "COM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/com.svg",
+    "currency": "KMF"
+  },
+  {
+    "name": "Congo",
+    "name_safe": "Congo",
+    "continent": "Africa",
+    "code_numeric": "178",
+    "code_2": "CG",
+    "code_3": "COG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cog.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Democratic Republic of the Congo",
+    "name_safe": "DemocraticRepublicoftheCongo",
+    "continent": "Africa",
+    "code_numeric": "180",
+    "code_2": "CD",
+    "code_3": "COD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cod.svg",
+    "currency": "CDF"
+  },
+  {
+    "name": "Cook Islands",
+    "name_safe": "CookIslands",
+    "continent": "Oceania",
+    "code_numeric": "184",
+    "code_2": "CK",
+    "code_3": "COK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cok.svg",
+    "currency": "NZD"
+  },
+  {
+    "name": "Costa Rica",
+    "name_safe": "CostaRica",
+    "continent": "North America",
+    "code_numeric": "188",
+    "code_2": "CR",
+    "code_3": "CRI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cri.svg",
+    "currency": "CRC"
+  },
+  {
+    "name": "Cote D'Ivoire",
+    "name_safe": "CoteDIvoire",
+    "continent": "Africa",
+    "code_numeric": "384",
+    "code_2": "CI",
+    "code_3": "CIV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/civ.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Croatia",
+    "name_safe": "Croatia",
+    "continent": "Europe",
+    "code_numeric": "191",
+    "code_2": "HR",
+    "code_3": "HRV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hrv.svg",
+    "currency": "HRK"
+  },
+  {
+    "name": "Cuba",
+    "name_safe": "Cuba",
+    "continent": "North America",
+    "code_numeric": "192",
+    "code_2": "CU",
+    "code_3": "CUB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cub.svg",
+    "currency": "CUC"
+  },
+  {
+    "name": "Curaçao",
+    "name_safe": "Curacao",
+    "continent": "South America",
+    "code_numeric": "531",
+    "code_2": "CW",
+    "code_3": "CUW",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cuw.svg",
+    "currency": "ANG"
+  },
+  {
+    "name": "Cyprus",
+    "name_safe": "Cyprus",
+    "continent": "Asia",
+    "code_numeric": "196",
+    "code_2": "CY",
+    "code_3": "CYP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cyp.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Czech Republic",
+    "name_safe": "CzechRepublic",
+    "continent": "Europe",
+    "code_numeric": "203",
+    "code_2": "CZ",
+    "code_3": "CZE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/cze.svg",
+    "currency": "CZK"
+  },
+  {
+    "name": "Denmark",
+    "name_safe": "Denmark",
+    "continent": "Europe",
+    "code_numeric": "208",
+    "code_2": "DK",
+    "code_3": "DNK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/dnk.svg",
+    "currency": "DKK"
+  },
+  {
+    "name": "Djibouti",
+    "name_safe": "Djibouti",
+    "continent": "Africa",
+    "code_numeric": "262",
+    "code_2": "DJ",
+    "code_3": "DJI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/dji.svg",
+    "currency": "DJF"
+  },
+  {
+    "name": "Dominica",
+    "name_safe": "Dominica",
+    "continent": "North America",
+    "code_numeric": "212",
+    "code_2": "DM",
+    "code_3": "DMA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/dma.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Dominican Republic",
+    "name_safe": "DominicanRepublic",
+    "continent": "North America",
+    "code_numeric": "214",
+    "code_2": "DO",
+    "code_3": "DOM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/dom.svg",
+    "currency": "DOP"
+  },
+  {
+    "name": "Ecuador",
+    "name_safe": "Ecuador",
+    "continent": "South America",
+    "code_numeric": "218",
+    "code_2": "EC",
+    "code_3": "ECU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ecu.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Egypt",
+    "name_safe": "Egypt",
+    "continent": "Africa",
+    "code_numeric": "818",
+    "code_2": "EG",
+    "code_3": "EGY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/egy.svg",
+    "currency": "EGP"
+  },
+  {
+    "name": "El Salvador",
+    "name_safe": "ElSalvador",
+    "continent": "North America",
+    "code_numeric": "222",
+    "code_2": "SV",
+    "code_3": "SLV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/slv.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "name_safe": "EquatorialGuinea",
+    "continent": "Africa",
+    "code_numeric": "226",
+    "code_2": "GQ",
+    "code_3": "GNQ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gnq.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Eritrea",
+    "name_safe": "Eritrea",
+    "continent": "Africa",
+    "code_numeric": "232",
+    "code_2": "ER",
+    "code_3": "ERI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/eri.svg",
+    "currency": "ERN"
+  },
+  {
+    "name": "Estonia",
+    "name_safe": "Estonia",
+    "continent": "Europe",
+    "code_numeric": "233",
+    "code_2": "EE",
+    "code_3": "EST",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/est.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Swaziland",
+    "name_safe": "Swaziland",
+    "continent": "Africa",
+    "code_numeric": "748",
+    "code_2": "SZ",
+    "code_3": "SWZ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/swz.svg",
+    "currency": "SZL"
+  },
+  {
+    "name": "Ethiopia",
+    "name_safe": "Ethiopia",
+    "continent": "Africa",
+    "code_numeric": "231",
+    "code_2": "ET",
+    "code_3": "ETH",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/eth.svg",
+    "currency": "ETB"
+  },
+  {
+    "name": "Falkland Islands (Malvinas)",
+    "name_safe": "FalklandIslandsMalvinas",
+    "continent": "South America",
+    "code_numeric": "238",
+    "code_2": "FK",
+    "code_3": "FLK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/flk.svg",
+    "currency": "FKP"
+  },
+  {
+    "name": "Faroe Islands",
+    "name_safe": "FaroeIslands",
+    "continent": "Europe",
+    "code_numeric": "234",
+    "code_2": "FO",
+    "code_3": "FRO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/fro.svg",
+    "currency": "DKK"
+  },
+  {
+    "name": "Fiji",
+    "name_safe": "Fiji",
+    "continent": "Oceania",
+    "code_numeric": "242",
+    "code_2": "FJ",
+    "code_3": "FJI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/fji.svg",
+    "currency": "FJD"
+  },
+  {
+    "name": "Finland",
+    "name_safe": "Finland",
+    "continent": "Europe",
+    "code_numeric": "246",
+    "code_2": "FI",
+    "code_3": "FIN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/fin.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "France",
+    "name_safe": "France",
+    "continent": "Europe",
+    "code_numeric": "250",
+    "code_2": "FR",
+    "code_3": "FRA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/fra.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "French Guiana",
+    "name_safe": "FrenchGuiana",
+    "continent": "South America",
+    "code_numeric": "254",
+    "code_2": "GF",
+    "code_3": "GUF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/guf.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "French Polynesia",
+    "name_safe": "FrenchPolynesia",
+    "continent": "Oceania",
+    "code_numeric": "258",
+    "code_2": "PF",
+    "code_3": "PYF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pyf.svg",
+    "currency": "XPF"
+  },
+  {
+    "name": "French Southern territories",
+    "name_safe": "FrenchSouthernterritories",
+    "continent": "Antarctica",
+    "code_numeric": "260",
+    "code_2": "TF",
+    "code_3": "ATF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/atf.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Gabon",
+    "name_safe": "Gabon",
+    "continent": "Africa",
+    "code_numeric": "266",
+    "code_2": "GA",
+    "code_3": "GAB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gab.svg",
+    "currency": "XAF"
+  },
+  {
+    "name": "Gambia",
+    "name_safe": "Gambia",
+    "continent": "Africa",
+    "code_numeric": "270",
+    "code_2": "GM",
+    "code_3": "GMB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gmb.svg",
+    "currency": "GMD"
+  },
+  {
+    "name": "Georgia",
+    "name_safe": "Georgia",
+    "continent": "Asia",
+    "code_numeric": "268",
+    "code_2": "GE",
+    "code_3": "GEO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/geo.svg",
+    "currency": "GEL"
+  },
+  {
+    "name": "Germany",
+    "name_safe": "Germany",
+    "continent": "Europe",
+    "code_numeric": "276",
+    "code_2": "DE",
+    "code_3": "DEU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/deu.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Ghana",
+    "name_safe": "Ghana",
+    "continent": "Africa",
+    "code_numeric": "288",
+    "code_2": "GH",
+    "code_3": "GHA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gha.svg",
+    "currency": "GHS"
+  },
+  {
+    "name": "Gibraltar",
+    "name_safe": "Gibraltar",
+    "continent": "Europe",
+    "code_numeric": "292",
+    "code_2": "GI",
+    "code_3": "GIB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gib.svg",
+    "currency": "GIP"
+  },
+  {
+    "name": "Greece",
+    "name_safe": "Greece",
+    "continent": "Europe",
+    "code_numeric": "300",
+    "code_2": "GR",
+    "code_3": "GRC",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/grc.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Greenland",
+    "name_safe": "Greenland",
+    "continent": "North America",
+    "code_numeric": "304",
+    "code_2": "GL",
+    "code_3": "GRL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/grl.svg",
+    "currency": "DKK"
+  },
+  {
+    "name": "Grenada",
+    "name_safe": "Grenada",
+    "continent": "North America",
+    "code_numeric": "308",
+    "code_2": "GD",
+    "code_3": "GRD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/grd.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Guadeloupe",
+    "name_safe": "Guadeloupe",
+    "continent": "North America",
+    "code_numeric": "312",
+    "code_2": "GP",
+    "code_3": "GLP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/glp.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Guam",
+    "name_safe": "Guam",
+    "continent": "Oceania",
+    "code_numeric": "316",
+    "code_2": "GU",
+    "code_3": "GUM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gum.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Guatemala",
+    "name_safe": "Guatemala",
+    "continent": "North America",
+    "code_numeric": "320",
+    "code_2": "GT",
+    "code_3": "GTM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gtm.svg",
+    "currency": "GTQ"
+  },
+  {
+    "name": "Guernsey",
+    "name_safe": "Guernsey",
+    "continent": "Europe",
+    "code_numeric": "831",
+    "code_2": "GG",
+    "code_3": "GGY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ggy.svg",
+    "currency": "GBP"
+  },
+  {
+    "name": "Guinea",
+    "name_safe": "Guinea",
+    "continent": "Africa",
+    "code_numeric": "324",
+    "code_2": "GN",
+    "code_3": "GIN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gin.svg",
+    "currency": "GNF"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "name_safe": "GuineaBissau",
+    "continent": "Africa",
+    "code_numeric": "624",
+    "code_2": "GW",
+    "code_3": "GNB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gnb.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Guyana",
+    "name_safe": "Guyana",
+    "continent": "South America",
+    "code_numeric": "328",
+    "code_2": "GY",
+    "code_3": "GUY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/guy.svg",
+    "currency": "GYD"
+  },
+  {
+    "name": "Haiti",
+    "name_safe": "Haiti",
+    "continent": "North America",
+    "code_numeric": "332",
+    "code_2": "HT",
+    "code_3": "HTI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hti.svg",
+    "currency": "HTG"
+  },
+  {
+    "name": "Heard Island and McDonald Islands",
+    "name_safe": "HeardIslandandMcDonaldIslands",
+    "continent": "Antarctica",
+    "code_numeric": "334",
+    "code_2": "HM",
+    "code_3": "HMD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hmd.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Holy See (Vatican City State)",
+    "name_safe": "HolySeeVaticanCityState",
+    "continent": "Europe",
+    "code_numeric": "336",
+    "code_2": "VA",
+    "code_3": "VAT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vat.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Honduras",
+    "name_safe": "Honduras",
+    "continent": "North America",
+    "code_numeric": "340",
+    "code_2": "HN",
+    "code_3": "HND",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hnd.svg",
+    "currency": "HNL"
+  },
+  {
+    "name": "Hong Kong",
+    "name_safe": "HongKong",
+    "continent": "Asia",
+    "code_numeric": "344",
+    "code_2": "HK",
+    "code_3": "HKG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hkg.svg",
+    "currency": "HKD"
+  },
+  {
+    "name": "Hungary",
+    "name_safe": "Hungary",
+    "continent": "Europe",
+    "code_numeric": "348",
+    "code_2": "HU",
+    "code_3": "HUN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/hun.svg",
+    "currency": "HUF"
+  },
+  {
+    "name": "Iceland",
+    "name_safe": "Iceland",
+    "continent": "Europe",
+    "code_numeric": "352",
+    "code_2": "IS",
+    "code_3": "ISL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/isl.svg",
+    "currency": "ISK"
+  },
+  {
+    "name": "India",
+    "name_safe": "India",
+    "continent": "Asia",
+    "code_numeric": "356",
+    "code_2": "IN",
+    "code_3": "IND",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ind.svg",
+    "currency": "INR"
+  },
+  {
+    "name": "Indonesia",
+    "name_safe": "Indonesia",
+    "continent": "Asia",
+    "code_numeric": "360",
+    "code_2": "ID",
+    "code_3": "IDN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/idn.svg",
+    "currency": "IDR"
+  },
+  {
+    "name": "Iran, Islamic Republic of",
+    "name_safe": "IranIslamicRepublicof",
+    "continent": "Asia",
+    "code_numeric": "364",
+    "code_2": "IR",
+    "code_3": "IRN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/irn.svg",
+    "currency": "IRR"
+  },
+  {
+    "name": "Iraq",
+    "name_safe": "Iraq",
+    "continent": "Asia",
+    "code_numeric": "368",
+    "code_2": "IQ",
+    "code_3": "IRQ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/irq.svg",
+    "currency": "IQD"
+  },
+  {
+    "name": "Ireland",
+    "name_safe": "Ireland",
+    "continent": "Europe",
+    "code_numeric": "372",
+    "code_2": "IE",
+    "code_3": "IRL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/irl.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Isle of Man",
+    "name_safe": "IsleofMan",
+    "continent": "Europe",
+    "code_numeric": "833",
+    "code_2": "IM",
+    "code_3": "IMN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/imn.svg",
+    "currency": "GBP"
+  },
+  {
+    "name": "Israel",
+    "name_safe": "Israel",
+    "continent": "Asia",
+    "code_numeric": "376",
+    "code_2": "IL",
+    "code_3": "ISR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/isr.svg",
+    "currency": "ILS"
+  },
+  {
+    "name": "Italy",
+    "name_safe": "Italy",
+    "continent": "Europe",
+    "code_numeric": "380",
+    "code_2": "IT",
+    "code_3": "ITA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ita.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Jamaica",
+    "name_safe": "Jamaica",
+    "continent": "North America",
+    "code_numeric": "388",
+    "code_2": "JM",
+    "code_3": "JAM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/jam.svg",
+    "currency": "JMD"
+  },
+  {
+    "name": "Japan",
+    "name_safe": "Japan",
+    "continent": "Asia",
+    "code_numeric": "392",
+    "code_2": "JP",
+    "code_3": "JPN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/jpn.svg",
+    "currency": "JPY"
+  },
+  {
+    "name": "Jersey",
+    "name_safe": "Jersey",
+    "continent": "Europe",
+    "code_numeric": "832",
+    "code_2": "JE",
+    "code_3": "JEY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/jey.svg",
+    "currency": "GBP"
+  },
+  {
+    "name": "Jordan",
+    "name_safe": "Jordan",
+    "continent": "Asia",
+    "code_numeric": "400",
+    "code_2": "JO",
+    "code_3": "JOR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/jor.svg",
+    "currency": "JOD"
+  },
+  {
+    "name": "Kazakhstan",
+    "name_safe": "Kazakhstan",
+    "continent": "Asia",
+    "code_numeric": "398",
+    "code_2": "KZ",
+    "code_3": "KAZ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kaz.svg",
+    "currency": "KZT"
+  },
+  {
+    "name": "Kenya",
+    "name_safe": "Kenya",
+    "continent": "Africa",
+    "code_numeric": "404",
+    "code_2": "KE",
+    "code_3": "KEN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ken.svg",
+    "currency": "KES"
+  },
+  {
+    "name": "Kiribati",
+    "name_safe": "Kiribati",
+    "continent": "Oceania",
+    "code_numeric": "296",
+    "code_2": "KI",
+    "code_3": "KIR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kir.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "North Korea",
+    "name_safe": "NorthKorea",
+    "continent": "Asia",
+    "code_numeric": "408",
+    "code_2": "KP",
+    "code_3": "PRK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/prk.svg",
+    "currency": "KPW"
+  },
+  {
+    "name": "South Korea",
+    "name_safe": "SouthKorea",
+    "continent": "Asia",
+    "code_numeric": "410",
+    "code_2": "KR",
+    "code_3": "KOR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kor.svg",
+    "currency": "KRW"
+  },
+  {
+    "name": "Kuwait",
+    "name_safe": "Kuwait",
+    "continent": "Asia",
+    "code_numeric": "414",
+    "code_2": "KW",
+    "code_3": "KWT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kwt.svg",
+    "currency": "KWD"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "name_safe": "Kyrgyzstan",
+    "continent": "Asia",
+    "code_numeric": "417",
+    "code_2": "KG",
+    "code_3": "KGZ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kgz.svg",
+    "currency": "KGS"
+  },
+  {
+    "name": "Lao People's Democratic Republic",
+    "name_safe": "LaoPeoplesDemocraticRepublic",
+    "continent": "Asia",
+    "code_numeric": "418",
+    "code_2": "LA",
+    "code_3": "LAO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lao.svg",
+    "currency": "LAK"
+  },
+  {
+    "name": "Latvia",
+    "name_safe": "Latvia",
+    "continent": "Europe",
+    "code_numeric": "428",
+    "code_2": "LV",
+    "code_3": "LVA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lva.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Lebanon",
+    "name_safe": "Lebanon",
+    "continent": "Asia",
+    "code_numeric": "422",
+    "code_2": "LB",
+    "code_3": "LBN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lbn.svg",
+    "currency": "LBP"
+  },
+  {
+    "name": "Lesotho",
+    "name_safe": "Lesotho",
+    "continent": "Africa",
+    "code_numeric": "426",
+    "code_2": "LS",
+    "code_3": "LSO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lso.svg",
+    "currency": "LSL"
+  },
+  {
+    "name": "Liberia",
+    "name_safe": "Liberia",
+    "continent": "Africa",
+    "code_numeric": "430",
+    "code_2": "LR",
+    "code_3": "LBR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lbr.svg",
+    "currency": "LRD"
+  },
+  {
+    "name": "Libya",
+    "name_safe": "Libya",
+    "continent": "Africa",
+    "code_numeric": "434",
+    "code_2": "LY",
+    "code_3": "LBY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lby.svg",
+    "currency": "LYD"
+  },
+  {
+    "name": "Liechtenstein",
+    "name_safe": "Liechtenstein",
+    "continent": "Europe",
+    "code_numeric": "438",
+    "code_2": "LI",
+    "code_3": "LIE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lie.svg",
+    "currency": "CHF"
+  },
+  {
+    "name": "Lithuania",
+    "name_safe": "Lithuania",
+    "continent": "Europe",
+    "code_numeric": "440",
+    "code_2": "LT",
+    "code_3": "LTU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ltu.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Luxembourg",
+    "name_safe": "Luxembourg",
+    "continent": "Europe",
+    "code_numeric": "442",
+    "code_2": "LU",
+    "code_3": "LUX",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lux.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Macao",
+    "name_safe": "Macao",
+    "continent": "Asia",
+    "code_numeric": "446",
+    "code_2": "MO",
+    "code_3": "MAC",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mac.svg",
+    "currency": "MOP"
+  },
+  {
+    "name": "Madagascar",
+    "name_safe": "Madagascar",
+    "continent": "Africa",
+    "code_numeric": "450",
+    "code_2": "MG",
+    "code_3": "MDG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mdg.svg",
+    "currency": "MGA"
+  },
+  {
+    "name": "Malawi",
+    "name_safe": "Malawi",
+    "continent": "Africa",
+    "code_numeric": "454",
+    "code_2": "MW",
+    "code_3": "MWI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mwi.svg",
+    "currency": "MWK"
+  },
+  {
+    "name": "Malaysia",
+    "name_safe": "Malaysia",
+    "continent": "Asia",
+    "code_numeric": "458",
+    "code_2": "MY",
+    "code_3": "MYS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mys.svg",
+    "currency": "MYR"
+  },
+  {
+    "name": "Maldives",
+    "name_safe": "Maldives",
+    "continent": "Asia",
+    "code_numeric": "462",
+    "code_2": "MV",
+    "code_3": "MDV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mdv.svg",
+    "currency": "MVR"
+  },
+  {
+    "name": "Mali",
+    "name_safe": "Mali",
+    "continent": "Africa",
+    "code_numeric": "466",
+    "code_2": "ML",
+    "code_3": "MLI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mli.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Malta",
+    "name_safe": "Malta",
+    "continent": "Europe",
+    "code_numeric": "470",
+    "code_2": "MT",
+    "code_3": "MLT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mlt.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Marshall Islands",
+    "name_safe": "MarshallIslands",
+    "continent": "Oceania",
+    "code_numeric": "584",
+    "code_2": "MH",
+    "code_3": "MHL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mhl.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Martinique",
+    "name_safe": "Martinique",
+    "continent": "North America",
+    "code_numeric": "474",
+    "code_2": "MQ",
+    "code_3": "MTQ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mtq.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Mauritania",
+    "name_safe": "Mauritania",
+    "continent": "Africa",
+    "code_numeric": "478",
+    "code_2": "MR",
+    "code_3": "MRT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mrt.svg",
+    "currency": "MRO"
+  },
+  {
+    "name": "Mauritius",
+    "name_safe": "Mauritius",
+    "continent": "Africa",
+    "code_numeric": "480",
+    "code_2": "MU",
+    "code_3": "MUS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mus.svg",
+    "currency": "MUR"
+  },
+  {
+    "name": "Mayotte",
+    "name_safe": "Mayotte",
+    "continent": "Africa",
+    "code_numeric": "175",
+    "code_2": "YT",
+    "code_3": "MYT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/myt.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Mexico",
+    "name_safe": "Mexico",
+    "continent": "North America",
+    "code_numeric": "484",
+    "code_2": "MX",
+    "code_3": "MEX",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mex.svg",
+    "currency": "MXN"
+  },
+  {
+    "name": "Micronesia",
+    "name_safe": "Micronesia",
+    "continent": "Oceania",
+    "code_numeric": "583",
+    "code_2": "FM",
+    "code_3": "FSM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/fsm.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Moldova",
+    "name_safe": "Moldova",
+    "continent": "Europe",
+    "code_numeric": "498",
+    "code_2": "MD",
+    "code_3": "MDA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mda.svg",
+    "currency": "MDL"
+  },
+  {
+    "name": "Monaco",
+    "name_safe": "Monaco",
+    "continent": "Europe",
+    "code_numeric": "492",
+    "code_2": "MC",
+    "code_3": "MCO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mco.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Mongolia",
+    "name_safe": "Mongolia",
+    "continent": "Asia",
+    "code_numeric": "496",
+    "code_2": "MN",
+    "code_3": "MNG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mng.svg",
+    "currency": "MNT"
+  },
+  {
+    "name": "Montenegro",
+    "name_safe": "Montenegro",
+    "continent": "Europe",
+    "code_numeric": "499",
+    "code_2": "ME",
+    "code_3": "MNE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mne.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Montserrat",
+    "name_safe": "Montserrat",
+    "continent": "North America",
+    "code_numeric": "500",
+    "code_2": "MS",
+    "code_3": "MSR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/msr.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Morocco",
+    "name_safe": "Morocco",
+    "continent": "Africa",
+    "code_numeric": "504",
+    "code_2": "MA",
+    "code_3": "MAR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mar.svg",
+    "currency": "MAD"
+  },
+  {
+    "name": "Mozambique",
+    "name_safe": "Mozambique",
+    "continent": "Africa",
+    "code_numeric": "508",
+    "code_2": "MZ",
+    "code_3": "MOZ",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/moz.svg",
+    "currency": "MZN"
+  },
+  {
+    "name": "Myanmar",
+    "name_safe": "Myanmar",
+    "continent": "Asia",
+    "code_numeric": "104",
+    "code_2": "MM",
+    "code_3": "MMR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mmr.svg",
+    "currency": "MMK"
+  },
+  {
+    "name": "Namibia",
+    "name_safe": "Namibia",
+    "continent": "Africa",
+    "code_numeric": "516",
+    "code_2": "NA",
+    "code_3": "NAM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nam.svg",
+    "currency": "NAD"
+  },
+  {
+    "name": "Nauru",
+    "name_safe": "Nauru",
+    "continent": "Oceania",
+    "code_numeric": "520",
+    "code_2": "NR",
+    "code_3": "NRU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nru.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Nepal",
+    "name_safe": "Nepal",
+    "continent": "Asia",
+    "code_numeric": "524",
+    "code_2": "NP",
+    "code_3": "NPL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/npl.svg",
+    "currency": "NPR"
+  },
+  {
+    "name": "Netherlands",
+    "name_safe": "Netherlands",
+    "continent": "Europe",
+    "code_numeric": "528",
+    "code_2": "NL",
+    "code_3": "NLD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nld.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "New Caledonia",
+    "name_safe": "NewCaledonia",
+    "continent": "Oceania",
+    "code_numeric": "540",
+    "code_2": "NC",
+    "code_3": "NCL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ncl.svg",
+    "currency": "XPF"
+  },
+  {
+    "name": "New Zealand",
+    "name_safe": "NewZealand",
+    "continent": "Oceania",
+    "code_numeric": "554",
+    "code_2": "NZ",
+    "code_3": "NZL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nzl.svg",
+    "currency": "NZD"
+  },
+  {
+    "name": "Nicaragua",
+    "name_safe": "Nicaragua",
+    "continent": "North America",
+    "code_numeric": "558",
+    "code_2": "NI",
+    "code_3": "NIC",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nic.svg",
+    "currency": "NIO"
+  },
+  {
+    "name": "Niger",
+    "name_safe": "Niger",
+    "continent": "Africa",
+    "code_numeric": "562",
+    "code_2": "NE",
+    "code_3": "NER",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ner.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Nigeria",
+    "name_safe": "Nigeria",
+    "continent": "Africa",
+    "code_numeric": "566",
+    "code_2": "NG",
+    "code_3": "NGA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nga.svg",
+    "currency": "NGN"
+  },
+  {
+    "name": "Niue",
+    "name_safe": "Niue",
+    "continent": "Oceania",
+    "code_numeric": "570",
+    "code_2": "NU",
+    "code_3": "NIU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/niu.svg",
+    "currency": "NZD"
+  },
+  {
+    "name": "Norfolk Island",
+    "name_safe": "NorfolkIsland",
+    "continent": "Oceania",
+    "code_numeric": "574",
+    "code_2": "NF",
+    "code_3": "NFK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nfk.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Macedonia",
+    "name_safe": "Macedonia",
+    "continent": "Europe",
+    "code_numeric": "807",
+    "code_2": "MK",
+    "code_3": "MKD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mkd.svg",
+    "currency": "MKD"
+  },
+  {
+    "name": "Northern Mariana Islands",
+    "name_safe": "NorthernMarianaIslands",
+    "continent": "Oceania",
+    "code_numeric": "580",
+    "code_2": "MP",
+    "code_3": "MNP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/mnp.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Norway",
+    "name_safe": "Norway",
+    "continent": "Europe",
+    "code_numeric": "578",
+    "code_2": "NO",
+    "code_3": "NOR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/nor.svg",
+    "currency": "NOK"
+  },
+  {
+    "name": "Oman",
+    "name_safe": "Oman",
+    "continent": "Asia",
+    "code_numeric": "512",
+    "code_2": "OM",
+    "code_3": "OMN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/omn.svg",
+    "currency": "OMR"
+  },
+  {
+    "name": "Pakistan",
+    "name_safe": "Pakistan",
+    "continent": "Asia",
+    "code_numeric": "586",
+    "code_2": "PK",
+    "code_3": "PAK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pak.svg",
+    "currency": "PKR"
+  },
+  {
+    "name": "Palau",
+    "name_safe": "Palau",
+    "continent": "Oceania",
+    "code_numeric": "585",
+    "code_2": "PW",
+    "code_3": "PLW",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/plw.svg",
+    "currency": "(none)"
+  },
+  {
+    "name": "Palestine",
+    "name_safe": "Palestine",
+    "continent": "Asia",
+    "code_numeric": "275",
+    "code_2": "PS",
+    "code_3": "PSE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pse.svg",
+    "currency": "ILS"
+  },
+  {
+    "name": "Panama",
+    "name_safe": "Panama",
+    "continent": "North America",
+    "code_numeric": "591",
+    "code_2": "PA",
+    "code_3": "PAN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pan.svg",
+    "currency": "PAB"
+  },
+  {
+    "name": "Papua New Guinea",
+    "name_safe": "PapuaNewGuinea",
+    "continent": "Oceania",
+    "code_numeric": "598",
+    "code_2": "PG",
+    "code_3": "PNG",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/png.svg",
+    "currency": "PGK"
+  },
+  {
+    "name": "Paraguay",
+    "name_safe": "Paraguay",
+    "continent": "South America",
+    "code_numeric": "600",
+    "code_2": "PY",
+    "code_3": "PRY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pry.svg",
+    "currency": "PYG"
+  },
+  {
+    "name": "Peru",
+    "name_safe": "Peru",
+    "continent": "South America",
+    "code_numeric": "604",
+    "code_2": "PE",
+    "code_3": "PER",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/per.svg",
+    "currency": "PEN"
+  },
+  {
+    "name": "Philippines",
+    "name_safe": "Philippines",
+    "continent": "Asia",
+    "code_numeric": "608",
+    "code_2": "PH",
+    "code_3": "PHL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/phl.svg",
+    "currency": "PHP"
+  },
+  {
+    "name": "Pitcairn",
+    "name_safe": "Pitcairn",
+    "continent": "Oceania",
+    "code_numeric": "612",
+    "code_2": "PN",
+    "code_3": "PCN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pcn.svg",
+    "currency": "NZD"
+  },
+  {
+    "name": "Poland",
+    "name_safe": "Poland",
+    "continent": "Europe",
+    "code_numeric": "616",
+    "code_2": "PL",
+    "code_3": "POL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pol.svg",
+    "currency": "PLN"
+  },
+  {
+    "name": "Portugal",
+    "name_safe": "Portugal",
+    "continent": "Europe",
+    "code_numeric": "620",
+    "code_2": "PT",
+    "code_3": "PRT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/prt.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Puerto Rico",
+    "name_safe": "PuertoRico",
+    "continent": "North America",
+    "code_numeric": "630",
+    "code_2": "PR",
+    "code_3": "PRI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/pri.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Qatar",
+    "name_safe": "Qatar",
+    "continent": "Asia",
+    "code_numeric": "634",
+    "code_2": "QA",
+    "code_3": "QAT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/qat.svg",
+    "currency": "QAR"
+  },
+  {
+    "name": "Réunion",
+    "name_safe": "Reunion",
+    "continent": "Africa",
+    "code_numeric": "638",
+    "code_2": "RE",
+    "code_3": "REU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/reu.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Romania",
+    "name_safe": "Romania",
+    "continent": "Europe",
+    "code_numeric": "642",
+    "code_2": "RO",
+    "code_3": "ROU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/rou.svg",
+    "currency": "RON"
+  },
+  {
+    "name": "Russia",
+    "name_safe": "Russia",
+    "continent": "Europe",
+    "code_numeric": "643",
+    "code_2": "RU",
+    "code_3": "RUS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/rus.svg",
+    "currency": "RUB"
+  },
+  {
+    "name": "Rwanda",
+    "name_safe": "Rwanda",
+    "continent": "Africa",
+    "code_numeric": "646",
+    "code_2": "RW",
+    "code_3": "RWA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/rwa.svg",
+    "currency": "RWF"
+  },
+  {
+    "name": "Saint Barthélemy",
+    "name_safe": "SaintBarthelemy",
+    "continent": "North America",
+    "code_numeric": "652",
+    "code_2": "BL",
+    "code_3": "BLM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/blm.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Saint Helena, Ascension and Tristan Da Cunha",
+    "name_safe": "SaintHelenaAscensionandTristanDaCunha",
+    "continent": "Africa",
+    "code_numeric": "654",
+    "code_2": "SH",
+    "code_3": "SHN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/shn.svg",
+    "currency": "SHP"
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "name_safe": "SaintKittsandNevis",
+    "continent": "North America",
+    "code_numeric": "659",
+    "code_2": "KN",
+    "code_3": "KNA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/kna.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Saint Lucia",
+    "name_safe": "SaintLucia",
+    "continent": "North America",
+    "code_numeric": "662",
+    "code_2": "LC",
+    "code_3": "LCA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lca.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Saint Martin",
+    "name_safe": "SaintMartin",
+    "continent": "North America",
+    "code_numeric": "663",
+    "code_2": "MF",
+    "code_3": "MAF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/maf.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Saint Pierre and Miquelon",
+    "name_safe": "SaintPierreandMiquelon",
+    "continent": "North America",
+    "code_numeric": "666",
+    "code_2": "PM",
+    "code_3": "SPM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/spm.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "name_safe": "SaintVincentandtheGrenadines",
+    "continent": "North America",
+    "code_numeric": "670",
+    "code_2": "VC",
+    "code_3": "VCT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vct.svg",
+    "currency": "XCD"
+  },
+  {
+    "name": "Samoa",
+    "name_safe": "Samoa",
+    "continent": "Oceania",
+    "code_numeric": "882",
+    "code_2": "WS",
+    "code_3": "WSM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/wsm.svg",
+    "currency": "WST"
+  },
+  {
+    "name": "San Marino",
+    "name_safe": "SanMarino",
+    "continent": "Europe",
+    "code_numeric": "674",
+    "code_2": "SM",
+    "code_3": "SMR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/smr.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "name_safe": "SaoTomeandPrincipe",
+    "continent": "Africa",
+    "code_numeric": "678",
+    "code_2": "ST",
+    "code_3": "STP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/stp.svg",
+    "currency": "STD"
+  },
+  {
+    "name": "Saudi Arabia",
+    "name_safe": "SaudiArabia",
+    "continent": "Asia",
+    "code_numeric": "682",
+    "code_2": "SA",
+    "code_3": "SAU",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sau.svg",
+    "currency": "SAR"
+  },
+  {
+    "name": "Senegal",
+    "name_safe": "Senegal",
+    "continent": "Africa",
+    "code_numeric": "686",
+    "code_2": "SN",
+    "code_3": "SEN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sen.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Serbia",
+    "name_safe": "Serbia",
+    "continent": "Europe",
+    "code_numeric": "688",
+    "code_2": "RS",
+    "code_3": "SRB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/srb.svg",
+    "currency": "RSD"
+  },
+  {
+    "name": "Seychelles",
+    "name_safe": "Seychelles",
+    "continent": "Africa",
+    "code_numeric": "690",
+    "code_2": "SC",
+    "code_3": "SYC",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/syc.svg",
+    "currency": "SCR"
+  },
+  {
+    "name": "Sierra Leone",
+    "name_safe": "SierraLeone",
+    "continent": "Africa",
+    "code_numeric": "694",
+    "code_2": "SL",
+    "code_3": "SLE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sle.svg",
+    "currency": "SLL"
+  },
+  {
+    "name": "Singapore",
+    "name_safe": "Singapore",
+    "continent": "Asia",
+    "code_numeric": "702",
+    "code_2": "SG",
+    "code_3": "SGP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sgp.svg",
+    "currency": "BND"
+  },
+  {
+    "name": "Sint Maarten (Dutch part)",
+    "name_safe": "SintMaartenDutchpart",
+    "continent": "North America",
+    "code_numeric": "534",
+    "code_2": "SX",
+    "code_3": "SXM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sxm.svg",
+    "currency": "ANG"
+  },
+  {
+    "name": "Slovakia",
+    "name_safe": "Slovakia",
+    "continent": "Europe",
+    "code_numeric": "703",
+    "code_2": "SK",
+    "code_3": "SVK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/svk.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Slovenia",
+    "name_safe": "Slovenia",
+    "continent": "Europe",
+    "code_numeric": "705",
+    "code_2": "SI",
+    "code_3": "SVN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/svn.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Solomon Islands",
+    "name_safe": "SolomonIslands",
+    "continent": "Oceania",
+    "code_numeric": "090",
+    "code_2": "SB",
+    "code_3": "SLB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/slb.svg",
+    "currency": "SBD"
+  },
+  {
+    "name": "Somalia",
+    "name_safe": "Somalia",
+    "continent": "Africa",
+    "code_numeric": "706",
+    "code_2": "SO",
+    "code_3": "SOM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/som.svg",
+    "currency": "SOS"
+  },
+  {
+    "name": "South Africa",
+    "name_safe": "SouthAfrica",
+    "continent": "Africa",
+    "code_numeric": "710",
+    "code_2": "ZA",
+    "code_3": "ZAF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/zaf.svg",
+    "currency": "ZAR"
+  },
+  {
+    "name": "South Georgia and the South Sandwich Islands",
+    "name_safe": "SouthGeorgiaandtheSouthSandwichIslands",
+    "continent": "Antarctica",
+    "code_numeric": "239",
+    "code_2": "GS",
+    "code_3": "SGS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sgs.svg",
+    "currency": "GBP"
+  },
+  {
+    "name": "South Sudan",
+    "name_safe": "SouthSudan",
+    "continent": "Africa",
+    "code_numeric": "728",
+    "code_2": "SS",
+    "code_3": "SSD",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ssd.svg",
+    "currency": "SSP"
+  },
+  {
+    "name": "Spain",
+    "name_safe": "Spain",
+    "continent": "Europe",
+    "code_numeric": "724",
+    "code_2": "ES",
+    "code_3": "ESP",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/esp.svg",
+    "currency": "EUR"
+  },
+  {
+    "name": "Sri Lanka",
+    "name_safe": "SriLanka",
+    "continent": "Asia",
+    "code_numeric": "144",
+    "code_2": "LK",
+    "code_3": "LKA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/lka.svg",
+    "currency": "LKR"
+  },
+  {
+    "name": "Sudan",
+    "name_safe": "Sudan",
+    "continent": "Africa",
+    "code_numeric": "729",
+    "code_2": "SD",
+    "code_3": "SDN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sdn.svg",
+    "currency": "SDG"
+  },
+  {
+    "name": "Suriname",
+    "name_safe": "Suriname",
+    "continent": "South America",
+    "code_numeric": "740",
+    "code_2": "SR",
+    "code_3": "SUR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sur.svg",
+    "currency": "SRD"
+  },
+  {
+    "name": "Svalbard and Jan Mayen",
+    "name_safe": "SvalbardandJanMayen",
+    "continent": "Europe",
+    "code_numeric": "744",
+    "code_2": "SJ",
+    "code_3": "SJM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/sjm.svg",
+    "currency": "NOK"
+  },
+  {
+    "name": "Sweden",
+    "name_safe": "Sweden",
+    "continent": "Europe",
+    "code_numeric": "752",
+    "code_2": "SE",
+    "code_3": "SWE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/swe.svg",
+    "currency": "SEK"
+  },
+  {
+    "name": "Switzerland",
+    "name_safe": "Switzerland",
+    "continent": "Europe",
+    "code_numeric": "756",
+    "code_2": "CH",
+    "code_3": "CHE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/che.svg",
+    "currency": "CHF"
+  },
+  {
+    "name": "Syria",
+    "name_safe": "Syria",
+    "continent": "Asia",
+    "code_numeric": "760",
+    "code_2": "SY",
+    "code_3": "SYR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/syr.svg",
+    "currency": "SYP"
+  },
+  {
+    "name": "Taiwan",
+    "name_safe": "Taiwan",
+    "continent": "Asia",
+    "code_numeric": "158",
+    "code_2": "TW",
+    "code_3": "TWN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/twn.svg",
+    "currency": "TWD"
+  },
+  {
+    "name": "Tajikistan",
+    "name_safe": "Tajikistan",
+    "continent": "Asia",
+    "code_numeric": "762",
+    "code_2": "TJ",
+    "code_3": "TJK",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tjk.svg",
+    "currency": "TJS"
+  },
+  {
+    "name": "Tanzania",
+    "name_safe": "Tanzania",
+    "continent": "Africa",
+    "code_numeric": "834",
+    "code_2": "TZ",
+    "code_3": "TZA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tza.svg",
+    "currency": "TZS"
+  },
+  {
+    "name": "Thailand",
+    "name_safe": "Thailand",
+    "continent": "Asia",
+    "code_numeric": "764",
+    "code_2": "TH",
+    "code_3": "THA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tha.svg",
+    "currency": "THB"
+  },
+  {
+    "name": "Timor-Leste",
+    "name_safe": "TimorLeste",
+    "continent": "Asia",
+    "code_numeric": "626",
+    "code_2": "TL",
+    "code_3": "TLS",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tls.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Togo",
+    "name_safe": "Togo",
+    "continent": "Africa",
+    "code_numeric": "768",
+    "code_2": "TG",
+    "code_3": "TGO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tgo.svg",
+    "currency": "XOF"
+  },
+  {
+    "name": "Tokelau",
+    "name_safe": "Tokelau",
+    "continent": "Oceania",
+    "code_numeric": "772",
+    "code_2": "TK",
+    "code_3": "TKL",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tkl.svg",
+    "currency": "NZD"
+  },
+  {
+    "name": "Tonga",
+    "name_safe": "Tonga",
+    "continent": "Oceania",
+    "code_numeric": "776",
+    "code_2": "TO",
+    "code_3": "TON",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ton.svg",
+    "currency": "TOP"
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "name_safe": "TrinidadandTobago",
+    "continent": "North America",
+    "code_numeric": "780",
+    "code_2": "TT",
+    "code_3": "TTO",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tto.svg",
+    "currency": "TTD"
+  },
+  {
+    "name": "Tunisia",
+    "name_safe": "Tunisia",
+    "continent": "Africa",
+    "code_numeric": "788",
+    "code_2": "TN",
+    "code_3": "TUN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tun.svg",
+    "currency": "TND"
+  },
+  {
+    "name": "Turkey",
+    "name_safe": "Turkey",
+    "continent": "Asia",
+    "code_numeric": "792",
+    "code_2": "TR",
+    "code_3": "TUR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tur.svg",
+    "currency": "TRY"
+  },
+  {
+    "name": "Turkmenistan",
+    "name_safe": "Turkmenistan",
+    "continent": "Asia",
+    "code_numeric": "795",
+    "code_2": "TM",
+    "code_3": "TKM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tkm.svg",
+    "currency": "TMT"
+  },
+  {
+    "name": "Turks and Caicos Islands",
+    "name_safe": "TurksandCaicosIslands",
+    "continent": "North America",
+    "code_numeric": "796",
+    "code_2": "TC",
+    "code_3": "TCA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tca.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Tuvalu",
+    "name_safe": "Tuvalu",
+    "continent": "Oceania",
+    "code_numeric": "798",
+    "code_2": "TV",
+    "code_3": "TUV",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/tuv.svg",
+    "currency": "AUD"
+  },
+  {
+    "name": "Uganda",
+    "name_safe": "Uganda",
+    "continent": "Africa",
+    "code_numeric": "800",
+    "code_2": "UG",
+    "code_3": "UGA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/uga.svg",
+    "currency": "UGX"
+  },
+  {
+    "name": "Ukraine",
+    "name_safe": "Ukraine",
+    "continent": "Europe",
+    "code_numeric": "804",
+    "code_2": "UA",
+    "code_3": "UKR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ukr.svg",
+    "currency": "UAH"
+  },
+  {
+    "name": "United Arab Emirates",
+    "name_safe": "UnitedArabEmirates",
+    "continent": "Asia",
+    "code_numeric": "784",
+    "code_2": "AE",
+    "code_3": "ARE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/are.svg",
+    "currency": "AED"
+  },
+  {
+    "name": "United Kingdom",
+    "name_safe": "UnitedKingdom",
+    "continent": "Europe",
+    "code_numeric": "826",
+    "code_2": "GB",
+    "code_3": "GBR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/gbr.svg",
+    "currency": "GBP"
+  },
+  {
+    "name": "United States",
+    "name_safe": "UnitedStates",
+    "continent": "North America",
+    "code_numeric": "840",
+    "code_2": "US",
+    "code_3": "USA",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/usa.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "United States Minor Outlying Islands",
+    "name_safe": "UnitedStatesMinorOutlyingIslands",
+    "continent": "Oceania",
+    "code_numeric": "581",
+    "code_2": "UM",
+    "code_3": "UMI",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/umi.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Uruguay",
+    "name_safe": "Uruguay",
+    "continent": "South America",
+    "code_numeric": "858",
+    "code_2": "UY",
+    "code_3": "URY",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ury.svg",
+    "currency": "UYU"
+  },
+  {
+    "name": "Uzbekistan",
+    "name_safe": "Uzbekistan",
+    "continent": "Asia",
+    "code_numeric": "860",
+    "code_2": "UZ",
+    "code_3": "UZB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/uzb.svg",
+    "currency": "UZS"
+  },
+  {
+    "name": "Vanuatu",
+    "name_safe": "Vanuatu",
+    "continent": "Oceania",
+    "code_numeric": "548",
+    "code_2": "VU",
+    "code_3": "VUT",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vut.svg",
+    "currency": "VUV"
+  },
+  {
+    "name": "Venezuela",
+    "name_safe": "Venezuela",
+    "continent": "South America",
+    "code_numeric": "862",
+    "code_2": "VE",
+    "code_3": "VEN",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/ven.svg",
+    "currency": "VEF"
+  },
+  {
+    "name": "Vietnam",
+    "name_safe": "Vietnam",
+    "continent": "Asia",
+    "code_numeric": "704",
+    "code_2": "VN",
+    "code_3": "VNM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vnm.svg",
+    "currency": "VND"
+  },
+  {
+    "name": "British Virgin Islands",
+    "name_safe": "BritishVirginIslands",
+    "continent": "North America",
+    "code_numeric": "092",
+    "code_2": "VG",
+    "code_3": "VGB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vgb.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Virgin Islands of the United States",
+    "name_safe": "VirginIslandsoftheUnitedStates",
+    "continent": "North America",
+    "code_numeric": "850",
+    "code_2": "VI",
+    "code_3": "VIR",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/vir.svg",
+    "currency": "USD"
+  },
+  {
+    "name": "Wallis and Futuna",
+    "name_safe": "WallisandFutuna",
+    "continent": "Oceania",
+    "code_numeric": "876",
+    "code_2": "WF",
+    "code_3": "WLF",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/wlf.svg",
+    "currency": "XPF"
+  },
+  {
+    "name": "Western Sahara",
+    "name_safe": "WesternSahara",
+    "continent": "Africa",
+    "code_numeric": "732",
+    "code_2": "EH",
+    "code_3": "ESH",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/esh.svg",
+    "currency": "MAD"
+  },
+  {
+    "name": "Yemen",
+    "name_safe": "Yemen",
+    "continent": "Asia",
+    "code_numeric": "887",
+    "code_2": "YE",
+    "code_3": "YEM",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/yem.svg",
+    "currency": "YER"
+  },
+  {
+    "name": "Zambia",
+    "name_safe": "Zambia",
+    "continent": "Africa",
+    "code_numeric": "894",
+    "code_2": "ZM",
+    "code_3": "ZMB",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/zmb.svg",
+    "currency": "ZMW"
+  },
+  {
+    "name": "Zimbabwe",
+    "name_safe": "Zimbabwe",
+    "continent": "Africa",
+    "code_numeric": "716",
+    "code_2": "ZW",
+    "code_3": "ZWE",
+    "flag_url": "https://cdn.tinglesoftware.com/statics/countries/flags/svg/zwe.svg",
+    "currency": "BWP"
+  }
+]

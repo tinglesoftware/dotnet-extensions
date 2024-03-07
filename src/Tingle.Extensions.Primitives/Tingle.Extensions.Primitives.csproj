@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--<Description>Basics for push notifications via FCM, APNS etc</Description>-->
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tingle.Extensions.Primitives.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Base62-Net" Version="1.2.157201" />
+  </ItemGroup>
+
+</Project>
