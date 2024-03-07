@@ -1,9 +1,5 @@
 # Tingle.Extensions.EntityFrameworkCore
 
-If you are looking for documentation for this package. It does not exist yet. Please help write it.
-
-TODO: write this documentation file
-
 ## Converters
 
 |Source Types|BSON Destination Types|
