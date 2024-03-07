@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Caching.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnotations", "src\Tingle.Extensions.DataAnnotations\Tingle.Extensions.DataAnnotations.csproj", "{51FA6572-8EB6-4291-8D02-BB736057A50E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tingle.Extensions.EntityFrameworkCore", "src\Tingle.Extensions.EntityFrameworkCore\Tingle.Extensions.EntityFrameworkCore.csproj", "{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Http", "src\Tingle.Extensions.Http\Tingle.Extensions.Http.csproj", "{5BFAD4DB-D6A6-44F4-ACAB-B7B04E5A052E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Http.Authentication", "src\Tingle.Extensions.Http.Authentication\Tingle.Extensions.Http.Authentication.csproj", "{47F95938-964A-47FE-A0D6-1EDD0893455B}"
@@ -58,6 +60,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Caching.MongoDB.Tests", "tests\Tingle.Extensions.Caching.MongoDB.Tests\Tingle.Extensions.Caching.MongoDB.Tests.csproj", "{0EA063C6-9A97-4DE8-9344-5D2BDD301134}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.DataAnnotations.Tests", "tests\Tingle.Extensions.DataAnnotations.Tests\Tingle.Extensions.DataAnnotations.Tests.csproj", "{8E3530BB-ED60-4A2C-9BD2-C6879D67B4BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tingle.Extensions.EntityFrameworkCore.Tests", "tests\Tingle.Extensions.EntityFrameworkCore.Tests\Tingle.Extensions.EntityFrameworkCore.Tests.csproj", "{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tingle.Extensions.Http.Tests", "tests\Tingle.Extensions.Http.Tests\Tingle.Extensions.Http.Tests.csproj", "{41980843-7F99-4AD2-B9E9-B13FC349A150}"
 EndProject
@@ -272,6 +276,14 @@ Global
 		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -318,6 +330,8 @@ Global
 		{CFEE0754-9DAF-4AA6-98F3-477F065D7DC4} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 		{AC04C113-8F75-43BA-8FEE-987475A87C58} = {CE7124E9-01B3-4AD6-8B8F-FB302E60FB7F}
 		{009C5985-9DD4-45A8-A31E-4E6B7FE5EE78} = {9071B0C9-DE4D-411D-A9D3-CB7326CBBD80}
+		{32D8B776-DF01-4726-B76B-9D0D1A4B8EE3} = {9546186D-D4E1-4EDB-956E-1F81C7F4DB72}
+		{AE6F9F63-4EB0-4BD8-B407-4AE91184FB07} = {815F0941-3B70-4705-A583-AF627559595C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9323FCA-8E8B-4176-A463-87D202EC4552}

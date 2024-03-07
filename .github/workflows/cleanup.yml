@@ -19,6 +19,7 @@ jobs:
         - { name: 'Tingle.AspNetCore.Tokens' }
         - { name: 'Tingle.Extensions.Caching.MongoDB' }
         - { name: 'Tingle.Extensions.DataAnnotations' }
+        - { name: 'Tingle.Extensions.EntityFrameworkCore' }
         - { name: 'Tingle.Extensions.Http' }
         - { name: 'Tingle.Extensions.Http.Authentication' }
         - { name: 'Tingle.Extensions.JsonPatch' }
