@@ -25,9 +25,6 @@ on:
   schedule:
   - cron: '0 1 * * *' # daily at 1am UTC
 
-permissions:
-  packages: write
-
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
