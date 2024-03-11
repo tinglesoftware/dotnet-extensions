@@ -9,6 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+      time: "02:00"
     open-pull-requests-limit: 10
     groups:
       microsoft:
@@ -40,9 +41,11 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+      time: "02:00"
     open-pull-requests-limit: 10
   - package-ecosystem: "devcontainers" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+      time: "02:00"
     open-pull-requests-limit: 10
