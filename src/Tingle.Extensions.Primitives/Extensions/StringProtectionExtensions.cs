@@ -21,7 +21,7 @@ public enum StringProtectionPosition
     End,
 }
 
-/// <summary>Extension methods for <see cref="string"/>.</summary>
+/// <summary>Extension methods for <see cref="string"/> for protection.</summary>
 public static partial class StringProtectionExtensions
 {
     /// <summary>
