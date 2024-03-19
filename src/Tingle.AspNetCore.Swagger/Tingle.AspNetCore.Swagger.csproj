@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Usability extensions for Swagger middleware including smaller ReDoc support</Description>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <IsTrimmable>false</IsTrimmable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tingle.AspNetCore.Swagger.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ReDoc\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AnyOf" Version="0.3.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tingle.Extensions.Primitives\Tingle.Extensions.Primitives.csproj" />
+  </ItemGroup>
+
+</Project>
