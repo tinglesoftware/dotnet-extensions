@@ -11,6 +11,7 @@ This repository contains projects/libraries for adding useful functionality to .
 
 |Package|Description|
 |--|--|
+|[`Tingle.AspNetCore.ApplicationInsights`](https://www.nuget.org/packages/Tingle.AspNetCore.ApplicationInsights/)|Convenience functionality for Application Insights on AspNetCore such as collecting problem details. See [docs](./src/Tingle.AspNetCore.ApplicationInsights/README.md) and [sample](./samples/ApplicationInsightsSample)|
 |[`Tingle.AspNetCore.Authentication`](https://www.nuget.org/packages/Tingle.AspNetCore.Authentication/)|Convenience authentication functionality such as pass through and pre-shared key authentication mechanisms. See [docs](./src/Tingle.AspNetCore.Authentication/README.md) and [sample](./samples/AuthenticationSample)|
 |[`Tingle.AspNetCore.Authorization`](https://www.nuget.org/packages/Tingle.AspNetCore.Authorization/)|Additional authorization functionality such as handlers and requirements. See [docs](./src/Tingle.AspNetCore.Authorization/README.md) and [sample](./samples/AuthorizationSample)|
 |[`Tingle.AspNetCore.DataProtection.MongoDB`](https://www.nuget.org/packages/Tingle.AspNetCore.DataProtection.MongoDB/)|Data Protection store in [MongoDB](https://mongodb.com) for ASP.NET Core. See [docs](./src/Tingle.AspNetCore.DataProtection.MongoDB/README.md) and [sample](./samples/DataProtectionMongoDBSample).|
