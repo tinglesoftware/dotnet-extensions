@@ -12,6 +12,7 @@ jobs:
       fail-fast: true
       matrix:
         suite:
+        - { name: 'Tingle.AspNetCore.ApplicationInsights' }
         - { name: 'Tingle.AspNetCore.Authentication' }
         - { name: 'Tingle.AspNetCore.Authorization' }
         - { name: 'Tingle.AspNetCore.DataProtection.MongoDB' }

@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <NoWarn>$(NoWarn);CA1822;CA1031;IDE0060;IDE0059</NoWarn>
+    <OutputType>Exe</OutputType>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
