@@ -1,5 +1,10 @@
 # Tingle.AspNetCore.Swagger
 
+> [!CAUTION]
+> This documentation for `Tingle.AspNetCore.Swagger` may cover the mos recent version of the code. Use it sparingly
+> 
+> See https://github.com/tinglesoftware/dotnet-extensions/issues/221
+
 Swagger is a specification for documenting your API and specifies the format (URL, method, and representation) used to describe REST web services. This library is used to generate API documentation as well as add API documentation UI through ReDoc.
 
 The library includes the `Swashbuckle.AspNetCore.SwaggerGen` library which is a Swagger generator that builds the `SwaggerDocument` objects directly from your routes, controllers, and models. It is combined with the Swagger endpoint middleware to automatically expose Swagger JSON.
