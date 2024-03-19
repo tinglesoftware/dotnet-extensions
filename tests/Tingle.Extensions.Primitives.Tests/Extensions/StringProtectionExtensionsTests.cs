@@ -1,4 +1,4 @@
-﻿namespace Tingle.Extensions.Modeling.Tests;
+﻿namespace Tingle.Extensions.Primitives.Tests.Extensions;
 
 public class StringProtectionExtensionsTests
 {
