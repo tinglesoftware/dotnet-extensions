@@ -16,7 +16,7 @@ internal partial class ExtrasTelemetryInitializer(IHttpContextAccessor httpConte
 
     public void Initialize(ITelemetry telemetry)
     {
-        static void AddIfNotExsits(IDictionary<string, string> dictionary, string key, string? value)
+        static void AddIfNotExists(IDictionary<string, string> dictionary, string key, string? value)
         {
             key = GetPrefixFormat().Replace(key, string.Empty).ToLowerInvariant();
             if (!dictionary.ContainsKey(key) && !string.IsNullOrWhiteSpace(value)) dictionary[key] = value;
@@ -42,19 +42,19 @@ internal partial class ExtrasTelemetryInitializer(IHttpContextAccessor httpConte
             var headers = httpContext.Request.Headers;
 
             // populate the package Id
-            AddIfNotExsits(request.Properties, HeaderXAppPackageId, headers[HeaderXAppPackageId].FirstOrDefault());
+            AddIfNotExists(request.Properties, HeaderXAppPackageId, headers[HeaderXAppPackageId].FirstOrDefault());
 
             // populate the version name
-            AddIfNotExsits(request.Properties, HeaderXAppVersionName, headers[HeaderXAppVersionName].FirstOrDefault());
+            AddIfNotExists(request.Properties, HeaderXAppVersionName, headers[HeaderXAppVersionName].FirstOrDefault());
 
             // populate the version code
-            AddIfNotExsits(request.Properties, HeaderXAppVersionCode, headers[HeaderXAppVersionCode].FirstOrDefault());
+            AddIfNotExists(request.Properties, HeaderXAppVersionCode, headers[HeaderXAppVersionCode].FirstOrDefault());
 
             // populate the client from user-agent
-            AddIfNotExsits(request.Properties, KeyAppClient, httpContext.GetUserAgent());
+            AddIfNotExists(request.Properties, KeyAppClient, httpContext.GetUserAgent());
 
             // populate the IP address
-            AddIfNotExsits(request.Properties, KeyAppIpAddress, GetIpAddress(httpContext.Connection?.RemoteIpAddress));
+            AddIfNotExists(request.Properties, KeyAppIpAddress, GetIpAddress(httpContext.Connection?.RemoteIpAddress));
         }
     }
 
