@@ -2,9 +2,9 @@
 
 ## Converters
 
-|Source Types|BSON Destination Types|
+|Source Types|Destination Types|
 |--|--|
-|`System.Text.Json.Nodes.JsonObject`|`BsonDocument`|
+|`System.Text.Json.Nodes.JsonObject`|`string`|
 |`System.Text.Json.Nodes.JsonNode`|`string`|
 |`System.Text.Json.JsonElement`|`string`|
 |`System.Net.IPNetwork` (.NET 8 or later)|`String`|
