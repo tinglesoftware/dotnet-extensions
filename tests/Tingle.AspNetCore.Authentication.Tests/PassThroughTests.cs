@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 using Tingle.AspNetCore.Authentication.PassThrough;
 
 namespace Tingle.AspNetCore.Authentication.Tests;

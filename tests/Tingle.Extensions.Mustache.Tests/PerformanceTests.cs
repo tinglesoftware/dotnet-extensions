@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Tingle.Extensions.Mustache.Parsing;
 using Tingle.Extensions.Mustache.Rendering;
-using Xunit.Abstractions;
 
 namespace Tingle.Extensions.Mustache.Tests;
 

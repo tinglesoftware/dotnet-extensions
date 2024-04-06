@@ -1,10 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 using Tingle.Extensions.PushNotifications.Firebase;
 using Tingle.Extensions.PushNotifications.Firebase.Models;
-using Xunit.Abstractions;
 
 namespace Tingle.Extensions.PushNotifications.Tests;
 

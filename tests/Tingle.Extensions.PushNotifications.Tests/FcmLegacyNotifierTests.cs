@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Tingle.Extensions.PushNotifications.FcmLegacy;
+﻿using Tingle.Extensions.PushNotifications.FcmLegacy;
 using Tingle.Extensions.PushNotifications.FcmLegacy.Models;
-using Xunit.Abstractions;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 

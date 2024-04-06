@@ -8,7 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
     <Using Include="Xunit" />
+    <Using Include="Xunit.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">
+    <Using Include="Microsoft.Extensions.Logging" />
   </ItemGroup>
 
   <ItemGroup>

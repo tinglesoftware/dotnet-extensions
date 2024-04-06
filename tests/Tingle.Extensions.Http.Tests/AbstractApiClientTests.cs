@@ -1,9 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
-using Xunit.Abstractions;
 
 namespace Tingle.Extensions.Http.Tests;
 
