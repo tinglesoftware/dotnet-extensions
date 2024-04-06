@@ -16,6 +16,7 @@ jobs:
         - { name: 'Tingle.AspNetCore.Authentication' }
         - { name: 'Tingle.AspNetCore.Authorization' }
         - { name: 'Tingle.AspNetCore.DataProtection.MongoDB' }
+        - { name: 'Tingle.AspNetCore.JsonPatch' }
         - { name: 'Tingle.AspNetCore.JsonPatch.NewtonsoftJson' }
         - { name: 'Tingle.AspNetCore.Swagger' }
         - { name: 'Tingle.AspNetCore.Tokens' }
