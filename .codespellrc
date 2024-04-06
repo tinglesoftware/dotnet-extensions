@@ -1,4 +1,4 @@
 [codespell]
 skip = .git,*/wwwroot,*.g.cs,countries-20200124.json,iso-639-3.tab,iso-4217.json,countries.json,currencies.json,languages.json
 # some modules, parts of regexes, and variable names to ignore
-ignore-words-list = aci
+ignore-words-list = aci,eachs,coppy
