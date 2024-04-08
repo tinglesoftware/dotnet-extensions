@@ -22,11 +22,11 @@ If you have a template model like this (represented as JSON):
 
 And this template:
 
-`Welcome home {{ user.name }}`
+```Welcome home {{ user.name }}```
 
 The rendered output will be
 
-`Welcome home John`
+```Welcome home John```
 
 ### Sections
 
@@ -57,7 +57,7 @@ Data:
 
 Output:
 
-`Never Shown!`
+```Shown```
 
 #### Non-Empty Lists
 
@@ -116,7 +116,7 @@ Data:
 
 Output:
 
-`No repos!`
+```No repos!```
 
 #### Comments
 
