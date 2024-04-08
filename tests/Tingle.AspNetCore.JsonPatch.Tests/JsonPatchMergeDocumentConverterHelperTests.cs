@@ -145,12 +145,9 @@ public class JsonPatchMergeDocumentConverterHelperTests
             ["name"] = null,
         };
 
-        var operations = new List<Operations.Operation<Video>>();
-        JsonPatchMergeDocumentConverterHelper.PopulateOperations(operations, node);
-
         var video = new Video { Metadata = new() { ["primary"] = "cake", } };
         var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
-        var doc = new JsonPatchMergeDocument<Video>(operations, serializerOptions);
+        var doc = JsonSerializer.Deserialize<JsonPatchMergeDocument<Video>>(node.ToJsonString(), serializerOptions)!;
         doc.ApplyTo(video);
 
         Assert.Equal("rudi shule", Assert.Contains("swa", video.Translations).Body);
@@ -160,6 +157,7 @@ public class JsonPatchMergeDocumentConverterHelperTests
         Assert.Equal(["prod", "ken"], video.Tags);
         Assert.Equal("immigration", video.Description);
         Assert.Null(video.Name);
+        Assert.Equal("123", video.Id);
     }
 
     class Video
@@ -169,6 +167,7 @@ public class JsonPatchMergeDocumentConverterHelperTests
         public List<string> Tags { get; set; } = [];
         public string? Description { get; set; }
         public string Name { get; set; } = "nat-geo";
+        public string Id { get; set; } = "123";
     }
 
     class VideoTranslation
