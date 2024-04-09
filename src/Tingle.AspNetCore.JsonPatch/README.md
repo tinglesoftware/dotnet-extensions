@@ -97,7 +97,6 @@ Use in your controller
 
 ```cs
 [HttpPatch]
-[Consumes(JsonMergePatchDocument.ContentType)]
 public void Patch([FromBody] JsonPatchMergeDocument<Customer> patch)
 {
     ...
