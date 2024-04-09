@@ -34,6 +34,7 @@ For example, the following JSON documents represent a resource, a JSON Merge Pat
 
 ```json
 {
+    "id": "1",
     "name": null,
     "phone": "+254722000000",
     "country": "ken"
@@ -54,11 +55,14 @@ For example, the following JSON documents represent a resource, a JSON Merge Pat
 
 ```json
 {
+    "id": "1",
     "name": "Fabrikam",
     "phone": "+254722000001",
     "country": null
 }
 ```
+
+`id` property remains unchanged as it is not part of the merge patch request.
 
 ### JSON Merge Patch in ASP.NET Core
 
@@ -73,7 +77,7 @@ class Customer
 }
 ```
 
-Add the following logic in the `program.cs` file. This same logic can be added to `startup.cs`.
+Add the following logic in the `Program.cs` file. This same logic can be added to `Startup.cs`.
 
 ```cs
 var builder = WebApplication.CreateBuilder(args);
