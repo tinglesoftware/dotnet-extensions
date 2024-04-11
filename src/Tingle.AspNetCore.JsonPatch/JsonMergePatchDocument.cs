@@ -6,30 +6,30 @@ using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-[JsonConverter(typeof(JsonPatchMergeDocumentConverter))]
-public class JsonPatchMergeDocument(JsonPatchDocument inner) : IJsonPatchMergeDocument
+[JsonConverter(typeof(JsonMergePatchDocumentConverter))]
+public class JsonMergePatchDocument(JsonPatchDocument inner) : IJsonMergePatchDocument
 {
     private readonly JsonPatchDocument inner = inner ?? throw new ArgumentNullException(nameof(inner));
 
     [JsonIgnore]
     public JsonSerializerOptions SerializerOptions { get { return inner.SerializerOptions; } set { inner.SerializerOptions = value; } }
 
-    public JsonPatchMergeDocument() : this([]) { }
+    public JsonMergePatchDocument() : this([]) { }
 
-    public JsonPatchMergeDocument(List<Operation> operations) : this(operations, new()) { }
+    public JsonMergePatchDocument(List<Operation> operations) : this(operations, new()) { }
 
-    public JsonPatchMergeDocument(JsonSerializerOptions serializerOptions) : this([], serializerOptions) { }
+    public JsonMergePatchDocument(JsonSerializerOptions serializerOptions) : this([], serializerOptions) { }
 
-    public JsonPatchMergeDocument(List<Operation> operations, JsonSerializerOptions serializerOptions)
+    public JsonMergePatchDocument(List<Operation> operations, JsonSerializerOptions serializerOptions)
         : this(new JsonPatchDocument(operations, serializerOptions)) { }
 
     internal List<Operation> Operations => inner.Operations;
-    IList<Operation> IJsonPatchMergeDocument.GetOperations() => ((IJsonPatchDocument)inner).GetOperations();
+    IList<Operation> IJsonMergePatchDocument.GetOperations() => ((IJsonPatchDocument)inner).GetOperations();
 
     /// <summary>
-    /// Apply this JsonPatchMergeDocument
+    /// Apply this JsonMergePatchDocument
     /// </summary>
-    /// <param name="objectToApplyTo">Object to apply the JsonPatchMergeDocument to</param>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     public void ApplyTo(object objectToApplyTo)
     {
         ArgumentNullException.ThrowIfNull(objectToApplyTo);
@@ -38,9 +38,9 @@ public class JsonPatchMergeDocument(JsonPatchDocument inner) : IJsonPatchMergeDo
     }
 
     /// <summary>
-    /// Apply this JsonPatchMergeDocument
+    /// Apply this JsonMergePatchDocument
     /// </summary>
-    /// <param name="objectToApplyTo">Object to apply the JsonPatchMergeDocument to</param>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     /// <param name="logErrorAction">Action to log errors</param>
     public void ApplyTo(object objectToApplyTo, Action<JsonPatchError> logErrorAction)
     {
@@ -48,17 +48,17 @@ public class JsonPatchMergeDocument(JsonPatchDocument inner) : IJsonPatchMergeDo
     }
 
     /// <summary>
-    /// Apply this JsonPatchMergeDocument
+    /// Apply this JsonMergePatchDocument
     /// </summary>
-    /// <param name="objectToApplyTo">Object to apply the JsonPatchMergeDocument to</param>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     /// <param name="adapter">IObjectAdapter instance to use when applying</param>
     /// <param name="logErrorAction">Action to log errors</param>
     public void ApplyTo(object objectToApplyTo, IObjectAdapter adapter, Action<JsonPatchError> logErrorAction) => inner.ApplyTo(objectToApplyTo, adapter, logErrorAction);
 
     /// <summary>
-    /// Apply this JsonPatchMergeDocument
+    /// Apply this JsonMergePatchDocument
     /// </summary>
-    /// <param name="objectToApplyTo">Object to apply the JsonPatchMergeDocument to</param>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     /// <param name="adapter">IObjectAdapter instance to use when applying</param>
     public void ApplyTo(object objectToApplyTo, IObjectAdapter adapter) => inner.ApplyTo(objectToApplyTo, adapter);
 }

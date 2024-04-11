@@ -3,14 +3,14 @@ using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-public class JsonPatchMergeDocumentExtensionsTest
+public class JsonMergePatchDocumentExtensionsTest
 {
     [Fact]
-    public void ApplyTo_JsonPatchMergeDocument_ModelState()
+    public void ApplyTo_JsonMergePatchDocument_ModelState()
     {
         // Arrange
         var operation = new Operation<Customer>("add", "CustomerId", from: null, value: "TestName");
-        var patchDoc = new JsonPatchMergeDocument<Customer>();
+        var patchDoc = new JsonMergePatchDocument<Customer>();
         patchDoc.Operations.Add(operation);
 
         var modelState = new ModelStateDictionary();
@@ -24,11 +24,11 @@ public class JsonPatchMergeDocumentExtensionsTest
     }
 
     [Fact]
-    public void ApplyTo_JsonPatchMergeDocument_PrefixModelState()
+    public void ApplyTo_JsonMergePatchDocument_PrefixModelState()
     {
         // Arrange
         var operation = new Operation<Customer>("add", "CustomerId", from: null, value: "TestName");
-        var patchDoc = new JsonPatchMergeDocument<Customer>();
+        var patchDoc = new JsonMergePatchDocument<Customer>();
         patchDoc.Operations.Add(operation);
 
         var modelState = new ModelStateDictionary();
@@ -45,7 +45,7 @@ public class JsonPatchMergeDocumentExtensionsTest
     public void ApplyTo_ValidPatchOperation_NoErrorsAdded()
     {
         // Arrange
-        var patch = new JsonPatchMergeDocument<Customer>();
+        var patch = new JsonMergePatchDocument<Customer>();
         patch.Operations.Add(new Operation<Customer>("replace", "/CustomerName", null, "James"));
         var model = new Customer();
         var modelState = new ModelStateDictionary();
@@ -70,7 +70,7 @@ public class JsonPatchMergeDocumentExtensionsTest
         string error)
     {
         // Arrange
-        var patch = new JsonPatchMergeDocument<Customer>();
+        var patch = new JsonMergePatchDocument<Customer>();
         patch.Operations.Add(new Operation<Customer>(op, path, from, value));
         var model = new Customer();
         var modelState = new ModelStateDictionary();

@@ -4,19 +4,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-internal class SystemTextJsonPatchMergeInputFormatter : SystemTextJsonInputFormatter, IInputFormatterExceptionPolicy
+internal class SystemTextJsonMergePatchInputFormatter : SystemTextJsonInputFormatter, IInputFormatterExceptionPolicy
 {
     /// <summary>
-    /// Initializes a new instance of <see cref="SystemTextJsonPatchMergeInputFormatter"/>.
+    /// Initializes a new instance of <see cref="SystemTextJsonMergePatchInputFormatter"/>.
     /// </summary>
     /// <param name="options">The <see cref="JsonOptions"/>.</param>
     /// <param name="logger">The <see cref="ILogger"/>.</param>
-    public SystemTextJsonPatchMergeInputFormatter(JsonOptions options, ILogger<SystemTextJsonPatchMergeInputFormatter> logger) : base(options, logger)
+    public SystemTextJsonMergePatchInputFormatter(JsonOptions options, ILogger<SystemTextJsonMergePatchInputFormatter> logger) : base(options, logger)
     {
         // Clear all values and only include merge-patch+json value.
         SupportedMediaTypes.Clear();
 
-        SupportedMediaTypes.Add(MediaTypeHeaderValues.ApplicationJsonPatchMerge);
+        SupportedMediaTypes.Add(MediaTypeHeaderValues.ApplicationJsonMergePatch);
     }
 
     /// <inheritdoc />
@@ -24,7 +24,7 @@ internal class SystemTextJsonPatchMergeInputFormatter : SystemTextJsonInputForma
     {
         get
         {
-            if (GetType() == typeof(SystemTextJsonPatchMergeInputFormatter))
+            if (GetType() == typeof(SystemTextJsonMergePatchInputFormatter))
             {
                 return InputFormatterExceptionPolicy.MalformedInputExceptions;
             }
@@ -40,9 +40,9 @@ internal class SystemTextJsonPatchMergeInputFormatter : SystemTextJsonInputForma
         var result = await base.ReadRequestBodyAsync(context).ConfigureAwait(false);
         if (!result.HasError)
         {
-            if (result.Model is IJsonPatchMergeDocument jsonPatchMergeDocument && SerializerOptions is not null)
+            if (result.Model is IJsonMergePatchDocument jsonMergePatchDocument && SerializerOptions is not null)
             {
-                jsonPatchMergeDocument.SerializerOptions = SerializerOptions;
+                jsonMergePatchDocument.SerializerOptions = SerializerOptions;
             }
         }
 
@@ -55,7 +55,7 @@ internal class SystemTextJsonPatchMergeInputFormatter : SystemTextJsonInputForma
         ArgumentNullException.ThrowIfNull(context);
 
         var modelType = context.ModelType;
-        if (!typeof(IJsonPatchMergeDocument).IsAssignableFrom(modelType) ||
+        if (!typeof(IJsonMergePatchDocument).IsAssignableFrom(modelType) ||
             !modelType.IsGenericType)
         {
             return false;

@@ -5,10 +5,10 @@ namespace Tingle.AspNetCore.JsonPatch;
 
 /// <summary>
 /// Implements a provider of <see cref="ApiDescription"/> to change parameters of
-/// type <see cref="JsonPatchMergeDocument{TModel}"/> to the model type.
+/// type <see cref="JsonMergePatchDocument{TModel}"/> to the model type.
 /// </summary>
 /// <param name="modelMetadataProvider">The <see cref="IModelMetadataProvider"/>.</param>
-internal sealed class JsonPatchMergeDocumentProvider(IModelMetadataProvider modelMetadataProvider) : IApiDescriptionProvider
+internal sealed class JsonMergePatchDocumentProvider(IModelMetadataProvider modelMetadataProvider) : IApiDescriptionProvider
 {
     /// <inheritdoc />
     /// <remarks>
@@ -26,7 +26,7 @@ internal sealed class JsonPatchMergeDocumentProvider(IModelMetadataProvider mode
             foreach (var parameterDescription in result.ParameterDescriptions)
             {
                 var parameterType = parameterDescription.Type;
-                if (parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(JsonPatchMergeDocument<>))
+                if (parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(JsonMergePatchDocument<>))
                 {
                     var modelType = parameterType.GetGenericArguments()[0];
 

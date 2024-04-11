@@ -4,19 +4,19 @@ using System.Reflection;
 namespace Tingle.AspNetCore.JsonPatch;
 
 /// <summary>
-/// Extensions for <see cref="JsonPatchMergeDocument{T}"/>
+/// Extensions for <see cref="JsonMergePatchDocument{T}"/>
 /// </summary>
-public static class JsonPatchMergeDocumentExtensions
+public static class JsonMergePatchDocumentExtensions
 {
     /// <summary>
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/> .
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{TModel}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{TModel}"/>  is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{TModel}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="immutableProperties">The properties that are not allowed to changed</param>
-    public static void ApplyToSafely<T>(this JsonPatchMergeDocument<T> patchDoc,
+    public static void ApplyToSafely<T>(this JsonMergePatchDocument<T> patchDoc,
                                         T objectToApplyTo,
                                         ModelStateDictionary modelState,
                                         IEnumerable<string> immutableProperties)
@@ -39,12 +39,12 @@ public static class JsonPatchMergeDocumentExtensions
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/> .
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{TModel}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{TModel}"/>  is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{TModel}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="prefix">The prefix to use when looking up values in <see cref="ModelStateDictionary"/>.</param>
     /// <param name="immutableProperties">The properties that are not allowed to changed</param>
-    public static void ApplyToSafely<T>(this JsonPatchMergeDocument<T> patchDoc,
+    public static void ApplyToSafely<T>(this JsonMergePatchDocument<T> patchDoc,
                                         T objectToApplyTo,
                                         ModelStateDictionary modelState,
                                         string prefix,
@@ -82,10 +82,10 @@ public static class JsonPatchMergeDocumentExtensions
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/> .
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{TModel}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{TModel}"/>  is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{TModel}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
-    public static void ApplyToSafely<T>(this JsonPatchMergeDocument<T> patchDoc,
+    public static void ApplyToSafely<T>(this JsonMergePatchDocument<T> patchDoc,
                                         T objectToApplyTo,
                                         ModelStateDictionary modelState)
         where T : class
@@ -103,11 +103,11 @@ public static class JsonPatchMergeDocumentExtensions
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/> .
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{TModel}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{TModel}"/>  is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{TModel}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{TModel}"/>  is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/>  to add errors.</param>
     /// <param name="prefix">The prefix to use when looking up values in <see cref="ModelStateDictionary"/>.</param>
-    public static void ApplyToSafely<T>(this JsonPatchMergeDocument<T> patchDoc,
+    public static void ApplyToSafely<T>(this JsonMergePatchDocument<T> patchDoc,
                                         T objectToApplyTo,
                                         ModelStateDictionary modelState,
                                         string prefix)
@@ -149,10 +149,10 @@ public static class JsonPatchMergeDocumentExtensions
     /// <summary>
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/>.
     /// </summary>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{T}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{T}"/> is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{T}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{T}"/> is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/> to add errors.</param>
-    public static void ApplyTo<T>(this JsonPatchMergeDocument<T> patchDoc, T objectToApplyTo, ModelStateDictionary modelState) where T : class
+    public static void ApplyTo<T>(this JsonMergePatchDocument<T> patchDoc, T objectToApplyTo, ModelStateDictionary modelState) where T : class
     {
         ArgumentNullException.ThrowIfNull(patchDoc);
         ArgumentNullException.ThrowIfNull(objectToApplyTo);
@@ -164,11 +164,11 @@ public static class JsonPatchMergeDocumentExtensions
     /// <summary>
     /// Applies JSON patch operations on object and logs errors in <see cref="ModelStateDictionary"/>.
     /// </summary>
-    /// <param name="patchDoc">The <see cref="JsonPatchMergeDocument{T}"/>.</param>
-    /// <param name="objectToApplyTo">The entity on which <see cref="JsonPatchMergeDocument{T}"/> is applied.</param>
+    /// <param name="patchDoc">The <see cref="JsonMergePatchDocument{T}"/>.</param>
+    /// <param name="objectToApplyTo">The entity on which <see cref="JsonMergePatchDocument{T}"/> is applied.</param>
     /// <param name="modelState">The <see cref="ModelStateDictionary"/> to add errors.</param>
     /// <param name="prefix">The prefix to use when looking up values in <see cref="ModelStateDictionary"/>.</param>
-    public static void ApplyTo<T>(this JsonPatchMergeDocument<T> patchDoc, T objectToApplyTo, ModelStateDictionary modelState, string prefix) where T : class
+    public static void ApplyTo<T>(this JsonMergePatchDocument<T> patchDoc, T objectToApplyTo, ModelStateDictionary modelState, string prefix) where T : class
     {
         ArgumentNullException.ThrowIfNull(patchDoc);
         ArgumentNullException.ThrowIfNull(objectToApplyTo);
