@@ -4,7 +4,7 @@ using Tingle.AspNetCore.JsonPatch.Converters;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-public class JsonPatchMergeDocumentConverterHelperTests
+public class JsonMergePatchDocumentConverterHelperTests
 {
     [Fact]
     public void PopulateOperations_Works()
@@ -30,7 +30,7 @@ public class JsonPatchMergeDocumentConverterHelperTests
         };
 
         var operations = new List<Operations.Operation<Video>>();
-        JsonPatchMergeDocumentConverterHelper.PopulateOperations(operations, node);
+        JsonMergePatchDocumentConverterHelper.PopulateOperations(operations, node);
 
         Assert.Equal([
             "add",
@@ -96,7 +96,7 @@ public class JsonPatchMergeDocumentConverterHelperTests
             var type = operation.OperationType;
             var segments = operation.path.Trim('/').Split('/'); ;
             var opvalue = type is Operations.OperationType.Remove ? null : operation.value;
-            JsonPatchMergeDocumentConverterHelper.PopulateJsonObject(node, segments, opvalue, serializerOptions);
+            JsonMergePatchDocumentConverterHelper.PopulateJsonObject(node, segments, opvalue, serializerOptions);
         }
 
         var expected = new JsonObject
@@ -147,7 +147,7 @@ public class JsonPatchMergeDocumentConverterHelperTests
 
         var video = new Video { Metadata = new() { ["primary"] = "cake", } };
         var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
-        var doc = JsonSerializer.Deserialize<JsonPatchMergeDocument<Video>>(node.ToJsonString(), serializerOptions)!;
+        var doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Video>>(node.ToJsonString(), serializerOptions)!;
         doc.ApplyTo(video);
 
         Assert.Equal("rudi shule", Assert.Contains("swa", video.Translations).Body);

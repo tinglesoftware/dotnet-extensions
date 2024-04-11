@@ -3,7 +3,7 @@ using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-public interface IJsonPatchMergeDocument
+public interface IJsonMergePatchDocument
 {
     JsonSerializerOptions SerializerOptions { get; set; }
 

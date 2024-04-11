@@ -7,6 +7,6 @@ internal static class MediaTypeHeaderValues
     public static readonly MediaTypeHeaderValue ApplicationJsonPatch
         = MediaTypeHeaderValue.Parse("application/json-patch+json").CopyAsReadOnly();
 
-    public static readonly MediaTypeHeaderValue ApplicationJsonPatchMerge
+    public static readonly MediaTypeHeaderValue ApplicationJsonMergePatch
         = MediaTypeHeaderValue.Parse("application/merge-patch+json").CopyAsReadOnly();
 }

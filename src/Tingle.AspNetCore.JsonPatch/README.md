@@ -102,7 +102,7 @@ Use in your controller
 
 ```cs
 [HttpPatch]
-public void Patch([FromBody] JsonPatchMergeDocument<Customer> patch)
+public void Patch([FromBody] JsonMergePatchDocument<Customer> patch)
 {
     ...
     patch.ApplyTo(customer, ModelState);

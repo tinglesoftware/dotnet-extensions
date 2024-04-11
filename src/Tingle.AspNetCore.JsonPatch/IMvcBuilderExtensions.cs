@@ -23,7 +23,7 @@ public static class IMvcBuilderExtensions
             ServiceDescriptor.Transient<IApiDescriptionProvider, JsonPatchOperationsArrayProvider>());
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApiDescriptionProvider, JsonPatchMergeDocumentProvider>());
+            ServiceDescriptor.Transient<IApiDescriptionProvider, JsonMergePatchDocumentProvider>());
 
         services.TryAddEnumerable(
             ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, JsonPatchMvcOptionsSetup>());
@@ -55,9 +55,9 @@ public static class IMvcBuilderExtensions
 
             options.InputFormatters.Insert(
                 0,
-                new SystemTextJsonPatchMergeInputFormatter(
+                new SystemTextJsonMergePatchInputFormatter(
                     jsonOptions,
-                    loggerFactory.CreateLogger<SystemTextJsonPatchMergeInputFormatter>()));
+                    loggerFactory.CreateLogger<SystemTextJsonMergePatchInputFormatter>()));
         }
     }
 }

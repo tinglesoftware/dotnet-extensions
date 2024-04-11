@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace Tingle.AspNetCore.JsonPatch.Converters;
 
-public class JsonPatchMergeDocumentConverter : JsonConverter<JsonPatchMergeDocument>
+public class JsonMergePatchDocumentConverter : JsonConverter<JsonMergePatchDocument>
 {
     /// <inheritdoc/>
-    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(JsonPatchMergeDocument);
+    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(JsonMergePatchDocument);
 
     /// <inheritdoc/>
-    public override JsonPatchMergeDocument? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override JsonMergePatchDocument? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Null) return default;
         if (reader.TokenType is not JsonTokenType.StartObject)
@@ -21,13 +21,13 @@ public class JsonPatchMergeDocumentConverter : JsonConverter<JsonPatchMergeDocum
         var no = new JsonNodeOptions { PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive, };
         var node = JsonNode.Parse(ref reader, no)!.AsObject();
         var operations = new List<Operations.Operation>();
-        JsonPatchMergeDocumentConverterHelper.PopulateOperations(operations, node);
+        JsonMergePatchDocumentConverterHelper.PopulateOperations(operations, node);
 
-        return new JsonPatchMergeDocument(operations, options);
+        return new JsonMergePatchDocument(operations, options);
     }
 
     /// <inheritdoc/>
-    public override void Write(Utf8JsonWriter writer, JsonPatchMergeDocument value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, JsonMergePatchDocument value, JsonSerializerOptions options)
     {
         // convert the operations to a JSON object
         var operations = value.Operations ?? [];
@@ -39,7 +39,7 @@ public class JsonPatchMergeDocumentConverter : JsonConverter<JsonPatchMergeDocum
             if (type is Operations.OperationType.Add or Operations.OperationType.Replace)
             {
                 var segments = operation.path.Trim('/').Split('/');
-                JsonPatchMergeDocumentConverterHelper.PopulateJsonObject(node, segments, operation.value, options);
+                JsonMergePatchDocumentConverterHelper.PopulateJsonObject(node, segments, operation.value, options);
             }
         }
 
@@ -48,13 +48,13 @@ public class JsonPatchMergeDocumentConverter : JsonConverter<JsonPatchMergeDocum
     }
 }
 
-public class JsonPatchMergeDocumentConverter<TModel> : JsonConverter<JsonPatchMergeDocument<TModel>> where TModel : class
+public class JsonMergePatchDocumentConverter<TModel> : JsonConverter<JsonMergePatchDocument<TModel>> where TModel : class
 {
     /// <inheritdoc/>
-    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(JsonPatchMergeDocument<TModel>);
+    public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(JsonMergePatchDocument<TModel>);
 
     /// <inheritdoc/>
-    public override JsonPatchMergeDocument<TModel>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override JsonMergePatchDocument<TModel>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Null) return default;
         if (reader.TokenType is not JsonTokenType.StartObject)
@@ -65,13 +65,13 @@ public class JsonPatchMergeDocumentConverter<TModel> : JsonConverter<JsonPatchMe
         var no = new JsonNodeOptions { PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive, };
         var node = JsonNode.Parse(ref reader, no)!.AsObject();
         var operations = new List<Operations.Operation<TModel>>();
-        JsonPatchMergeDocumentConverterHelper.PopulateOperations(operations, node);
+        JsonMergePatchDocumentConverterHelper.PopulateOperations(operations, node);
 
-        return new JsonPatchMergeDocument<TModel>(operations, options);
+        return new JsonMergePatchDocument<TModel>(operations, options);
     }
 
     /// <inheritdoc/>
-    public override void Write(Utf8JsonWriter writer, JsonPatchMergeDocument<TModel> value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, JsonMergePatchDocument<TModel> value, JsonSerializerOptions options)
     {
         // convert the operations to a JSON object
         var operations = value.Operations ?? [];
@@ -82,7 +82,7 @@ public class JsonPatchMergeDocumentConverter<TModel> : JsonConverter<JsonPatchMe
             var type = operation.OperationType;
             var segments = operation.path.Trim('/').Split('/');
             var opvalue = type is Operations.OperationType.Remove ? null : operation.value;
-            JsonPatchMergeDocumentConverterHelper.PopulateJsonObject(node, segments, opvalue, options);
+            JsonMergePatchDocumentConverterHelper.PopulateJsonObject(node, segments, opvalue, options);
         }
 
         // write the object
@@ -90,7 +90,7 @@ public class JsonPatchMergeDocumentConverter<TModel> : JsonConverter<JsonPatchMe
     }
 }
 
-internal static class JsonPatchMergeDocumentConverterHelper
+internal static class JsonMergePatchDocumentConverterHelper
 {
     internal static void PopulateJsonObject(JsonObject node, IReadOnlyList<string> segments, object? value, JsonSerializerOptions options)
     {

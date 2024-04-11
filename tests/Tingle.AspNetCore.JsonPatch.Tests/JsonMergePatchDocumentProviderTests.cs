@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
-public class JsonPatchMergeDocumentProviderTests
+public class JsonMergePatchDocumentProviderTests
 {
     [Fact]
     public void OnProvidersExecuting_FindsJsonPatchDocuments_ProvidesOperationsArray()
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var provider = new JsonPatchMergeDocumentProvider(metadataProvider);
-        var jsonPatchMergeParameterDescription = new ApiParameterDescription
+        var provider = new JsonMergePatchDocumentProvider(metadataProvider);
+        var jsonMergePatchParameterDescription = new ApiParameterDescription
         {
-            Type = typeof(JsonPatchMergeDocument<Customer>)
+            Type = typeof(JsonMergePatchDocument<Customer>)
         };
 
         var stringParameterDescription = new ApiParameterDescription
@@ -23,7 +23,7 @@ public class JsonPatchMergeDocumentProviderTests
         };
 
         var apiDescription = new ApiDescription();
-        apiDescription.ParameterDescriptions.Add(jsonPatchMergeParameterDescription);
+        apiDescription.ParameterDescriptions.Add(jsonMergePatchParameterDescription);
         apiDescription.ParameterDescriptions.Add(stringParameterDescription);
 
         var actionDescriptorList = new List<ActionDescriptor>();
