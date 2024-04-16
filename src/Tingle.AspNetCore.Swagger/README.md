@@ -1,62 +1,270 @@
 # Tingle.AspNetCore.Swagger
 
-> [!CAUTION]
-> This documentation for `Tingle.AspNetCore.Swagger` may not cover the most recent version of the code. Use it sparingly
-> 
-> See <https://github.com/tinglesoftware/dotnet-extensions/issues/221>
+This library contains a bunch of extensions for [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore).
 
-Swagger is a specification for documenting your API and specifies the format (URL, method, and representation) used to describe REST web services. This library is used to generate API documentation as well as add API documentation UI through ReDoc.
+## Getting started
 
-The library includes the `Swashbuckle.AspNetCore.SwaggerGen` library which is a Swagger generator that builds the `SwaggerDocument` objects directly from your routes, controllers, and models. It is combined with the Swagger endpoint middleware to automatically expose Swagger JSON.
+To use the extensions, install [NuGet package](https://www.nuget.org/packages/Tingle.AspNetCore.Swagger/) into your project.
 
-Swashbuckle relies heavily on `ApiExplorer` (the API metadata layer that ships with ASP.NET Core). If using `AddMvcCore` for a more pared down MVC stack, you'll need to explicitly add the `ApiExplorer` service.
+Then use whichever annotations or extensions (filters) you need.
 
-In `ConfigureServices` method of `Program.cs`, add `MvcCore` service, the `ApiExplorer` service, and register the Swagger generator defining one or more Swagger documents.
+## Extensions Use
+
+### Add error codes
+
+Annotate your controller action methods with the `OperationErrorCodes` attribute to indicate which error codes can be expected to be returned:
 
 ```cs
-// Add swagger documents generation
-builder.Services.AddSwaggerGen(options =>
-{
-    options
-        .AddDocuments(services.BuildServiceProvider(), ConstStrings.ApiDocsTitle, System.IO.File.ReadAllText("apidesc.md"))
-        .AlwaysShowAuthorizationFailedResponse()
-        .AlwaysShowBadRequestResponse();
+using Microsoft.AspNetCore.Mvc;
 
-    options.IncludeXmlComments<Program>();
+[HttpGet("{id}")]
+[OperationErrorCodes("user_not_found", "user_ineligible_for_account")]
+public async Task<IActionResult> CreateAccountAsync([FromRoute, Required] string id){ }
+```
+
+Then configure Swashbuckle to incorporate the error codes into the generated swagger documentation. In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AddErrorCodes();
+})
+```
+
+You can optionally add descriptions to the error codes by supplying an instance of `IDictionary<string, string>` to `AddErrorCodes(...)`.
+
+### Add extra tags
+
+You can use tags to provide additional metadata to operations. You can do this by annotating your controllers or action methods with the `OperationExtraTag` attribute:
+
+```cs
+using Microsoft.AspNetCore.Mvc;
+
+[Route("/devices")]
+[OperationExtraTag("Devices", Description = "Accessing Device Operations", ExternalDocsUrl = "https://redocly.github.io/redoc/example-logo.png")]
+public class DevicesController : ControllerBase { }
+```
+
+Then configure Swashbuckle to incorporate the extra tags into the generated swagger documentation. In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AddExtraTags();
+})
+```
+
+You can further control the tags by [grouping them](#add-tag-groups).
+
+### Add tag groups
+
+Use `x-tagGroups` to group tags in the Reference docs navigation sidebar.
+
+Add controllers you wish to group:
+
+```cs
+using Microsoft.AspNetCore.Mvc;
+
+[Route("/devices")]
+public class DevicesController : ControllerBase { }
+
+[Route("/telemetry")]
+public class TelemetryController : ControllerBase { }
+```
+
+Then configure Swashbuckle to incorporate the tag groups into the generated swagger documentation. In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+using Tingle.AspNetCore.Swagger;
+
+var tagGroups = new new List<OpenApiTagGroup>
+{
+    new OpenApiTagGroup("Engineering", new List<string>
+    {
+        "Telemetry",
+        "Devices"
+    })
+};
+
+services.AddSwaggerGen(options =>
+{
+    options.AddTagGroups(tagGroups);
+})
+```
+
+By default, any tags that haven't been added to any group will be left as is. However, if you'd like to add them to a `ungrouped` grouping you can set the `addUngrouped` parameter in `AddTagGroups(...)` to `true`.
+
+### Add description for Bad Request (400) Responses
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AlwaysShowBadRequestResponse();
+})
+```
+
+### Add description for Unauthorized (401) and Forbidden (403) Responses
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AlwaysShowAuthorizationFailedResponse();
+})
+```
+
+### Hide your internal APIs
+
+Sometimes you may want to hide your endpoints internal use only. You can do this by annotating your controllers or action methods with the `InternalOnly` attribute:
+
+```cs
+using Microsoft.AspNetCore.Mvc;
+
+[InternalOnly]
+[Route("/devices")]
+public class DevicesController : ControllerBase { }
+```
+
+Then you can add the `x-internal` to the API description. In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AddInternalOnlyExtensions();
+})
+```
+
+Then you can generate an external and internal version of the API. More details can be found [here](https://redocly.com/docs/cli/guides/hide-apis/#step-3-output-internal-and-external-apis).
+
+### Add Correlation ID headers to all operations
+
+You can add the `X-Correlation-ID` headers to all operations, that are used to uniquely identify the HTTP request, as shown below:
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AddCorrelationIds();
+})
+```
+
+By default, the header is only indicated to be part of the response headers. If you'd like the header to appear among the request headers you can set the `includeInRequests` parameter in `AddCorrelationIds(...)` to `true`.
+
+### Add Logo
+
+Use `x-logo` to add a custom logo image to your API reference documentation. For example:
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+var logo = new OpenApiReDocLogo
+{
+    Url = "https://redocly.github.io/redoc/example-logo.png",
+    BackgroundColor = "#FFFFFF",
+    AltText = "Example logo"
+};
+
+services.AddSwaggerGen(options =>
+{
+    options.AddReDocLogo();
+})
+```
+
+When specified, the logo image is displayed above the navigation sidebar, on the left side of the API documentation page.
+
+### Add swagger documents from API version descriptions
+
+You can automatically discover API versions declared in code and generate swagger documents as shown below:
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>{});
+services.AddSwaggerDocsAutoDiscovery(title: "My docs", description: "My description", skipDeprecated: false, deprecationSuffix: "[deprecated]");
+```
+
+If you'd like to add swagger docs for only particular API versions.
+
+Annotate a controller with an API version:
+
+```cs
+using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
+
+[ApiVersion("v1")]
+[Route("/devices")]
+public class DevicesController : ControllerBase { }
+```
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
+{
+    options.AddDocument(documentName: "v1", versionName: "v1", title: "My v1 docs", description: "My v1 docs");
 });
 ```
 
-In the `Configure` method of `Program.cs`, insert middleware to expose the generated Swagger as JSON endpoints.
+You can use the various `AddDocument(...)` or `AddDocuments(...)` overloads to also achieve the same result.
+
+### Add conversion of XML comments extracted for Swagger to markdown
+
+In the `Program.cs` or `Startup.cs`:
 
 ```cs
-// Add swagger schema docs
-app.MapSwagger(options => options.PreSerializeFilters.Add((swaggerDoc, httpRequest) => swaggerDoc.Host = httpRequest.Host.Value));
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options => { });
+services.AddSwaggerXmlToMarkdown();
 ```
 
-In the code snippet above, the `SwaggerDocument` and the current `HttpRequest` are passed to the filter thus providing a lot of flexibility. The filter will be executed prior to serializing the document.
+### Add enum descriptions
 
-ReDoc functionalities are described in the sections below:
-
-## ReDoc
-
-ReDoc adds API documentation UI. It can be used to document complex request/response payloads. It also supports nested schemas and displays them in place with the ability to collapse or expand.
-
-This library is used to add ReDoc middleware to the HTTP request pipeline. This adds API documentation UI.
-
-## Setup
-
-Add the following code logic to `Program.cs`
+In the `Program.cs` or `Startup.cs`:
 
 ```cs
-// Add ReDoc services
-builder.Services.AddReDoc(o =>
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options => { });
+services.AddSwaggerEnumDescriptions();
+```
+
+This should be called after all XML documents have been added.
+
+### Add XML comments from summary and remarks into the swagger documentation
+
+In the `Program.cs` or `Startup.cs`:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddSwaggerGen(options =>
 {
-    o.DocumentTitle = ConstStrings.ApiDocsTitle;
-    o.DefaultDocumentName = $"v{ConstStrings.ApiVersion2}";
+    options.IncludeXmlCommentsFromInheritDocs();
 });
-
-var app = builder.Build();
-
-// Add API documentation UI via ReDoc
-app.MapReDoc();
 ```
+
+You can alternatively use the `IncludeXmlComments(...)` extension to add XML comments from a file in a certain directory or from the assembly of the specified type.
