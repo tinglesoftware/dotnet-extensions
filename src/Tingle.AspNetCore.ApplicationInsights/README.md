@@ -1,52 +1,72 @@
 # Tingle.AspNetCore.ApplicationInsights
 
-> [!CAUTION]
-> This documentation for `Tingle.AspNetCore.ApplicationInsights` may not cover the most recent version of the code. Use it sparingly
-> 
-> See <https://github.com/tinglesoftware/dotnet-extensions/issues/224>
+This library provides some extensions for [Microsoft.ApplicationInsights](https://github.com/Microsoft/ApplicationInsights-dotnet).
 
-This is a customized library developed by Tingle. The `ApplicationInsights` package in AspNetCore offers functionality to understand how the application is performing and how it is being used. `Tingle.AspNetCore.ApplicationInsights` has additional functionality for Application Insights on AspNetCore mainly used in building Tingle APIs and Services.
+## Add details of the request source to application insights telemetry
 
-## Adding to Service Collections
+You can add some request source details to the `RequestTelemetry` that is sent along to application insights. The following details can be added:
 
-The following logic is added to `Program.cs` file:
+- The package name which should be found in the `X-App-Package-Id` request header
+- The version name which should be found in the `X-App-Version-Name` request header
+- The version code which should be found in the `X-App-Version-Code` request header
+- The User Agent which should be found in the `User-Agent` request header
+- The IP address
 
-```csharp
-// Enables Application Insights telemetry collection
-builder.Services.AddApplicationInsightsTelemetryExtras(builder.Configuration)
+To accomplish this, add the following logic to `Program.cs` or `Startup.cs` file:
+
+```cs
+services.AddApplicationInsightsTelemetryExtras();
+services.AddHttpContextAccessor();
 ```
 
-This library has a number of extensibility points, one of them being the telemetry initializer. To implement the telemetry initializer, a class is created that implements the `ITelemetryInitializer` interface.  In this case, `ExtrasTelemetryInitializer` is a class implementing `ITelemetryInitializer` interface. The `ExtrasTelemetryInitializer` extends ApplicationInsights telemetry collection by supplying additional information about the application which includes the `AppPackageId`, `AppVersionName`, `AppVersionCode`, `AppClient`, `AppIpAddress` and `AppKind`.
+We've injected the `IHttpContextAccessor` in the DI container so that we can access the `HttpContext` object that contains the HTTP request details.
 
-In the `ITelemetryInitializer` interface's `Initialize` method, a `HttpContext` object is created. Whenever a new HTTP request or response is made, a `HttpContext` object is created which wraps all HTTP related information in one place. The `HttpContext` object is accessed through the `IHttpContextAccessor` and its default implementation `HttpAccessor`. It is necessary to use the `IHttpContextAccessor` so as to access the `HttpContext` object within a service.
+The request source details will be seen as custom properties of an application insights telemetry record.
 
-The initializers are used to mark every collected telemetry item with the current web request identity so that traces and exceptions can be correlated to corresponding requests.
+## Add all request headers to application insights telemetry
 
-The library is used to track error details in application insights when the response is `BadRequestObjectResult` with the value of type `ProblemDetails`.
+You can send all request headers to application insights by adding the following logic to `Program.cs` or `Startup.cs` file:
 
-From the request header, the application's package ID, version name, version code, client, IP address and kind properties are extracted so that the traces and exceptions can be correlated/matched to the corresponding requests.
-
-## Configuration
-
-The instrumentation key is specified in configuration. The following code sample shows how to specify an instrumentation key in `appsettings.json.`
-
-```json
-{
-  "ApplicationInsights:InstrumentationKey":"#{ApplicationInsightsInstrumentationKey}#"
-}
+```cs
+services.AddApplicationInsightsTelemetryHeaders();
+services.AddHttpContextAccessor();
 ```
 
-## Sample Usage
+We've injected the `IHttpContextAccessor` in the DI container so that we can access the `HttpContext` object that contains the HTTP request details.
 
-```csharp
+The request headers will be seen as custom properties of an application insights telemetry record.
+
+## Add manual dependency tracking in application insights
+
+A dependency is a component that's called by your application. It's typically a service called by using HTTP, a database, or a file system. Application Insights measures the duration of dependency calls and whether it's failing or not, along with information like the name of the dependency. You can investigate specific dependency calls and correlate them to requests and exceptions. The list of dependencies that are automatically tracked can be seen [here](https://learn.microsoft.com/en-us/azure/azure-monitor/app/asp-net-dependencies#automatically-tracked-dependencies).
+
+So how do we assist in tracking of dependencies that aren't automatically tracked?
+
+We do this by using [ActivitySource](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.activitysource?view=net-5.0&ref=jimmybogard.com)/[ActivityListener](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.activitylistener?view=net-5.0&ref=jimmybogard.com) APIs, which make it quite a bit simpler to raise and listen to events for `Activity` start/stop.
+
+Per conventions, the activity source name should be the name of the assembly creating the activities. That makes it much easier to "discover" activities, you don't have to expose a constant or search through source code to discern the name.
+
+We can then create an `IHostedService` that uses `ActivityListener` internally, collects from the `ActivitySources` that are needed, creates instance(s) of `DependencyTelemetry` then sends to application insights via the [TrackDependency API](https://learn.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics#trackdependency).
+
+This can be accomplished by adding the following logic to `Program.cs` or `Startup.cs` file:
+
+```cs
+services.AddActivitySourceDependencyCollector(["Tingle.EventBus", "Tingle.Extensions.MongoDB"]);
+```
+
+You can replace the array of activities supplied in `AddActivitySourceDependencyCollector(...)` with your own.
+
+## Track problem details in application insights
+
+Track the problem details in application insights when the response is a `BadRequestObjectResult` with value of `ProblemDetails`. The properties are seen as custom properties of an application insights telemetry record. To do this, annotate your controller with the `TrackProblems` attribute:
+
+```cs
 [TrackProblems]
 [ApiVersion("1")]
 [Route("v{version:apiVersion}/[controller]")]
 public class DummyController : ControllerBase
 {
   [HttpPost]
-  [ProducesResponseType(typeof(RequestEntry), 200)]
-  [ProducesResponseType(typeof(ErrorModel), 400)]
   public async Task<IActionResult> SendAsync([FromBody] SendRequestModel model)
   {
       ...
