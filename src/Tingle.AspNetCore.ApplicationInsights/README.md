@@ -38,7 +38,7 @@ The request headers will be seen as custom properties of an application insights
 
 ## Add manual dependency tracking in application insights
 
-A dependency is a component that's called by your application. It's typically a service called by using HTTP, a database, or a file system. Application Insights measures the duration of dependency calls and whether it's failing or not, along with information like the name of the dependency. You can investigate specific dependency calls and correlate them to requests and exceptions. The list of dependencies that are automatically tracked can be seen [here](https://learn.microsoft.com/en-us/azure/azure-monitor/app/asp-net-dependencies).
+A dependency is a component that's called by your application. It's typically a service called by using HTTP, a database, or a file system. Application Insights measures the duration of dependency calls and whether it's failing or not, along with information like the name of the dependency. You can investigate specific dependency calls and correlate them to requests and exceptions. The list of dependencies that are automatically tracked can be seen [here](https://learn.microsoft.com/en-us/azure/azure-monitor/app/asp-net-dependencies#automatically-tracked-dependencies).
 
 So how do we assist in tracking of dependencies that aren't automatically tracked?
 
