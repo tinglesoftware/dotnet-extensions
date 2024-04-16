@@ -21,6 +21,8 @@ services.AddHttpContextAccessor();
 
 We've injected the `IHttpContextAccessor` in the DI container so that we can access the `HttpContext` object that contains the HTTP request details.
 
+The request source details will be seen as custom properties of an application insights telemetry record.
+
 ## Add all request headers to application insights telemetry
 
 You can send all request headers to application insights by adding the following logic to `Program.cs` or `Startup.cs` file:
@@ -31,6 +33,8 @@ services.AddHttpContextAccessor();
 ```
 
 We've injected the `IHttpContextAccessor` in the DI container so that we can access the `HttpContext` object that contains the HTTP request details.
+
+The request headers will be seen as custom properties of an application insights telemetry record.
 
 ## Add manual dependency tracking in application insights
 
