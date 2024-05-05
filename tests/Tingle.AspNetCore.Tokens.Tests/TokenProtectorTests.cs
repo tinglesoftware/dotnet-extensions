@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
@@ -14,70 +15,52 @@ public class TokenProtectorTests
     public void Protection_Works()
     {
         var rnd = new Random();
-        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
-        AssertValueEncryptDecrypt(options, Guid.NewGuid());                                  // Guid
-        AssertValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue));            // int
-        AssertValueEncryptDecrypt(options, Convert.ToInt64(rnd.NextDouble() * int.MinValue));// long
-        AssertValueEncryptDecrypt(options, rnd.NextDouble() * int.MinValue);                 // double
-        AssertValueEncryptDecrypt(options, DateTimeOffset.UtcNow);                           // DateTimeOffset
-        AssertValueEncryptDecrypt(options, DateTime.UtcNow);                                 // DateTime
-        AssertValueEncryptDecrypt(options, Guid.NewGuid().ToString());                       // string
-    }
-
-    [Fact]
-    public void Protection_With_UseConversionInsteadOfJson_Works()
-    {
-        var rnd = new Random();
-        var options = new OptionsSnapshot<TokenProtectorOptions>(new() { UseConversionInsteadOfJson = true, });
-
-        AssertValueEncryptDecrypt(options, Guid.NewGuid());                                        // Guid
-        AssertValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue));                  // int
-        AssertValueEncryptDecrypt(options, Convert.ToInt64(rnd.NextDouble() * int.MinValue));      // long
-        AssertValueEncryptDecrypt(options, rnd.NextDouble() * int.MinValue);                       // double
-        AssertValueEncryptDecrypt(options, DateTimeOffset.UtcNow, true);                           // DateTimeOffset
-        AssertValueEncryptDecrypt(options, DateTime.UtcNow, true);                                 // DateTime
-        AssertValueEncryptDecrypt(options, Guid.NewGuid().ToString());                             // string
+        AssertValueEncryptDecrypt(Guid.NewGuid());                                      // Guid
+        AssertValueEncryptDecrypt(rnd.Next(int.MinValue, int.MaxValue));                // int
+        AssertValueEncryptDecrypt(Convert.ToInt64(rnd.NextDouble() * int.MinValue));    // long
+        AssertValueEncryptDecrypt(rnd.NextDouble() * int.MinValue);                     // double
+        AssertValueEncryptDecrypt(DateTimeOffset.UtcNow);                               // DateTimeOffset
+        AssertValueEncryptDecrypt(DateTime.UtcNow);                                     // DateTime
+        AssertValueEncryptDecrypt(Guid.NewGuid().ToString());                           // string
     }
 
     [Fact]
     public void TimeLimited_Protection_Works()
     {
         var rnd = new Random();
-        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
         // test with absolute expiration
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
-        AssertTimeLimitedValueEncryptDecrypt(options, Guid.NewGuid(), expiration);                                  // Guid
-        AssertTimeLimitedValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue), expiration);            // int
-        AssertTimeLimitedValueEncryptDecrypt(options, Convert.ToInt64(rnd.NextDouble() * int.MinValue), expiration);// long
-        AssertTimeLimitedValueEncryptDecrypt(options, rnd.NextDouble() * int.MinValue, expiration);                 // double
-        AssertTimeLimitedValueEncryptDecrypt(options, DateTimeOffset.UtcNow, expiration);                           // DateTimeOffset
-        AssertTimeLimitedValueEncryptDecrypt(options, DateTime.UtcNow, expiration);                                 // DateTime
-        AssertTimeLimitedValueEncryptDecrypt(options, Guid.NewGuid().ToString(), expiration);                       // string
+        AssertTimeLimitedValueEncryptDecrypt(Guid.NewGuid(), expiration);                                   // Guid
+        AssertTimeLimitedValueEncryptDecrypt(rnd.Next(int.MinValue, int.MaxValue), expiration);             // int
+        AssertTimeLimitedValueEncryptDecrypt(Convert.ToInt64(rnd.NextDouble() * int.MinValue), expiration); // long
+        AssertTimeLimitedValueEncryptDecrypt(rnd.NextDouble() * int.MinValue, expiration);                  // double
+        AssertTimeLimitedValueEncryptDecrypt(DateTimeOffset.UtcNow, expiration);                            // DateTimeOffset
+        AssertTimeLimitedValueEncryptDecrypt(DateTime.UtcNow, expiration);                                  // DateTime
+        AssertTimeLimitedValueEncryptDecrypt(Guid.NewGuid().ToString(), expiration);                        // string
 
         // not test with lifespan
         var lifespan = TimeSpan.FromSeconds(60);
-        AssertTimeLimitedValueEncryptDecrypt(options, Guid.NewGuid(), lifespan);                                  // Guid
-        AssertTimeLimitedValueEncryptDecrypt(options, rnd.Next(int.MinValue, int.MaxValue), lifespan);            // int
-        AssertTimeLimitedValueEncryptDecrypt(options, Convert.ToInt64(rnd.NextDouble() * int.MinValue), lifespan);// long
-        AssertTimeLimitedValueEncryptDecrypt(options, rnd.NextDouble() * int.MinValue, lifespan);                 // double
-        AssertTimeLimitedValueEncryptDecrypt(options, DateTimeOffset.UtcNow, lifespan);                           // DateTimeOffset
-        AssertTimeLimitedValueEncryptDecrypt(options, DateTime.UtcNow, lifespan);                                 // DateTime
-        AssertTimeLimitedValueEncryptDecrypt(options, Guid.NewGuid().ToString(), lifespan);                       // string
+        AssertTimeLimitedValueEncryptDecrypt(Guid.NewGuid(), lifespan);                                     // Guid
+        AssertTimeLimitedValueEncryptDecrypt(rnd.Next(int.MinValue, int.MaxValue), lifespan);               // int
+        AssertTimeLimitedValueEncryptDecrypt(Convert.ToInt64(rnd.NextDouble() * int.MinValue), lifespan);   // long
+        AssertTimeLimitedValueEncryptDecrypt(rnd.NextDouble() * int.MinValue, lifespan);                    // double
+        AssertTimeLimitedValueEncryptDecrypt(DateTimeOffset.UtcNow, lifespan);                              // DateTimeOffset
+        AssertTimeLimitedValueEncryptDecrypt(DateTime.UtcNow, lifespan);                                    // DateTime
+        AssertTimeLimitedValueEncryptDecrypt(Guid.NewGuid().ToString(), lifespan);                          // string
     }
 
     [Fact]
     public void TimeLimited_Protection_Works_On_DataClass()
     {
         var d = TestDataClass.CreateRandom();
-        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
 
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
-        AssertTimeLimitedValueEncryptDecrypt(options, d, expiration);
+        AssertTimeLimitedValueEncryptDecrypt(d, expiration);
 
         var lifespan = TimeSpan.FromSeconds(60);
-        AssertTimeLimitedValueEncryptDecrypt(options, d, lifespan);
+        AssertTimeLimitedValueEncryptDecrypt( d, lifespan);
     }
 
     [Fact]
@@ -86,30 +69,31 @@ public class TokenProtectorTests
         var d = TestDataClass.CreateRandom();
         var expiration = DateTimeOffset.UtcNow.AddSeconds(1);
 
-        var options = new OptionsSnapshot<TokenProtectorOptions>(new());
-        var ctc = new TokenProtector<TestDataClass>(protectionProvider, options);
-        var enc = ctc.Protect(d, expiration);
+        var options = new OptionsSnapshot<JsonOptions>(new());
+        var prot = new TokenProtector<TestDataClass>(protectionProvider, options);
+        var enc = prot.Protect(d, expiration);
 
         // delay the usage
         await Task.Delay(TimeSpan.FromSeconds(2));
 
-        var ex = Assert.ThrowsAny<CryptographicException>(() => ctc.UnProtect(enc, out DateTimeOffset actualExpiration));
+        var ex = Assert.ThrowsAny<CryptographicException>(() => prot.UnProtect(enc, out DateTimeOffset actualExpiration));
         Assert.StartsWith("The payload expired", ex.Message);
 
         var lifespan = TimeSpan.FromSeconds(1);
 
-        ctc = new TokenProtector<TestDataClass>(protectionProvider, options);
-        enc = ctc.Protect(d, lifespan);
+        prot = new TokenProtector<TestDataClass>(protectionProvider, options);
+        enc = prot.Protect(d, lifespan);
 
         // delay the usage
         await Task.Delay(TimeSpan.FromSeconds(2));
 
-        ex = Assert.ThrowsAny<CryptographicException>(() => ctc.UnProtect(enc, out DateTimeOffset actualExpiration));
+        ex = Assert.ThrowsAny<CryptographicException>(() => prot.UnProtect(enc, out DateTimeOffset actualExpiration));
         Assert.StartsWith("The payload expired", ex.Message);
     }
 
-    private void AssertValueEncryptDecrypt<T>(IOptionsSnapshot<TokenProtectorOptions> options, T datum, bool unwrapDateTime = false)
+    private void AssertValueEncryptDecrypt<T>(T datum, bool unwrapDateTime = false)
     {
+        var options = new OptionsSnapshot<JsonOptions>(new());
         ITokenProtector<T> prot = new TokenProtector<T>(protectionProvider, options);
         var actual = prot.UnProtect(prot.Protect(datum));
         if (unwrapDateTime && typeof(T) == typeof(DateTime))
@@ -123,16 +107,18 @@ public class TokenProtectorTests
         else Assert.Equal(datum, actual);
     }
 
-    private void AssertTimeLimitedValueEncryptDecrypt<T>(IOptionsSnapshot<TokenProtectorOptions> options, T datum, DateTimeOffset expectedExpiration)
+    private void AssertTimeLimitedValueEncryptDecrypt<T>(T datum, DateTimeOffset expectedExpiration)
     {
+        var options = new OptionsSnapshot<JsonOptions>(new());
         ITokenProtector<T> prot = new TokenProtector<T>(protectionProvider, options);
         var actual = prot.UnProtect(prot.Protect(datum, expectedExpiration), out DateTimeOffset actualExpiration);
         Assert.Equal(datum, actual);
         Assert.Equal(expectedExpiration, actualExpiration);
     }
 
-    private void AssertTimeLimitedValueEncryptDecrypt<T>(IOptionsSnapshot<TokenProtectorOptions> options, T datum, TimeSpan lifespan)
+    private void AssertTimeLimitedValueEncryptDecrypt<T>(T datum, TimeSpan lifespan)
     {
+        var options = new OptionsSnapshot<JsonOptions>(new());
         ITokenProtector<T> prot = new TokenProtector<T>(protectionProvider, options);
         var actual = prot.UnProtect(prot.Protect(datum, lifespan), out _);
         Assert.Equal(datum, actual);

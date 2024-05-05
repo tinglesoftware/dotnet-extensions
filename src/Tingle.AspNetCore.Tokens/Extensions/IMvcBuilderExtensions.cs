@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.CodeAnalysis;
-using Tingle.AspNetCore.Tokens;
 using Tingle.AspNetCore.Tokens.Binders;
 using Tingle.AspNetCore.Tokens.Protection;
 
@@ -26,17 +24,11 @@ public static class IMvcBuilderExtensions
     /// Redis, Blob Storage, Windows Registry etc.
     /// </summary>
     /// <param name="builder">The application's MVC builder.</param>
-    /// <param name="configure">
-    /// An <see cref="Action{T}"/> to further configure instances of <see cref="TokenProtectorOptions"/>.
-    /// </param>
     /// <returns>The modified builder.</returns>
-    [RequiresUnreferencedCode(MessageStrings.TokenProtectorUnreferencedCodeMessage)]
-    [RequiresDynamicCode(MessageStrings.TokenProtectorRequiresDynamicCodeMessage)]
-    public static IMvcBuilder AddTokens(this IMvcBuilder builder, Action<TokenProtectorOptions>? configure = null)
+    public static IMvcBuilder AddTokens(this IMvcBuilder builder)
     {
         // Register the protector services
         var services = builder.Services;
-        if (configure != null) services.Configure(configure);
         services.AddScoped(typeof(ITokenProtector<>), typeof(TokenProtector<>));
 
         return builder.AddMvcOptions(options =>

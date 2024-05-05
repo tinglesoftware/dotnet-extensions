@@ -11,5 +11,5 @@ public static class TokenDefaults
     public const string ContinuationTokenHeaderName = "X-Continuation-Token";
 
     // change this name when the encrypting process changes
-    internal const string ProtectorPurpose = "Tingle.Tokens.v2019-12-27";
+    internal const string ProtectorPurpose = "Tingle.AspNetCore.Tokens.v2024-05-05";
 }

@@ -19,11 +19,9 @@ internal class ContinuationTokenJsonConverter : JsonConverter<IToken>
     /// <inheritdoc/>
     public override IToken Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         => throw new NotSupportedException("Tokens cannot be deserialized because they are protected (obscure) data."
-                                           + " Use model binding instead.");
+                                         + " Use model binding instead.");
 
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, IToken value, JsonSerializerOptions options)
-    {
-        writer.WriteStringValue(value.GetProtected());
-    }
+        => writer.WriteStringValue(value.GetProtected());
 }
