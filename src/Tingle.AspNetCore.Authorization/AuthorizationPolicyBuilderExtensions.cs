@@ -94,7 +94,7 @@ public static class AuthorizationPolicyBuilderExtensions
     /// Adds an <see cref="ApprovedIPNetworkRequirement"/> to the current instance, using known Azure IPs that are cached locally.
     /// Ensure the necessary Authorization and framework services are added to the same collection
     /// using <c>services.AddApprovedNetworksHandler(...)</c>.
-    /// Networks used are retrieved using <see cref="AzureIPNetworks.AzureIPsHelper"/>.
+    /// Networks used are retrieved using <see cref="AzureIPNetworks.AzureIPsProvider.Local"/>.
     /// </summary>
     /// <param name="builder">The instance to add to</param>
     /// <param name="cloud">The Azure Cloud which to allow.</param>
@@ -116,10 +116,9 @@ public static class AuthorizationPolicyBuilderExtensions
     /// Adds an <see cref="ApprovedIPNetworkRequirement"/> to the current instance, using known Azure IPs from an instance of <see cref="AzureIPNetworks.AzureIPsProvider"/>.
     /// Ensure the necessary Authorization and framework services are added to the same collection
     /// using <c>services.AddApprovedNetworksHandler(...)</c>.
-    /// Networks used are retrieved using <see cref="AzureIPNetworks.AzureIPsHelper"/>.
     /// </summary>
     /// <param name="builder">The instance to add to</param>
-    /// <param name="provider">The <see cref="AzureIPNetworks.AzureIPsProvider"/> to use.</param>
+    /// <param name="provider">The <see cref="AzureIPNetworks.AzureIPsProvider"/> to use for retrieval.</param>
     /// <param name="cloud">The Azure Cloud which to allow.</param>
     /// <param name="service">
     /// (Optional) The name of the service whose IP ranges to allow.
@@ -136,6 +135,60 @@ public static class AuthorizationPolicyBuilderExtensions
                                                                     string? region = null)
     {
         var networks = provider.GetNetworksAsync(cloud, service, region)
+                               .AsTask()
+                               .GetAwaiter()
+                               .GetResult()
+                               .ToArray();
+
+        // create the requirement and add it to the builder
+        return builder.RequireApprovedNetworks(networks);
+    }
+
+    /// <summary>
+    /// Adds an <see cref="ApprovedIPNetworkRequirement"/> to the current instance, using known Azure IPs that are cached locally.
+    /// Ensure the necessary Authorization and framework services are added to the same collection
+    /// using <c>services.AddApprovedNetworksHandler(...)</c>.
+    /// Networks used are retrieved using <see cref="AzureIPNetworks.AzureIPsProvider"/>.
+    /// </summary>
+    /// <param name="builder">The instance to add to</param>
+    /// <param name="cloud">The Azure Cloud which to allow.</param>
+    /// <param name="services">
+    /// (Optional) The name of the services whose IP ranges to allow.
+    /// When not provided(null), IPs from all services are added.
+    /// </param>
+    /// <param name="regions">
+    /// (Optional) The name of the regions whose IP ranges to allow.
+    /// When not provided(null), IPs from all regions are added.
+    /// </param>
+    public static AuthorizationPolicyBuilder RequireAzureIPNetworks(this AuthorizationPolicyBuilder builder,
+                                                                    AzureIPNetworks.AzureCloud cloud,
+                                                                    IReadOnlyList<string> services,
+                                                                    IReadOnlyList<string> regions)
+        => builder.RequireAzureIPNetworks(AzureIPNetworks.AzureIPsProvider.Local, cloud, services, regions);
+
+    /// <summary>
+    /// Adds an <see cref="ApprovedIPNetworkRequirement"/> to the current instance, using known Azure IPs from an instance of <see cref="AzureIPNetworks.AzureIPsProvider"/>.
+    /// Ensure the necessary Authorization and framework services are added to the same collection
+    /// using <c>services.AddApprovedNetworksHandler(...)</c>.
+    /// </summary>
+    /// <param name="builder">The instance to add to</param>
+    /// <param name="provider">The <see cref="AzureIPNetworks.AzureIPsProvider"/> to use for retrieval.</param>
+    /// <param name="cloud">The Azure Cloud which to allow.</param>
+    /// <param name="services">
+    /// (Optional) The name of the services whose IP ranges to allow.
+    /// When not provided(null), IPs from all services are added.
+    /// </param>
+    /// <param name="regions">
+    /// (Optional) The name of the regions whose IP ranges to allow.
+    /// When not provided(null), IPs from all regions are added.
+    /// </param>
+    public static AuthorizationPolicyBuilder RequireAzureIPNetworks(this AuthorizationPolicyBuilder builder,
+                                                                    AzureIPNetworks.AzureIPsProvider provider,
+                                                                    AzureIPNetworks.AzureCloud cloud,
+                                                                    IReadOnlyList<string> services,
+                                                                    IReadOnlyList<string> regions)
+    {
+        var networks = provider.GetNetworksAsync(cloud, services, regions)
                                .AsTask()
                                .GetAwaiter()
                                .GetResult()
