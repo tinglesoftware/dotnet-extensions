@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using Tingle.AspNetCore.Tokens.Protection;
 
@@ -16,6 +17,8 @@ namespace Tingle.AspNetCore.Tokens.Binders;
 /// The implementation is responsible for encrypting and decrypting where needed.
 /// </param>
 /// <param name="logger">The application's logger, specialized for <see cref="ContinuationTokenModelBinder{T}"/>.</param>
+[RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+[RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
 internal class ContinuationTokenModelBinder<T>(ITokenProtector<T> protector, ILogger<ContinuationTokenModelBinder<T>> logger) : IModelBinder
 {
     private readonly ITokenProtector<T> protector = protector ?? throw new ArgumentNullException(nameof(protector));
