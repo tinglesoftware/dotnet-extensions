@@ -9,8 +9,7 @@ internal class PassThroughPostConfigureOptions : IPostConfigureOptions<PassThrou
 {
     public void PostConfigure(string? name, PassThroughOptions options)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options));
+        ArgumentNullException.ThrowIfNull(options);
 
         options.Events ??= new PassThroughEvents();
     }

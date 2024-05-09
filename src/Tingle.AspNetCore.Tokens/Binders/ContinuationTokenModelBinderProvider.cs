@@ -17,7 +17,7 @@ internal class ContinuationTokenModelBinderProvider : IModelBinderProvider
     /// <inheritdoc/>
     public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
-        if (context == null) throw new ArgumentNullException(nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
 
         // ensure the model type is generic
         var modelType = context.Metadata.ModelType;

@@ -25,10 +25,10 @@ public static class JsonPatchDocumentExtensions
         ModelStateDictionary modelState,
         IEnumerable<string> immutableProperties) where T : class
     {
-        if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
-        if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
-        if (modelState == null) throw new ArgumentNullException(nameof(modelState));
-        if (immutableProperties == null) throw new ArgumentNullException(nameof(immutableProperties));
+        ArgumentNullException.ThrowIfNull(patchDoc);
+        ArgumentNullException.ThrowIfNull(objectToApplyTo);
+        ArgumentNullException.ThrowIfNull(modelState);
+        ArgumentNullException.ThrowIfNull(immutableProperties);
 
         // if we get here, there are no changes to the immutable properties
         // we can thus proceed to apply the other properties
@@ -54,10 +54,10 @@ public static class JsonPatchDocumentExtensions
         string prefix,
         IEnumerable<string> immutableProperties) where T : class
     {
-        if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
-        if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
-        if (modelState == null) throw new ArgumentNullException(nameof(modelState));
-        if (immutableProperties == null) throw new ArgumentNullException(nameof(immutableProperties));
+        ArgumentNullException.ThrowIfNull(patchDoc);
+        ArgumentNullException.ThrowIfNull(objectToApplyTo);
+        ArgumentNullException.ThrowIfNull(modelState);
+        ArgumentNullException.ThrowIfNull(immutableProperties);
 
         // check each operation
         foreach (var op in patchDoc.Operations)
@@ -93,9 +93,9 @@ public static class JsonPatchDocumentExtensions
         T objectToApplyTo,
         ModelStateDictionary modelState) where T : class
     {
-        if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
-        if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
-        if (modelState == null) throw new ArgumentNullException(nameof(modelState));
+        ArgumentNullException.ThrowIfNull(patchDoc);
+        ArgumentNullException.ThrowIfNull(objectToApplyTo);
+        ArgumentNullException.ThrowIfNull(modelState);
 
         // if we get here, there are no changes to the immutable properties
         // we can thus proceed to apply the other properties
@@ -116,9 +116,9 @@ public static class JsonPatchDocumentExtensions
         ModelStateDictionary modelState,
         string prefix) where T : class
     {
-        if (patchDoc == null) throw new ArgumentNullException(nameof(patchDoc));
-        if (objectToApplyTo == null) throw new ArgumentNullException(nameof(objectToApplyTo));
-        if (modelState == null) throw new ArgumentNullException(nameof(modelState));
+        ArgumentNullException.ThrowIfNull(patchDoc);
+        ArgumentNullException.ThrowIfNull(objectToApplyTo);
+        ArgumentNullException.ThrowIfNull(modelState);
 
         var attrs = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
         var properties = typeof(T).GetProperties(attrs).Select(p =>

@@ -15,7 +15,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetEmail(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("email") ?? principal.FindFirstValue(ClaimTypes.Email);
     }
 
@@ -26,7 +26,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static bool? GetEmailVerified(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         var value = principal.FindFirstValue("email_verified");
         if (bool.TryParse(value, out var result)) return result;
         return null;
@@ -39,7 +39,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetUpn(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue(ClaimTypes.Upn);
     }
 
@@ -51,7 +51,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetEmailOrUpn(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.GetEmail() ?? principal.GetUpn();
     }
 
@@ -62,7 +62,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetPreferredUsername(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("preferred_username");
     }
 
@@ -73,7 +73,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetName(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("name") ?? principal.FindFirstValue(ClaimTypes.Name);
     }
 
@@ -91,7 +91,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetNameId(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue(ClaimTypes.NameIdentifier);
     }
 
@@ -102,7 +102,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetSub(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("sub");
     }
 
@@ -122,7 +122,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetObjectId(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue(Constants.ObjectIdentifierClaimType);
     }
 
@@ -134,7 +134,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetUserId(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.GetObjectId() ?? principal.GetNameId() ?? principal.GetSub();
     }
 
@@ -145,7 +145,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetTenantId(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue(Constants.TenantIdClaimType);
     }
 
@@ -156,7 +156,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetPhoneNumber(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("phone_number");
     }
 
@@ -167,7 +167,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static bool? GetPhoneNumberVerified(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         var value = principal.FindFirstValue("phone_number_verified");
         if (bool.TryParse(value, out var result)) return result;
         return null;
@@ -181,7 +181,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static string? GetAddress(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         return principal.FindFirstValue("address");
     }
 
@@ -193,7 +193,7 @@ public static class ClaimsPrincipalExtensions
     /// <returns></returns>
     public static AddressClaim? GetAddressDecoded(this ClaimsPrincipal principal)
     {
-        if (principal == null) throw new ArgumentNullException(nameof(principal));
+        ArgumentNullException.ThrowIfNull(principal);
         var json = principal.GetAddress();
         if (string.IsNullOrWhiteSpace(json)) return default;
         return Text.Json.JsonSerializer.Deserialize(json, SC.Default.AddressClaim);

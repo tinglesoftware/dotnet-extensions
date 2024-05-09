@@ -9,8 +9,7 @@ internal class SharedKeyPostConfigureOptions : IPostConfigureOptions<SharedKeyOp
 {
     public void PostConfigure(string? name, SharedKeyOptions options)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options));
+        ArgumentNullException.ThrowIfNull(options);
 
         options.Events ??= new SharedKeyEvents();
 

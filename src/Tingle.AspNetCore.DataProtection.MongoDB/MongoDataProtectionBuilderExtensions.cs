@@ -19,10 +19,7 @@ public static class MongoDataProtectionBuilderExtensions
     /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
     public static IDataProtectionBuilder PersistKeysToMongo(this IDataProtectionBuilder builder)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgumentNullException.ThrowIfNull(builder);
 
         return PersistKeysToMongo(builder, (services) =>
         {
@@ -51,15 +48,9 @@ public static class MongoDataProtectionBuilderExtensions
     /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
     public static IDataProtectionBuilder PersistKeysToMongo(this IDataProtectionBuilder builder, IMongoClient client, string databaseName, string collectionName)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgumentNullException.ThrowIfNull(builder);
 
-        if (client == null)
-        {
-            throw new ArgumentNullException(nameof(client));
-        }
+        ArgumentNullException.ThrowIfNull(client);
 
         return PersistKeysToMongo(builder, () => client.GetDatabase(databaseName).GetCollection<DataProtectionKey>(collectionName));
     }
@@ -73,15 +64,9 @@ public static class MongoDataProtectionBuilderExtensions
     /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
     public static IDataProtectionBuilder PersistKeysToMongo(this IDataProtectionBuilder builder, IMongoDatabase database, string collectionName)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgumentNullException.ThrowIfNull(builder);
 
-        if (database == null)
-        {
-            throw new ArgumentNullException(nameof(database));
-        }
+        ArgumentNullException.ThrowIfNull(database);
 
         return PersistKeysToMongo(builder, () => database.GetCollection<DataProtectionKey>(collectionName));
     }
@@ -94,15 +79,9 @@ public static class MongoDataProtectionBuilderExtensions
     /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
     public static IDataProtectionBuilder PersistKeysToMongo(this IDataProtectionBuilder builder, Func<IServiceProvider, IMongoCollection<DataProtectionKey>> collectionFactory)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgumentNullException.ThrowIfNull(builder);
 
-        if (collectionFactory == null)
-        {
-            throw new ArgumentNullException(nameof(collectionFactory));
-        }
+        ArgumentNullException.ThrowIfNull(collectionFactory);
 
         builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
         {
@@ -122,15 +101,9 @@ public static class MongoDataProtectionBuilderExtensions
     /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
     public static IDataProtectionBuilder PersistKeysToMongo(this IDataProtectionBuilder builder, Func<IMongoCollection<DataProtectionKey>> collectionFactory)
     {
-        if (builder == null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
+        ArgumentNullException.ThrowIfNull(builder);
 
-        if (collectionFactory == null)
-        {
-            throw new ArgumentNullException(nameof(collectionFactory));
-        }
+        ArgumentNullException.ThrowIfNull(collectionFactory);
 
         builder.Services.Configure<KeyManagementOptions>(options =>
         {

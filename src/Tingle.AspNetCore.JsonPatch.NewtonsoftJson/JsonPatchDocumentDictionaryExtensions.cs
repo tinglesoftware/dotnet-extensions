@@ -28,10 +28,7 @@ public static class JsonPatchDocumentDictionaryExtensions
         where TModel : class
         where TKey : IConvertible
     {
-        if (path == null)
-        {
-            throw new ArgumentNullException(nameof(path));
-        }
+        ArgumentNullException.ThrowIfNull(path);
 
         document.Operations.Add(
             new Operation<TModel>(
@@ -61,10 +58,7 @@ public static class JsonPatchDocumentDictionaryExtensions
         where TModel : class
         where TKey : IConvertible
     {
-        if (path == null)
-        {
-            throw new ArgumentNullException(nameof(path));
-        }
+        ArgumentNullException.ThrowIfNull(path);
 
         document.Operations.Add(
             new Operation<TModel>(
@@ -92,10 +86,7 @@ public static class JsonPatchDocumentDictionaryExtensions
         where TModel : class
         where TKey : IConvertible
     {
-        if (path == null)
-        {
-            throw new ArgumentNullException(nameof(path));
-        }
+        ArgumentNullException.ThrowIfNull(path);
 
         document.Operations.Add(
             new Operation<TModel>(
