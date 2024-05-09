@@ -14,7 +14,9 @@ internal class SharedKeyPostConfigureOptions : IPostConfigureOptions<SharedKeyOp
         options.Events ??= new SharedKeyEvents();
 
         if (string.IsNullOrWhiteSpace(options.HeaderValuePrefix))
-            throw new ArgumentNullException(nameof(options.HeaderValuePrefix));
+        {
+            throw new InvalidOperationException($"{nameof(options.HeaderValuePrefix)} must be specified");
+        }
 
         if (options.ValidationParameters.DateHeaderNames == null || options.ValidationParameters.DateHeaderNames.Count < 1)
         {
@@ -29,8 +31,7 @@ internal class SharedKeyPostConfigureOptions : IPostConfigureOptions<SharedKeyOp
         // if path prefix is specified, it must start with a '/'
         if (!string.IsNullOrWhiteSpace(options.ValidationParameters.PathPrefix) && !options.ValidationParameters.PathPrefix.StartsWith("/"))
         {
-            throw new ArgumentException($"{nameof(options.ValidationParameters.PathPrefix)} must start with '/' or be null",
-                                        nameof(options.ValidationParameters.PathPrefix));
+            throw new InvalidOperationException($"{nameof(options.ValidationParameters.PathPrefix)} must start with '/' or be null");
         }
     }
 }
