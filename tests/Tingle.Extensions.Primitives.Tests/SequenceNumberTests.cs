@@ -153,11 +153,11 @@ public class SequenceNumberTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "0", new SequenceNumber(0L), },
-        new object []{ "123456789", new SequenceNumber(123456789L), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["0", new SequenceNumber(0L)],
+        ["123456789", new SequenceNumber(123456789L)],
+    ];
 
     [Theory]
     [InlineData("0", 0UL)]

@@ -120,11 +120,11 @@ public class CountryTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "KEN", Country.FromCode("KEN"), },
-        new object []{ "KE", Country.FromCode("KEN"), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["KEN", Country.FromCode("KEN")],
+        ["KE", Country.FromCode("KEN")],
+    ];
 
     [Fact]
     public void JsonConverter_Works()

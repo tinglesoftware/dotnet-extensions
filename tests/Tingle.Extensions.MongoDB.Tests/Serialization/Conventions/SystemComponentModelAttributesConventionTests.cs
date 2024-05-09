@@ -52,7 +52,7 @@ public class SystemComponentModelAttributesConventionTests
     private class TestConventionPack : IConventionPack
     {
         private static readonly IConventionPack __defaultConventionPack = new TestConventionPack();
-        private readonly IEnumerable<IConvention> _conventions = new List<IConvention> { new SystemComponentModelAttributesConvention(), };
+        private readonly IEnumerable<IConvention> _conventions = [new SystemComponentModelAttributesConvention()];
 
         public static IConventionPack Instance => __defaultConventionPack;
         public IEnumerable<IConvention> Conventions => _conventions;

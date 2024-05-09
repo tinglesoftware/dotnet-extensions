@@ -250,13 +250,13 @@ public class DurationTests
     }
 
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "P3M", Duration.FromMonths(3), },
-        new object []{ "P5D", Duration.FromDays(5), },
-        new object []{ "P3M5D", new Duration(0, months: 3, 0, days: 5), },
-        new object []{ "PT10M", Duration.FromMinutes(10), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["P3M", Duration.FromMonths(3)],
+        ["P5D", Duration.FromDays(5)],
+        ["P3M5D", new Duration(0, months: 3, 0, days: 5)],
+        ["PT10M", Duration.FromMinutes(10)],
+    ];
 
     public static readonly IEnumerable<object[]> ConverterTestDataReverse = ConverterTestData.Select(t => t.Reverse().ToArray()).ToList();
 }

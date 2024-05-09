@@ -106,11 +106,11 @@ public class CurrencyTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "KES", Currency.FromCode("KES"), },
-        new object []{ "USD", Currency.FromCode("USD"), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["KES", Currency.FromCode("KES")],
+        ["USD", Currency.FromCode("USD")],
+    ];
 
     [Fact]
     public void JsonConverter_Works()

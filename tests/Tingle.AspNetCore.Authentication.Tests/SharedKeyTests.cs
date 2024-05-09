@@ -47,8 +47,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { key })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)[key])
             };
         });
 
@@ -68,8 +68,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
             o.SaveToken = true;
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { key })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)[key])
             };
         });
 
@@ -212,7 +212,7 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
+                KnownFixedKeys = [],
                 KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)null)
             };
         });
@@ -234,8 +234,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)Array.Empty<string>())
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult<IEnumerable<string>>([])
             };
         });
 
@@ -256,8 +256,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { "not-base64", "BEahPY/aD0KqvZdLuNQJBw==" })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)["not-base64", "BEahPY/aD0KqvZdLuNQJBw=="])
             };
         });
 
@@ -715,8 +715,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { key })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)[key])
             };
         });
         var newSharedKeyToken = "SharedKey " + tokenText;
@@ -733,8 +733,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { key })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)[key])
             };
             o.Events = new SharedKeyEvents()
             {
@@ -758,8 +758,8 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             o.ValidationParameters = new SharedKeyTokenValidationParameters
             {
-                KnownFixedKeys = Array.Empty<string>(),
-                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)new[] { key })
+                KnownFixedKeys = [],
+                KeysResolver = (ctx) => Task.FromResult((IEnumerable<string>)[key])
             };
             o.Events = new SharedKeyEvents()
             {
@@ -824,7 +824,7 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         {
             if (ExceptionType == typeof(SharedKeyNoDateException))
             {
-                throw SharedKeyNoDateException.Create(new List<string> { "x-ts-date", "x-ms-date" });
+                throw SharedKeyNoDateException.Create(["x-ts-date", "x-ms-date"]);
             }
             if (ExceptionType == typeof(SharedKeyTimeWindowExpiredException))
             {

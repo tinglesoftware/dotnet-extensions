@@ -31,7 +31,7 @@ internal class ExtraTagsOperationFilter : IOperationFilter
         // make the attributes unique by name
         var uniqueAttributes = attributes.ToDictionary(attr => attr.Name, StringComparer.OrdinalIgnoreCase);
 
-        operation.Tags ??= new List<OpenApiTag>();
+        operation.Tags ??= [];
 
         foreach (var kvp in uniqueAttributes)
         {

@@ -35,7 +35,7 @@ public abstract class AbstractPhoneNumberValidator : IPhoneNumberValidator
         }
 
         var match = RegularExpression.Match(phoneNumber);
-        if (!match.Success) return Array.Empty<string>();
+        if (!match.Success) return [];
 
         var linenumber = match.Groups[1].Value;
         return [$"{CountryPrefix}{linenumber}", $"0{linenumber}", linenumber];

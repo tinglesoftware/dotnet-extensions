@@ -30,60 +30,60 @@ public class KeygenTests
         Assert.Equal(expected, encoding.GetString(Keygen.Decode(key, format)));
     }
 
-    public static readonly IEnumerable<object?[]> createTestData = new List<object?[]>
-    {
-        new object?[] { "000", Keygen.OutputFormat.Base64, null, "MDAw", },
-        new object?[] { "100", Keygen.OutputFormat.Base64, null, "MTAw", },
-        new object?[] { "000", Keygen.OutputFormat.Hex, null, "303030", },
-        new object?[] { "100", Keygen.OutputFormat.Hex, null, "313030", },
-        new object?[] { "000", Keygen.OutputFormat.Base62, null, "DFYW", },
-        new object?[] { "100", Keygen.OutputFormat.Base62, null, "DWbY", },
+    public static readonly IEnumerable<object?[]> createTestData =
+    [
+        ["000", Keygen.OutputFormat.Base64, null, "MDAw"],
+        ["100", Keygen.OutputFormat.Base64, null, "MTAw"],
+        ["000", Keygen.OutputFormat.Hex, null, "303030"],
+        ["100", Keygen.OutputFormat.Hex, null, "313030"],
+        ["000", Keygen.OutputFormat.Base62, null, "DFYW"],
+        ["100", Keygen.OutputFormat.Base62, null, "DWbY"],
 
-        new object?[] { "000", Keygen.OutputFormat.Base64, Encoding.ASCII, "MDAw", },
-        new object?[] { "000", Keygen.OutputFormat.Hex, Encoding.ASCII, "303030", },
-        new object?[] { "000", Keygen.OutputFormat.Base62, Encoding.ASCII, "DFYW", },
+        ["000", Keygen.OutputFormat.Base64, Encoding.ASCII, "MDAw"],
+        ["000", Keygen.OutputFormat.Hex, Encoding.ASCII, "303030"],
+        ["000", Keygen.OutputFormat.Base62, Encoding.ASCII, "DFYW"],
 
-        new object?[] { "000", Keygen.OutputFormat.Base64, Encoding.UTF32, "MAAAADAAAAAwAAAA", },
-        new object?[] { "000", Keygen.OutputFormat.Hex, Encoding.UTF32, "300000003000000030000000", },
-        new object?[] { "000", Keygen.OutputFormat.Base62, Encoding.UTF32, "JJpnu5vdqHZAdqG8", },
+        ["000", Keygen.OutputFormat.Base64, Encoding.UTF32, "MAAAADAAAAAwAAAA"],
+        ["000", Keygen.OutputFormat.Hex, Encoding.UTF32, "300000003000000030000000"],
+        ["000", Keygen.OutputFormat.Base62, Encoding.UTF32, "JJpnu5vdqHZAdqG8"],
 
-        new object?[] { "000", Keygen.OutputFormat.Base64, Encoding.Unicode, "MAAwADAA", },
-        new object?[] { "000", Keygen.OutputFormat.Hex, Encoding.Unicode, "300030003000", },
-        new object?[] { "000", Keygen.OutputFormat.Base62, Encoding.Unicode, "EzAr0VHM", },
+        ["000", Keygen.OutputFormat.Base64, Encoding.Unicode, "MAAwADAA"],
+        ["000", Keygen.OutputFormat.Hex, Encoding.Unicode, "300030003000"],
+        ["000", Keygen.OutputFormat.Base62, Encoding.Unicode, "EzAr0VHM"],
 
-        new object?[] {
+        [
             "idv_0o5Fs0EELR0fUjHjbCnEtdUwQe3:live:AAAAAAAAAAA=",
             Keygen.OutputFormat.Base62,
             null,
-            "Cy0PU8LXdqtEkQlWzmln8wB5IRDPWHsUPcEUrloBAm20XJJOCheBOMp9ceYK9psrjZ",
-        },
+            "Cy0PU8LXdqtEkQlWzmln8wB5IRDPWHsUPcEUrloBAm20XJJOCheBOMp9ceYK9psrjZ"
+        ],
 
-        new object?[] {
+        [
             "idv_0o5Fs0EELR0fUjHjbCnEtdUwQe3:AAAAAAAAAAA=",
             Keygen.OutputFormat.Base62,
             null,
-            "fX8y3T8GYbqdnFDC38RpPvpd948XZsb5KkoeKCumHdDL05hVijwYhHaz0Pt",
-        },
+            "fX8y3T8GYbqdnFDC38RpPvpd948XZsb5KkoeKCumHdDL05hVijwYhHaz0Pt"
+        ],
 
-        new object?[] {
+        [
             "{\"id\":\"idv_0o5Fs0EELR0fUjHjbCnEtdUwQe3\",\"etag\":\"AAAAAAAAAAA=\"}",
             Keygen.OutputFormat.Base62,
             null,
-            "1fy0BgWMw2g2RdIcbIBnv28reNqjJnEN38bkkpiWgWx8aew21SFbfScegTIJsw7S7ivONfnwKMlPaIgpib3V",
-        },
-    };
+            "1fy0BgWMw2g2RdIcbIBnv28reNqjJnEN38bkkpiWgWx8aew21SFbfScegTIJsw7S7ivONfnwKMlPaIgpib3V"
+        ],
+    ];
 
-    public static readonly IEnumerable<object?[]> decodeTestData = new List<object?[]>
-    {
-        new object?[] { "MDAw", Keygen.OutputFormat.Base64, Encoding.UTF8, "000", },
-        new object?[] { "MTAw", Keygen.OutputFormat.Base64, Encoding.UTF8, "100", },
-        new object?[] { "303030", Keygen.OutputFormat.Hex, Encoding.UTF8, "000", },
-        new object?[] { "313030", Keygen.OutputFormat.Hex, Encoding.UTF8, "100", },
-        new object?[] { "DFYW", Keygen.OutputFormat.Base62, Encoding.UTF8, "000", },
-        new object?[] { "DWbY", Keygen.OutputFormat.Base62, Encoding.UTF8, "100", },
+    public static readonly IEnumerable<object?[]> decodeTestData =
+    [
+        ["MDAw", Keygen.OutputFormat.Base64, Encoding.UTF8, "000"],
+        ["MTAw", Keygen.OutputFormat.Base64, Encoding.UTF8, "100"],
+        ["303030", Keygen.OutputFormat.Hex, Encoding.UTF8, "000"],
+        ["313030", Keygen.OutputFormat.Hex, Encoding.UTF8, "100"],
+        ["DFYW", Keygen.OutputFormat.Base62, Encoding.UTF8, "000"],
+        ["DWbY", Keygen.OutputFormat.Base62, Encoding.UTF8, "100"],
 
-        new object?[] { "MDAw", Keygen.OutputFormat.Base64, Encoding.ASCII, "000", },
-        new object?[] { "300000003000000030000000", Keygen.OutputFormat.Hex, Encoding.UTF32, "000", },
-        new object?[] { "EzAr0VHM", Keygen.OutputFormat.Base62, Encoding.Unicode, "000", },
-    };
+        ["MDAw", Keygen.OutputFormat.Base64, Encoding.ASCII, "000"],
+        ["300000003000000030000000", Keygen.OutputFormat.Hex, Encoding.UTF32, "000"],
+        ["EzAr0VHM", Keygen.OutputFormat.Base62, Encoding.Unicode, "000"],
+    ];
 }

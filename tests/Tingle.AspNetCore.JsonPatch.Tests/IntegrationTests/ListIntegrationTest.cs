@@ -307,7 +307,7 @@ public class ListIntegrationTest
         var simpleObject3 = new SimpleObject() { IntegerValue = 3 };
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObjectList = [simpleObject1, simpleObject2, simpleObject3,]
+            SimpleObjectList = [simpleObject1, simpleObject2, simpleObject3]
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();

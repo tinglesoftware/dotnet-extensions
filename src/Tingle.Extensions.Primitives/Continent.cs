@@ -37,11 +37,7 @@ public sealed class Continent : IEquatable<Continent>, IComparable<Continent>, I
     /// </summary>
     /// <param name="name">the default name</param>
     /// <param name="otherNames">other representations for the name</param>
-    public Continent(string name, params string[] otherNames)
-    {
-        Name = name;
-        OtherName = otherNames ?? [];
-    }
+    public Continent(string name, params string[] otherNames) : this(name, (IEnumerable<string>)otherNames) { }
 
     /// <summary>
     /// Creates an instance of <see cref="Continent"/>
@@ -51,7 +47,7 @@ public sealed class Continent : IEquatable<Continent>, IComparable<Continent>, I
     public Continent(string name, IEnumerable<string> otherNames)
     {
         Name = name;
-        OtherName = otherNames ?? Array.Empty<string>();
+        OtherName = otherNames ?? [];
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public class SharedKeyNoDateException : Exception
     /// <summary>
     /// List of possible header names for specifying the time
     /// </summary>
-    public IEnumerable<string> PossibleHeaderNames { get; private set; } = new List<string>();
+    public IEnumerable<string> PossibleHeaderNames { get; private set; } = [];
 
     internal string? HeaderNamesJoined { get; private set; }
 

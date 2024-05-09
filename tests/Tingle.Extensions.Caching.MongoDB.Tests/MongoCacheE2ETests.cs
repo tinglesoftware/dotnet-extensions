@@ -25,7 +25,7 @@ public class MongoCacheE2ETests
         {
             SlidingExpiration = TimeSpan.FromSeconds(ttl)
         };
-        await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
+        await cache.SetAsync(sessionId, [], cacheOptions);
 
         // Verify that collection has been created
         Assert.Contains("session", await dbFixture.Database!.ListCollectionNames().ToListAsync());
@@ -62,7 +62,7 @@ public class MongoCacheE2ETests
         {
             SlidingExpiration = TimeSpan.FromSeconds(ttl)
         };
-        await cache.SetAsync(sessionId, Array.Empty<byte>(), cacheOptions);
+        await cache.SetAsync(sessionId, [], cacheOptions);
 
         // Verify that collection was not created
         Assert.Equal("Cache", Assert.Single(await dbFixture.Database!.ListCollectionNames().ToListAsync()));
@@ -90,7 +90,7 @@ public class MongoCacheE2ETests
         {
             SlidingExpiration = TimeSpan.FromSeconds(ttl)
         };
-        byte[] data = new byte[4] { 1, 2, 3, 4 };
+        byte[] data = [1, 2, 3, 4];
         await cache.SetAsync(sessionId, data, cacheOptions);
 
         // Verify that collection has been created
@@ -107,7 +107,7 @@ public class MongoCacheE2ETests
         using var dbFixture = new MongoDbFixture();
         const string sessionId = "sessionId";
         const int ttl = 1400;
-        byte[] data = new byte[1] { 1 };
+        byte[] data = [1];
 
         IOptions<MongoCacheOptions> options = Options.Create(new MongoCacheOptions()
         {

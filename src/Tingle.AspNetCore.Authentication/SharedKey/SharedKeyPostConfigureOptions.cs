@@ -24,7 +24,7 @@ internal class SharedKeyPostConfigureOptions : IPostConfigureOptions<SharedKeyOp
 
         if (options.ValidationParameters.KeysResolver == null)
         {
-            options.ValidationParameters.KeysResolver = (c) => Task.FromResult((IEnumerable<string>)Array.Empty<string>());
+            options.ValidationParameters.KeysResolver = (c) => Task.FromResult<IEnumerable<string>>([]);
         }
 
         // if path prefix is specified, it must start with a '/'

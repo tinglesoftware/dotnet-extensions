@@ -8,7 +8,7 @@ public class ObjectVisitorTest
     private class Class1
     {
         public string? Name { get; set; }
-        public IList<string>? States { get; set; } = new List<string>();
+        public IList<string>? States { get; set; } = [];
         public IDictionary<string, string> CountriesAndRegions { get; set; } = new Dictionary<string, string>();
         public dynamic Items { get; set; } = new ExpandoObject();
     }

@@ -4,7 +4,7 @@ namespace Tingle.Extensions.DataAnnotations.Tests.Models;
 
 public sealed class SaveValidationContextAttribute : ValidationAttribute
 {
-    public static IList<ValidationContext> SavedContexts = new List<ValidationContext>();
+    public static readonly IList<ValidationContext> SavedContexts = [];
 
     /// <inheritdoc/>
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)

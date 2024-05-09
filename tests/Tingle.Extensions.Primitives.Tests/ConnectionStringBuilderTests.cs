@@ -120,18 +120,18 @@ public class ConnectionStringBuilderTests
     }
 
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        [
             "Hostname=contoso.com;Scheme=https;Key=abcd",
-            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpsScheme().WithKey("abcd"),
-        },
+            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpsScheme().WithKey("abcd")
+        ],
 
-        new object []{
+        [
             "Hostname=contoso.com;Scheme=http;Key=123456",
-            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpScheme().WithKey("123456"),
-        },
-    };
+            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpScheme().WithKey("123456")
+        ],
+    ];
 
     public static readonly IEnumerable<object[]> ConverterTestDataReverse = ConverterTestData.Select(t => t.Reverse().ToArray()).ToList();
 }

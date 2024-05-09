@@ -167,11 +167,11 @@ public class KsuidTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "0o5Fs0EELR0fUjHjbCnEtdUwQe3", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3"), },
-        new object []{ "05A95E21D7B6FE8CD7CFF211704D8E7B9421210B", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3"), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["0o5Fs0EELR0fUjHjbCnEtdUwQe3", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3")],
+        ["05A95E21D7B6FE8CD7CFF211704D8E7B9421210B", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3")],
+    ];
 
     [Fact]
     public void JsonConverter_Works()

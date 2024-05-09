@@ -35,7 +35,7 @@ public readonly struct ParsedPath
         }
     }
 
-    public IReadOnlyList<string> Segments => _segments ?? Array.Empty<string>();
+    public IReadOnlyList<string> Segments => _segments ?? [];
 
     private static string[] ParsePath(string path)
     {

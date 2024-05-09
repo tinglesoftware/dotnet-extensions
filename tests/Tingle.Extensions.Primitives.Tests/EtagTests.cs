@@ -146,13 +146,13 @@ public class EtagTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData = new List<object[]>
-    {
-        new object []{ "AAAAAAAAAAA=", new Etag(0UL), },
-        new object []{ "Fc1bBwAAAAA=", new Etag(123456789UL), },
-        new object []{ "0x0", new Etag(0UL), },
-        new object []{ "0x75BCD15", new Etag(123456789UL), },
-    };
+    public static readonly IEnumerable<object[]> ConverterTestData =
+    [
+        ["AAAAAAAAAAA=", new Etag(0UL)],
+        ["Fc1bBwAAAAA=", new Etag(123456789UL)],
+        ["0x0", new Etag(0UL)],
+        ["0x75BCD15", new Etag(123456789UL)],
+    ];
 
     [Theory]
     [InlineData("AAAAAAAAAAA=", 0UL)]

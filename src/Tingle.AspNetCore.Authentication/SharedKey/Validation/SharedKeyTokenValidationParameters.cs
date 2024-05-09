@@ -36,11 +36,11 @@ public class SharedKeyTokenValidationParameters
     /// <summary>
     /// Resolver for signing keys
     /// </summary>
-    public Func<HttpContext, Task<IEnumerable<string>>> KeysResolver { get; set; } = (ctx) => Task.FromResult<IEnumerable<string>>(Array.Empty<string>());
+    public Func<HttpContext, Task<IEnumerable<string>>> KeysResolver { get; set; } = (ctx) => Task.FromResult<IEnumerable<string>>([]);
 
     internal async Task<IEnumerable<string>> ResolveKeysAsync(HttpContext httpContext)
     {
-        var keys = (await KeysResolver(httpContext).ConfigureAwait(false) ?? Array.Empty<string>()).ToList();
+        var keys = (await KeysResolver(httpContext).ConfigureAwait(false) ?? []).ToList();
         keys.AddRange(KnownFixedKeys);
         return keys;
     }
