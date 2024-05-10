@@ -24,11 +24,16 @@ public class ErrorCodesOperationFilter : IOperationFilter
         attributes.AddRange(methodAttributes);
 
         // get attributes from the controller
-        if (context.ApiDescription.ActionDescriptor is ControllerActionDescriptor cad)
+        var actionDescriptor = context.ApiDescription.ActionDescriptor;
+        if (actionDescriptor is ControllerActionDescriptor cad)
         {
             var controllerAttributes = cad.ControllerTypeInfo.GetCustomAttributes(inherit: true).OfType<OperationErrorCodesAttribute>();
             attributes.AddRange(controllerAttributes);
         }
+
+        // get attributes from the endpoint metadata
+        var metadataAttributes = actionDescriptor.EndpointMetadata.OfType<OperationErrorCodesAttribute>();
+        attributes.AddRange(metadataAttributes);
 
         // make unique error codes
         var uniqueErrorCodes = attributes.SelectMany(attr => attr.Errors)
