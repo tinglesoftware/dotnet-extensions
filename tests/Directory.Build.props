@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'"/>
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.0" Condition="'$(TargetFramework)' == 'net8.0'"/>
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.0" Condition="'$(TargetFramework)' == 'net8.0'" />
   </ItemGroup>
 
 </Project>

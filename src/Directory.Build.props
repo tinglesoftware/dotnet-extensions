@@ -38,8 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1" PrivateAssets="All"/>
-    <PackageReference Include="Polyfill " Version="5.2.2" PrivateAssets="All"/>
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1" PrivateAssets="All" />
+    <PackageReference Include="Polyfill " Version="5.2.2" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

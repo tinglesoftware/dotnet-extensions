@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace System;
 
 /// <summary>Extensions for Enums.</summary>
-public static class EnumExtensions // TODO: unit test this
+public static class EnumExtensions
 {
     private const DynamicallyAccessedMemberTypes MembersTypesForEnums =
         DynamicallyAccessedMemberTypes.PublicFields |
