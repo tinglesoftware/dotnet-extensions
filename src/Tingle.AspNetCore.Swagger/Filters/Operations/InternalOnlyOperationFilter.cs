@@ -18,12 +18,15 @@ public class InternalOnlyOperationFilter : IOperationFilter
     /// <inheritdoc/>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        // Check if the method or controller has the attribute declared/annotated
+        // check attribute on the method
         var attr = context.MethodInfo.GetCustomAttribute<InternalOnlyAttribute>(inherit: true);
-        if (attr is null && context.ApiDescription.ActionDescriptor is ControllerActionDescriptor cad)
-        {
-            attr = cad.ControllerTypeInfo.GetCustomAttribute<InternalOnlyAttribute>(inherit: true);
-        }
+
+        // check attribute on the controller
+        var actionDescriptor = context.ApiDescription.ActionDescriptor;
+        attr ??= (actionDescriptor as ControllerActionDescriptor)?.ControllerTypeInfo.GetCustomAttribute<InternalOnlyAttribute>(inherit: true);
+
+        // check the endpoint metadata
+        attr ??= actionDescriptor.EndpointMetadata.OfType<InternalOnlyAttribute>().FirstOrDefault();
         if (attr is null) return;
 
         // At this point, the API is internal only, so just set the extension value

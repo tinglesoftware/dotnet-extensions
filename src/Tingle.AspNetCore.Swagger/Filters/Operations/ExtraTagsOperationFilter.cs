@@ -22,21 +22,24 @@ internal class ExtraTagsOperationFilter : IOperationFilter
         attributes.AddRange(methodAttributes);
 
         // get attributes from the controller
-        if (context.ApiDescription.ActionDescriptor is ControllerActionDescriptor cad)
+        var actionDescriptor = context.ApiDescription.ActionDescriptor;
+        if (actionDescriptor is ControllerActionDescriptor cad)
         {
             var controllerAttributes = cad.ControllerTypeInfo.GetCustomAttributes(inherit: true).OfType<OperationExtraTagAttribute>();
             attributes.AddRange(controllerAttributes);
         }
 
+        // get attributes from the endpoint metadata
+        var metadataAttributes = actionDescriptor.EndpointMetadata.OfType<OperationExtraTagAttribute>();
+        attributes.AddRange(metadataAttributes);
+
         // make the attributes unique by name
-        var uniqueAttributes = attributes.ToDictionary(attr => attr.Name, StringComparer.OrdinalIgnoreCase);
+        var uniqueAttributes = attributes.DistinctBy(attr => attr.Name, StringComparer.OrdinalIgnoreCase);
 
         operation.Tags ??= [];
 
-        foreach (var kvp in uniqueAttributes)
+        foreach (var attr in uniqueAttributes)
         {
-            var attr = kvp.Value;
-
             operation.Tags.Add(new OpenApiTag
             {
                 Name = attr.Name,
