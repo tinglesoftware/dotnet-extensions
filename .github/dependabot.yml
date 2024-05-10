@@ -23,18 +23,6 @@ updates:
       xunit:
         patterns: ["Xunit*"]
     ignore:
-      # Ignore patch updates for some packages
-      - dependency-name: "Microsoft.*"
-        update-types: ["version-update:semver-patch"]
-      - dependency-name: "System.*"
-        update-types: ["version-update:semver-patch"]
-      - dependency-name: "MongoDB.*"
-        update-types: ["version-update:semver-patch"]
-      - dependency-name: "libphonenumber-csharp"
-        update-types: ["version-update:semver-patch"]
-      - dependency-name: "AzureIPNetworks"
-        update-types: ["version-update:semver-patch"]
-
       # Ignore major updates for packages used in multi-targeting
       - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
         update-types: ["version-update:semver-major"]
