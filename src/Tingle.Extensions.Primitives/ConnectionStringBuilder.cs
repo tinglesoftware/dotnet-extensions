@@ -126,7 +126,7 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
     /// <typeparam name="T">the type of item to be returned</typeparam>
     /// <param name="key">the key identifying the segment</param>
     /// <returns></returns>
-    public T? GetValue<T>(string key)
+    public readonly T? GetValue<T>(string key)
     {
         if (TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value))
         {
@@ -244,7 +244,7 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
     private const string SegmentNameHostname = "Hostname";
 
     /// <summary>Gets the value for <c>Key</c> used in authentication.</summary>
-    public string? GetKey() => GetValue<string>(SegmentNameKey);
+    public readonly string? GetKey() => GetValue<string>(SegmentNameKey);
 
     /// <summary>Sets value for <c>Key</c> used in authentication.</summary>
     /// <param name="key"></param>
@@ -255,17 +255,17 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
     }
 
     /// <summary>Gets the value for <c>Scheme</c> used in making requests.</summary>
-    public string? GetScheme() => GetValue<string>(SegmentNameScheme);
+    public readonly string? GetScheme() => GetValue<string>(SegmentNameScheme);
 
     /// <summary>Gets value indicating if the <c>Scheme</c> for making requests is set to <paramref name="scheme"/>.</summary>
     /// <param name="scheme"></param>
-    public bool IsScheme(string scheme) => string.Equals(scheme, GetScheme());
+    public readonly bool IsScheme(string scheme) => string.Equals(scheme, GetScheme());
 
     /// <summary>Gets value indicating if the <c>Scheme</c> for making requests is set to <c>https</c>.</summary>
-    public bool IsHttpsScheme() => IsScheme(Uri.UriSchemeHttps);
+    public readonly bool IsHttpsScheme() => IsScheme(Uri.UriSchemeHttps);
 
     /// <summary>Gets value indicating if the <c>Scheme</c> for making requests is set to <c>http</c>.</summary>
-    public bool IsHttpScheme() => IsScheme(Uri.UriSchemeHttp);
+    public readonly bool IsHttpScheme() => IsScheme(Uri.UriSchemeHttp);
 
     /// <summary>Sets value for <c>Scheme</c> used in making requests.</summary>
     /// <param name="scheme"></param>
@@ -284,7 +284,7 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
         => WithScheme(Uri.UriSchemeHttp);
 
     /// <summary>Gets the value for <c>Hostname</c> (usually the FQDN with the port, if needed) used in making the requests.</summary>
-    public string? GetHostname() => GetValue<string>(SegmentNameHostname);
+    public readonly string? GetHostname() => GetValue<string>(SegmentNameHostname);
 
     /// <summary>Sets the value for <c>Hostname</c> (usually the FQDN with the port, if needed) used in making the requests.</summary>
     /// <param name="hostname"></param>
@@ -340,10 +340,10 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
     }
 
     /// <inheritdoc/>
-    public override bool Equals(object? obj) => obj is ConnectionStringBuilder builder && Equals(builder);
+    public override readonly bool Equals(object? obj) => obj is ConnectionStringBuilder builder && Equals(builder);
 
     /// <inheritdoc/>
-    public bool Equals(ConnectionStringBuilder other) => string.Equals(ToString(), other.ToString());
+    public readonly bool Equals(ConnectionStringBuilder other) => string.Equals(ToString(), other.ToString());
 
     /// <inheritdoc/>
     public override readonly int GetHashCode() => HashCode.Combine(segments, segmentsSeparator, valueSeparator);
@@ -400,7 +400,7 @@ public struct ConnectionStringBuilder : IEquatable<ConnectionStringBuilder>, ICo
     readonly long IConvertible.ToInt64(IFormatProvider? provider) => throw new InvalidCastException();
     readonly sbyte IConvertible.ToSByte(IFormatProvider? provider) => throw new InvalidCastException();
     readonly float IConvertible.ToSingle(IFormatProvider? provider) => throw new InvalidCastException();
-    string IConvertible.ToString(IFormatProvider? provider) => ToString();
+    readonly string IConvertible.ToString(IFormatProvider? provider) => ToString();
 
     readonly object IConvertible.ToType(Type conversionType, IFormatProvider? provider)
     {
