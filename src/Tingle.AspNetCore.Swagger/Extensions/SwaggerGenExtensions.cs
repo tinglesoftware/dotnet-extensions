@@ -134,7 +134,6 @@ public static partial class SwaggerGenExtensions
     /// <returns></returns>
     public static SwaggerGenOptions MapFrameworkTypes(this SwaggerGenOptions options)
     {
-        options.MapType<TimeSpan>(() => new OpenApi.Models.OpenApiSchema { Type = "string", Format = "date-span", });
         options.MapType<System.Net.IPAddress>(() => new OpenApi.Models.OpenApiSchema { Type = "string", Format = "ip-address", });
         options.MapType<System.Net.IPNetwork>(() => new OpenApi.Models.OpenApiSchema { Type = "string", Format = "cidr", });
         options.MapType<System.Text.Json.Nodes.JsonNode>(() => new OpenApi.Models.OpenApiSchema { });
