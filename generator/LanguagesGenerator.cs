@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace StaticDataGenerator;
 
-internal partial class LanguagesGenerator(IHostEnvironment environment, FileDownloader downloader) 
+internal partial class LanguagesGenerator(IHostEnvironment environment, FileDownloader downloader)
     : AbstractGenerator<List<LanguagesGenerator.LanguageImpl>>(environment, downloader, "iso-639-3.tab")
 {
     internal record struct LanguageImpl(string Name, string Part3, string? Part1, string Type, string Scope);

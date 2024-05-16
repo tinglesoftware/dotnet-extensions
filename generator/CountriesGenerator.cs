@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace StaticDataGenerator;
 
-internal class CountriesGenerator(IHostEnvironment environment, FileDownloader downloader) 
+internal class CountriesGenerator(IHostEnvironment environment, FileDownloader downloader)
     : AbstractGenerator<List<CountriesGenerator.CountryImpl>>(environment, downloader, "countries-20200124.json")
 {
     internal struct CountryImpl

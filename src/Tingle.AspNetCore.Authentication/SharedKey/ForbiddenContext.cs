@@ -10,4 +10,5 @@ namespace Tingle.AspNetCore.Authentication.SharedKey;
 /// <param name="scheme"></param>
 /// <param name="options"></param>
 public class ForbiddenContext(HttpContext context, AuthenticationScheme scheme, SharedKeyOptions options)
-    : ResultContext<SharedKeyOptions>(context, scheme, options) { }
+    : ResultContext<SharedKeyOptions>(context, scheme, options)
+{ }

@@ -29,7 +29,16 @@ public sealed class Continent : IEquatable<Continent>, IComparable<Continent>, I
     /// A list of known continents
     /// </summary>
     public static readonly Continent[] KnownContinents = [
-        Asia, Europe, Americas, Africa, NorthAmerica, SouthAmerica, Antarctica, Oceania, Australia, Kenorland,
+        Asia,
+        Europe,
+        Americas,
+        Africa,
+        NorthAmerica,
+        SouthAmerica,
+        Antarctica,
+        Oceania,
+        Australia,
+        Kenorland,
     ];
 
     /// <summary>

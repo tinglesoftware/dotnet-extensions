@@ -60,7 +60,7 @@ public class TokenProtectorTests
         AssertTimeLimitedValueEncryptDecrypt(d, expiration);
 
         var lifespan = TimeSpan.FromSeconds(60);
-        AssertTimeLimitedValueEncryptDecrypt( d, lifespan);
+        AssertTimeLimitedValueEncryptDecrypt(d, lifespan);
     }
 
     [Fact]
