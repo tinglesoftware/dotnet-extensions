@@ -106,7 +106,7 @@ public static class RecursiveValidator
         bool result = TryValidateObject(instance, validationResults, validationContextItems);
 
         var properties = instance.GetType().GetProperties().Where(prop => prop.CanRead
-            && !prop.GetCustomAttributes(typeof(SkipRecursiveValidationAttribute), false).Any()
+            && prop.GetCustomAttributes(typeof(SkipRecursiveValidationAttribute), false).Length == 0
             && prop.GetIndexParameters().Length == 0).ToList();
 
         foreach (var property in properties)
@@ -169,7 +169,7 @@ public static class RecursiveValidator
         ValidateObject(instance, validationContextItems);
 
         var properties = instance.GetType().GetProperties().Where(prop => prop.CanRead
-            && !prop.GetCustomAttributes(typeof(SkipRecursiveValidationAttribute), false).Any()
+            && prop.GetCustomAttributes(typeof(SkipRecursiveValidationAttribute), false).Length == 0
             && prop.GetIndexParameters().Length == 0).ToList();
 
         foreach (var property in properties)

@@ -58,7 +58,7 @@ public class InheritDocSchemaFilter : ISchemaFilter
     /// <param name="context"><see cref="SchemaFilterContext"/>.</param>
     public void Apply(OpenApiSchema schema, SchemaFilterContext context)
     {
-        if (excludedTypes.Any() && excludedTypes.Contains(context.Type)) return;
+        if (excludedTypes.Length != 0 && excludedTypes.Contains(context.Type)) return;
 
         // Try to apply a description for inherited types.
         var memberName = XmlCommentsNodeNameHelper.GetMemberNameForType(context.Type);
@@ -98,10 +98,9 @@ public class InheritDocSchemaFilter : ISchemaFilter
     {
         var memberName = XmlCommentsNodeNameHelper.GetMemberNameForFieldOrProperty(memberInfo);
 
-        if (!inheritedDocs.ContainsKey(memberName)) return;
-        if (excludedTypes.Any() && excludedTypes.Contains(((PropertyInfo)memberInfo).PropertyType)) return;
+        if (excludedTypes.Length != 0 && excludedTypes.Contains(((PropertyInfo)memberInfo).PropertyType)) return;
+        if (!inheritedDocs.TryGetValue(memberName, out string? cref)) return;
 
-        var cref = inheritedDocs[memberName];
         var target = GetTargetRecursive(memberInfo, cref);
 
         var targetXmlNode = GetMemberXmlNode(XmlCommentsNodeNameHelper.GetMemberNameForFieldOrProperty(target));
@@ -184,7 +183,7 @@ public class InheritDocSchemaFilter : ISchemaFilter
     {
         var targets = type.GetInterfaces();
         if (type.BaseType is not null && type.BaseType != typeof(object))
-            targets = targets.Append(type.BaseType).ToArray();
+            targets = [.. targets, type.BaseType];
 
         // Try to find the target, if one is declared.
         if (!string.IsNullOrEmpty(cref))

@@ -84,6 +84,6 @@ public readonly struct ParsedPath
             strings.Add(sb.ToString());
         }
 
-        return strings.ToArray();
+        return [.. strings];
     }
 }

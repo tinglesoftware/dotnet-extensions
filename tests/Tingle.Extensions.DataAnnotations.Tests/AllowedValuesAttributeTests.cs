@@ -120,7 +120,7 @@ public class AllowedValuesAttributeTests
     [InlineData(false, "green", "BLUE", "yellow")]
     public void Works_For_CaseSensitiveStrings(bool expected, params string[] value)
     {
-        var obj = new TestModel5(value.ToList());
+        var obj = new TestModel5([.. value]);
         var context = new ValidationContext(obj);
         var results = new List<ValidationResult>();
         var actual = Validator.TryValidateObject(obj, context, results, true);
