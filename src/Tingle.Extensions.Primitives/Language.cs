@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Tingle.Extensions.Primitives;
@@ -241,22 +240,6 @@ public sealed class Language : IEquatable<Language?>, IComparable<Language>, ICo
         /// A generic non-specific scope that is context-dependent.
         /// </summary>
         Special
-    }
-
-    internal class LanguageJsonConverter : JsonConverter<Language>
-    {
-        /// <inheritdoc/>
-        public override Language? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var s = reader.GetString();
-            return string.IsNullOrWhiteSpace(s) ? null : FromCode(s);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, Language value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ThreeLetterCode);
-        }
     }
 
     internal class LanguageTypeConverter : TypeConverter

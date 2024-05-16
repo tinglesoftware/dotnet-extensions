@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -223,22 +223,6 @@ public sealed partial class SwiftCode(string institution, string country, string
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => throw new InvalidCastException();
 
     #endregion
-
-    internal class SwiftCodeJsonConverter : JsonConverter<SwiftCode>
-    {
-        /// <inheritdoc/>
-        public override SwiftCode? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var s = reader.GetString();
-            return string.IsNullOrWhiteSpace(s) ? null : Parse(s);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, SwiftCode value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ToString());
-        }
-    }
 
     internal class SwiftCodeTypeConverter : TypeConverter
     {

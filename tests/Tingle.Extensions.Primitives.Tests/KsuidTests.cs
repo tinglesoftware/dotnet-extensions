@@ -204,7 +204,16 @@ public class KsuidTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"id\":\"0o5Fs0EELR0fUjHjbCnEtdUwQe3\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.KsuidTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.KsuidTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public Ksuid? Id { get; set; }
     }

@@ -175,7 +175,16 @@ public class SequenceNumberTests
         Assert.Equal<long>(val, model!.Position);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"position\":123456789}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.SequenceNumberTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.SequenceNumberTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public SequenceNumber Position { get; set; }
     }

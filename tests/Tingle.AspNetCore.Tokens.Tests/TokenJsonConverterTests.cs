@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Tingle.AspNetCore.Tokens.Tests;
 
@@ -38,9 +39,27 @@ public class TokenJsonConverterTests
                         + " Use model binding instead.", ex.Message);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = @"{""token1"":""YyBpPyhOgEGAKQAkqvNFMg=="",""token2"":""GkTK64SntEWRw28wsnYQ5g==""}";
+        var tdm = new TestDataClass { };
+        var model = new TestModel
+        {
+            Token1 = new ContinuationToken<TestDataClass>(tdm, "YyBpPyhOgEGAKQAkqvNFMg=="),
+            Token2 = new TimedContinuationToken<TestDataClass>(tdm, "GkTK64SntEWRw28wsnYQ5g==", DateTimeOffset.UtcNow)
+        };
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public ContinuationToken<TestDataClass>? Token1 { get; set; }
         public TimedContinuationToken<TestDataClass>? Token2 { get; set; }
     }
 }
+
+[JsonSerializable(typeof(TokenJsonConverterTests.TestModel))]
+[JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+internal partial class TestJsonSerializerContext : JsonSerializerContext { }

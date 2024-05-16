@@ -96,7 +96,16 @@ public class LanguageTests
         Assert.Equal(src_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"language\":\"eng\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.LanguageTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.LanguageTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public Language? Language { get; set; }
     }

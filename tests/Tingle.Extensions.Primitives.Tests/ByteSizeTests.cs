@@ -421,7 +421,16 @@ public class ByteSizeTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"size\":\"1 MiB\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.ByteSizeTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.ByteSizeTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public ByteSize Size { get; set; }
     }

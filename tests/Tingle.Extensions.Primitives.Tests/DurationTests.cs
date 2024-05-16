@@ -244,7 +244,16 @@ public class DurationTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"duration\":\"P3M\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.DurationTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.DurationTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public Duration Duration { get; set; }
     }

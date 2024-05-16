@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -160,22 +160,6 @@ public sealed class Country : IEquatable<Country>, IComparable<Country>, IConver
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => throw new InvalidCastException();
 
     #endregion
-
-    internal class CountryJsonConverter : JsonConverter<Country>
-    {
-        /// <inheritdoc/>
-        public override Country? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var s = reader.GetString();
-            return string.IsNullOrWhiteSpace(s) ? null : FromCode(s);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, Country value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ThreeLetterCode);
-        }
-    }
 
     internal class CountryTypeConverter : TypeConverter
     {

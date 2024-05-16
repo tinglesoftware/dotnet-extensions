@@ -269,7 +269,16 @@ public class MoneyTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"money\":\"KES 12.50\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.MoneyTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.MoneyTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public Money? Money { get; set; }
     }

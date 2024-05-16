@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -444,30 +444,6 @@ public readonly struct Duration : IEquatable<Duration>, IConvertible
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => throw new InvalidCastException();
 
     #endregion
-
-    internal class DurationJsonConverter : JsonConverter<Duration>
-    {
-        public DurationJsonConverter() { }
-
-        /// <inheritdoc/>
-        public override Duration Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType == JsonTokenType.Null) return default;
-            if (reader.TokenType != JsonTokenType.String)
-            {
-                throw new InvalidOperationException("Only strings are supported");
-            }
-
-            var str = reader.GetString();
-            return Parse(str!);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, Duration value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.ToString());
-        }
-    }
 
     internal class DurationTypeConverter : TypeConverter
     {

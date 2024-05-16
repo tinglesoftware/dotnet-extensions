@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -156,22 +156,6 @@ public sealed class Currency : IEquatable<Currency?>, IComparable<Currency>, ICo
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => throw new InvalidCastException();
 
     #endregion
-
-    internal class CurrencyJsonConverter : JsonConverter<Currency>
-    {
-        /// <inheritdoc/>
-        public override Currency? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var s = reader.GetString();
-            return string.IsNullOrWhiteSpace(s) ? null : FromCode(s);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, Currency value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.Code);
-        }
-    }
 
     internal class CurrencyTypeConverter : TypeConverter
     {
