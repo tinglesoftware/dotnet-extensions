@@ -11,7 +11,7 @@ namespace Tingle.AspNetCore.Tokens;
 /// <item><see cref="TimedContinuationToken{T}"/></item>
 /// </list>
 /// </summary>
-internal class ContinuationTokenJsonConverter : JsonConverter<IToken>
+public class ContinuationTokenJsonConverter : JsonConverter<IToken>
 {
     /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert) => typeof(IToken).IsAssignableFrom(typeToConvert);

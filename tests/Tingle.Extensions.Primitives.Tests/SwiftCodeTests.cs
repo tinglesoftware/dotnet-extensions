@@ -135,7 +135,16 @@ public class SwiftCodeTests
         Assert.Equal(src_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"swiftCode\":\"KCBLKENXXXX\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.SwiftCodeTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.SwiftCodeTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public SwiftCode? SwiftCode { get; set; }
     }

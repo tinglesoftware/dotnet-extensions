@@ -205,7 +205,16 @@ public class EtagTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"etag\":\"Fc1bBwAAAAA=\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.EtagTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.EtagTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public Etag Etag { get; set; }
     }

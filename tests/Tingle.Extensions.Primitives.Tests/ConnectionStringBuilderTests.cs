@@ -114,7 +114,16 @@ public class ConnectionStringBuilderTests
         Assert.Equal(expected_json, dst_json);
     }
 
-    class TestModel
+    [Fact]
+    public void JsonSerializerContext_Works()
+    {
+        var src_json = "{\"value\":\"Hostname=contoso.com;Scheme=https;Key=abcd\"}";
+        var model = JsonSerializer.Deserialize(src_json, TestJsonSerializerContext.Default.ConnectionStringBuilderTests_TestModel)!;
+        var dst_json = JsonSerializer.Serialize(model, TestJsonSerializerContext.Default.ConnectionStringBuilderTests_TestModel);
+        Assert.Equal(src_json, dst_json);
+    }
+
+    internal class TestModel
     {
         public ConnectionStringBuilder Value { get; set; }
     }

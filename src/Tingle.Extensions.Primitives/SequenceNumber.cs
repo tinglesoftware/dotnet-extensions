@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -207,27 +207,6 @@ public readonly struct SequenceNumber : IComparable<SequenceNumber>, IEquatable<
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => (ulong)value;
 
     #endregion
-
-    internal class SequenceNumberJsonConverter : JsonConverter<SequenceNumber>
-    {
-        /// <inheritdoc/>
-        public override SequenceNumber Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.Number)
-            {
-                throw new InvalidOperationException("Only numbers are supported");
-            }
-
-            var value = reader.GetInt64();
-            return new SequenceNumber(value);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, SequenceNumber value, JsonSerializerOptions options)
-        {
-            writer.WriteNumberValue(value.Value);
-        }
-    }
 
     internal class SequenceNumberTypeConverter : TypeConverter
     {

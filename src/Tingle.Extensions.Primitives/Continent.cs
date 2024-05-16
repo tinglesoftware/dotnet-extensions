@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using Tingle.Extensions.Primitives.Converters;
 
 namespace Tingle.Extensions.Primitives;
 
@@ -146,22 +146,6 @@ public sealed class Continent : IEquatable<Continent>, IComparable<Continent>, I
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => throw new InvalidCastException();
 
     #endregion
-
-    internal class ContinentJsonConverter : JsonConverter<Continent>
-    {
-        /// <inheritdoc/>
-        public override Continent? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var s = reader.GetString();
-            return string.IsNullOrWhiteSpace(s) ? null : new Continent(s);
-        }
-
-        /// <inheritdoc/>
-        public override void Write(Utf8JsonWriter writer, Continent value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(value.Name);
-        }
-    }
 
     internal class ContinentTypeConverter : TypeConverter
     {
