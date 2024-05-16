@@ -1,5 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
 
@@ -8,13 +9,13 @@ namespace Tingle.AspNetCore.ApplicationInsights;
 // See https://github.com/microsoft/ApplicationInsights-dotnet/issues/1427
 internal class ActivitySourceDependencyCollector : IHostedService
 {
-    private readonly TelemetryClient client;
+    private readonly IServiceProvider serviceProvider;
     private readonly IDictionary<string, ActivitySamplingResult> activities;
     private readonly ActivityListener? listener;
 
-    public ActivitySourceDependencyCollector(TelemetryClient client, IDictionary<string, ActivitySamplingResult> activities)
+    public ActivitySourceDependencyCollector(IServiceProvider serviceProvider, IDictionary<string, ActivitySamplingResult> activities)
     {
-        this.client = client ?? throw new ArgumentNullException(nameof(client));
+        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         this.activities = activities ?? throw new ArgumentNullException(nameof(activities));
 
         if (activities.Count > 0)
@@ -34,6 +35,9 @@ internal class ActivitySourceDependencyCollector : IHostedService
 
     internal void ActivityStopped(Activity activity)
     {
+        var client = serviceProvider.GetService<TelemetryClient>();
+        if (client is null) return;
+
         // extensibility point - can chain more telemetry extraction methods here
         var telemetry = ExtractDependencyTelemetry(activity);
         if (telemetry == null)

@@ -62,6 +62,6 @@ public static class IServiceCollectionExtensions
     public static IServiceCollection AddActivitySourceDependencyCollector(this IServiceCollection services,
                                                                           IDictionary<string, ActivitySamplingResult> activities)
     {
-        return services.AddHostedService(p => ActivatorUtilities.CreateInstance<ActivitySourceDependencyCollector>(p, [activities]));
+        return services.AddHostedService(p => new ActivitySourceDependencyCollector(p, activities));
     }
 }
