@@ -1,6 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using Asp.Versioning.ApiExplorer;
-#endif
+﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -38,8 +36,6 @@ public static partial class SwaggerGenExtensions
         options.SwaggerDoc(documentName, info);
         return options;
     }
-
-#if NET8_0_OR_GREATER
 
     /// <summary>
     /// Adds a swagger document from an API version description
@@ -107,6 +103,4 @@ public static partial class SwaggerGenExtensions
 
         return options;
     }
-#endif
-
 }

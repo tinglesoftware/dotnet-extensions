@@ -1,10 +1,6 @@
-﻿#if NET8_0_OR_GREATER
-using Asp.Versioning.ApiExplorer;
-#endif
+﻿using Asp.Versioning.ApiExplorer;
 using Microsoft.Extensions.Options;
-#if NET8_0_OR_GREATER
 using Microsoft.OpenApi.Models;
-#endif
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Tingle.AspNetCore.Swagger.Filters;
 
@@ -35,8 +31,6 @@ public static class IServiceCollectionExtensions
     {
         return services.AddTransient<IPostConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenEnumDescriptions>();
     }
-
-#if NET8_0_OR_GREATER
 
     /// <summary>
     /// Adds swagger documents for api version descriptions declared in code.
@@ -87,6 +81,4 @@ public static class IServiceCollectionExtensions
         /// <inheritdoc />
         public void Configure(SwaggerGenOptions options) => configure?.Invoke(provider.ApiVersionDescriptions, options);
     }
-
-#endif
 }
