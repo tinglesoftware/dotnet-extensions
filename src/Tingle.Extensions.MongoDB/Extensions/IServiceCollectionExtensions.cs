@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Extensions.DiagnosticSources;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Tingle.Extensions.MongoDB;
@@ -32,13 +33,14 @@ public static class IServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Action<MongoDbContextOptionsBuilder>? optionsAction = null,
+        InstrumentationOptions? instrumentationOptions = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Singleton,
         ServiceLifetime optionsLifetime = ServiceLifetime.Singleton)
         where TContext : MongoDbContext
     {
         var connectionString = configuration.GetConnectionString("Mongo");
         return connectionString is not null
-            ? AddMongoDbContext<TContext>(services, connectionString: connectionString, optionsAction, contextLifetime, optionsLifetime)
+            ? AddMongoDbContext<TContext>(services, connectionString: connectionString, optionsAction, instrumentationOptions, contextLifetime, optionsLifetime)
             : AddMongoDbContext<TContext>(services, optionsAction, contextLifetime, optionsLifetime);
     }
 
@@ -46,13 +48,14 @@ public static class IServiceCollectionExtensions
         this IServiceCollection services,
         string connectionString,
         Action<MongoDbContextOptionsBuilder>? optionsAction = null,
+        InstrumentationOptions? instrumentationOptions = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Singleton,
         ServiceLifetime optionsLifetime = ServiceLifetime.Singleton)
         where TContext : MongoDbContext
     {
         return AddMongoDbContext<TContext>(services, options =>
         {
-            options.UseMongoConnectionString(connectionString);
+            options.UseMongoConnectionString(connectionString, instrumentationOptions);
             optionsAction?.Invoke(options);
         }, contextLifetime, optionsLifetime);
     }
