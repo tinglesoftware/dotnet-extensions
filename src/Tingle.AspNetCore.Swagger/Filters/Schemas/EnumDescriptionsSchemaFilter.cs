@@ -62,8 +62,7 @@ public class EnumDescriptionsSchemaFilter(XPathDocument xmlDoc) : ISchemaFilter
         var summaryNode = enumNode.SelectSingleNode("summary");
         if (summaryNode != null)
         {
-            var xml = XmlCommentsTextHelper.Humanize(summaryNode.InnerXml);
-            return XmlCommentsHelper.ToMarkdown(xml);
+            return XmlCommentsTextHelper.Humanize(summaryNode.InnerXml);
         }
 
         return null;

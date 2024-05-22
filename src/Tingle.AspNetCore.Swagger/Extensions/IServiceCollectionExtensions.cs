@@ -12,16 +12,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class IServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds conversion of XML comments extracted for Swagger to markdown.
-    /// </summary>
-    /// <param name="services">the service collection to use</param>
-    /// <returns></returns>
-    public static IServiceCollection AddSwaggerXmlToMarkdown(this IServiceCollection services)
-    {
-        return services.AddTransient<IPostConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenXmlToMarkdown>();
-    }
-
-    /// <summary>
     /// Adds enum descriptions.
     /// This should be called after all XML documents have been added.
     /// </summary>
