@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
-using MongoDB.Driver.Core.Events;
+using MongoDB.Driver.Core.Extensions.DiagnosticSources;
 using System.Diagnostics.CodeAnalysis;
-using Tingle.Extensions.MongoDB.Diagnostics;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -122,16 +121,9 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context.
     /// </summary>
     /// <param name="url">The <see cref="MongoUrl"/> to be used</param>
-    /// <param name="instrumentCommandText">
-    /// Whether the command text should be captured in instrumentation.
-    /// </param>
-    /// <param name="shouldInstrument">
-    /// Delegate for determining if a <see cref="CommandStartedEvent"/> should be instrumented.
-    /// </param>
+    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public virtual MongoDbContextOptionsBuilder UseMongoUrl(MongoUrl url,
-                                                            bool instrumentCommandText = true,
-                                                            Func<CommandStartedEvent, bool>? shouldInstrument = null)
+    public virtual MongoDbContextOptionsBuilder UseMongoUrl(MongoUrl url, InstrumentationOptions? instrumentationOptions = null)
     {
         ArgumentNullException.ThrowIfNull(url);
         if (string.IsNullOrWhiteSpace(url.DatabaseName))
@@ -146,10 +138,7 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
         {
             settings.ClusterConfigurator = builder =>
             {
-                builder.Subscribe(
-                    new MongoDbDiagnosticEvents(
-                        captureCommandText: instrumentCommandText,
-                        shouldStartActivity: shouldInstrument));
+                builder.Subscribe(new DiagnosticsActivityEventSubscriber(instrumentationOptions ?? new() { CaptureCommandText = true }));
             };
         });
 
@@ -165,19 +154,12 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
     /// <c>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</c>
     /// e.g. <c>mongodb://localhost:27017/myDatabase</c>
     /// </param>
-    /// <param name="instrumentCommandText">
-    /// Whether the command text should be captured in instrumentation.
-    /// </param>
-    /// <param name="shouldInstrument">
-    /// Delegate for determining if a <see cref="CommandStartedEvent"/> should be instrumented.
-    /// </param>
+    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public virtual MongoDbContextOptionsBuilder UseMongoConnectionString(string connectionString,
-                                                                         bool instrumentCommandText = true,
-                                                                         Func<CommandStartedEvent, bool>? shouldInstrument = null)
+    public virtual MongoDbContextOptionsBuilder UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions = null)
     {
         ArgumentNullException.ThrowIfNull(connectionString);
-        return UseMongoUrl(new MongoUrl(connectionString), instrumentCommandText, shouldInstrument);
+        return UseMongoUrl(new MongoUrl(connectionString), instrumentationOptions);
     }
 
     /// <summary>
@@ -246,17 +228,10 @@ public class MongoDbContextOptionsBuilder<TContext>(MongoDbContextOptions<TConte
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context.
     /// </summary>
     /// <param name="url">The <see cref="MongoUrl"/> to be used</param>
-    /// <param name="instrumentCommandText">
-    /// Whether the command text should be captured in instrumentation.
-    /// </param>
-    /// <param name="shouldInstrument">
-    /// Delegate for determining if a <see cref="CommandStartedEvent"/> should be instrumented.
-    /// </param>
+    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoUrl(MongoUrl url,
-                                                                          bool instrumentCommandText = true,
-                                                                          Func<CommandStartedEvent, bool>? shouldInstrument = null)
-        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoUrl(url, instrumentCommandText, shouldInstrument);
+    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoUrl(MongoUrl url, InstrumentationOptions? instrumentationOptions = null)
+        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoUrl(url, instrumentationOptions);
 
     /// <summary>
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context by
@@ -267,17 +242,10 @@ public class MongoDbContextOptionsBuilder<TContext>(MongoDbContextOptions<TConte
     /// <c>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</c>
     /// e.g. <c>mongodb://localhost:27017/myDatabase</c>
     /// </param>
-    /// <param name="instrumentCommandText">
-    /// Whether the command text should be captured in instrumentation.
-    /// </param>
-    /// <param name="shouldInstrument">
-    /// Delegate for determining if a <see cref="CommandStartedEvent"/> should be instrumented.
-    /// </param>
+    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString,
-                                                                                       bool instrumentCommandText = true,
-                                                                                       Func<CommandStartedEvent, bool>? shouldInstrument = null)
-        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoConnectionString(connectionString, instrumentCommandText, shouldInstrument);
+    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions=null)
+        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoConnectionString(connectionString, instrumentationOptions);
 
     /// <summary>
     /// Further configure the existing instance of <see cref="MongoClientSettings"/>.

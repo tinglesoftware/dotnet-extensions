@@ -49,7 +49,7 @@ If MongoDB client is configured with a connection string, add the `ConnectionStr
 
 ## Diagnostics
 
-Events for Mongo are produced on an `ActivitySource` named `MongoDB`. This is done by registering and instance of `IEventSubscriber` named `MongoDbDiagnosticEvents` to the `ClusterConfigurator`. However, this is done automatically when using `MongoDbContext`.
+Events for Mongo are produced on an `ActivitySource` named [`MongoDB.Driver.Core.Extensions.DiagnosticSources`](https://github.com/jbogard/MongoDB.Driver.Core.Extensions.DiagnosticSources), automatically when using `MongoDbContext`.
 
 ## HealthChecks
 
