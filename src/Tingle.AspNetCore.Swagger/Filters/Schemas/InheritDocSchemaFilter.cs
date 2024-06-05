@@ -86,7 +86,7 @@ public class InheritDocSchemaFilter : ISchemaFilter
         // Add the summary and examples for the properties.
         foreach (var entry in schema.Properties)
         {
-            var memberInfo = ((TypeInfo)context.Type).GetAllMembers()?.FirstOrDefault(p => p.Name.Equals(entry.Key, StringComparison.OrdinalIgnoreCase));
+            var memberInfo = GetAllMembers(context.Type.GetTypeInfo())?.FirstOrDefault(p => p.Name.Equals(entry.Key, StringComparison.OrdinalIgnoreCase));
             if (memberInfo != null)
             {
                 ApplyPropertyComments(entry.Value, memberInfo);
@@ -194,5 +194,15 @@ public class InheritDocSchemaFilter : ISchemaFilter
 
         // We use the last since that will be our base class or the "nearest" implemented interface.
         return targets.LastOrDefault();
+    }
+
+    internal static IEnumerable<MemberInfo> GetAllMembers(TypeInfo typeInfo)
+    {
+        var ti = typeInfo;
+        while (ti is not null)
+        {
+            foreach (var t in ti.DeclaredMembers) yield return t;
+            ti = ti.BaseType?.GetTypeInfo();
+        }
     }
 }
