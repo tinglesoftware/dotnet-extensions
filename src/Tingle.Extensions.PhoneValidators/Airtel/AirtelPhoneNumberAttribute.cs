@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Tingle.Extensions.PhoneValidators.Airtel;
+﻿using Tingle.Extensions.PhoneValidators.Airtel;
 
 namespace System.ComponentModel.DataAnnotations;
 
@@ -9,8 +8,6 @@ namespace System.ComponentModel.DataAnnotations;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class AirtelPhoneNumberAttribute : ValidationAttribute
 {
-    private static readonly Regex regex = new(AirtelPhoneNumberValidator.RegExComplete);
-
     /// <summary>
     /// Initializes a new instance of the <see cref="SafaricomPhoneNumberAttribute"/> class.
     /// </summary>
@@ -19,6 +16,8 @@ public sealed class AirtelPhoneNumberAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
+        static bool IsValidByRegEx(string value) => AirtelPhoneNumberValidator.Expression.IsMatch(value);
+
         if (value is string s && !string.IsNullOrEmpty(s)) return IsValidByRegEx(s);
 
         if (value is IEnumerable<string> values)
@@ -32,6 +31,4 @@ public sealed class AirtelPhoneNumberAttribute : ValidationAttribute
 
         return true;
     }
-
-    private bool IsValidByRegEx(string value) => regex.IsMatch(value);
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using Tingle.Extensions.PhoneValidators.Telkom;
+﻿using Tingle.Extensions.PhoneValidators.Telkom;
 
 namespace System.ComponentModel.DataAnnotations;
 
@@ -9,8 +8,6 @@ namespace System.ComponentModel.DataAnnotations;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class TelkomPhoneNumberAttribute : ValidationAttribute
 {
-    private static readonly Regex regex = new(TelkomPhoneNumberValidator.RegExComplete);
-
     /// <summary>
     /// Initializes a new instance of the <see cref="SafaricomPhoneNumberAttribute"/> class.
     /// </summary>
@@ -19,6 +16,8 @@ public sealed class TelkomPhoneNumberAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
+    static bool IsValidByRegEx(string value) => TelkomPhoneNumberValidator.Expression.IsMatch(value);
+
         if (value is string s && !string.IsNullOrEmpty(s)) return IsValidByRegEx(s);
 
         if (value is IEnumerable<string> values)
@@ -32,6 +31,4 @@ public sealed class TelkomPhoneNumberAttribute : ValidationAttribute
 
         return true;
     }
-
-    private bool IsValidByRegEx(string value) => regex.IsMatch(value);
 }

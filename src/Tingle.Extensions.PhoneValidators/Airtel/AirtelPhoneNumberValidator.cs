@@ -6,7 +6,7 @@ namespace Tingle.Extensions.PhoneValidators.Airtel;
 /// <summary>
 /// Implementation of <see cref="IPhoneNumberValidator"/> specifically for Airtel phone numbers
 /// </summary>
-public class AirtelPhoneNumberValidator : AbstractPhoneNumberValidator
+public partial class AirtelPhoneNumberValidator : AbstractPhoneNumberValidator
 {
     // This regular expression will match numbers with known formats.
     // The intention is to ensure the line number (after country code or local code) are actually standard.
@@ -16,12 +16,19 @@ public class AirtelPhoneNumberValidator : AbstractPhoneNumberValidator
     // The digits are 30-39, 50-56, 85-89 when prefixed with 7 and 00-02 when prefixed with 1
     internal const string RegExComplete = @"^(?:254|\+254|0)?((?:(?:7(?:(?:3[0-9])|(?:5[0-6])|(8[5-9])))|(?:1(?:[0][0-2])))[0-9]{6})$";
 
-    private static readonly Regex regex = new(@RegExComplete);
+    internal static readonly Regex Expression = GetExpression();
 
     /// <summary>
     /// Creates an instance of <see cref="AirtelPhoneNumberValidator"/>
     /// </summary>
     public AirtelPhoneNumberValidator() : base() { }
 
-    internal override Regex RegularExpression => regex;
+    internal override Regex RegularExpression => Expression;
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(RegExComplete)]
+    private static partial Regex GetExpression();
+#else
+    private static Regex GetExpression() => new(RegExComplete);
+#endif
 }

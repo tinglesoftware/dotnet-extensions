@@ -10,6 +10,7 @@
 
   <PropertyGroup>
     <WarningsAsErrors>$(WaringsAsErrors),IL2026,IL3050</WarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors),SYSLIB1045</WarningsAsErrors>
   </PropertyGroup>
 
 </Project>
