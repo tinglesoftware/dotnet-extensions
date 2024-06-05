@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -16,7 +18,7 @@ namespace Tingle.Extensions.Primitives;
 /// </remarks>
 [JsonConverter(typeof(DurationJsonConverter))]
 [TypeConverter(typeof(DurationTypeConverter))]
-public readonly struct Duration : IEquatable<Duration>, IConvertible
+public readonly struct Duration : IEquatable<Duration>, IConvertible, IParsable<Duration>
 {
     /// <summary>Represents the zero <see cref="Duration"/> value.</summary>
     public static readonly Duration Zero = new(0, 0, 0, 0);
@@ -174,39 +176,58 @@ public readonly struct Duration : IEquatable<Duration>, IConvertible
     #region Parsing
 
     /// <summary>Converts a <see cref="string"/> in ISO8601 format into a <see cref="Duration"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
-    /// <returns>A <see cref="Duration"/> equivalent to the value specified in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="value"/> is not in a correct format.</exception>
-    public static Duration Parse(string value)
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <returns>A <see cref="Duration"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Duration Parse(string s) => Parse(s, null);
+
+    /// <summary>Converts a <see cref="string"/> in ISO8601 format into a <see cref="Duration"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns>A <see cref="Duration"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Duration Parse(string s, IFormatProvider? provider)
     {
-        if (string.IsNullOrWhiteSpace(value))
+        if (string.IsNullOrWhiteSpace(s))
         {
-            throw new ArgumentException($"'{nameof(value)}' cannot be null or whitespace.", nameof(value));
+            throw new ArgumentException($"'{nameof(s)}' cannot be null or whitespace.", nameof(s));
         }
 
-        if (TryParse(value, out var duration))
-            return duration;
-
-        throw new FormatException($"'{value}' is not a valid Duration representation.");
+        if (TryParse(s, out var duration)) return duration;
+        throw new FormatException($"'{s}' is not a valid Duration representation.");
     }
 
     /// <summary>Converts a <see cref="string"/> in ISO8601 format into a <see cref="Duration"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="s">A string containing the value to convert.</param>
     /// <param name="result">
     /// When this method returns, contains the value associated parsed,
     /// if successful; otherwise, <see langword="null"/> is returned.
     /// This parameter is passed uninitialized.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="value"/> could be parsed; otherwise, false.
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
     /// </returns>
-    public static bool TryParse(string value, out Duration result)
+    public static bool TryParse([NotNullWhen(true)] string? s, out Duration result) => TryParse(s, null, out result);
+
+    /// <summary>Converts a <see cref="string"/> in ISO8601 format into a <see cref="Duration"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="result">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Duration result)
     {
         result = default;
-        if (value == null) return false;
-        if (value.Length < 3) return false;
-        if (value[0] != DurationChars.Prefix) return false;
+        if (s == null) return false;
+        if (s.Length < 3) return false;
+        if (s[0] != DurationChars.Prefix) return false;
 
         uint years = 0, months = 0, weeks = 0, days = 0, hours = 0, minutes = 0, seconds = 0;
 
@@ -215,9 +236,9 @@ public readonly struct Duration : IEquatable<Duration>, IConvertible
         int numberStart = -1;
         var isTimeSpecified = false;
 
-        while (position < value.Length)
+        while (position < s.Length)
         {
-            char c = value[position];
+            char c = s[position];
             if (c == DurationChars.Time)
             {
                 isTimeSpecified = true;
@@ -228,7 +249,7 @@ public readonly struct Duration : IEquatable<Duration>, IConvertible
                 if (numberStart < 0 || numberStart >= position)
                     return false; // No number preceding letter
 
-                var numberString = value[numberStart..position];
+                var numberString = s[numberStart..position];
                 if (!uint.TryParse(numberString, out uint n))
                     return false; // Not a valid number
 

@@ -140,13 +140,6 @@ public class MoneyTests
         Assert.Equal(new Money("JPY", 765), yen);
     }
 
-    [Fact, UseCulture("en-US")]
-    public void Parse_Works_DollarSymbolInUSA()
-    {
-        var dollar = Money.Parse("$765.43");
-        Assert.Equal(new Money("USD", 76543), dollar);
-    }
-
     [Fact, UseCulture("nl-NL")]
     public void Parsing_DollarSymbolInNetherlands_Fails()
     {

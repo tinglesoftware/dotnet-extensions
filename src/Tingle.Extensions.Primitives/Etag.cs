@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.Primitives.Converters;
@@ -10,8 +11,10 @@ namespace Tingle.Extensions.Primitives;
 /// </summary>
 [JsonConverter(typeof(EtagJsonConverter))]
 [TypeConverter(typeof(EtagTypeConverter))]
-public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible, IFormattable
+public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible, IFormattable, IParsable<Etag>
 {
+    private const string ObsoleteUseParsing = "Use Parse(...) or TryParse(...) instead";
+
     /// <summary>
     /// The default value starting from the beginning (<see cref="ulong.MinValue"/>)
     /// </summary>
@@ -49,6 +52,7 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
     /// <exception cref="ArgumentException">
     /// <paramref name="value"/> does not have sufficient data to create <see cref="ulong"/>.
     /// </exception>
+    [Obsolete(ObsoleteUseParsing)]
     public Etag(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -136,7 +140,7 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
     public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <inheritdoc/>
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
         format ??= Base64Format;
 
@@ -161,6 +165,78 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
     /// <returns></returns>
     public Etag Next() => new(value + 1);
 
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Etag"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <returns>A <see cref="Etag"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Etag Parse(string s) => Parse(s, null);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Etag"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns>A <see cref="Etag"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Etag Parse(string s, IFormatProvider? provider)
+    {
+        ArgumentNullException.ThrowIfNull(s);
+
+        if (TryParse(s, provider, out var result)) return result;
+        throw new FormatException($"'{s}' is not a valid Etag.");
+    }
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Etag"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, [MaybeNullWhen(false)] out Etag value) => TryParse(s, null, out value);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Etag"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out Etag value)
+    {
+        value = default;
+        if (string.IsNullOrWhiteSpace(s)) return false;
+
+        // remove quotes and parse the number
+        if (s.StartsWith(QuoteCharacter)) s = s.Trim(QuoteCharacter);
+
+        if (s.StartsWith(HexSpecifier, StringComparison.OrdinalIgnoreCase))
+        {
+            s = s[HexSpecifier.Length..];
+            if (ulong.TryParse(s, NumberStyles.HexNumber, provider, out var ul))
+            {
+                value = new Etag(ul);
+                return true;
+            }
+        }
+        else
+        {
+            var raw = Convert.FromBase64String(s);  // convert from base64 string
+            var ul = BitConverter.ToUInt64(raw, 0); // convert to ulong
+            value = new Etag(ul);
+            return true;
+        }
+
+        return false;
+    }
+
     /// <inheritdoc/>
     public static bool operator ==(Etag left, Etag right) => left.Equals(right);
 
@@ -181,6 +257,7 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
 
     /// <summary>Converts a <see cref="string"/> to a <see cref="Etag"/>.</summary>
     /// <param name="s"></param>
+    [Obsolete(ObsoleteUseParsing)]
     public static implicit operator Etag(string s) => new(value: s);
 
     /// <summary>Converts a <see cref="T:byte[]"/> to a <see cref="Etag"/>.</summary>
@@ -232,6 +309,7 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
     /// <summary>Combine multiple instances of <see cref="string"/> into one <see cref="Etag"/>.</summary>
     /// <param name="etags">The values to be combined.</param>
     /// <returns></returns>
+    [Obsolete(ObsoleteUseParsing)]
     public static Etag Combine(IEnumerable<string> etags) => Combine(etags.Select(e => new Etag(e)));
 
     /// <summary>Combine multiple instances of <see cref="T:byte[]"/> into one <see cref="Etag"/>.</summary>
@@ -287,7 +365,7 @@ public readonly struct Etag : IEquatable<Etag>, IComparable<Etag>, IConvertible,
         /// <inheritdoc/>
         public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         {
-            return value is string s ? new Etag(s) : base.ConvertFrom(context, culture, value);
+            return value is string s ? Parse(s) : base.ConvertFrom(context, culture, value);
         }
 
         /// <inheritdoc/>

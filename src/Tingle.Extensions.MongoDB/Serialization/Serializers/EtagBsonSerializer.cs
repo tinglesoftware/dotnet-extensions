@@ -56,7 +56,7 @@ public class EtagBsonSerializer : StructSerializerBase<Etag>, IRepresentationCon
         var bsonType = context.Reader.CurrentBsonType;
         return bsonType switch
         {
-            BsonType.String => new Etag(_stringSerializer.Deserialize(context)),
+            BsonType.String => Etag.Parse(_stringSerializer.Deserialize(context)),
             BsonType.Int64 => new Etag((ulong)_int64Serializer.Deserialize(context)),
             BsonType.Binary => new Etag(_byteArraySerializer.Deserialize(context)),
             _ => throw CreateCannotDeserializeFromBsonTypeException(bsonType),

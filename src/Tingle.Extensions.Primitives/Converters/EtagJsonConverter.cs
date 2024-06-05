@@ -33,7 +33,7 @@ public class EtagJsonConverter : JsonConverter<Etag>
         }
 
         var str = reader.GetString();
-        return new Etag(str!);
+        return Etag.Parse(str!);
     }
 
     /// <inheritdoc/>
