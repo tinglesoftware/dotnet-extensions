@@ -244,7 +244,7 @@ public class MongoDbContextOptionsBuilder<TContext>(MongoDbContextOptions<TConte
     /// </param>
     /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions=null)
+    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions = null)
         => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoConnectionString(connectionString, instrumentationOptions);
 
     /// <summary>

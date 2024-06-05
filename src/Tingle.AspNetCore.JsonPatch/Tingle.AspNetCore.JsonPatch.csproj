@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>JSON Patch support for AspNetCore using System.Text.Json</Description>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <IsTrimmable>false</IsTrimmable>
+    <IsAotCompatible>false</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>

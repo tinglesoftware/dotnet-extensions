@@ -42,8 +42,8 @@ internal class EnumConverterHelper<[DynamicallyAccessedMembers(EnumConverterHelp
         enumTypeCode = Type.GetTypeCode(type);
         isFlags = type.IsDefined(typeof(FlagsAttribute), true);
 
-        var names = type.GetEnumNames();
-        var builtInValues = type.GetEnumValues();
+        var names = Enum.GetNames<TEnum>();
+        var builtInValues = Enum.GetValues<TEnum>();
 
         int numberOfNames = names.Length;
 

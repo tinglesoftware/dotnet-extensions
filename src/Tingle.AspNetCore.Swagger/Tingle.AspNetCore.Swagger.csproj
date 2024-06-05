@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Usability extensions for Swagger middleware including smaller ReDoc support</Description>
     <TargetFrameworks>net8.0</TargetFrameworks>
-    <IsTrimmable>false</IsTrimmable>
+    <IsAotCompatible>false</IsAotCompatible>
   </PropertyGroup>
 
   <ItemGroup>

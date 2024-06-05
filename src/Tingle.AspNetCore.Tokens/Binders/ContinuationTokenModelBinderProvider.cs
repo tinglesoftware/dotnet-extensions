@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tingle.AspNetCore.Tokens.Binders;
 
@@ -12,6 +13,7 @@ namespace Tingle.AspNetCore.Tokens.Binders;
 /// </list>
 /// if applicable.
 /// </summary>
+[RequiresDynamicCode(MessageStrings.ModelBindingGenericsRequiresDynamicCodeMessage)]
 internal class ContinuationTokenModelBinderProvider : IModelBinderProvider
 {
     /// <inheritdoc/>
