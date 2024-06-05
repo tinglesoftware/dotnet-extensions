@@ -23,7 +23,7 @@ namespace Tingle.Extensions.Primitives;
 /// </remarks>
 [JsonConverter(typeof(KsuidJsonConverter))]
 [TypeConverter(typeof(KsuidTypeConverter))]
-public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormattable
+public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormattable, IParsable<Ksuid>
 {
     /// <summary>Gets an instance of <see cref="Ksuid"/> where the value is empty.</summary>
     public static readonly Ksuid Empty = default;
@@ -80,51 +80,6 @@ public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormatt
     /// <summary>Gets the timestamp represented in the instance.</summary>
     public DateTimeOffset Created => origin.AddSeconds(timestamp);
 
-    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
-    /// <param name="s">A string containing the value to convert.</param>
-    /// <returns>A <see cref="Ksuid"/> equivalent to the value specified in <paramref name="s"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
-    public static Ksuid Parse(string s)
-    {
-        ArgumentNullException.ThrowIfNull(s);
-
-        if (TryParse(s, out var result)) return result;
-        throw new FormatException($"'{s}' is not a valid KSUID.");
-    }
-
-    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
-    /// <param name="s">A string containing the value to convert.</param>
-    /// <param name="value">
-    /// When this method returns, contains the value associated parsed,
-    /// if successful; otherwise, <see langword="null"/> is returned.
-    /// This parameter is passed uninitialized.
-    /// </param>
-    /// <returns>
-    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
-    /// </returns>
-    public static bool TryParse(string s, [NotNullWhen(true)] out Ksuid value)
-    {
-        value = default;
-        if (string.IsNullOrWhiteSpace(s))
-        {
-            return false;
-        }
-
-        if (s.Length == Base62EncodedLength)
-        {
-            value = new(KsuidBase62.FromBase62(s));
-            return true;
-        }
-        else if (s.Length == HexEncodedLength)
-        {
-            value = new Ksuid(Convert.FromHexString(s));
-            return true;
-        }
-
-        return false;
-    }
-
     /// <summary>Returns a 20-element byte array that contains the value of this instance.</summary>
     /// <returns>A 20-element byte array.</returns>
     public byte[] ToByteArray()
@@ -151,7 +106,7 @@ public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormatt
     public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <inheritdoc/>
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
         format ??= Base62Format;
 
@@ -161,6 +116,69 @@ public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormatt
             HexFormat => Convert.ToHexString(ToByteArray()),
             _ => throw new FormatException($"The {format} format string is not supported."),
         };
+    }
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <returns>A <see cref="Ksuid"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Ksuid Parse(string s) => Parse(s, null);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns>A <see cref="Ksuid"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Ksuid Parse(string s, IFormatProvider? provider)
+    {
+        ArgumentNullException.ThrowIfNull(s);
+
+        if (TryParse(s, provider, out var result)) return result;
+        throw new FormatException($"'{s}' is not a valid KSUID.");
+    }
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, [MaybeNullWhen(false)] out Ksuid value) => TryParse(s, null, out value);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Ksuid"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out Ksuid value)
+    {
+        value = default;
+        if (string.IsNullOrWhiteSpace(s)) return false;
+
+        if (s.Length == Base62EncodedLength)
+        {
+            value = new(KsuidBase62.FromBase62(s));
+            return true;
+        }
+        else if (s.Length == HexEncodedLength)
+        {
+            value = new Ksuid(Convert.FromHexString(s));
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>Generates a new <see cref="Ksuid"/> with a unique value.</summary>

@@ -16,7 +16,7 @@ namespace Tingle.Extensions.Primitives;
 /// <param name="branch"></param>
 [JsonConverter(typeof(SwiftCodeJsonConverter))]
 [TypeConverter(typeof(SwiftCodeTypeConverter))]
-public sealed partial class SwiftCode(string institution, string country, string location, string? branch = null) : IEquatable<SwiftCode>, IComparable<SwiftCode>, IConvertible
+public sealed partial class SwiftCode(string institution, string country, string location, string? branch = null) : IEquatable<SwiftCode>, IComparable<SwiftCode>, IConvertible, IParsable<SwiftCode>
 {
     /// <summary>
     /// A 4-letter representation of the institution.
@@ -122,16 +122,42 @@ public sealed partial class SwiftCode(string institution, string country, string
     /// </code>
     /// The default expression used for validation is <c>^([a-zA-Z]{4})([a-zA-Z]{2})([a-zA-Z0-9]{2})([a-zA-Z0-9]{3})?$</c>
     /// </summary>
-    /// <param name="code">the string representation of a swift code as specified under ISO-9362.</param>
+    /// <param name="s">the string representation of a swift code as specified under ISO-9362.</param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException"><paramref name="code"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="code"/> does not have a valid format.</exception>
-    public static SwiftCode Parse(string code)
-    {
-        ArgumentNullException.ThrowIfNull(code);
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> does not have a valid format.</exception>
+    public static SwiftCode Parse(string s) => Parse(s, null);
 
-        if (TryParse(code, out var result)) return result;
-        throw new FormatException($"'{code}' is not a valid Swift code.");
+    /// <summary>
+    /// Parses a code into <see cref="SwiftCode"/>. The format of a Swift Code is as specified under ISO-9362.
+    /// The Swift code can be either 8 or 11 characters long, an 8 digits code implies the primary office.
+    /// The code consists of 4 separate section, and the format arrange in the following manner: <c>AAAA BB CC DDD</c>.
+    /// <code>The first 4 characters ("AAAA") specify the institution. Only letters.</code>
+    /// <code>
+    /// The next 2 characters("BB") specify the country where the institution's located. The code follows the format
+    /// of ISO 3166-1 alpha-2 country code. Only letters.
+    /// </code>
+    /// <code>
+    /// The next 2 characters ("CC") specify the institution's location. Can be letters and digits.
+    /// Passive participants will have "1" in the second character.
+    /// </code>
+    /// <code>
+    /// The last 3 characters("DDD") specify the institution's branch. This section is an optional.
+    /// When set to 'XXX' refers to a primary office. Can be letters and digits.
+    /// </code>
+    /// The default expression used for validation is <c>^([a-zA-Z]{4})([a-zA-Z]{2})([a-zA-Z0-9]{2})([a-zA-Z0-9]{3})?$</c>
+    /// </summary>
+    /// <param name="s">the string representation of a swift code as specified under ISO-9362.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> does not have a valid format.</exception>
+    public static SwiftCode Parse(string s, IFormatProvider? provider)
+    {
+        ArgumentNullException.ThrowIfNull(s);
+
+        if (TryParse(s, provider, out var result)) return result;
+        throw new FormatException($"'{s}' is not a valid Swift code.");
     }
 
     /// <summary>
@@ -153,19 +179,52 @@ public sealed partial class SwiftCode(string institution, string country, string
     /// </code>
     /// The default expression used for validation is <c>^([a-zA-Z]{4})([a-zA-Z]{2})([a-zA-Z0-9]{2})([a-zA-Z0-9]{3})?$</c>
     /// </summary>
-    /// <param name="code">the string representation of a swift code as specified under ISO-9362.</param>
+    /// <param name="s">the string representation of a swift code as specified under ISO-9362.</param>
     /// <param name="value">
     /// When this method returns, contains the value associated parsed,
     /// if successful; otherwise, <see langword="null"/> is returned.
     /// This parameter is passed uninitialized.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="code"/> could be parsed; otherwise, false.
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
     /// </returns>
-    public static bool TryParse(string code, [NotNullWhen(true)] out SwiftCode? value)
+    public static bool TryParse(string? s, [MaybeNullWhen(false)] out SwiftCode value) => TryParse(s, null, out value);
+
+    /// <summary>
+    /// Parses a code into <see cref="SwiftCode"/>. The format of a Swift Code is as specified under ISO-9362.
+    /// The Swift code can be either 8 or 11 characters long, an 8 digits code implies the primary office.
+    /// The code consists of 4 separate section, and the format arrange in the following manner: <c>AAAA BB CC DDD</c>.
+    /// <code>The first 4 characters ("AAAA") specify the institution. Only letters.</code>
+    /// <code>
+    /// The next 2 characters("BB") specify the country where the institution's located. The code follows the format
+    /// of ISO 3166-1 alpha-2 country code. Only letters.
+    /// </code>
+    /// <code>
+    /// The next 2 characters ("CC") specify the institution's location. Can be letters and digits.
+    /// Passive participants will have "1" in the second character.
+    /// </code>
+    /// <code>
+    /// The last 3 characters("DDD") specify the institution's branch. This section is an optional.
+    /// When set to 'XXX' refers to a primary office. Can be letters and digits.
+    /// </code>
+    /// The default expression used for validation is <c>^([a-zA-Z]{4})([a-zA-Z]{2})([a-zA-Z0-9]{2})([a-zA-Z0-9]{3})?$</c>
+    /// </summary>
+    /// <param name="s">the string representation of a swift code as specified under ISO-9362.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="value">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    /// </returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out SwiftCode value)
     {
-        value = null;
-        var match = GetPattern().Match(code);
+        value = default;
+        if (string.IsNullOrWhiteSpace(s)) return false;
+
+        var match = GetPattern().Match(s);
         if (!match.Success) return false;
 
         value = new SwiftCode(institution: match.Groups[1].Value,
@@ -183,8 +242,8 @@ public sealed partial class SwiftCode(string institution, string country, string
     public static bool operator !=(SwiftCode left, SwiftCode right) => !(left == right);
 
     /// <summary>Converts a string to a <see cref="SwiftCode"/>.</summary>
-    /// <param name="code">the string representation of the code</param>
-    public static implicit operator SwiftCode(string code) => Parse(code: code);
+    /// <param name="s">the string representation of the code</param>
+    public static implicit operator SwiftCode(string s) => Parse(s);
 
     /// <summary>Converts a <see cref="SwiftCode"/> to a string.</summary>
     /// <param name="code">the string representation of the code</param>

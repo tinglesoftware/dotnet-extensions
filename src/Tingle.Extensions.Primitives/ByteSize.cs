@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.Primitives.Converters;
@@ -11,7 +12,7 @@ namespace Tingle.Extensions.Primitives;
 /// <param name="bytes">Number of bytes.</param>
 [JsonConverter(typeof(ByteSizeJsonConverter))]
 [TypeConverter(typeof(ByteSizeTypeConverter))]
-public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<ByteSize>, IConvertible, IFormattable
+public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<ByteSize>, IConvertible, IFormattable, IParsable<ByteSize>
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static readonly ByteSize MinValue = FromBytes(long.MinValue);
@@ -186,27 +187,27 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     public string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 
     /// <inheritdoc/>
-    public string ToString(string? format, IFormatProvider? formatProvider) => ToString(format, formatProvider, useBinaryByte: false);
+    public string ToString(string? format, IFormatProvider? provider) => ToString(format, provider, useBinaryByte: false);
 
     /// <summary>Formats the value of the current instance in binary format.</summary>
     /// <returns>The value of the current instance in the specified format.</returns>
     public string ToBinaryString() => ToString("0.##", CultureInfo.CurrentCulture, useBinaryByte: true);
 
     /// <summary>Formats the value of the current instance in binary format.</summary>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The provider to use to format the value. -or- A null reference (Nothing in Visual
     /// Basic) to obtain the numeric format information from the current locale setting
     /// of the operating system.
     /// </param>
     /// <returns>The value of the current instance in the specified format.</returns>
-    public string ToBinaryString(IFormatProvider? formatProvider) => ToString("0.##", formatProvider, useBinaryByte: true);
+    public string ToBinaryString(IFormatProvider? provider) => ToString("0.##", provider, useBinaryByte: true);
 
     /// <summary>Formats the value of the current instance using the specified format.</summary>
     /// <param name="format">
     /// The format to use. -or- A null reference (Nothing in Visual Basic) to use the
     /// default format defined for the type of the System.IFormattable implementation.
     /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// The provider to use to format the value. -or- A null reference (Nothing in Visual
     /// Basic) to obtain the numeric format information from the current locale setting
     /// of the operating system.
@@ -215,16 +216,16 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// Whether to use binary format
     /// </param>
     /// <returns>The value of the current instance in the specified format.</returns>
-    public string ToString(string? format, IFormatProvider? formatProvider, bool useBinaryByte)
+    public string ToString(string? format, IFormatProvider? provider, bool useBinaryByte)
     {
         format ??= "0.##";
-        formatProvider ??= CultureInfo.CurrentCulture;
+        provider ??= CultureInfo.CurrentCulture;
 
         if (!format.Contains('#') && !format.Contains('0'))
             format = "0.## " + format;
 
         bool has(string s) => format.Contains(s, StringComparison.CurrentCultureIgnoreCase);
-        string output(double n) => n.ToString(format, formatProvider);
+        string output(double n) => n.ToString(format, provider);
 
         // Binary
         if (has("PiB")) return output(PebiBytes);
@@ -245,8 +246,8 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
             return output(Bytes);
 
         return useBinaryByte
-            ? string.Format("{0} {1}", LargestWholeNumberBinaryValue.ToString(format, formatProvider), LargestWholeNumberBinarySymbol)
-            : string.Format("{0} {1}", LargestWholeNumberDecimalValue.ToString(format, formatProvider), LargestWholeNumberDecimalSymbol);
+            ? string.Format("{0} {1}", LargestWholeNumberBinaryValue.ToString(format, provider), LargestWholeNumberBinarySymbol)
+            : string.Format("{0} {1}", LargestWholeNumberDecimalValue.ToString(format, provider), LargestWholeNumberDecimalSymbol);
     }
 
     #endregion
@@ -339,11 +340,11 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="ByteSize"/> in a specified culture-specific format.</summary>
     /// <param name="s">A string containing the value to convert.</param>
-    /// <param name="formatProvider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
     /// <returns>A <see cref="ByteSize"/> equivalent to the value specified in <paramref name="s"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
     /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
-    public static ByteSize Parse(string s, IFormatProvider formatProvider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, formatProvider);
+    public static ByteSize Parse(string s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="ByteSize"/> in a specified style and culture-specific format.</summary>
     /// <param name="s">A string containing the value to convert.</param>
@@ -351,7 +352,7 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// A bitwise combination of <see cref="NumberStyles"/> values that indicates the permitted format of <paramref name="s"/>.
     /// A typical value to specify is <see cref="NumberStyles.Float"/> combined with <see cref="NumberStyles.AllowThousands"/>.
     /// </param>
-    /// <param name="formatProvider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
     /// <returns>A <see cref="ByteSize"/> equivalent to the value specified in <paramref name="s"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
     /// <exception cref="ArgumentException">
@@ -359,7 +360,7 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// -or- style includes the <see cref="NumberStyles.AllowHexSpecifier"/> value.
     /// </exception>
     /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
-    public static ByteSize Parse(string s, NumberStyles style, IFormatProvider formatProvider)
+    public static ByteSize Parse(string s, NumberStyles style, IFormatProvider? provider)
     {
         if (string.IsNullOrWhiteSpace(s))
         {
@@ -371,7 +372,7 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
 
         var found = false;
 
-        var numberFormatInfo = NumberFormatInfo.GetInstance(formatProvider);
+        var numberFormatInfo = NumberFormatInfo.GetInstance(provider);
         var decimalSeparator = Convert.ToChar(numberFormatInfo.NumberDecimalSeparator);
         var groupSeparator = Convert.ToChar(numberFormatInfo.NumberGroupSeparator);
 
@@ -397,7 +398,7 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
         string sizePart = s[lastNumber..].Trim();
 
         // Get the numeric part
-        if (!double.TryParse(numberPart, style, formatProvider, out var number))
+        if (!double.TryParse(numberPart, style, provider, out var number))
             throw new FormatException($"No number found in value '{s}'.");
 
         // Get the magnitude part
@@ -441,18 +442,18 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// any value originally supplied in result will be overwritten.
     /// </param>
     /// <returns><see langword="true"/> if <paramref name="s"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    public static bool TryParse(string s, out ByteSize result)
+    public static bool TryParse([NotNullWhen(true)] string? s, out ByteSize result)
     {
+        result = default;
+        if (s is null) return false;
+
         try
         {
             result = Parse(s);
             return true;
         }
-        catch
-        {
-            result = new ByteSize();
-            return false;
-        }
+        catch { }
+        return false;
     }
 
     /// <summary>
@@ -460,11 +461,7 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// A return value indicates whether the conversion succeeded or failed.
     /// </summary>
     /// <param name="s">A string containing the value to convert.</param>
-    /// <param name="style">
-    /// A bitwise combination of <see cref="NumberStyles"/> values that indicates the permitted format of <paramref name="s"/>.
-    /// A typical value to specify is <see cref="NumberStyles.Float"/> combined with <see cref="NumberStyles.AllowThousands"/>.
-    /// </param>
-    /// <param name="formatProvider">
+    /// <param name="provider">
     /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information about <paramref name="s"/>.
     /// </param>
     /// <param name="result">
@@ -476,18 +473,53 @@ public readonly struct ByteSize(long bytes) : IEquatable<ByteSize>, IComparable<
     /// any value originally supplied in result will be overwritten.
     /// </param>
     /// <returns><see langword="true"/> if <paramref name="s"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    public static bool TryParse(string s, NumberStyles style, IFormatProvider formatProvider, out ByteSize result)
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out ByteSize result)
     {
+        result = default;
+        if (s is null) return false;
+
         try
         {
-            result = Parse(s, style, formatProvider);
+            result = Parse(s, provider);
             return true;
         }
-        catch
+        catch { }
+        return false;
+    }
+
+    /// <summary>
+    /// Converts the <see cref="string"/> into a <see cref="ByteSize"/> in a specified style and culture-specific format.
+    /// A return value indicates whether the conversion succeeded or failed.
+    /// </summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="style">
+    /// A bitwise combination of <see cref="NumberStyles"/> values that indicates the permitted format of <paramref name="s"/>.
+    /// A typical value to specify is <see cref="NumberStyles.Float"/> combined with <see cref="NumberStyles.AllowThousands"/>.
+    /// </param>
+    /// <param name="provider">
+    /// An <see cref="IFormatProvider"/> that supplies culture-specific formatting information about <paramref name="s"/>.
+    /// </param>
+    /// <param name="result">
+    /// When this method returns, contains the <see cref="ByteSize"/> equivalent of the <paramref name="s"/> parameter,
+    /// if the conversion succeeded, or default if the conversion failed.
+    /// The conversion fails if the <paramref name="s"/> parameter is <see langword="null"/> or <see cref="string.Empty"/>,
+    /// is not in a valid format, or represents a value less than <see cref="MinValue"/>
+    /// or greater than <see cref="MaxValue"/>. This parameter is passed uninitialized;
+    /// any value originally supplied in result will be overwritten.
+    /// </param>
+    /// <returns><see langword="true"/> if <paramref name="s"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
+    public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out ByteSize result)
+    {
+        result = default;
+        if (s is null) return false;
+
+        try
         {
-            result = new ByteSize();
-            return false;
+            result = Parse(s, style, provider);
+            return true;
         }
+        catch { }
+        return false;
     }
 
     #endregion

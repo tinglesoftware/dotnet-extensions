@@ -100,7 +100,7 @@ public readonly struct SequenceNumber : IComparable<SequenceNumber>, IEquatable<
     public override string ToString() => value.ToString();
 
     /// <inheritdoc/>
-    public string ToString(string? format, IFormatProvider? formatProvider) => value.ToString(format, formatProvider);
+    public string ToString(string? format, IFormatProvider? provider) => value.ToString(format, provider);
 
     /// <inheritdoc/>
     public int CompareTo(SequenceNumber other) => value.CompareTo(other.value);

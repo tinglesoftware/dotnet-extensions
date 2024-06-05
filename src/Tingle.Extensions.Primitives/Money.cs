@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.Primitives.Converters;
@@ -15,7 +16,7 @@ namespace Tingle.Extensions.Primitives;
 /// <exception cref="ArgumentNullException"></exception>
 [JsonConverter(typeof(MoneyJsonConverter))]
 [TypeConverter(typeof(MoneyTypeConverter))]
-public readonly struct Money(Currency currency, long amount) : IEquatable<Money>, IComparable<Money>, IConvertible, IFormattable
+public readonly struct Money(Currency currency, long amount) : IEquatable<Money>, IComparable<Money>, IConvertible, IFormattable, IParsable<Money>
 {
     private readonly Currency currency = currency ?? throw new ArgumentNullException(nameof(currency));
     private readonly long amount = amount;
@@ -69,21 +70,20 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
     public string ToString(string? format) => ToString(format, null);
 
     /// <inheritdoc/>
-    public string ToString(IFormatProvider? formatProvider) => ToString(null, formatProvider);
+    public string ToString(IFormatProvider? provider) => ToString(null, provider);
 
     // https://github.com/DynamicHands/NodaMoney/blob/c4c9a621fd002abecb855273581632a6814c0c6c/src/NodaMoney/Money.Formattable.cs
     /// <inheritdoc/>
-    public string ToString(string? format, IFormatProvider? formatProvider)
+    public string ToString(string? format, IFormatProvider? provider)
     {
-        IFormatProvider provider;
         if (!string.IsNullOrWhiteSpace(format) && format.StartsWith('I') && format.Length >= 1 && format.Length <= 2)
         {
             format = format.Replace("I", "C", StringComparison.Ordinal);
-            provider = GetFormatProvider(currency, formatProvider, true);
+            provider = GetFormatProvider(currency, provider, true);
         }
         else
         {
-            provider = GetFormatProvider(currency, formatProvider);
+            provider = GetFormatProvider(currency, provider);
         }
 
         if (format == null || format == "G")
@@ -113,117 +113,95 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
     #region Parsing
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
-    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="value"/> is not in a correct format.</exception>
-    public static Money Parse(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentNullException(nameof(value));
-
-        var currency = ExtractCurrencyFromString(value, out var s);
-        return Parse(s, currency);
-    }
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Money Parse(string s) => Parse(s, null, null);
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="s">A string containing the value to convert.</param>
     /// <param name="currency">The currency to use for parsing the string representation.</param>
-    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="value"/> is not in a correct format.</exception>
-    public static Money Parse(string value, Currency currency)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentNullException(nameof(value));
-
-        return Parse(value, NumberStyles.Currency, GetFormatProvider(currency, null), currency);
-    }
+    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Money Parse(string s, Currency currency) => Parse(s, null, currency);
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
-    /// <param name="style">
-    /// A bitwise combination of enumeration values that indicates the permitted format of value.
-    /// A typical value to specify is <see cref="NumberStyles.Currency"/>.
-    /// </param>
-    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="value"/>.</param>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="s"/>.</param>
+    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Money Parse(string s, IFormatProvider? provider) => Parse(s, provider, null);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="s"/>.</param>
     /// <param name="currency">The currency to use for parsing the string representation.</param>
-    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-    /// <exception cref="FormatException"><paramref name="value"/> is not in a correct format.</exception>
-    public static Money Parse(string value, NumberStyles style, IFormatProvider provider, Currency currency)
+    /// <returns>A <see cref="Money"/> equivalent to the value specified in <paramref name="s"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="s"/> is null.</exception>
+    /// <exception cref="FormatException"><paramref name="s"/> is not in a correct format.</exception>
+    public static Money Parse(string s, IFormatProvider? provider, Currency? currency)
     {
-        if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentNullException(nameof(value));
+        if (string.IsNullOrWhiteSpace(s)) throw new ArgumentNullException(nameof(s));
 
-        if (TryParse(value, style, provider, currency, out var result)) return result;
-        throw new FormatException($"'{value}' is not a valid Money representation.");
+        currency ??= ExtractCurrencyFromString(s, out s);
+        provider = GetFormatProvider(currency, provider);
+        if (TryParse(s, provider, currency, out var result)) return result;
+        throw new FormatException($"'{s}' is not a valid Money representation.");
     }
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="s">A string containing the value to convert.</param>
     /// <param name="result">
     /// When this method returns, contains the value associated parsed,
     /// if successful; otherwise, <see langword="null"/> is returned.
     /// This parameter is passed uninitialized.
     /// </param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="value"/> could be parsed; otherwise, false.
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
     /// </returns>
-    public static bool TryParse(string value, out Money result)
-    {
-        result = default;
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return false;
-        }
-
-        Currency currency;
-        string s;
-        try
-        {
-            currency = ExtractCurrencyFromString(value, out s);
-        }
-        catch (FormatException)
-        {
-            return false;
-        }
-
-        return TryParse(s, currency, out result);
-    }
+    public static bool TryParse([NotNullWhen(true)] string? s, out Money result) => TryParse(s, null, null, out result);
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="s">A string containing the value to convert.</param>
     /// <param name="currency">The currency to use for parsing the string representation.</param>
     /// <param name="result">
     /// When this method returns, contains the value associated parsed,
     /// if successful; otherwise, <see langword="null"/> is returned.
     /// This parameter is passed uninitialized.
     /// </param>
-    /// <see langword="true"/> if <paramref name="value"/> could be parsed; otherwise, false.
-    public static bool TryParse(string value, Currency currency, out Money result)
-    {
-        return TryParse(value, NumberStyles.Currency, GetFormatProvider(currency, null), currency, out result);
-    }
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    public static bool TryParse([NotNullWhen(true)] string? s, Currency? currency, out Money result) => TryParse(s, null, currency, out result);
 
     /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
-    /// <param name="value">A string containing the value to convert.</param>
-    /// <param name="currency">The currency to use for parsing the string representation.</param>
-    /// <param name="style">
-    /// A bitwise combination of enumeration values that indicates the permitted format of value.
-    /// A typical value to specify is <see cref="NumberStyles.Currency"/>.
-    /// </param>
-    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="value"/>.</param>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="s"/>.</param>
     /// <param name="result">
     /// When this method returns, contains the value associated parsed,
     /// if successful; otherwise, <see langword="null"/> is returned.
     /// This parameter is passed uninitialized.
     /// </param>
-    /// <see langword="true"/> if <paramref name="value"/> could be parsed; otherwise, false.
-    public static bool TryParse(string value, NumberStyles style, IFormatProvider provider, Currency currency, out Money result)
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Money result) => TryParse(s, provider, null, out result);
+
+    /// <summary>Converts a <see cref="string"/> into a <see cref="Money"/>.</summary>
+    /// <param name="s">A string containing the value to convert.</param>
+    /// <param name="currency">The currency to use for parsing the string representation.</param>
+    /// <param name="provider">An object that supplies culture-specific parsing information about <paramref name="s"/>.</param>
+    /// <param name="result">
+    /// When this method returns, contains the value associated parsed,
+    /// if successful; otherwise, <see langword="null"/> is returned.
+    /// This parameter is passed uninitialized.
+    /// </param>
+    /// <see langword="true"/> if <paramref name="s"/> could be parsed; otherwise, false.
+    public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, Currency? currency, out Money result)
     {
         result = default;
-        if (double.TryParse(value, style, GetFormatProvider(currency, provider), out var amountD))
+        if (currency is null &&!TryExtractCurrencyFromString(s, out s, out currency)) return false;
+
+        if (double.TryParse(s, NumberStyles.Currency, GetFormatProvider(currency, provider), out var amountD))
         {
             var amount = Convert.ToInt64(amountD * Math.Pow(10, currency.DecimalDigits));
             result = new Money(currency, amount);
@@ -237,20 +215,17 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
 
     #region Helpers
 
-    private static NumberFormatInfo GetFormatProvider(Currency currency, IFormatProvider? formatProvider, bool useCode = false)
+    private static NumberFormatInfo GetFormatProvider(Currency currency, IFormatProvider? provider, bool useCode = false)
     {
         var cc = CultureInfo.CurrentCulture;
 
         // var numberFormatInfo = (NumberFormatInfo)NumberFormatInfo.CurrentInfo.Clone();
         var numberFormatInfo = (NumberFormatInfo)cc.NumberFormat.Clone();
 
-        if (formatProvider != null)
+        if (provider != null)
         {
-            if (formatProvider is CultureInfo ci)
-                numberFormatInfo = (NumberFormatInfo)ci.NumberFormat.Clone();
-
-            if (formatProvider is NumberFormatInfo nfi)
-                numberFormatInfo = (NumberFormatInfo)nfi.Clone();
+            if (provider is CultureInfo ci) numberFormatInfo = (NumberFormatInfo)ci.NumberFormat.Clone();
+            if (provider is NumberFormatInfo nfi) numberFormatInfo = (NumberFormatInfo)nfi.Clone();
         }
 
         numberFormatInfo.CurrencyDecimalDigits = Math.Max(0, currency.DecimalDigits);
@@ -301,39 +276,40 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
 
     private static Currency ExtractCurrencyFromString(string value, out string repaired)
     {
-        var currencyAsString = new string(value.ToCharArray().Where(IsNotNumericCharacter()).ToArray());
+        repaired = value;
+        var extracted = new string(value.ToCharArray().Where(IsNotNumericCharacter()).ToArray());
 
         var current = Currency.CurrentCurrency;
-        Currency currency;
-        if (current is not null && (currencyAsString.Length == 0 || current.Symbol == currencyAsString || current.Code == currencyAsString))
+        if (current is not null && extracted.Length == 0) return current;
+
+        var matching = Currency.All.Where(c => c.Symbol == extracted || c.Code == extracted).ToList();
+        if (matching.Count == 0) throw new FormatException($"{extracted} is an unknown currency sign or code!");
+        if (matching.Count > 1)
         {
-            currency = current;
-        }
-        else
-        {
-            var match = Currency.All.Where(c => c.Symbol == currencyAsString || c.Code == currencyAsString).ToList();
-
-            if (match.Count == 0)
-            {
-                throw new FormatException($"{currencyAsString} is an unknown currency sign or code!");
-            }
-
-            if (match.Count > 1)
-            {
-                throw new FormatException($"Currency sign {currencyAsString} matches with multiple known currencies! Specify currency or culture explicit.");
-            }
-
-            currency = match[0];
+            throw new FormatException($"Currency sign {extracted} matches with multiple known currencies! Specify currency or culture explicit.");
         }
 
-        // repair the currency to allow for parsing
-        repaired = value;
-        if (currencyAsString.Length > 0)
-        {
-            repaired = value.Replace(currencyAsString, currency.Symbol);
-        }
-
+        var currency = matching[0];
+        repaired = value.Replace(extracted, currency.Symbol); // repair the currency to allow for parsing
         return currency;
+    }
+
+    private static bool TryExtractCurrencyFromString([NotNullWhen(true)] string? value, out string? repaired, [MaybeNullWhen(false)] out Currency currency)
+    {
+        repaired = value;
+        currency = default;
+        if (string.IsNullOrWhiteSpace(value)) return false;
+
+        var extracted = new string(value.ToCharArray().Where(IsNotNumericCharacter()).ToArray());
+        if (extracted.Length == 0) return false;
+
+        var matching = Currency.All.Where(c => c.Symbol == extracted || c.Code == extracted).ToList();
+        if (matching.Count == 0) return false;
+        if (matching.Count > 1) return false;
+
+        currency = matching[0];
+        repaired = value.Replace(extracted, currency.Symbol); // repair the currency to allow for parsing
+        return true;
     }
 
     private static Func<char, bool> IsNotNumericCharacter()
@@ -364,7 +340,7 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
 
     /// <summary>Converts a <see cref="string"/> to a <see cref="Money"/>.</summary>
     /// <param name="s"></param>
-    public static implicit operator Money(string s) => Parse(value: s);
+    public static implicit operator Money(string s) => Parse(s);
 
     /// <summary>Converts a <see cref="Money"/> to a string.</summary>
     /// <param name="etag"></param>

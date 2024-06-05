@@ -12,7 +12,7 @@ public class EtagTests
     [InlineData("CgAAAAAAAAA=", "CwAAAAAAAAA=")]
     public void Next_Works(string current, string expected)
     {
-        var etag = new Etag(current);
+        var etag = Etag.Parse(current);
         var actual = etag.Next().ToString();
         Assert.Equal(expected, actual);
     }
@@ -36,9 +36,9 @@ public class EtagTests
     [InlineData(new string[] { "DAAAAAAAAAA=", "CAAAAAAAAAA=", "AQAAAAAAAAA=", "FQAAAAAAAAA=", }, "KgAAAAAAAAA=")]
     public void Combine_Works_ForStrings(string[] values, string expected)
     {
-        var tags = values.Select(u => (Etag)u).ToArray();
+        var tags = values.Select(v => Etag.Parse(v)).ToArray();
         var actual = Etag.Combine(tags);
-        Assert.Equal((Etag)expected, actual);
+        Assert.Equal(Etag.Parse(expected), actual);
     }
 
     [Theory]
@@ -93,7 +93,7 @@ public class EtagTests
     [InlineData("AQAAAAAAAAA=", "AQAAAAAAAAA=")]
     public void CreateFromString_Works(string value, string expected)
     {
-        var etag = new Etag(value);
+        var etag = Etag.Parse(value);
         var actual = etag.ToString();
         Assert.Equal(expected, actual);
     }

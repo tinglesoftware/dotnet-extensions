@@ -24,15 +24,15 @@ public static class NumberAbbreviationExtensions
     /// using the specified culture-specific format information.
     /// </summary>
     /// <param name="source">the numeric value</param>
-    /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
     /// <returns>The string representation of the value of this instance as specified by format and provider.</returns>
     /// <exception cref="FormatException">format is invalid or not supported.</exception>
-    public static string ToStringAbbreviated(this long source, IFormatProvider formatProvider)
+    public static string ToStringAbbreviated(this long source, IFormatProvider? provider)
     {
-        if (source > 999999999 || source < -999999999) return source.ToString(FormatBillions, formatProvider);
-        else if (source > 999999 || source < -999999) return source.ToString(FormatMillions, formatProvider);
-        else if (source > 999 || source < -999) return source.ToString(FormatKilo, formatProvider);
-        return source.ToString(formatProvider);
+        if (source > 999999999 || source < -999999999) return source.ToString(FormatBillions, provider);
+        else if (source > 999999 || source < -999999) return source.ToString(FormatMillions, provider);
+        else if (source > 999 || source < -999) return source.ToString(FormatKilo, provider);
+        return source.ToString(provider);
     }
 
     /// <summary>
@@ -48,14 +48,14 @@ public static class NumberAbbreviationExtensions
     /// using the specified culture-specific format information.
     /// </summary>
     /// <param name="source">the numeric value</param>
-    /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
     /// <returns>The string representation of the value of this instance as specified by format and provider.</returns>
     /// <exception cref="FormatException">format is invalid or not supported.</exception>
-    public static string ToStringAbbreviated(this int source, IFormatProvider formatProvider)
+    public static string ToStringAbbreviated(this int source, IFormatProvider? provider)
     {
-        if (source > 999999999 || source < -999999999) return source.ToString(FormatBillions, formatProvider);
-        else if (source > 999999 || source < -999999) return source.ToString(FormatMillions, formatProvider);
-        else if (source > 999 || source < -999) return source.ToString(FormatKilo, formatProvider);
-        return source.ToString(formatProvider);
+        if (source > 999999999 || source < -999999999) return source.ToString(FormatBillions, provider);
+        else if (source > 999999 || source < -999999) return source.ToString(FormatMillions, provider);
+        else if (source > 999 || source < -999) return source.ToString(FormatKilo, provider);
+        return source.ToString(provider);
     }
 }
