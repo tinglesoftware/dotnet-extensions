@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Reflection;
 using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
@@ -27,7 +26,7 @@ internal sealed class JsonPatchOperationsArrayProvider(IModelMetadataProvider mo
         {
             foreach (var parameterDescription in result.ParameterDescriptions)
             {
-                if (typeof(IJsonPatchDocument).GetTypeInfo().IsAssignableFrom(parameterDescription.Type))
+                if (typeof(IJsonPatchDocument).IsAssignableFrom(parameterDescription.Type))
                 {
                     parameterDescription.Type = typeof(Operation[]);
                     parameterDescription.ModelMetadata = modelMetadataProvider.GetMetadataForType(typeof(Operation[]));
