@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using System.Text.RegularExpressions;
 
 namespace Tingle.Extensions.Caching.MongoDB.Tests;
 
@@ -7,7 +6,7 @@ public sealed class MongoDbFixture : IDisposable
 {
     public MongoDbFixture()
     {
-        var dbName = Regex.Replace(Guid.NewGuid().ToString(), "[^a-zA-Z0-9]", "");
+        var dbName = Guid.NewGuid().ToString("n");
         var mub = new MongoUrlBuilder()
         {
             Server = MongoServerAddress.Parse("localhost:27017"),

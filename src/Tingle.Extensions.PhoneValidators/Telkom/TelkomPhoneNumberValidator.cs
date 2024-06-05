@@ -6,7 +6,7 @@ namespace Tingle.Extensions.PhoneValidators.Telkom;
 /// <summary>
 /// Implementation of <see cref="IPhoneNumberValidator"/> specifically for Telkom phone numbers
 /// </summary>
-public class TelkomPhoneNumberValidator : AbstractPhoneNumberValidator
+public partial class TelkomPhoneNumberValidator : AbstractPhoneNumberValidator
 {
     // This regular expression will match numbers with known formats.
     // The intention is to ensure the line number (after country code or local code) are actually standard.
@@ -16,12 +16,19 @@ public class TelkomPhoneNumberValidator : AbstractPhoneNumberValidator
     // The digits are 70-79 when prefixed with 7
     internal const string RegExComplete = @"^(?:254|\+254|0)?(7(?:(?:7[0-9]))[0-9]{6})$";
 
-    private static readonly Regex regex = new(@RegExComplete);
+    internal static readonly Regex Expression = GetExpression();
 
     /// <summary>
     /// Creates an instance of <see cref="TelkomPhoneNumberValidator"/>
     /// </summary>
     public TelkomPhoneNumberValidator() : base() { }
 
-    internal override Regex RegularExpression => regex;
+    internal override Regex RegularExpression => Expression;
+
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(RegExComplete)]
+    private static partial Regex GetExpression();
+#else
+    private static Regex GetExpression() => new(RegExComplete);
+#endif
 }
