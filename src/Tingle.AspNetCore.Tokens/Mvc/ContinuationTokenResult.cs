@@ -54,7 +54,7 @@ public class ContinuationTokenResult<T> : OkObjectResult
     {
         base.OnFormatting(context); // required so that it can write the statusCode
 
-        // we can only set the header if 
+        // we can only set the header if
         // 1) the provided token instance is not null
         // 2) the underlying value is not null
         // 3) the protected value is not null or empty
@@ -64,6 +64,7 @@ public class ContinuationTokenResult<T> : OkObjectResult
             var protector = context.HttpContext.RequestServices.GetRequiredService<ITokenProtector<T>>();
 
 #pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+#pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
             // generate a new protected value based on the type of token
             string protected_val;
             var value = token.GetValue();
@@ -85,6 +86,7 @@ public class ContinuationTokenResult<T> : OkObjectResult
             if (!string.IsNullOrWhiteSpace(protected_val))
                 context.HttpContext.Response.Headers[headerName] = protected_val;
         }
+#pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
 #pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
     }
 }

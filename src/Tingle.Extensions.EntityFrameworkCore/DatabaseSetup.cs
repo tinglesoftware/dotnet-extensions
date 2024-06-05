@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tingle.Extensions.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace Tingle.Extensions.EntityFrameworkCore;
 /// Helper for performing migrations or creation.
 /// </summary>
 /// <typeparam name="TContext">The type of context to be used.</typeparam>
+[RequiresDynamicCode(MessageStrings.MigrationsRequiresDynamicCodeMessage)]
 public class DatabaseSetup<TContext> : IHostedService where TContext : DbContext
 {
     private readonly IServiceScopeFactory scopeFactory;
