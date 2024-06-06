@@ -16,7 +16,7 @@ public sealed class TelkomPhoneNumberAttribute : ValidationAttribute
     /// <inheritdoc/>
     public override bool IsValid(object? value)
     {
-    static bool IsValidByRegEx(string value) => TelkomPhoneNumberValidator.Expression.IsMatch(value);
+        static bool IsValidByRegEx(string value) => TelkomPhoneNumberValidator.Expression.IsMatch(value);
 
         if (value is string s && !string.IsNullOrEmpty(s)) return IsValidByRegEx(s);
 

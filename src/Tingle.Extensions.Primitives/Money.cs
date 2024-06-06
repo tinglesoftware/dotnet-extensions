@@ -199,7 +199,7 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, Currency? currency, out Money result)
     {
         result = default;
-        if (currency is null &&!TryExtractCurrencyFromString(s, out s, out currency)) return false;
+        if (currency is null && !TryExtractCurrencyFromString(s, out s, out currency)) return false;
 
         if (double.TryParse(s, NumberStyles.Currency, GetFormatProvider(currency, provider), out var amountD))
         {
