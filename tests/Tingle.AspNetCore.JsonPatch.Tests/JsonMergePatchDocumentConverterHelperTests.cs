@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using Tingle.AspNetCore.JsonPatch.Converters;
 
@@ -149,6 +150,47 @@ public class JsonMergePatchDocumentConverterHelperTests
         var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
         var doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Video>>(node.ToJsonString(), serializerOptions)!;
         doc.ApplyTo(video);
+
+        Assert.Equal("rudi shule", Assert.Contains("swa", video.Translations).Body);
+        Assert.Equal("google", Assert.Contains("swa", video.Translations).Provider);
+        Assert.Equal("hapa tu", Assert.Contains("primary", video.Metadata));
+        Assert.Equal("pale tu", Assert.Contains("secondary", video.Metadata));
+        Assert.Equal(["prod", "ken"], video.Tags);
+        Assert.Equal("immigration", video.Description);
+        Assert.Null(video.Name);
+        Assert.Equal("123", video.Id);
+    }
+
+    [Fact]
+    public void ApplyToSafely_Works()
+    {
+        var node = new JsonObject
+        {
+            ["translations"] = new JsonObject
+            {
+                ["swa"] = new JsonObject
+                {
+                    ["body"] = "rudi shule",
+                    ["provider"] = "google",
+                },
+            },
+            ["metadata"] = new JsonObject
+            {
+                ["primary"] = "hapa tu",
+                ["secondary"] = "pale tu",
+            },
+            ["tags"] = new JsonArray { "prod", "ken", },
+            ["description"] = "immigration",
+            ["name"] = null,
+        };
+
+        var video = new Video { Metadata = new() { ["primary"] = "cake", } };
+        var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        var doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Video>>(node.ToJsonString(), serializerOptions)!;
+        var modelState = new ModelStateDictionary();
+        doc.ApplyToSafely(video, modelState);
+        Assert.True(modelState.IsValid);
+        Assert.Empty(modelState);
 
         Assert.Equal("rudi shule", Assert.Contains("swa", video.Translations).Body);
         Assert.Equal("google", Assert.Contains("swa", video.Translations).Provider);
