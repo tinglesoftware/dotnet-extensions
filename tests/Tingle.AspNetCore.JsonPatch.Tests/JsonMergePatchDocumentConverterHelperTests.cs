@@ -159,34 +159,9 @@ public class JsonMergePatchDocumentConverterHelperTests
         Assert.Equal("immigration", video.Description);
         Assert.Null(video.Name);
         Assert.Equal("123", video.Id);
-    }
 
-    [Fact]
-    public void ApplyToSafely_Works()
-    {
-        var node = new JsonObject
-        {
-            ["translations"] = new JsonObject
-            {
-                ["swa"] = new JsonObject
-                {
-                    ["body"] = "rudi shule",
-                    ["provider"] = "google",
-                },
-            },
-            ["metadata"] = new JsonObject
-            {
-                ["primary"] = "hapa tu",
-                ["secondary"] = "pale tu",
-            },
-            ["tags"] = new JsonArray { "prod", "ken", },
-            ["description"] = "immigration",
-            ["name"] = null,
-        };
-
-        var video = new Video { Metadata = new() { ["primary"] = "cake", } };
-        var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
-        var doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Video>>(node.ToJsonString(), serializerOptions)!;
+        video = new Video { Metadata = new() { ["primary"] = "cake", } };
+        doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Video>>(node.ToJsonString(), serializerOptions)!;
         var modelState = new ModelStateDictionary();
         doc.ApplyToSafely(video, modelState);
         Assert.True(modelState.IsValid);
@@ -200,6 +175,50 @@ public class JsonMergePatchDocumentConverterHelperTests
         Assert.Equal("immigration", video.Description);
         Assert.Null(video.Name);
         Assert.Equal("123", video.Id);
+    }
+
+    [Fact]
+    public void Apply_Works_CreatesNodes()
+    {
+        var node = new JsonObject
+        {
+            ["make"] = "Tesla",
+            ["model"] = "Model 3",
+            ["owner"] = new JsonObject
+            {
+                ["name"] = "Elon Musk",
+                ["address"] = new JsonObject
+                {
+                    ["country"] = "USA",
+                },
+            },
+        };
+
+        var vehicle = new Vehicle { Make = "Toyota", Model = "Corolla" };
+        var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        var doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Vehicle>>(node.ToJsonString(), serializerOptions)!;
+        doc.ApplyTo(vehicle);
+
+        Assert.Equal("Tesla", vehicle.Make);
+        Assert.Equal("Model 3", vehicle.Model);
+        Assert.NotNull(vehicle.Owner);
+        Assert.Equal("Elon Musk", vehicle.Owner.Name);
+        Assert.NotNull(vehicle.Owner.Address);
+        Assert.Equal("USA", vehicle.Owner.Address.Country);
+
+        vehicle = new Vehicle { Make = "Toyota", Model = "Corolla" };
+        doc = JsonSerializer.Deserialize<JsonMergePatchDocument<Vehicle>>(node.ToJsonString(), serializerOptions)!;
+        var modelState = new ModelStateDictionary();
+        doc.ApplyToSafely(vehicle, modelState);
+        Assert.True(modelState.IsValid);
+        Assert.Empty(modelState);
+
+        Assert.Equal("Tesla", vehicle.Make);
+        Assert.Equal("Model 3", vehicle.Model);
+        Assert.NotNull(vehicle.Owner);
+        Assert.Equal("Elon Musk", vehicle.Owner.Name);
+        Assert.NotNull(vehicle.Owner.Address);
+        Assert.Equal("USA", vehicle.Owner.Address.Country);
     }
 
     class Video
@@ -216,5 +235,23 @@ public class JsonMergePatchDocumentConverterHelperTests
     {
         public string? Body { get; set; }
         public string? Provider { get; set; }
+    }
+
+    class Vehicle
+    {
+        public string? Make { get; set; }
+        public string? Model { get; set; }
+        public VehicleOwner? Owner { get; set; }
+    }
+
+    class VehicleOwner
+    {
+        public string? Name { get; set; }
+        public VehicleOwnerAddress? Address { get; set; }
+    }
+
+    class VehicleOwnerAddress
+    {
+        public string? Country { get; set; }
     }
 }
