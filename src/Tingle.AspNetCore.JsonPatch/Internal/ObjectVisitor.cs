@@ -49,6 +49,12 @@ public class ObjectVisitor(ParsedPath path, JsonSerializerOptions serializerOpti
                 }
             }
 
+            // If we hit a null on an interior segment but we can create, then we should try to create.
+            if (next == null && create)
+            {
+                adapter.TryCreate(target, path.Segments[i], serializerOptions, out next, out errorMessage);
+            }
+
             // If we hit a null on an interior segment then we need to stop traversing.
             if (next == null)
             {

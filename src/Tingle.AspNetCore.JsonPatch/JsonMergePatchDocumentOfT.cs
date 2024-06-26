@@ -30,11 +30,12 @@ public class JsonMergePatchDocument<TModel>(JsonPatchDocument<TModel> inner) : I
     /// Apply this JsonMergePatchDocument
     /// </summary>
     /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
-    public void ApplyTo(TModel objectToApplyTo)
+    /// <param name="create">Whether to create nested objects if they do not exist</param>
+    public void ApplyTo(TModel objectToApplyTo, bool create = true)
     {
         ArgumentNullException.ThrowIfNull(objectToApplyTo);
 
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, null, AdapterFactory.Default, create: true));
+        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, null, AdapterFactory.Default, create));
     }
 
     /// <summary>
@@ -42,9 +43,10 @@ public class JsonMergePatchDocument<TModel>(JsonPatchDocument<TModel> inner) : I
     /// </summary>
     /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     /// <param name="logErrorAction">Action to log errors</param>
-    public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction)
+    /// <param name="create">Whether to create nested objects if they do not exist</param>
+    public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction, bool create = true)
     {
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, logErrorAction, AdapterFactory.Default, create: true), logErrorAction);
+        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, logErrorAction, AdapterFactory.Default, create), logErrorAction);
     }
 
     /// <summary>
