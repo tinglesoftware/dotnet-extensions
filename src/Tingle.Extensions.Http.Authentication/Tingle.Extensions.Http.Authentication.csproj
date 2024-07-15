@@ -18,7 +18,7 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
