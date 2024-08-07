@@ -40,7 +40,7 @@ public class FilterCreationTests
     {
         var env = new FakeWebHostEnvironment { ApplicationName = "Test", ContentRootPath = Environment.CurrentDirectory, };
         var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(env, includeControllerXmlComments: true))
+                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(true))
                                               .AddSwaggerEnumDescriptions()
                                               .BuildServiceProvider();
 
@@ -54,7 +54,7 @@ public class FilterCreationTests
     {
         var env = new FakeWebHostEnvironment { ApplicationName = "Test", ContentRootPath = Environment.CurrentDirectory, };
         var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(env, includeControllerXmlComments: true))
+                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(true))
                                               .AddSwaggerEnumDescriptions()
                                               .BuildServiceProvider();
 
