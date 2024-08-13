@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using MongoDB.Driver.Core.Extensions.DiagnosticSources;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -121,9 +120,8 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context.
     /// </summary>
     /// <param name="url">The <see cref="MongoUrl"/> to be used</param>
-    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public virtual MongoDbContextOptionsBuilder UseMongoUrl(MongoUrl url, InstrumentationOptions? instrumentationOptions = null)
+    public virtual MongoDbContextOptionsBuilder UseMongoUrl(MongoUrl url)
     {
         ArgumentNullException.ThrowIfNull(url);
         if (string.IsNullOrWhiteSpace(url.DatabaseName))
@@ -132,15 +130,6 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
         }
 
         options.AddMetadata(url);
-
-        // add the default event subscriber
-        ConfigureMongoClientSettings(settings =>
-        {
-            settings.ClusterConfigurator = builder =>
-            {
-                builder.Subscribe(new DiagnosticsActivityEventSubscriber(instrumentationOptions ?? new() { CaptureCommandText = true }));
-            };
-        });
 
         return this;
     }
@@ -154,12 +143,11 @@ public class MongoDbContextOptionsBuilder(MongoDbContextOptions options)
     /// <c>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</c>
     /// e.g. <c>mongodb://localhost:27017/myDatabase</c>
     /// </param>
-    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public virtual MongoDbContextOptionsBuilder UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions = null)
+    public virtual MongoDbContextOptionsBuilder UseMongoConnectionString(string connectionString)
     {
         ArgumentNullException.ThrowIfNull(connectionString);
-        return UseMongoUrl(new MongoUrl(connectionString), instrumentationOptions);
+        return UseMongoUrl(new MongoUrl(connectionString));
     }
 
     /// <summary>
@@ -228,10 +216,9 @@ public class MongoDbContextOptionsBuilder<TContext>(MongoDbContextOptions<TConte
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context.
     /// </summary>
     /// <param name="url">The <see cref="MongoUrl"/> to be used</param>
-    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoUrl(MongoUrl url, InstrumentationOptions? instrumentationOptions = null)
-        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoUrl(url, instrumentationOptions);
+    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoUrl(MongoUrl url)
+        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoUrl(url);
 
     /// <summary>
     /// Sets the <see cref="MongoUrl"/> to use when configuring the context by
@@ -242,10 +229,9 @@ public class MongoDbContextOptionsBuilder<TContext>(MongoDbContextOptions<TConte
     /// <c>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]</c>
     /// e.g. <c>mongodb://localhost:27017/myDatabase</c>
     /// </param>
-    /// <param name="instrumentationOptions">The options to use for instrumentation.</param>
     /// <returns></returns>
-    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString, InstrumentationOptions? instrumentationOptions = null)
-        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoConnectionString(connectionString, instrumentationOptions);
+    public new virtual MongoDbContextOptionsBuilder<TContext> UseMongoConnectionString(string connectionString)
+        => (MongoDbContextOptionsBuilder<TContext>)base.UseMongoConnectionString(connectionString);
 
     /// <summary>
     /// Further configure the existing instance of <see cref="MongoClientSettings"/>.
