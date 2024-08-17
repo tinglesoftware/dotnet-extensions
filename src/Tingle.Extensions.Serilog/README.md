@@ -1,5 +1,8 @@
 # Tingle.Extensions.Serilog
 
+> [!IMPORTANT]
+> Use of OpenTelemetry is recommended for instrumentation, including logging. This library is provided for convenience and compatibility with existing applications but is no longer actively maintained and not recommended for new projects.
+
 This library provides convenience extensions and logic for registering Serilog in applications with support for various hosts while setting up basic thins to match the default logging setup in the framework.
 
 This includes:
