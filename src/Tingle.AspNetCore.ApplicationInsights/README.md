@@ -1,5 +1,8 @@
 # Tingle.AspNetCore.ApplicationInsights
 
+> [!IMPORTANT]
+> Use of OpenTelemetry is recommended for instrumentation. This library is provided for convenience and compatibility with existing applications but is no longer actively maintained and not recommended for new projects.
+
 This library provides some extensions for [Microsoft.ApplicationInsights](https://github.com/Microsoft/ApplicationInsights-dotnet).
 
 ## Add details of the request source to application insights telemetry
