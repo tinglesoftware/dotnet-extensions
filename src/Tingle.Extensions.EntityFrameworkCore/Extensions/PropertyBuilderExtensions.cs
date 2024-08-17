@@ -22,11 +22,71 @@ public static class PropertyBuilderExtensions
     /// </summary>
     /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
     /// <returns></returns>
-    public static PropertyBuilder<Etag> HasEtagConversion(this PropertyBuilder<Etag> propertyBuilder)
+    public static PropertyBuilder<Etag> HasEtagToBytesConversion(this PropertyBuilder<Etag> propertyBuilder)
     {
         ArgumentNullException.ThrowIfNull(propertyBuilder);
 
-        propertyBuilder.HasConversion(new EtagConverter());
+        propertyBuilder.HasConversion(new EtagToBytesConverter());
+        propertyBuilder.Metadata.SetValueComparer(new EtagComparer());
+
+        return propertyBuilder;
+    }
+
+    /// <summary>
+    /// Attach conversion of property to/from <see cref="Etag"/> stored in the database as a <see cref="int"/>.
+    /// </summary>
+    /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
+    /// <returns></returns>
+    public static PropertyBuilder<Etag> HasEtagToInt32Conversion(this PropertyBuilder<Etag> propertyBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(propertyBuilder);
+
+        propertyBuilder.HasConversion(new EtagToInt32Converter());
+        propertyBuilder.Metadata.SetValueComparer(new EtagComparer());
+
+        return propertyBuilder;
+    }
+
+    /// <summary>
+    /// Attach conversion of property to/from <see cref="Etag"/> stored in the database as a <see cref="uint"/>.
+    /// </summary>
+    /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
+    /// <returns></returns>
+    public static PropertyBuilder<Etag> HasEtagToUInt32Conversion(this PropertyBuilder<Etag> propertyBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(propertyBuilder);
+
+        propertyBuilder.HasConversion(new EtagToUInt32Converter());
+        propertyBuilder.Metadata.SetValueComparer(new EtagComparer());
+
+        return propertyBuilder;
+    }
+
+    /// <summary>
+    /// Attach conversion of property to/from <see cref="Etag"/> stored in the database as a <see cref="long"/>.
+    /// </summary>
+    /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
+    /// <returns></returns>
+    public static PropertyBuilder<Etag> HasEtagToInt64Conversion(this PropertyBuilder<Etag> propertyBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(propertyBuilder);
+
+        propertyBuilder.HasConversion(new EtagToInt64Converter());
+        propertyBuilder.Metadata.SetValueComparer(new EtagComparer());
+
+        return propertyBuilder;
+    }
+
+    /// <summary>
+    /// Attach conversion of property to/from <see cref="Etag"/> stored in the database as a <see cref="ulong"/>.
+    /// </summary>
+    /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
+    /// <returns></returns>
+    public static PropertyBuilder<Etag> HasEtagToUInt64Conversion(this PropertyBuilder<Etag> propertyBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(propertyBuilder);
+
+        propertyBuilder.HasConversion(new EtagToUInt64Converter());
         propertyBuilder.Metadata.SetValueComparer(new EtagComparer());
 
         return propertyBuilder;

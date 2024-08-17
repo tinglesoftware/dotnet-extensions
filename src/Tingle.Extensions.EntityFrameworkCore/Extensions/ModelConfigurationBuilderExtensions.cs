@@ -17,14 +17,58 @@ namespace Microsoft.EntityFrameworkCore;
 public static class ModelConfigurationBuilderExtensions
 {
     /// <summary>
-    /// Add fields of type <see cref="Etag"/> to be converted using <see cref="EtagConverter"/>.
+    /// Add fields of type <see cref="Etag"/> to be converted to a <see cref="T:byte[]"/>.
     /// </summary>
     /// <param name="configurationBuilder">The <see cref="ModelConfigurationBuilder"/> to use.</param>
-    public static void AddEtagConventions(this ModelConfigurationBuilder configurationBuilder)
+    public static void AddEtagToBytesConventions(this ModelConfigurationBuilder configurationBuilder)
     {
         ArgumentNullException.ThrowIfNull(configurationBuilder);
 
-        configurationBuilder.Properties<Etag>().HaveConversion<EtagConverter, EtagComparer>();
+        configurationBuilder.Properties<Etag>().HaveConversion<EtagToBytesConverter, EtagComparer>();
+    }
+
+    /// <summary>
+    /// Add fields of type <see cref="Etag"/> to be converted to a <see cref="uint"/>.
+    /// </summary>
+    /// <param name="configurationBuilder">The <see cref="ModelConfigurationBuilder"/> to use.</param>
+    public static void AddEtagToInt32Conventions(this ModelConfigurationBuilder configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+
+        configurationBuilder.Properties<Etag>().HaveConversion<EtagToInt32Converter, EtagComparer>();
+    }
+
+    /// <summary>
+    /// Add fields of type <see cref="Etag"/> to be converted to a <see cref="int"/>.
+    /// </summary>
+    /// <param name="configurationBuilder">The <see cref="ModelConfigurationBuilder"/> to use.</param>
+    public static void AddEtagToUInt32Conventions(this ModelConfigurationBuilder configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+
+        configurationBuilder.Properties<Etag>().HaveConversion<EtagToUInt32Converter, EtagComparer>();
+    }
+
+    /// <summary>
+    /// Add fields of type <see cref="Etag"/> to be converted to a <see cref="long"/>.
+    /// </summary>
+    /// <param name="configurationBuilder">The <see cref="ModelConfigurationBuilder"/> to use.</param>
+    public static void AddEtagToInt64Conventions(this ModelConfigurationBuilder configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+
+        configurationBuilder.Properties<Etag>().HaveConversion<EtagToInt64Converter, EtagComparer>();
+    }
+
+    /// <summary>
+    /// Add fields of type <see cref="Etag"/> to be converted to a <see cref="ulong"/>.
+    /// </summary>
+    /// <param name="configurationBuilder">The <see cref="ModelConfigurationBuilder"/> to use.</param>
+    public static void AddEtagToUInt64Conventions(this ModelConfigurationBuilder configurationBuilder)
+    {
+        ArgumentNullException.ThrowIfNull(configurationBuilder);
+
+        configurationBuilder.Properties<Etag>().HaveConversion<EtagToUInt64Converter, EtagComparer>();
     }
 
     /// <summary>
