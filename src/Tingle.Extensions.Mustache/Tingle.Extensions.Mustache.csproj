@@ -18,6 +18,7 @@ For more information on the spec, refer to https://mustache.github.io/
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

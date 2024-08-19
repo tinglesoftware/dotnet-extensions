@@ -3,5 +3,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Tingle.Extensions.DataAnnotations\Tingle.Extensions.DataAnnotations.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+  </ItemGroup>
 
 </Project>
