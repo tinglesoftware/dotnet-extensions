@@ -9,66 +9,45 @@ namespace Tingle.AspNetCore.Swagger.Tests;
 public class FilterCreationTests
 {
     [Fact]
-    public void InheritDocSchemaFilter_IsAdded()
+    public void InheritDocSchemaFilter_IsAdded_And_Created()
     {
-        var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlCommentsFromInheritDocs())
-                                              .BuildServiceProvider();
+        var services = CreateServiceProvider();
 
-        var options = services.GetRequiredService<IOptions<SwaggerGenOptions>>().Value;
-        var descriptors = options.SchemaFilterDescriptors.Where(sfd => sfd.Type == typeof(InheritDocSchemaFilter));
+        var options1 = services.GetRequiredService<IOptions<SwaggerGenOptions>>().Value;
+        var descriptors = options1.SchemaFilterDescriptors.Where(sfd => sfd.Type == typeof(InheritDocSchemaFilter));
         var descriptor = Assert.Single(descriptors);
         var arguments = descriptor.Arguments;
         Assert.Equal(2, arguments.Length);
         Assert.IsType<SwaggerGenOptions>(arguments[0]);
         Assert.IsType<Type[]>(arguments[1]);
+
+        var options2 = services.GetRequiredService<IOptions<SchemaGeneratorOptions>>().Value;
+        Assert.Single(options2.SchemaFilters.OfType<InheritDocSchemaFilter>());
     }
 
     [Fact]
-    public void InheritDocSchemaFilter_CanBe_Created()
+    public void EnumDescriptionsFilters_AreAdded_And_Created()
     {
-        var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlCommentsFromInheritDocs())
-                                              .BuildServiceProvider();
+        var services = CreateServiceProvider();
 
-        var options = services.GetRequiredService<IOptions<SchemaGeneratorOptions>>().Value;
-        Assert.Single(options.SchemaFilters.OfType<InheritDocSchemaFilter>());
+        var options1 = services.GetRequiredService<IOptions<SwaggerGenOptions>>().Value;
+        Assert.Single(options1.SchemaFilterDescriptors, d => d.Type == typeof(EnumDescriptionsSchemaFilter));
+
+        var options2 = services.GetRequiredService<IOptions<SchemaGeneratorOptions>>().Value;
+        Assert.Single(options2.SchemaFilters.OfType<EnumDescriptionsSchemaFilter>());
     }
 
-    [Fact]
-    public void EnumDescriptionsFilters_AreAdded()
+    private static IServiceProvider CreateServiceProvider(Action<IServiceCollection>? configure = null)
     {
-        var env = new FakeWebHostEnvironment { ApplicationName = "Test", ContentRootPath = Environment.CurrentDirectory, };
-        var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(true))
-                                              .AddSwaggerEnumDescriptions()
-                                              .BuildServiceProvider();
-
-        var options = services.GetRequiredService<IOptions<SwaggerGenOptions>>().Value;
-
-        Assert.Single(options.SchemaFilterDescriptors, d => d.Type == typeof(EnumDescriptionsSchemaFilter));
-    }
-
-    [Fact]
-    public void EnumDescriptionsFilter_CanBe_Created()
-    {
-        var env = new FakeWebHostEnvironment { ApplicationName = "Test", ContentRootPath = Environment.CurrentDirectory, };
-        var services = new ServiceCollection().AddLogging()
-                                              .AddSwaggerGen(o => o.IncludeXmlComments<EnumDescriptionsSchemaFilter>(true))
-                                              .AddSwaggerEnumDescriptions()
-                                              .BuildServiceProvider();
-
-        var options = services.GetRequiredService<IOptions<SchemaGeneratorOptions>>().Value;
-        Assert.Single(options.SchemaFilters.OfType<EnumDescriptionsSchemaFilter>());
-    }
-
-    private class FakeWebHostEnvironment : IWebHostEnvironment
-    {
-        public string WebRootPath { get; set; } = default!;
-        public IFileProvider WebRootFileProvider { get; set; } = default!;
-        public string ApplicationName { get; set; } = default!;
-        public IFileProvider ContentRootFileProvider { get; set; } = default!;
-        public string ContentRootPath { get; set; } = default!;
-        public string EnvironmentName { get; set; } = default!;
+        var services = new ServiceCollection();
+        services.AddLogging();
+        services.AddSwaggerGen(options =>
+        {
+            options.IncludeXmlComments<EnumDescriptionsSchemaFilter>(true);
+            options.IncludeXmlCommentsFromInheritDocs();
+        });
+        services.AddSwaggerEnumDescriptions();
+        configure?.Invoke(services);
+        return services.BuildServiceProvider();
     }
 }
