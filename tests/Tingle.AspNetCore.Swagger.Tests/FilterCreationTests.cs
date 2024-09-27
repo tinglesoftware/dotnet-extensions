@@ -46,7 +46,7 @@ public class FilterCreationTests
 
         var options = services.GetRequiredService<IOptions<SwaggerGenOptions>>().Value;
 
-        Assert.Single(options.SchemaFilterDescriptors.Where(d => d.Type == typeof(EnumDescriptionsSchemaFilter)));
+        Assert.Single(options.SchemaFilterDescriptors, d => d.Type == typeof(EnumDescriptionsSchemaFilter));
     }
 
     [Fact]

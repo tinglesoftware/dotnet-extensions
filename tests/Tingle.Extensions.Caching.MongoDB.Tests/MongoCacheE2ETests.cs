@@ -31,7 +31,7 @@ public class MongoCacheE2ETests
         Assert.Contains("session", await dbFixture.Database!.ListCollectionNames().ToListAsync());
         var collection = dbFixture.Database.GetCollection<MongoCacheEntry>("session");
         var indexes = await collection.Indexes.List().ToListAsync();
-        Assert.Single(indexes.Where(b => b["name"] != "_id_"));
+        Assert.Single(indexes, b => b["name"] != "_id_");
     }
 
     [Fact]
@@ -67,7 +67,7 @@ public class MongoCacheE2ETests
         // Verify that collection was not created
         Assert.Equal("Cache", Assert.Single(await dbFixture.Database!.ListCollectionNames().ToListAsync()));
         var indexes = await collection.Indexes.List().ToListAsync();
-        var ix = Assert.Single(indexes.Where(b => b["name"] != "_id_"));
+        var ix = Assert.Single(indexes, b => b["name"] != "_id_");
         Assert.Equal(model.Options.Name, ix["name"]);
     }
 
