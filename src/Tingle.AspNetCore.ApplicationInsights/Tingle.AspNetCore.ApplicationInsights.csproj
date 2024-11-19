@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Description>Convenience functionality for Application Insights on AspNetCore</Description>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

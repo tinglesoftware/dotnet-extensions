@@ -200,6 +200,7 @@ public static class RecursiveValidator
 }
 internal static class ObjectExtensions
 {
+    [RequiresUnreferencedCode("The Type of instance cannot be statically discovered.")]
     public static object GetPropertyValue(this object o, string propertyName)
     {
         var propertyInfo = o.GetType().GetProperty(propertyName);
