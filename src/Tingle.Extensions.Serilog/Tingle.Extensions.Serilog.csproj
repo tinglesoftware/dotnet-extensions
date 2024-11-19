@@ -5,6 +5,8 @@
 Extensions for working with Serilog.
 Including easier registration when working with different host setups, and general basics.
 </Description>
+    <!-- No longer maintained, this is just for reference -->
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup>
