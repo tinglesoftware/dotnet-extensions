@@ -1,4 +1,5 @@
-﻿using Tingle.Extensions.Http;
+﻿using System.Diagnostics.CodeAnalysis;
+using Tingle.Extensions.Http;
 using Tingle.Extensions.PushNotifications;
 using Tingle.Extensions.PushNotifications.Apple;
 using Tingle.Extensions.PushNotifications.FcmLegacy;
@@ -68,7 +69,9 @@ public static class IServiceCollectionExtensions
         return builder;
     }
 
-    private static IHttpClientBuilder AddNotifier<TNotifier, TOptions>(this IServiceCollection services, Action<TOptions>? configure = null)
+    private static IHttpClientBuilder AddNotifier<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TNotifier, TOptions>(
+        this IServiceCollection services,
+        Action<TOptions>? configure = null)
 
         where TNotifier : AbstractHttpApiClient<TOptions>
         where TOptions : AbstractHttpApiClientOptions, new()

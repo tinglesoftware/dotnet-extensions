@@ -21,6 +21,7 @@
       Have a look at the project site for the current status of this package and to learn how to get started.
     </Description>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <IsAotCompatible>false</IsAotCompatible>
   </PropertyGroup>
 
   <PropertyGroup>

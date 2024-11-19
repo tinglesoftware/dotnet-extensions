@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Additional primitive types such as Money, Currency, Country, Duration, Keygen, Etag, Ksuid, Language, SequenceNumber, ByteSize, etc</Description>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
