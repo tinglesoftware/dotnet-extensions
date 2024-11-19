@@ -18,9 +18,7 @@ internal class JsonElementBsonSerializer : StructSerializerBase<JsonElement>
     /// Without this, ObjectIDs, Dates, and Integers are output as {"_id": ObjectId(ds8f7s9d87f89sd9f8d9f7sd9f9s8d)},
     /// {"date": ISODate("2020-04-14 14:30:00:000")}, {"int": NumberInt(130)} and respectively, which is not valid JSON
     /// </summary>
-#pragma warning disable CS0618 // Type or member is obsolete
-    internal static readonly JsonWriterSettings settings = new() { OutputMode = JsonOutputMode.Strict, };
-#pragma warning restore CS0618 // Type or member is obsolete
+    internal static readonly JsonWriterSettings settings = new() { OutputMode = JsonOutputMode.CanonicalExtendedJson, };
 
     /// <inheritdoc/>
     public override JsonElement Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)

@@ -41,7 +41,7 @@ public class SequenceNumberBsonSerializerTests
             Position = new SequenceNumber(123456789)
         };
         var json = obj.ToJson();
-        var expected = $"{{ '_id' : 'cake', 'Position' : NumberLong(123456789) }}".Replace("'", "\"");
+        var expected = $"{{ '_id' : 'cake', 'Position' : 123456789 }}".Replace("'", "\"");
         Assert.Equal(expected, json);
 
         var bson = obj.ToBson();
@@ -52,7 +52,7 @@ public class SequenceNumberBsonSerializerTests
 
     [Theory]
     [InlineData(123456789UL, typeof(BookshopString), "'123456789'")]
-    [InlineData(123456789UL, typeof(BookshopInt64), "NumberLong(123456789)")]
+    [InlineData(123456789UL, typeof(BookshopInt64), "123456789")]
     public void BsonRepresentation_Is_Respected(long val, Type t, string bsonRaw)
     {
         var obj = (IBookshop)Activator.CreateInstance(t)!;

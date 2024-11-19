@@ -52,7 +52,7 @@ public class EtagBsonSerializerTests
             Etag = new Etag(123456789UL)
         };
         var json = obj.ToJson();
-        var expected = $"{{ '_id' : 'cake', 'Etag' : NumberLong(123456789) }}".Replace("'", "\"");
+        var expected = $"{{ '_id' : 'cake', 'Etag' : 123456789 }}".Replace("'", "\"");
         Assert.Equal(expected, json);
 
         var bson = obj.ToBson();
@@ -63,8 +63,8 @@ public class EtagBsonSerializerTests
 
     [Theory]
     [InlineData(123456789UL, typeof(BookshopString), "'Fc1bBwAAAAA='")]
-    [InlineData(123456789UL, typeof(BookshopInt64), "NumberLong(123456789)")]
-    [InlineData(123456789UL, typeof(BookshopBinary), "new BinData(0, 'Fc1bBwAAAAA=')")]
+    [InlineData(123456789UL, typeof(BookshopInt64), "123456789")]
+    [InlineData(123456789UL, typeof(BookshopBinary), "{ '$binary' : { 'base64' : 'Fc1bBwAAAAA=', 'subType' : '00' } }")]
     public void BsonRepresentation_Is_Respected(ulong val, Type t, string bsonRaw)
     {
         var obj = (IBookshop)Activator.CreateInstance(t)!;

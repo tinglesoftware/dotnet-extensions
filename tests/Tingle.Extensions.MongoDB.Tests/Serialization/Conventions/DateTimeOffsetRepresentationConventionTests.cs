@@ -12,7 +12,7 @@ public class DateTimeOffsetRepresentationConventionTests
     [InlineData(BsonType.Document)]
     [InlineData(BsonType.DateTime)]
     [InlineData(BsonType.String)]
-    public void Convention_Is_Used_When_Memeber_Is_A_DateTimeOffset(BsonType representation)
+    public void Convention_Is_Used_When_Member_Is_A_DateTimeOffset(BsonType representation)
     {
         var subject = new DateTimeOffsetRepresentationConvention(representation);
         var classMap = new BsonClassMap<Bookshop>();
@@ -29,7 +29,7 @@ public class DateTimeOffsetRepresentationConventionTests
     [InlineData(BsonType.Document)]
     [InlineData(BsonType.DateTime)]
     [InlineData(BsonType.String)]
-    public void Convention_Is_Used_When_Memeber_Is_A_Nullable_DateTimeOffset(BsonType representation)
+    public void Convention_Is_Used_When_Member_Is_A_Nullable_DateTimeOffset(BsonType representation)
     {
         var subject = new DateTimeOffsetRepresentationConvention(representation);
         var classMap = new BsonClassMap<Bookshop>();
@@ -43,9 +43,9 @@ public class DateTimeOffsetRepresentationConventionTests
     }
 
     [Fact]
-    public void Convention_Is_Not_Used_When_Memeber_Is_Not_A_DateTimeOffset()
+    public void Convention_Is_Not_Used_When_Member_Is_Not_A_DateTimeOffset()
     {
-        var subject = new DateTimeOffsetRepresentationConvention(BsonType.Array);
+        var subject = new DateTimeOffsetRepresentationConvention(BsonType.Document);
         var classMap = new BsonClassMap<Bookshop>();
         var memberMap = classMap.MapMember(b => b.Created);
 
