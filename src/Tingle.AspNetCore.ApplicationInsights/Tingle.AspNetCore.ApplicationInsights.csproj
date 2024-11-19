@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <Description>Convenience functionality for Application Insights on AspNetCore</Description>
+    <!-- No longer maintained, this is just for reference -->
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
