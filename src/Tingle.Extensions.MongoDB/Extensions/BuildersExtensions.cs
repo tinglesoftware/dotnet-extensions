@@ -82,8 +82,16 @@ public static class BuildersExtensions
     {
         var collection = new ExpressionFieldDefinition<T>(collectionExpression);
         var child = new ExpressionFieldDefinition<TChild>(memberExpression);
-        var collectionDefinition = collection.Render(BsonSerializer.LookupSerializer<T>(), BsonSerializer.SerializerRegistry);
-        var childDefinition = child.Render(BsonSerializer.LookupSerializer<TChild>(), BsonSerializer.SerializerRegistry);
+        var collectionDefinition = collection.Render(new RenderArgs<T>
+        {
+            DocumentSerializer = BsonSerializer.LookupSerializer<T>(),
+            SerializerRegistry = BsonSerializer.SerializerRegistry,
+        });
+        var childDefinition = child.Render(new RenderArgs<TChild>
+        {
+            DocumentSerializer = BsonSerializer.LookupSerializer<TChild>(),
+            SerializerRegistry = BsonSerializer.SerializerRegistry,
+        });
 
         var fieldDefinition = new StringFieldDefinition<T>(collectionDefinition.FieldName + "." + childDefinition.FieldName);
         return fieldDefinition;
