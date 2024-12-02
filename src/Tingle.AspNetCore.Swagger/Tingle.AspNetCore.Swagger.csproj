@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="AnyOf" Version="0.5.0" />
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.7.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
