@@ -53,7 +53,7 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.GetAsync("/frob");
+        var response = await client.GetAsync("/frob", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
@@ -77,7 +77,7 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.GetAsync("/DOCS/v1");
+        var response = await client.GetAsync("/DOCS/v1", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/html", response.Content.Headers.ContentType?.ToString());
         Assert.NotEqual(0, response.Content.Headers.ContentLength);
@@ -103,7 +103,7 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.GetAsync("/DOCS/v1");
+        var response = await client.GetAsync("/DOCS/v1", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/html", response.Content.Headers.ContentType?.ToString());
         Assert.NotEqual(0, response.Content.Headers.ContentLength);
@@ -128,10 +128,10 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.GetAsync("/docs");
+        var response = await client.GetAsync("/docs", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/html", response.Content.Headers.ContentType?.ToString());
-        Assert.Contains("/swagger/v2/swagger.json", await response.Content.ReadAsStringAsync());
+        Assert.Contains("/swagger/v2/swagger.json", await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
     }
 
     [Fact] // Matches based on '.Map'
@@ -153,11 +153,11 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.GetAsync("/docs/v1");
+        var response = await client.GetAsync("/docs/v1", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("text/html", response.Content.Headers.ContentType?.ToString());
         Assert.NotEqual(0, response.Content.Headers.ContentLength);
-        Assert.Contains("/swagger/v1/swagger.json", await response.Content.ReadAsStringAsync());
+        Assert.Contains("/swagger/v1/swagger.json", await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
     }
 
     [Fact]
@@ -180,11 +180,11 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         using var server = new TestServer(builder);
         var client = server.CreateClient();
 
-        var response = await client.DeleteAsync("/docs/v1");
+        var response = await client.DeleteAsync("/docs/v1", TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
         Assert.Equal(0, response.Content.Headers.ContentLength);
 
-        response = await client.PostAsync("/docs/v1", new StringContent(""));
+        response = await client.PostAsync("/docs/v1", new StringContent(""), TestContext.Current.CancellationToken);
         Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
         Assert.Equal(0, response.Content.Headers.ContentLength);
     }
@@ -214,7 +214,7 @@ public class ReDocEndpointRouteBuilderExtensionsTest
         var client = server.CreateClient();
 
         // Act
-        var response = await client.GetAsync("/docs/v1");
+        var response = await client.GetAsync("/docs/v1", TestContext.Current.CancellationToken);
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

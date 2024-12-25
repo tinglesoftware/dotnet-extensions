@@ -16,7 +16,7 @@ public class SharedKeyHandlerTests
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/search?number=12345678");
         request.Headers.TryAddWithoutValidation("x-ts-date", "Tue, 26 Dec 2017 23:09:28 GMT");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -39,7 +39,7 @@ public class SharedKeyHandlerTests
         request.Content = new StreamContent(stream);
         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -58,7 +58,7 @@ public class SharedKeyHandlerTests
         // invoke the authentication provider
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/search?number=12345678");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         IReadOnlyDictionary<string, IEnumerable<string>> dict = request.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);

@@ -12,7 +12,7 @@ public class BasicHeaderHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;

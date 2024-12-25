@@ -56,7 +56,10 @@ public class ApnsNotifierTests(ITestOutputHelper outputHelper)
         cache.Set("apns:tokens:cake:cake", "cake-token");
         var client = sp.GetRequiredService<ApnsNotifier>();
 
-        var rr = await client.SendAsync(new ApnsMessageHeader { DeviceToken = "cake" }, new ApnsMessageData(new ApnsMessagePayload { }));
+        var rr = await client.SendAsync(
+            new ApnsMessageHeader { DeviceToken = "cake" },
+            new ApnsMessageData(new ApnsMessagePayload { }),
+            TestContext.Current.CancellationToken);
         Assert.Equal("bearer cake-token", header);
     }
 

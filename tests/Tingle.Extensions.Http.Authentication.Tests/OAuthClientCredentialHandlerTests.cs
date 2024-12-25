@@ -68,7 +68,7 @@ public class OAuthClientCredentialHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -105,7 +105,7 @@ public class OAuthClientCredentialHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -142,7 +142,7 @@ public class OAuthClientCredentialHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -179,7 +179,7 @@ public class OAuthClientCredentialHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -216,7 +216,8 @@ public class OAuthClientCredentialHandlerTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(() => client.SendAsync(request));
+        var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(
+            () => client.SendAsync(request, TestContext.Current.CancellationToken));
 
         // Assert
         var header = request.Headers.Authorization;

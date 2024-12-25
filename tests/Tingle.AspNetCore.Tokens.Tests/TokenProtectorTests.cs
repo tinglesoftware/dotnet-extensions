@@ -74,7 +74,7 @@ public class TokenProtectorTests
         var enc = prot.Protect(d, expiration);
 
         // delay the usage
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2), TestContext.Current.CancellationToken);
 
         var ex = Assert.ThrowsAny<CryptographicException>(() => prot.UnProtect(enc, out DateTimeOffset actualExpiration));
         Assert.StartsWith("The payload expired", ex.Message);
@@ -85,7 +85,7 @@ public class TokenProtectorTests
         enc = prot.Protect(d, lifespan);
 
         // delay the usage
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2), TestContext.Current.CancellationToken);
 
         ex = Assert.ThrowsAny<CryptographicException>(() => prot.UnProtect(enc, out DateTimeOffset actualExpiration));
         Assert.StartsWith("The payload expired", ex.Message);

@@ -116,7 +116,7 @@ public class FirebaseNotifierTests(ITestOutputHelper outputHelper)
 
         var msg = new FirebaseRequestMessage();
         var model = new FirebaseRequest(msg);
-        var response = await client.SendAsync(model);
+        var response = await client.SendAsync(model, TestContext.Current.CancellationToken);
         response.EnsureSuccess();
         Assert.Equal("Bearer stupid_token", header);
     }

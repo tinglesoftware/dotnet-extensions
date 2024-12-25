@@ -16,7 +16,7 @@ public class ResourceResponseHeadersTests
         response.Headers.TryAddWithoutValidation("x-continuation-token", Guid.NewGuid().ToString());
         response.Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes("me")));
         response.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("text/plain;charset=utf-8");
-        response.Content.LoadIntoBufferAsync(); // required to populate Content-Length header
+        response.Content.LoadIntoBufferAsync(TestContext.Current.CancellationToken); // required to populate Content-Length header
 
         var rr = new ResourceResponse<object>(response);
         Assert.NotNull(rr.Headers);

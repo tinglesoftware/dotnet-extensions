@@ -12,7 +12,7 @@ public class ApiKeyHandlersTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var header = request.Headers.Authorization;
@@ -31,7 +31,7 @@ public class ApiKeyHandlersTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var uri = request.RequestUri?.ToString();
@@ -49,7 +49,7 @@ public class ApiKeyHandlersTests
         // Act
         var request = new HttpRequestMessage(HttpMethod.Get, "https://apis.example.com/v1/cars?c2bOnly=true");
         var client = new HttpClient(handler);
-        await client.SendAsync(request);
+        await client.SendAsync(request, TestContext.Current.CancellationToken);
 
         // Assert
         var uri = request.RequestUri?.ToString();

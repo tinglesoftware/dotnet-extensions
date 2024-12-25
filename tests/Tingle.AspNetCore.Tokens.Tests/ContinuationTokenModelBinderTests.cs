@@ -171,7 +171,7 @@ public class ContinuationTokenModelBinderTests
         var token = ctProtector.Protect(original, expiration);
 
         // delay the usage
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2), TestContext.Current.CancellationToken);
 
         // prepare HTTP context
         var httpContext = new DefaultHttpContext() { RequestServices = serviceProvider };
@@ -197,7 +197,7 @@ public class ContinuationTokenModelBinderTests
         var token = ctProtector.Protect(original);
 
         // delay the usage
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2), TestContext.Current.CancellationToken);
 
         // prepare HTTP context
         var httpContext = new DefaultHttpContext() { RequestServices = serviceProvider };
@@ -224,7 +224,7 @@ public class ContinuationTokenModelBinderTests
         var token = ctProtector.Protect(original, expiration);
 
         // delay the usage
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        await Task.Delay(TimeSpan.FromSeconds(2), TestContext.Current.CancellationToken);
 
         // prepare HTTP context
         var httpContext = new DefaultHttpContext() { RequestServices = serviceProvider };

@@ -42,7 +42,7 @@ public class FcmLegacyNotifierTests(ITestOutputHelper outputHelper)
         var client = sp.GetRequiredService<FcmLegacyNotifier>();
 
         var model = new FcmLegacyRequest { };
-        var rr = await client.SendAsync(model);
+        var rr = await client.SendAsync(model, TestContext.Current.CancellationToken);
         Assert.Equal($"key={key}", header);
     }
 }

@@ -23,7 +23,7 @@ public class DataProtectionMongoTests
         repo.StoreElement(element, friendlyName);
 
         var collection = dbFixture.GetCollection<DataProtectionKey>(CollName);
-        var dbKeys = collection.Find(Builders<DataProtectionKey>.Filter.Empty).ToList();
+        var dbKeys = collection.Find(Builders<DataProtectionKey>.Filter.Empty).ToList(TestContext.Current.CancellationToken);
         var dbKey = Assert.Single(dbKeys);
         Assert.Equal(key.FriendlyName, dbKey?.FriendlyName);
         Assert.Equal(key.Xml, dbKey?.Xml);

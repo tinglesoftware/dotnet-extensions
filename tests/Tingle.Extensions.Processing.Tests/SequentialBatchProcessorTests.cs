@@ -14,7 +14,7 @@ public class SequentialBatchProcessorTests
             processed.Add(n);
             return Task.CompletedTask;
         });
-        await processor.ProcessAsync(numbers);
+        await processor.ProcessAsync(numbers, TestContext.Current.CancellationToken);
         Assert.Equal(100, invocations);
         Assert.Equal(numbers, processed);
     }
@@ -31,7 +31,7 @@ public class SequentialBatchProcessorTests
             Interlocked.Increment(ref invocations);
             processed.Add(n);
         });
-        await processor.ProcessAsync(numbers);
+        await processor.ProcessAsync(numbers, TestContext.Current.CancellationToken);
         Assert.Equal(100, invocations);
         Assert.Equal(numbers, processed.OrderBy(x => x));
     }

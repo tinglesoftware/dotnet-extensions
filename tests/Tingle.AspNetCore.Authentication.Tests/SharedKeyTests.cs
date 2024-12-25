@@ -76,7 +76,7 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
         var newSharedKeyToken = "SharedKey " + tokenText;
         var response = await SendAsync(server, "http://example.com/token", newSharedKeyToken, date);
         Assert.Equal(HttpStatusCode.OK, response.Response.StatusCode);
-        Assert.Equal(tokenText, await response.Response.Content.ReadAsStringAsync());
+        Assert.Equal(tokenText, await response.Response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
     }
 
     [Fact]
@@ -124,7 +124,7 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
             catch (Exception)
             {
                 context.Response.StatusCode = 401;
-                await context.Response.WriteAsync("i got this");
+                await context.Response.WriteAsync("i got this", TestContext.Current.CancellationToken);
             }
         });
 
@@ -766,14 +766,14 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
                 OnForbidden = context =>
                 {
                     context.Response.StatusCode = 418;
-                    return context.Response.WriteAsync("You Shall Not Pass");
+                    return context.Response.WriteAsync("You Shall Not Pass", TestContext.Current.CancellationToken);
                 }
             };
         });
         var newSharedKeyToken = "SharedKey " + tokenText;
         var response = await SendAsync(server, "http://example.com/forbidden", newSharedKeyToken, date);
         Assert.Equal(418, (int)response.Response.StatusCode);
-        Assert.Equal("You Shall Not Pass", await response.Response.Content.ReadAsStringAsync());
+        Assert.Equal("You Shall Not Pass", await response.Response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
     }
 
     class InvalidTokenValidator : ISharedKeyTokenValidator

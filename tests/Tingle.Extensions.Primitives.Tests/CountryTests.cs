@@ -40,7 +40,7 @@ public class CountryTests
         foreach (var c in all)
         {
             using var request = new HttpRequestMessage(HttpMethod.Head, c.FlagUrl);
-            using var response = await httpClient.SendAsync(request);
+            using var response = await httpClient.SendAsync(request, TestContext.Current.CancellationToken);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Flag URL for {c.ThreeLetterCode}({c.Name}) failed. URL set = {c.FlagUrl}");

@@ -14,7 +14,7 @@ public class SplitAndBatchProcessorTests
             Interlocked.Increment(ref invocations);
             foreach (var n in b) processed.Add(n);
         });
-        await processor.ProcessAsync(numbers);
+        await processor.ProcessAsync(numbers, TestContext.Current.CancellationToken);
         Assert.Equal(20, invocations);
         Assert.Equal(numbers, processed.OrderBy(x => x));
     }
