@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
-    <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
+    <PackageReference Include="TimeZoneConverter" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
