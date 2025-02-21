@@ -17,6 +17,7 @@ jobs:
         - { name: 'Tingle.AspNetCore.DataProtection.MongoDB' }
         - { name: 'Tingle.AspNetCore.JsonPatch' }
         - { name: 'Tingle.AspNetCore.JsonPatch.NewtonsoftJson' }
+        - { name: 'Tingle.AspNetCore.OpenApi' }
         - { name: 'Tingle.AspNetCore.Tokens' }
         - { name: 'Tingle.Extensions.Caching.MongoDB' }
         - { name: 'Tingle.Extensions.DataAnnotations' }
