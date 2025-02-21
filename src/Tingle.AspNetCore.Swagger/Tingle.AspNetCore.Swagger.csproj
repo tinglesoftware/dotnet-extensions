@@ -4,6 +4,8 @@
     <Description>Usability extensions for Swagger middleware including smaller ReDoc support</Description>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <IsAotCompatible>false</IsAotCompatible>
+    <!-- No longer maintained, this is just for reference -->
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
