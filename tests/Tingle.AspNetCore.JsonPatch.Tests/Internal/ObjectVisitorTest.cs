@@ -20,7 +20,7 @@ public class ObjectVisitorTest
 
     [Theory]
     [ClassData(typeof(ReturnsListAdapterData))]
-    public void Visit_ValidPathToArray_ReturnsListAdapter(object targetObject, string path, object expectedTargetObject)
+    public void Visit_ValidPathToArray_ReturnsListAdapter(object targetObject, string path, object? expectedTargetObject)
     {
         // Arrange
         var visitor = new ObjectVisitor(new ParsedPath(path), new JsonSerializerOptions(), create: false);
@@ -35,13 +35,13 @@ public class ObjectVisitorTest
         Assert.IsType<ListAdapter>(adapter);
     }
 
-    class ReturnsListAdapterData : TheoryData<object?, string, object?>
+    class ReturnsListAdapterData : TheoryData<object, string, object?>
     {
         public ReturnsListAdapterData()
         {
             var model = new Class1();
             Add(model, "/States/-", model.States);
-            Add(model.States, "/-", model.States);
+            Add(model.States ?? [], "/-", model.States);
 
             var nestedModel = new Class1Nested();
             nestedModel.Customers.Add(new Class1());
