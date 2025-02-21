@@ -21,9 +21,10 @@ updates:
       xunit:
         patterns: ["Xunit*"]
     ignore:
-      # No longer maintaining Application Insights and Serilog
+      # No longer maintaining Application Insights, Serilog and Swashbuckle
       - dependency-name: "Microsoft.ApplicationInsights*"
       - dependency-name: "Serilog*"
+      - dependency-name: "Swashbuckle*"
       # Ignore major updates for packages used in multi-targeting
       - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
         update-types: ["version-update:semver-major"]

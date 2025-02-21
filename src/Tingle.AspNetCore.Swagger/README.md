@@ -1,5 +1,9 @@
 # Tingle.AspNetCore.Swagger
 
+> [!IMPORTANT]
+> Use of `Microsoft.AspNetCore.OpenApi` is the recommended replacement. This library is provided for convenience and compatibility with existing applications but is no longer actively maintained and not recommended for new projects.
+> Supported extensions for `Microsoft.AspNetCore.OpenApi` are at [`Tingle.AspNetCore.OpenApi`](../Tingle.AspNetCore.OpenApi/README.md)
+
 This library contains a bunch of extensions for [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore).
 
 ## Getting started
