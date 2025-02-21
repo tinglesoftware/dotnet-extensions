@@ -18,14 +18,12 @@ updates:
           - "Microsoft.IdentityModel.Protocols.OpenIdConnect"
       system:
         patterns: ["System*"]
-      serilog:
-        patterns: ["Serilog*"]
       xunit:
         patterns: ["Xunit*"]
     ignore:
-      # No longer maintaining Serilog and Application Insights
-      - dependency-name: "Serilog*"
+      # No longer maintaining Application Insights and Serilog
       - dependency-name: "Microsoft.ApplicationInsights*"
+      - dependency-name: "Serilog*"
       # Ignore major updates for packages used in multi-targeting
       - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
         update-types: ["version-update:semver-major"]

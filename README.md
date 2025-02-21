@@ -11,7 +11,6 @@ This repository contains projects/libraries for adding useful functionality to .
 
 |Package|Description|
 |--|--|
-|[`Tingle.AspNetCore.ApplicationInsights`](https://www.nuget.org/packages/Tingle.AspNetCore.ApplicationInsights/)|Convenience functionality for Application Insights on AspNetCore such as collecting problem details. See [docs](./src/Tingle.AspNetCore.ApplicationInsights/README.md) and [sample](./samples/ApplicationInsightsSample)|
 |[`Tingle.AspNetCore.Authentication`](https://www.nuget.org/packages/Tingle.AspNetCore.Authentication/)|Convenience authentication functionality such as pass through and pre-shared key authentication mechanisms. See [docs](./src/Tingle.AspNetCore.Authentication/README.md) and [sample](./samples/AuthenticationSample)|
 |[`Tingle.AspNetCore.Authorization`](https://www.nuget.org/packages/Tingle.AspNetCore.Authorization/)|Additional authorization functionality such as handlers and requirements. See [docs](./src/Tingle.AspNetCore.Authorization/README.md) and [sample](./samples/AuthorizationSample)|
 |[`Tingle.AspNetCore.DataProtection.MongoDB`](https://www.nuget.org/packages/Tingle.AspNetCore.DataProtection.MongoDB/)|Data Protection store in [MongoDB](https://mongodb.com) for ASP.NET Core. See [docs](./src/Tingle.AspNetCore.DataProtection.MongoDB/README.md) and [sample](./samples/DataProtectionMongoDBSample).|
@@ -31,7 +30,6 @@ This repository contains projects/libraries for adding useful functionality to .
 |[`Tingle.Extensions.Primitives`](https://www.nuget.org/packages/Tingle.Extensions.Primitives/)|Additional primitive types such as `Money`, `Currency`, `Duration`, `Keygen`, `Etag` etc. See [docs](./src/Tingle.Extensions.Primitives/README.md).|
 |[`Tingle.Extensions.Processing`](https://www.nuget.org/packages/Tingle.Extensions.Processing/)|Helpers for making processing of bulk in memory tasks. See [docs](./src/Tingle.Extensions.Processing/README.md).|
 |[`Tingle.Extensions.PushNotifications`](https://www.nuget.org/packages/Tingle.Extensions.PushNotifications/)|Clients for sending push notifications via FCM, APNs etc. See [docs](./src/Tingle.Extensions.PushNotifications/README.md).|
-|[`Tingle.Extensions.Serilog`](https://www.nuget.org/packages/Tingle.Extensions.Serilog/)|Extensions for working with [`Serilog`](https://serilog.net/). Including easier registration when working with different host setups, and general basics. See [docs](./src/Tingle.Extensions.Serilog/README.md) and [sample](./samples/SerilogSample).|
 
 ### Issues &amp; Comments
 
