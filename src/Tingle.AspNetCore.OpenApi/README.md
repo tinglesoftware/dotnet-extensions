@@ -35,31 +35,6 @@ services.AddOpenApi("v1", options =>
 
 You can optionally add descriptions to the error codes by supplying an instance of `IDictionary<string, string>` to `AddErrorCodes(...)`.
 
-### Add extra tags
-
-You can use tags to provide additional metadata to operations. You can do this by annotating your controllers or action methods with the `OperationExtraTag` attribute:
-
-```cs
-using Microsoft.AspNetCore.Mvc;
-
-[Route("/devices")]
-[OperationExtraTag("Devices", Description = "Accessing Device Operations", ExternalDocsUrl = "https://redocly.github.io/redoc/example-logo.png")]
-public class DevicesController : ControllerBase { }
-```
-
-Then configure OpenApi to incorporate the extra tags into the generated document. In the `Program.cs` or `Startup.cs`:
-
-```cs
-using Microsoft.Extensions.DependencyInjection;
-
-services.AddOpenApi("v1", options =>
-{
-    options.AddExtraTags();
-})
-```
-
-You can further control the tags by [grouping them](#add-tag-groups).
-
 ### Add tag groups
 
 Use `x-tagGroups` to group tags in the Reference docs navigation sidebar.
