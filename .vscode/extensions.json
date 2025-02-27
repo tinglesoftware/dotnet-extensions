@@ -4,10 +4,8 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-		"ms-dotnettools.vscodeintellicode-csharp",
+		"ms-dotnettools.csdevkit",
 		"streetsidesoftware.code-spell-checker",
-		"ms-azuretools.vscode-docker",
-		"shardulm94.trailing-spaces",
 		"redhat.vscode-yaml",
 		"github.vscode-github-actions"
 	]
