@@ -8,6 +8,7 @@ internal class BadRequestOperationTransformer : IOpenApiOperationTransformer
     public Task TransformAsync(OpenApiOperation operation, OpenApiOperationTransformerContext context, CancellationToken cancellationToken)
     {
         // if the operation does not have a response for bad request, create a new one and add it
+        operation.Responses ??= [];
         if (!operation.Responses.TryGetValue("400", out var response))
         {
             response = operation.Responses["400"] = new OpenApiResponse();

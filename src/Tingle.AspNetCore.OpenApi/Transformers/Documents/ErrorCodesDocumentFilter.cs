@@ -1,3 +1,4 @@
+using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -26,17 +27,14 @@ public class ErrorCodesDocumentTransformer(IDictionary<string, string> descripti
         // if there are no errors, do not proceed
         if (descriptions.Count <= 0) return Task.CompletedTask;
 
-        var ext = new OpenApiArray();
-        foreach (var desc in descriptions)
+        var ext = new JsonArray([.. descriptions.Select(desc => new JsonObject
         {
-            ext.Add(new OpenApiObject
-            {
-                ["name"] = new OpenApiString(desc.Key),
-                ["description"] = new OpenApiString(desc.Value),
-            });
-        };
+            ["name"] = desc.Key,
+            ["description"] = desc.Value,
+        })]);
 
-        document.Extensions[ExtensionName] = ext;
+        document.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
+        document.Extensions[ExtensionName] = new OpenApiAny(ext);
 
         return Task.CompletedTask;
     }

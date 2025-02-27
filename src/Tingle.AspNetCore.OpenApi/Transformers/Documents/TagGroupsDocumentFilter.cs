@@ -23,10 +23,10 @@ public class TagGroupsDocumentTransformer(IEnumerable<OpenApiTagGroup> groups, b
             // find tags that have not been grouped
             var operationTags = document.Paths.Select(p => p.Value)
                                               .SelectMany(pi => pi.Operations.Select(op => op.Value))
-                                              .SelectMany(op => op.Tags)
+                                              .SelectMany(op => op.Tags ?? [])
                                               .Select(t => t.Name);
 
-            var docTags = document.Tags.Select(t => t.Name);
+            var docTags = document.Tags?.Select(t => t.Name) ?? [];
             var allUniqueTags = docTags.Concat(operationTags).ToHashSet(StringComparer.OrdinalIgnoreCase);
             var alreadyGroupedTags = groups.Select(g => g.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
             var ungroupedTags = allUniqueTags.Except(alreadyGroupedTags, StringComparer.OrdinalIgnoreCase).ToList();
@@ -39,6 +39,7 @@ public class TagGroupsDocumentTransformer(IEnumerable<OpenApiTagGroup> groups, b
         }
 
         // Add to the document
+        document.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
         document.Extensions["x-tagGroups"] = new OpenApiTagGroups { Groups = groups, };
 
         return Task.CompletedTask;

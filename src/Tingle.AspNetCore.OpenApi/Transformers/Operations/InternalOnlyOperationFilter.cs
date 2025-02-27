@@ -33,7 +33,8 @@ public class InternalOnlyOperationTransformer : IOpenApiOperationTransformer
         if (attr is null) return Task.CompletedTask;
 
         // At this point, the API is internal only, so just set the extension value
-        operation.Extensions[ExtensionName] = new OpenApiBoolean(true);
+        operation.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
+        operation.Extensions[ExtensionName] = new OpenApiAny(true);
 
         return Task.CompletedTask;
     }

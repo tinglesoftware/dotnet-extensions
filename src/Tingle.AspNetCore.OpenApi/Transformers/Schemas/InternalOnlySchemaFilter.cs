@@ -21,7 +21,7 @@ public class InternalOnlySchemaTransformer : IOpenApiSchemaTransformer
         if (attr is null) return Task.CompletedTask;
 
         // At this point, the API is internal only, so just set the extension value
-        schema.Extensions[InternalOnlyOperationTransformer.ExtensionName] = new OpenApiBoolean(true);
+        schema.Extensions[InternalOnlyOperationTransformer.ExtensionName] = new OpenApiAny(true);
 
         return Task.CompletedTask;
     }

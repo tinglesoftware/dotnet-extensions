@@ -46,13 +46,10 @@ public class ErrorCodesOperationTransformer : IOpenApiOperationTransformer
         // if there are no errors, do not proceed
         if (uniqueErrorCodes.Count <= 0) return Task.CompletedTask;
 
-        var ext = new OpenApiArray();
-        foreach (var code in uniqueErrorCodes)
-        {
-            ext.Add(new OpenApiString(code));
-        }
+        var ext = new System.Text.Json.Nodes.JsonArray([.. uniqueErrorCodes.Select(code => code)]);
 
-        operation.Extensions[ErrorCodesDocumentTransformer.ExtensionName] = ext;
+        operation.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
+        operation.Extensions[ErrorCodesDocumentTransformer.ExtensionName] = new OpenApiAny(ext);
 
         return Task.CompletedTask;
     }

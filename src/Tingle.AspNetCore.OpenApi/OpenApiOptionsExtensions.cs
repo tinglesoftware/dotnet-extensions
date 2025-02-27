@@ -36,14 +36,6 @@ public static class OpenApiOptionsExtensions
         => options.AddOperationTransformer<BadRequestOperationTransformer>();
 
     /// <summary>
-    /// Add extra tags to operations
-    /// </summary>
-    /// <param name="options"></param>
-    /// <returns></returns>
-    public static OpenApiOptions AddExtraTags(this OpenApiOptions options)
-        => options.AddOperationTransformer<ExtraTagsOperationTransformer>();
-
-    /// <summary>
     /// Add error codes to operations and the document using the vendor extension <c>x-error-codes</c>
     /// </summary>
     /// <param name="options"></param>
