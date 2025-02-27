@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Usability extensions for Swagger middleware including smaller ReDoc support</Description>
     <TargetFrameworks>net8.0</TargetFrameworks>
+    <Description>Usability extensions for Swagger middleware including smaller ReDoc support</Description>
     <IsAotCompatible>false</IsAotCompatible>
     <!-- No longer maintained, this is just for reference -->
     <IsPackable>false</IsPackable>

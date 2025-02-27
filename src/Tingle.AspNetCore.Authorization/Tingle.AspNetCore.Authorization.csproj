@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Convenience authorization functionality such as approval of IPs in AspNetCore</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);authorization</PackageTags>
   </PropertyGroup>
 

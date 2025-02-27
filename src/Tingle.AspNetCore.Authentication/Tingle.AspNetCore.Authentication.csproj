@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Convenience authentication functionality such as pass through and pre-shared key authentication mechanisms.</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);authentication</PackageTags>
   </PropertyGroup>
 

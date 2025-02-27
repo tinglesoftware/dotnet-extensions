@@ -1,16 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>
-Extensions for working with Serilog.
+    <Description>Extensions for working with Serilog.
 Including easier registration when working with different host setups, and general basics.
-</Description>
+    </Description>
+    <PackageTags>$(PackageTags);serilog;serilog-builder</PackageTags>
     <!-- No longer maintained, this is just for reference -->
     <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageTags>$(PackageTags);serilog;serilog-builder</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

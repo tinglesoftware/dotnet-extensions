@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Validation handlers for phone numbers either via attributes or resolvable services with support for specific MNOs (Mobile Network Providers).</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);validation;dataannotations;phonevalidators;phones</PackageTags>
   </PropertyGroup>
 

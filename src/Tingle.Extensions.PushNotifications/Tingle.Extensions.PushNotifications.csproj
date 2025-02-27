@@ -3,9 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <Description>Clients for sending push notifications via FCM, APNS etc</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);push;notifications;push-notifications;apns;fcm</PackageTags>
   </PropertyGroup>
 

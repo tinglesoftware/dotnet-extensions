@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Usability extensions for OpenAPI including ReDoc support</Description>
     <TargetFrameworks>net10.0</TargetFrameworks>
+    <Description>Usability extensions for OpenAPI including ReDoc support</Description>
   </PropertyGroup>
 
   <ItemGroup>

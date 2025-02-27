@@ -3,9 +3,6 @@
   <PropertyGroup>
     <Description>Distributed cache implementation of Microsoft.Extensions.Caching.Distributed.IDistributedCache using MongoDB.
 For more information, refer to https://www.mongodb.com/.</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);cache;mongo;mongodb;nosql;distributedcache</PackageTags>
   </PropertyGroup>
 

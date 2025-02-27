@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Light weight abstraction around `HttpClient` which can be used to build custom client with response wrapping semantics.</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);httpclient;resource-response</PackageTags>
   </PropertyGroup>
 

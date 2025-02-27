@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Extensions to ensure immutable types aren't modified or removed during JSON PATCH operations</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);jsonpatch;patch;json;newtonsoft;newtonsoftjson</PackageTags>
   </PropertyGroup>
 

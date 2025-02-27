@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Extensions for working with MongoDB</Description>
     <TargetFrameworks>net8.0</TargetFrameworks>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <Description>Extensions for working with MongoDB</Description>
     <PackageTags>$(PackageTags);cache;mongo;mongodb;nosql;extensions</PackageTags>
   </PropertyGroup>
 

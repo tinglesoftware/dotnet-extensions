@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <Description>Extra validation attributes for application specific scenarios such as dates in the past/future, ratings, prefixes, swift code, and timezones.</Description>
-    <NoWarn>$(NoWarn);CA1813</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);validation;dataannotations</PackageTags>
+    <NoWarn>$(NoWarn);CA1813</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">

@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Support for storing data protection keys using MongoDB in AspNetCore</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);mongo;mongodb;dataprotection</PackageTags>
   </PropertyGroup>
 

@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Convenience functionality and extensions for working with EntityFrameworkCore</Description>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <Description>Convenience functionality and extensions for working with EntityFrameworkCore</Description>
     <PackageTags>$(PackageTags);EntityFrameworkCore;efcore</PackageTags>
   </PropertyGroup>
 

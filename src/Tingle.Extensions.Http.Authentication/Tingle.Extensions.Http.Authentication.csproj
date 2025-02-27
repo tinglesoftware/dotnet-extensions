@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Authentication handlers for use with HttpClient and Microsoft.Extensions.Http such as Shared Key, API Key and OAuth</Description>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PackageTags>$(PackageTags);httpclient;authentication;httpclient-authentication</PackageTags>
   </PropertyGroup>
 
@@ -16,9 +13,6 @@
     <PackageReference Include="AnyOf" Version="0.5.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="9.0.2" />
   </ItemGroup>
 
