@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Validation handlers for phone numbers either via attributes or resolvable services with support for specific MNOs (Mobile Network Providers).</Description>
@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="libphonenumber-csharp" Version="8.13.55" />
+    <PackageReference Include="libphonenumber-csharp" Version="9.0.2" />
   </ItemGroup>
 
 </Project>
