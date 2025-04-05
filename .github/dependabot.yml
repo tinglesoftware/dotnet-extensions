@@ -5,44 +5,52 @@
 
 version: 2
 updates:
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: 'nuget'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      time: "02:00"
+      interval: 'weekly'
+      time: '02:00'
     open-pull-requests-limit: 10
     groups:
       microsoft:
-        patterns: ["Microsoft*"]
+        patterns: ['Microsoft*']
         exclude-patterns:
-          - "Microsoft.IdentityModel.Protocols.OpenIdConnect"
+          - 'Microsoft.IdentityModel.Protocols.OpenIdConnect'
       system:
-        patterns: ["System*"]
+        patterns: ['System*']
       xunit:
-        patterns: ["Xunit*"]
+        patterns: ['Xunit*']
     ignore:
       # No longer maintaining Application Insights, Serilog and Swashbuckle
-      - dependency-name: "Microsoft.ApplicationInsights*"
-      - dependency-name: "Serilog*"
-      - dependency-name: "Swashbuckle*"
+      - dependency-name: 'Microsoft.ApplicationInsights*'
+      - dependency-name: 'Serilog*'
+      - dependency-name: 'Swashbuckle*'
       # Ignore major updates for packages used in multi-targeting
-      - dependency-name: "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "Microsoft.AspNetCore.TestHost"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "Microsoft.EntityFrameworkCore.Relational"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "Microsoft.Extensions.Hosting.Abstractions"
-        update-types: ["version-update:semver-major"]
-  - package-ecosystem: "github-actions" # See documentation for possible values
-    directory: "/" # Location of package manifests
+      - dependency-name: 'Microsoft.AspNetCore.Mvc.NewtonsoftJson'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'Microsoft.AspNetCore.TestHost'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'Microsoft.EntityFrameworkCore.Relational'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'Microsoft.Extensions.Hosting.Abstractions'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: 'dotnet-sdk'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      time: "02:00"
+      interval: 'monthly'
+      time: '02:00'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      time: '02:00'
     open-pull-requests-limit: 10
-  - package-ecosystem: "devcontainers" # See documentation for possible values
-    directory: "/" # Location of package manifests
+
+  - package-ecosystem: 'devcontainers'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      time: "02:00"
+      interval: 'weekly'
+      time: '02:00'
     open-pull-requests-limit: 10

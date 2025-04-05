@@ -43,6 +43,15 @@ jobs:
       with:
         fetch-depth: 0 # Required for GitVersion
 
+    # this step only exists because we still reference 9.x but some projects have moved to 10 preview
+    - name: Setup .NET 9 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.x'
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v3
       with:
@@ -53,13 +62,6 @@ jobs:
       id: gitversion
       with:
         useConfigFile: true
-
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          9.x
-          10.x
 
     - name: Install dependencies
       run: dotnet restore
