@@ -65,7 +65,7 @@ For development and preview environments, databases may need to be created autom
 ```json
 {
   "profiles": {
-    "SerilogSample": {
+    "MyApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {

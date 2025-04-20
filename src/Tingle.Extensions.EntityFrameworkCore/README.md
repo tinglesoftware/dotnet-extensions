@@ -32,7 +32,7 @@ This can be done using `EFCORE_PERFORM_MIGRATIONS` or `EFCORE_CREATE_DATABASE` e
 ```json
 {
   "profiles": {
-    "SerilogSample": {
+    "MyApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
