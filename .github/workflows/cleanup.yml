@@ -25,6 +25,7 @@ jobs:
           - { name: 'Tingle.Extensions.Http' }
           - { name: 'Tingle.Extensions.Http.Authentication' }
           - { name: 'Tingle.Extensions.JsonPatch' }
+          - { name: 'Tingle.Extensions.Logging' }
           - { name: 'Tingle.Extensions.MongoDB' }
           - { name: 'Tingle.Extensions.Mustache' }
           - { name: 'Tingle.Extensions.PhoneValidators' }
