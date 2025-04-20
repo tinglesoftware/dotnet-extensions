@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Convenience extensions and logging in CLI applications..</Description>
+    <Description>Convenience extensions and logging in CLI applications.</Description>
     <PackageTags>$(PackageTags);logging;cli</PackageTags>
   </PropertyGroup>
 

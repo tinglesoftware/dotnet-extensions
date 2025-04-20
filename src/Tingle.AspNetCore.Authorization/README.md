@@ -12,7 +12,7 @@ Below are some of the functionalities that the library provides to aid with auth
 
 It is a common scenario whereby we may require to only allow HTTP requests from certain IPs.
 
-In appsettings.json ...
+In `appsettings.json`
 
 ```json
 {
@@ -23,7 +23,7 @@ In appsettings.json ...
 }
 ```
 
-In Program.cs ...
+In `Program.cs`
 
 ```cs
 builder.Services.AddAuthorization(options =>
@@ -57,7 +57,7 @@ Now, we can use this functionality to authorize access to a controller as shown 
 [Authorize("my_auth_policy")]
 public class DummyController : ControllerBase
 {
-    ...
+    // ..
 }
 ```
 
@@ -67,7 +67,7 @@ Is that it?... Wait there's more!
 
 Alternatively, you can provide a list of fully qualified domain names and each of them will be resolved to the list of IP addresses. Let us see how to do this with an example:
 
-In appsettings.json ...
+In `appsettings.json`
 
 ```json
 {
@@ -75,7 +75,7 @@ In appsettings.json ...
 }
 ```
 
-In Program.cs ...
+In `Program.cs`
 
 ```cs
 builder.Services.AddAuthorization(options =>

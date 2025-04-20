@@ -74,10 +74,12 @@ builder.Services.AddAuthorization(options =>
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
-   ...
+   // ...
+
    // Add auth middleware
    app.UseAuthentication();
    app.UseAuthorization();
-   ....
+
+   // ...
 }
 ```

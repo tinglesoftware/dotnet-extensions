@@ -72,10 +72,12 @@ public class DummyController : ControllerBase
   [HttpPost]
   public async Task<IActionResult> SendAsync([FromBody] SendRequestModel model)
   {
-      ...
+      // ...
+
       // In case of a bad request
       return Problem(title: "error_title", description: "more detailed description", statusCode: 400);
-      ...
+
+      // ...
     }
 }
 ```

@@ -104,9 +104,11 @@ Use in your controller
 [HttpPatch]
 public void Patch([FromBody] JsonMergePatchDocument<Customer> patch)
 {
-    ...
+    // ..
+
     patch.ApplyTo(customer, ModelState);
-    ...
+
+    // ..
 }
 ```
 

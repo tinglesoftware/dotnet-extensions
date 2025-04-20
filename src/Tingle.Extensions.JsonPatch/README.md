@@ -45,7 +45,7 @@ Let us create `JsonPatchDocument<Customer>` instance to demonstrate the various 
 
 ```cs
 var patchDoc = new JsonPatchDocument<Customer>();
-// Define operations here...
+// Define operations here
 ```
 
 By default, the case transform type is `LowerCase`. Other options available are `UpperCase`, `CamelCase` and `OriginalCase`. These can be set via the constructor of the `JsonPatchDocument<T>`. For our example purposes we'll go with the default casing. Now let us see the supported patch operations.

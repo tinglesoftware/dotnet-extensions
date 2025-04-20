@@ -23,6 +23,7 @@ public class MyServiceClient : AbstractApiClient<MyServiceClientOptions>
        var request = new HttpRequestMessage(HttpMethod.Get, uri);
        return await SendAsync<Account>(request, cancellationToken);
    }
+
    // ...
 }
 
