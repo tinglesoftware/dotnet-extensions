@@ -197,21 +197,21 @@ Console.WriteLine(Keygen.Create("000", Keygen.OutputFormat.Hex, Encoding.Unicode
 Most of the types have conversion to/from JSON using `System.Text.Json`.
 Support for Type converters is also included to allow binding via `IConfiguration` instances.
 
-|Type|JSON converter|Type converter|
-|--|--|--|
-|`ByteSize`|&#9745;|&#9745;|
-|`ConnectionStringBuilder`|&#9745;|&#9745;|
-|`Country`|&#9745;|&#9745;|
-|`Currency`|&#9745;|&#9745;|
-|`Duration`|&#9745;|&#9745;|
-|`Etag`|&#9745;|&#9745;|
-|`ImageDimensions`|&#9744;|&#9744;|
-|`ImageDimensionsRange`|&#9744;|&#9744;|
-|`Ksuid`|&#9745;|&#9745;|
-|`Language`|&#9745;|&#9745;|
-|`SequenceNumber`|&#9745;|&#9745;|
-|`SwiftCode`|&#9745;|&#9745;|
-|`Keygen`|&#9744;|&#9744;|
+| Type                      | JSON converter | Type converter |
+| ------------------------- | -------------- | -------------- |
+| `ByteSize`                | &#9745;        | &#9745;        |
+| `ConnectionStringBuilder` | &#9745;        | &#9745;        |
+| `Country`                 | &#9745;        | &#9745;        |
+| `Currency`                | &#9745;        | &#9745;        |
+| `Duration`                | &#9745;        | &#9745;        |
+| `Etag`                    | &#9745;        | &#9745;        |
+| `ImageDimensions`         | &#9744;        | &#9744;        |
+| `ImageDimensionsRange`    | &#9744;        | &#9744;        |
+| `Ksuid`                   | &#9745;        | &#9745;        |
+| `Language`                | &#9745;        | &#9745;        |
+| `SequenceNumber`          | &#9745;        | &#9745;        |
+| `SwiftCode`               | &#9745;        | &#9745;        |
+| `Keygen`                  | &#9744;        | &#9744;        |
 
 There are also some convenience extension methods on framework types that can be useful for various tasks. They are explained below:
 
@@ -237,11 +237,11 @@ var result = key.Protect();
 Console.WriteLine(result); // Ecs*************
 ```
 
-By default, only the first 20% of the string will be kept as is. The remaining characters will be replaced with asterisks (*). To alter this default behavior you can supply different values to the following parameters:
+By default, only the first 20% of the string will be kept as is. The remaining characters will be replaced with asterisks (\*). To alter this default behavior you can supply different values to the following parameters:
 
 - `toKeep`: Specifies how many of the characters in the string aren't replaced with the replacement character (which is an asterisk by default) as a percentage.
 - `position`: The position of the string to protect. By default, the `StringProtectionPosition` is `End`. You can alter this to `Middle` or `Start`.
-- `replacementChar`: The character to replace the protected string characters with. By default, it is an asterisk (*).
+- `replacementChar`: The character to replace the protected string characters with. By default, it is an asterisk (\*).
 - `replacementLength`: The length of the replacement string using the replacement characters.
 
 ## Extensions for splitting a string in Pascal casing into multiple words

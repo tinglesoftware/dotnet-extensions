@@ -1,6 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html>
-<head>
+  <head>
     <title>%(DocumentTitle)</title>
     <!-- needed for adaptive design -->
     <meta charset="utf-8" />
@@ -11,18 +11,18 @@
     ReDoc doesn't change outer page styles
     -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
     </style>
     %(HeadContent)
-</head>
-<body>
+  </head>
+  <body>
     <div id="redoc-container"></div>
     <script src="%(ScriptUrl)"></script>
     <script type="text/javascript">
-        Redoc.init('%(SpecUrl)', JSON.parse('%(Config)'), document.getElementById('redoc-container'))
+      Redoc.init('%(SpecUrl)', JSON.parse('%(Config)'), document.getElementById('redoc-container'));
     </script>
-</body>
+  </body>
 </html>

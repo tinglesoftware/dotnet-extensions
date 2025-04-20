@@ -51,7 +51,7 @@ Data:
 
 ```json
 {
-   "user": false
+  "user": false
 }
 ```
 
@@ -67,7 +67,7 @@ Template:
 
 ```html
 {{#user}}
-    <b>Welcome home {{ name }}</b>
+<b>Welcome home {{ name }}</b>
 {{/user}}
 ```
 
@@ -75,10 +75,7 @@ Data:
 
 ```json
 {
-  "user": [
-    { "name": "John" },
-    { "name": "Mary" }
-  ]
+  "user": [{ "name": "John" }, { "name": "Mary" }]
 }
 ```
 
@@ -139,9 +136,9 @@ Template:
 ```html
 <p>{{name}} vehicles:</p>
 <ul>
-    {{#each vehicles}}
-        <li>{{registration}}</li>
-    {{/each}}
+  {{#each vehicles}}
+  <li>{{registration}}</li>
+  {{/each}}
 </ul>
 ```
 
@@ -166,8 +163,8 @@ Output:
 ```html
 <p>John vehicles:</p>
 <ul>
-    <li>123 KL 3</li>
-    <li>054F 87T</li>
+  <li>123 KL 3</li>
+  <li>054F 87T</li>
 </ul>
 ```
 
@@ -179,9 +176,9 @@ Template:
 
 ```html
 <ul>
-    {{#each vehicles}}
-        <li>{{registration}} is owned by {{../../name}}</li>
-    {{/each}}
+  {{#each vehicles}}
+  <li>{{registration}} is owned by {{../../name}}</li>
+  {{/each}}
 </ul>
 ```
 
@@ -189,8 +186,8 @@ Output:
 
 ```html
 <ul>
-    <li>123 KL 3 is owned by John</li>
-    <li>054F 87T is owned by John</li>
+  <li>123 KL 3 is owned by John</li>
+  <li>054F 87T is owned by John</li>
 </ul>
 ```
 

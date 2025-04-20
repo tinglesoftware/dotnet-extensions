@@ -23,11 +23,11 @@ In your appsettings.json (or any other configuration store/source you use):
 
 ```jsonc
 {
-   "Apns:TeamId": "AA0A0AAAA0",
-   "Apns:BundleId": "com.apple.iBooks",
-   "Apns:KeyId": "AA00AA000A",
+  "Apns:TeamId": "AA0A0AAAA0",
+  "Apns:BundleId": "com.apple.iBooks",
+  "Apns:KeyId": "AA00AA000A",
 
-// ...
+  // ...
 }
 ```
 
@@ -87,9 +87,9 @@ In your appsettings.json (or any other configuration store/source you use):
 
 ```jsonc
 {
-   "Firebase:ProjectId": "dummy-id",
+  "Firebase:ProjectId": "dummy-id",
 
-   // ...
+  // ...
 }
 ```
 
@@ -165,9 +165,9 @@ In your appsettings.json (or any other configuration store/source you use):
 
 ```jsonc
 {
-   "Firebase:Key": "<your-legacy-key-here>",
+  "Firebase:Key": "<your-legacy-key-here>",
 
-   // ...
+  // ...
 }
 ```
 

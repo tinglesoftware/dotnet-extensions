@@ -31,21 +31,21 @@ If MongoDB client is configured with a connection string, add the `ConnectionStr
 
 ```json
 {
-    "ConnectionStrings:Mongo":"#{ConnectionStringsMongo}#"
+  "ConnectionStrings:Mongo": "#{ConnectionStringsMongo}#"
 }
 ```
 
 ## Serializers
 
-|Source Types|BSON Destination Types|
-|--|--|
-|`System.Text.Json.Nodes.JsonObject`|`BsonDocument`|
-|`System.Text.Json.Nodes.JsonArray`|`BsonArray`|
-|`System.Text.Json.JsonElement`|`BsonDocument`, `BsonArray`, or value|
-|`System.Net.IPNetwork` (.NET 8 or later)|`String`|
-|`Tingle.Extensions.Primitives.Duration`|`String`|
-|`Tingle.Extensions.Primitives.Etag`|`Int64`, `Binary` or `String`|
-|`Tingle.Extensions.Primitives.SequenceNumber`|`Int64` or `String`|
+| Source Types                                  | BSON Destination Types                |
+| --------------------------------------------- | ------------------------------------- |
+| `System.Text.Json.Nodes.JsonObject`           | `BsonDocument`                        |
+| `System.Text.Json.Nodes.JsonArray`            | `BsonArray`                           |
+| `System.Text.Json.JsonElement`                | `BsonDocument`, `BsonArray`, or value |
+| `System.Net.IPNetwork` (.NET 8 or later)      | `String`                              |
+| `Tingle.Extensions.Primitives.Duration`       | `String`                              |
+| `Tingle.Extensions.Primitives.Etag`           | `Int64`, `Binary` or `String`         |
+| `Tingle.Extensions.Primitives.SequenceNumber` | `Int64` or `String`                   |
 
 ## Diagnostics
 

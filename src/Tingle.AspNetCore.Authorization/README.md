@@ -71,7 +71,7 @@ In `appsettings.json`
 
 ```json
 {
-    "AllowedDomains": ["contoso.com", "northwind.com"]
+  "AllowedDomains": ["contoso.com", "northwind.com"]
 }
 ```
 

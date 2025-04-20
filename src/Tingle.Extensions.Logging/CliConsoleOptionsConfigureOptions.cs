@@ -32,7 +32,7 @@ internal sealed class CliConsoleOptionsConfigureOptions(ILoggerProviderConfigura
         SetValue(nameof(options.UseUtcTimestamp), v => options.UseUtcTimestamp = v);
     }
 
-    private void SetValue<T>(string key, Action<T> setter) where T: struct, Enum
+    private void SetValue<T>(string key, Action<T> setter) where T : struct, Enum
     {
         if (Enum.TryParse<T>(configuration[key], ignoreCase: true, out var value)) setter(value);
     }

@@ -43,7 +43,7 @@ The available attributes include:
 |Attribute Name|Description|
 |--|--|
 |E164PhoneAttribute|Validates that the value is formatted as per the [E.164 standard](https://en.wikipedia.org/wiki/E.164).|
-|MsisdnPhoneAttribute|Validates that the value is formatted as per the [MSISDN format](https://en.wikipedia.org/wiki/MSISDN#:~:text=MSISDN%20(pronounced%20as%20%2F'em,a%20mobile%20or%20cellular%20phone.)).|
+|MsisdnPhoneAttribute|Validates that the value is formatted as per the [MSISDN format](<https://en.wikipedia.org/wiki/MSISDN#:~:text=MSISDN%20(pronounced%20as%20%2F'em,a%20mobile%20or%20cellular%20phone.)>).|
 |SafaricomPhoneAttribute|Validates that the value is valid for Safaricom Kenya phone numbers|
 |AirtelPhoneAttribute|Validates that the value is valid for Airtel Kenya phone numbers|
 |TelkomPhoneAttribute|Validates that the value is valid for Telkom Kenya phone numbers|

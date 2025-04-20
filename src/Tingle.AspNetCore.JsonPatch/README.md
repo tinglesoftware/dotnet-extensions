@@ -26,7 +26,7 @@ app.Run();
 
 ## Json Merge Patch
 
- The library helps to deserialize HTTP requests' and responses' JSON body content for merge patch operation. If the merge patch request contains members that appear as null on the target object, those members are added. If the target object contains the member, the value is replaced. Members with null values in the merge patch requests, are removed from the target object (set to null or default).
+The library helps to deserialize HTTP requests' and responses' JSON body content for merge patch operation. If the merge patch request contains members that appear as null on the target object, those members are added. If the target object contains the member, the value is replaced. Members with null values in the merge patch requests, are removed from the target object (set to null or default).
 
 For example, the following JSON documents represent a resource, a JSON Merge Patch document for the resource, and the result of applying the Patch operations.
 
@@ -34,10 +34,10 @@ For example, the following JSON documents represent a resource, a JSON Merge Pat
 
 ```json
 {
-    "id": "1",
-    "name": null,
-    "phone": "+254722000000",
-    "country": "ken"
+  "id": "1",
+  "name": null,
+  "phone": "+254722000000",
+  "country": "ken"
 }
 ```
 
@@ -45,9 +45,9 @@ For example, the following JSON documents represent a resource, a JSON Merge Pat
 
 ```json
 {
-    "name": "Fabrikam",
-    "phone": "+254722000001",
-    "country": null
+  "name": "Fabrikam",
+  "phone": "+254722000001",
+  "country": null
 }
 ```
 
@@ -55,10 +55,10 @@ For example, the following JSON documents represent a resource, a JSON Merge Pat
 
 ```json
 {
-    "id": "1",
-    "name": "Fabrikam",
-    "phone": "+254722000001",
-    "country": null
+  "id": "1",
+  "name": "Fabrikam",
+  "phone": "+254722000001",
+  "country": null
 }
 ```
 

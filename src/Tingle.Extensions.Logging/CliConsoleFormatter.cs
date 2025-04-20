@@ -90,7 +90,7 @@ internal class CliConsoleFormatter : ConsoleFormatter
                     textWriter.Write(span[..charsWritten]);
                 else
 #endif
-                    textWriter.Write(eventId.ToString());
+                textWriter.Write(eventId.ToString());
 
                 textWriter.Write(']');
             }

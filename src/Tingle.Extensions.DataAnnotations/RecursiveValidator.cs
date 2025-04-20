@@ -132,7 +132,7 @@ public static class RecursiveValidator
                                 PropertyInfo property1 = property;
                                 validationResults.Add(new ValidationResult(validationResult.ErrorMessage, validationResult.MemberNames.Select(x => property1.Name + '.' + x)));
                             }
-                        };
+                        }
                     }
                 }
             }
@@ -147,7 +147,7 @@ public static class RecursiveValidator
                         PropertyInfo property1 = property;
                         validationResults.Add(new ValidationResult(validationResult.ErrorMessage, validationResult.MemberNames.Select(x => property1.Name + '.' + x)));
                     }
-                };
+                }
             }
         }
 
