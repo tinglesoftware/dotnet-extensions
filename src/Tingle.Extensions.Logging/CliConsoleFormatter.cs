@@ -2,20 +2,18 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
-
-#nullable disable
+using System.Runtime.CompilerServices;
 
 namespace Tingle.Extensions.Logging;
 
+// We have this because the SimpleConsoleFormatter does not offset follow up lines with the size of the time, log level, and its padding
+// and does not support excluding category and eventId
 internal class CliConsoleFormatter : ConsoleFormatter
 {
-    private const string LoglevelPadding = ": ";
-    //private static readonly string _messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length);
-    //private static readonly string _newLineWithMessagePadding = Environment.NewLine + _messagePadding;
-    private readonly IDisposable _optionsReloadToken;
+    private const string LogLevelPadding = ": ";
+    private readonly IDisposable? _optionsReloadToken;
 
-    public CliConsoleFormatter(IOptionsMonitor<CliConsoleOptions> options)
-        : base("tingle")
+    public CliConsoleFormatter(IOptionsMonitor<CliConsoleOptions> options) : base("cli")
     {
         ReloadLoggerOptions(options.CurrentValue);
         _optionsReloadToken = options.OnChange(ReloadLoggerOptions);
@@ -31,9 +29,9 @@ internal class CliConsoleFormatter : ConsoleFormatter
         _optionsReloadToken?.Dispose();
     }
 
-    internal CliConsoleOptions FormatterOptions { get; set; }
+    internal CliConsoleOptions? FormatterOptions { get; set; }
 
-    public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
+    public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
     {
         string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
         if (logEntry.Exception == null && message == null)
@@ -44,8 +42,8 @@ internal class CliConsoleFormatter : ConsoleFormatter
         ConsoleColors logLevelColors = GetLogLevelConsoleColors(logLevel);
         string logLevelString = GetLogLevelString(logLevel);
 
-        string timestamp = null;
-        string timestampFormat = FormatterOptions.TimestampFormat;
+        var timestamp = (string?)null;
+        var timestampFormat = FormatterOptions?.TimestampFormat;
         if (timestampFormat != null)
         {
             DateTimeOffset dateTimeOffset = GetCurrentDateTime();
@@ -62,20 +60,20 @@ internal class CliConsoleFormatter : ConsoleFormatter
         CreateDefaultLogMessage(textWriter, logEntry, message, scopeProvider);
     }
 
-    private void CreateDefaultLogMessage<TState>(TextWriter textWriter, in LogEntry<TState> logEntry, string message, IExternalScopeProvider scopeProvider)
+    private void CreateDefaultLogMessage<TState>(TextWriter textWriter, in LogEntry<TState> logEntry, string message, IExternalScopeProvider? scopeProvider)
     {
-        bool singleLine = FormatterOptions.SingleLine;
-        bool includeCategory = FormatterOptions.IncludeCategory;
-        bool includeEventId = FormatterOptions.IncludeEventId;
+        bool singleLine = FormatterOptions?.SingleLine ?? false;
+        bool includeCategory = FormatterOptions?.IncludeCategory ?? false;
+        bool includeEventId = FormatterOptions?.IncludeEventId ?? false;
         int eventId = logEntry.EventId.Id;
-        Exception exception = logEntry.Exception;
+        var exception = logEntry.Exception;
 
         // Example:
         // info: ConsoleApp.Program[10]
         //       Request received
 
         // category and event id
-        textWriter.Write(LoglevelPadding);
+        textWriter.Write(LogLevelPadding);
         if (includeCategory)
         {
             textWriter.Write(logEntry.Category);
@@ -145,7 +143,7 @@ internal class CliConsoleFormatter : ConsoleFormatter
 
     private DateTimeOffset GetCurrentDateTime()
     {
-        return FormatterOptions.UseUtcTimestamp ? DateTimeOffset.UtcNow : DateTimeOffset.Now;
+        return FormatterOptions?.UseUtcTimestamp ?? false ? DateTimeOffset.UtcNow : DateTimeOffset.Now;
     }
 
     private static string GetLogLevelString(LogLevel logLevel)
@@ -164,8 +162,8 @@ internal class CliConsoleFormatter : ConsoleFormatter
 
     private ConsoleColors GetLogLevelConsoleColors(LogLevel logLevel)
     {
-        bool disableColors = FormatterOptions.ColorBehavior == LoggerColorBehavior.Disabled ||
-            FormatterOptions.ColorBehavior == LoggerColorBehavior.Default && Console.IsOutputRedirected;
+        bool disableColors = FormatterOptions?.ColorBehavior == LoggerColorBehavior.Disabled ||
+            FormatterOptions?.ColorBehavior == LoggerColorBehavior.Default && Console.IsOutputRedirected;
         if (disableColors)
         {
             return new ConsoleColors(null, null);
@@ -184,12 +182,12 @@ internal class CliConsoleFormatter : ConsoleFormatter
         };
     }
 
-    private void WriteScopeInformation(TextWriter textWriter, IExternalScopeProvider scopeProvider, bool singleLine, MessagePaddings paddings)
+    private void WriteScopeInformation(TextWriter textWriter, IExternalScopeProvider? scopeProvider, bool singleLine, MessagePaddings paddings)
     {
-        if (FormatterOptions.IncludeScopes && scopeProvider != null)
+        if (FormatterOptions?.IncludeScopes ?? false && scopeProvider != null)
         {
             bool paddingNeeded = !singleLine;
-            scopeProvider.ForEachScope((scope, state) =>
+            scopeProvider?.ForEachScope((scope, state) =>
             {
                 if (paddingNeeded)
                 {
@@ -223,17 +221,17 @@ internal class CliConsoleFormatter : ConsoleFormatter
         public string MessagePadding { get; } = messagePadding;
         public string NewLineWithMessagePadding { get; } = newLineWithMessagePadding;
 
-        public static MessagePaddings Create(CliConsoleOptions options)
+        public static MessagePaddings Create(CliConsoleOptions? options)
         {
             string messagePadding, newLineWithMessagePadding;
-            var timestampFormat = options.TimestampFormat;
+            var timestampFormat = options?.TimestampFormat;
             if (timestampFormat is not null)
             {
-                messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length + timestampFormat.Length);
+                messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + LogLevelPadding.Length + timestampFormat.Length);
             }
             else
             {
-                messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + LoglevelPadding.Length);
+                messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + LogLevelPadding.Length);
             }
 
             newLineWithMessagePadding = Environment.NewLine + messagePadding;

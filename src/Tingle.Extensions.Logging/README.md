@@ -40,6 +40,7 @@ Now you can configure the `cli` formatter as:
       "FormatterOptions": {
         "SingleLine": true,
         "IncludeScopes": false,
+        "IncludeCategory": false,
         "IncludeEventId": false,
         "TimestampFormat": "yyyy-MM-dd HH:mm:ss "
       }
@@ -50,14 +51,23 @@ Now you can configure the `cli` formatter as:
 
 ```cs
 var builder = Host.CreateApplicationBuilder();
-builder.Logging.AddCliConsole();
+builder.Logging.AddCliConsole(); // pulls from config
+
+// // or without config
+// builder.Logging.AddCliConsole(options =>
+// {
+//   options.SingleLine = true;
+//   options.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+// });
 ```
 
 The output would be:
 
 ```txt
 2025-04-20 13:19:11 info:  Start processing HTTP request GET https://api64.ipify.org/?*
-2025-04-20 13:19:11 info: Sending HTTP request GET https://api64.ipify.org/?*
-2025-04-20 13:19:12 info: Received HTTP response headers after 553.3962ms - 200
-2025-04-20 13:19:12 info: End processing HTTP request after 568.9045ms - 200
+2025-04-20 13:19:11 info:  Sending HTTP request GET https://api64.ipify.org/?*
+2025-04-20 13:19:12 info:  Received HTTP response headers after 553.3962ms - 200
+2025-04-20 13:19:12 info:  End processing HTTP request after 568.9045ms - 200
 ```
+
+See [sample](./samples/LoggingSample).
