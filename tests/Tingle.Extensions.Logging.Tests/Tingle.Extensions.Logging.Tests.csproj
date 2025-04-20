@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Tingle.Extensions.Logging\Tingle.Extensions.Logging.csproj" />
+  </ItemGroup>
+
+</Project>
