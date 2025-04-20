@@ -15,7 +15,8 @@ updates:
       microsoft:
         patterns: ['Microsoft*']
         exclude-patterns:
-          - 'Microsoft.IdentityModel.Protocols.OpenIdConnect'
+          - 'Microsoft.IdentityModel.Protocols.OpenIdConnect' # different team and cycle
+          - 'Microsoft.AspNetCore.OpenApi*' # TODO: remove once fixed in the preview
       system:
         patterns: ['System*']
       xunit:
@@ -34,8 +35,6 @@ updates:
         update-types: ['version-update:semver-major']
       - dependency-name: 'Microsoft.Extensions.Hosting.Abstractions'
         update-types: ['version-update:semver-major']
-      # TODO: remove this once previews are stable
-      - dependency-name: 'Microsoft.AspNetCore.OpenApi*'
 
   - package-ecosystem: 'dotnet-sdk'
     directory: '/'
