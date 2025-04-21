@@ -1,0 +1,62 @@
+<Solution>
+  <Folder Name="/generator/">
+    <Project Path="generator/StaticDataGenerator.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <File Path="samples/Directory.Build.props" />
+    <Project Path="samples/AspNetCoreSessionState/AspNetCoreSessionState.csproj" />
+    <Project Path="samples/AuthenticationSample/AuthenticationSample.csproj" />
+    <Project Path="samples/AuthorizationSample/AuthorizationSample.csproj" />
+    <Project Path="samples/DataProtectionMongoDBSample/DataProtectionMongoDBSample.csproj" />
+    <Project Path="samples/HttpAuthenticationSample/HttpAuthenticationSample.csproj" />
+    <Project Path="samples/LoggingSample/LoggingSample.csproj" />
+    <Project Path="samples/MongoDBSample/MongoDBSample.csproj" />
+    <Project Path="samples/TokensSample/TokensSample.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/Tingle.AspNetCore.Authentication/Tingle.AspNetCore.Authentication.csproj" />
+    <Project Path="src/Tingle.AspNetCore.Authorization/Tingle.AspNetCore.Authorization.csproj" />
+    <Project Path="src/Tingle.AspNetCore.DataProtection.MongoDB/Tingle.AspNetCore.DataProtection.MongoDB.csproj" />
+    <Project Path="src/Tingle.AspNetCore.JsonPatch.NewtonsoftJson/Tingle.AspNetCore.JsonPatch.NewtonsoftJson.csproj" />
+    <Project Path="src/Tingle.AspNetCore.JsonPatch/Tingle.AspNetCore.JsonPatch.csproj" />
+    <Project Path="src/Tingle.AspNetCore.OpenApi/Tingle.AspNetCore.OpenApi.csproj" />
+    <Project Path="src/Tingle.AspNetCore.Tokens/Tingle.AspNetCore.Tokens.csproj" />
+    <Project Path="src/Tingle.Extensions.Caching.MongoDB/Tingle.Extensions.Caching.MongoDB.csproj" />
+    <Project Path="src/Tingle.Extensions.DataAnnotations/Tingle.Extensions.DataAnnotations.csproj" />
+    <Project Path="src/Tingle.Extensions.EntityFrameworkCore/Tingle.Extensions.EntityFrameworkCore.csproj" />
+    <Project Path="src/Tingle.Extensions.Http.Authentication/Tingle.Extensions.Http.Authentication.csproj" />
+    <Project Path="src/Tingle.Extensions.Http/Tingle.Extensions.Http.csproj" />
+    <Project Path="src/Tingle.Extensions.JsonPatch/Tingle.Extensions.JsonPatch.csproj" />
+    <Project Path="src/Tingle.Extensions.Logging/Tingle.Extensions.Logging.csproj" />
+    <Project Path="src/Tingle.Extensions.MongoDB/Tingle.Extensions.MongoDB.csproj" />
+    <Project Path="src/Tingle.Extensions.Mustache/Tingle.Extensions.Mustache.csproj" />
+    <Project Path="src/Tingle.Extensions.PhoneValidators/Tingle.Extensions.PhoneValidators.csproj" />
+    <Project Path="src/Tingle.Extensions.Primitives/Tingle.Extensions.Primitives.csproj" />
+    <Project Path="src/Tingle.Extensions.Processing/Tingle.Extensions.Processing.csproj" />
+    <Project Path="src/Tingle.Extensions.PushNotifications/Tingle.Extensions.PushNotifications.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/Tingle.AspNetCore.Authentication.Tests/Tingle.AspNetCore.Authentication.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.Authorization.Tests/Tingle.AspNetCore.Authorization.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.DataProtection.MongoDB.Tests/Tingle.AspNetCore.DataProtection.MongoDB.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.JsonPatch.NewtonsoftJson.Tests/Tingle.AspNetCore.JsonPatch.NewtonsoftJson.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.JsonPatch.Tests/Tingle.AspNetCore.JsonPatch.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.OpenApi.Tests/Tingle.AspNetCore.OpenApi.Tests.csproj" />
+    <Project Path="tests/Tingle.AspNetCore.Tokens.Tests/Tingle.AspNetCore.Tokens.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Caching.MongoDB.Tests/Tingle.Extensions.Caching.MongoDB.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.DataAnnotations.Tests/Tingle.Extensions.DataAnnotations.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.EntityFrameworkCore.Tests/Tingle.Extensions.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Http.Authentication.Tests/Tingle.Extensions.Http.Authentication.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Http.Tests/Tingle.Extensions.Http.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.JsonPatch.Tests/Tingle.Extensions.JsonPatch.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Logging.Tests/Tingle.Extensions.Logging.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.MongoDB.Tests/Tingle.Extensions.MongoDB.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Mustache.Tests/Tingle.Extensions.Mustache.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.PhoneValidators.Tests/Tingle.Extensions.PhoneValidators.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Primitives.Tests/Tingle.Extensions.Primitives.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.Processing.Tests/Tingle.Extensions.Processing.Tests.csproj" />
+    <Project Path="tests/Tingle.Extensions.PushNotifications.Tests/Tingle.Extensions.PushNotifications.Tests.csproj" />
+  </Folder>
+</Solution>
