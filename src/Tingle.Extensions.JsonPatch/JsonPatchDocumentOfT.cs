@@ -843,9 +843,7 @@ public class JsonPatchDocument<[DynamicallyAccessedMembers(DynamicallyAccessedMe
 
     private static string GetPropertyNameFromMemberExpression(MemberExpression memberExpression)
     {
-#pragma warning disable IL2075 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
         var propertyInfo = memberExpression.Expression!.Type.GetProperty(memberExpression.Member.Name);
-#pragma warning restore IL2075 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
         var targetAttr = propertyInfo?.GetCustomAttributes(typeof(JsonPropertyNameAttribute), false)
                                       .OfType<JsonPropertyNameAttribute>()
                                       .FirstOrDefault();

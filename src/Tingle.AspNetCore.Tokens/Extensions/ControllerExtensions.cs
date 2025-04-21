@@ -91,6 +91,8 @@ public static class ControllerExtensions
     /// <param name="token">the token containing the value</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
     /// <param name="headerName">the name of the header to write the protected token</param>
+    [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     public static ContinuationTokenResult<T> Ok<T>(this ControllerBase controller,
                                                    [ActionResultObjectValue] object value,
                                                    ContinuationToken<T> token,
@@ -109,6 +111,8 @@ public static class ControllerExtensions
     /// <param name="tokenValue">the token's value</param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
     /// <param name="headerName">the name of the header to write the protected token</param>
+    [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     public static ContinuationTokenResult<T> Ok<T>(this ControllerBase controller,
                                                    [ActionResultObjectValue] object value,
                                                    T tokenValue,
@@ -133,6 +137,8 @@ public static class ControllerExtensions
     /// <param name="expiration"></param>
     /// <param name="jsonTypeInfo">Metadata about the type to convert.</param>
     /// <param name="headerName">the name of the header to write the protected token</param>
+    [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     public static ContinuationTokenResult<T> Ok<T>(this ControllerBase controller,
                                                    [ActionResultObjectValue] object value,
                                                    T tokenValue,
