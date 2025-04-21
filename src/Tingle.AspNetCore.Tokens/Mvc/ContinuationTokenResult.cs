@@ -12,6 +12,8 @@ namespace Microsoft.AspNetCore.Mvc;
 /// An <see cref="OkObjectResult"/> that supports writing the continuation token to a header before writing the response body
 /// </summary>
 /// <typeparam name="T">The type of data contained</typeparam>
+[RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
+[RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
 public class ContinuationTokenResult<T> : OkObjectResult
 {
     private readonly ContinuationToken<T> token;
@@ -23,8 +25,6 @@ public class ContinuationTokenResult<T> : OkObjectResult
     /// <param name="token">the token containing the value</param>
     /// <param name="serializerOptions">Options to control the behavior during parsing.</param>
     /// <param name="headerName">the name of the header to write the protected token</param>
-    [RequiresUnreferencedCode(MessageStrings.SerializationUnreferencedCodeMessage)]
-    [RequiresDynamicCode(MessageStrings.SerializationRequiresDynamicCodeMessage)]
     public ContinuationTokenResult([ActionResultObjectValue] object value,
                                    ContinuationToken<T> token,
                                    JsonSerializerOptions? serializerOptions = null,
@@ -63,8 +63,6 @@ public class ContinuationTokenResult<T> : OkObjectResult
             // get an instance of the protector
             var protector = context.HttpContext.RequestServices.GetRequiredService<ITokenProtector<T>>();
 
-#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
-#pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
             // generate a new protected value based on the type of token
             string protected_val;
             var value = token.GetValue();
@@ -86,7 +84,5 @@ public class ContinuationTokenResult<T> : OkObjectResult
             if (!string.IsNullOrWhiteSpace(protected_val))
                 context.HttpContext.Response.Headers[headerName] = protected_val;
         }
-#pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
-#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Nodes;
 
 #pragma warning disable CS8603 // Possible null reference return.
@@ -17,6 +18,8 @@ public class JsonNodeConverter : ValueConverter<JsonNode, string>
 }
 
 ///
+[RequiresDynamicCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
+[RequiresUnreferencedCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
 public class JsonNodeComparer : ValueComparer<JsonNode>
 {
     ///

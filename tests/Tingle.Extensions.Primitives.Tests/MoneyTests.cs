@@ -158,9 +158,7 @@ public class MoneyTests
     [Fact]
     public void Parse_ThrowsExeception_For_Null()
     {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-        Assert.Throws<ArgumentNullException>(() => Money.Parse(null));
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+        Assert.Throws<ArgumentNullException>(() => Money.Parse(null!));
     }
 
     [Fact]

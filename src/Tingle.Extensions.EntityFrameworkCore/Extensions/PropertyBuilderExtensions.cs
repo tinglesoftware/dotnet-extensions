@@ -174,6 +174,8 @@ public static class PropertyBuilderExtensions
     /// </summary>
     /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
     /// <returns></returns>
+    [RequiresDynamicCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
+    [RequiresUnreferencedCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
     public static PropertyBuilder<JsonObject> HasJsonObjectConversion(this PropertyBuilder<JsonObject> propertyBuilder)
     {
         ArgumentNullException.ThrowIfNull(propertyBuilder);
@@ -189,6 +191,8 @@ public static class PropertyBuilderExtensions
     /// </summary>
     /// <param name="propertyBuilder">The <see cref="PropertyBuilder{TProperty}"/> to extend.</param>
     /// <returns></returns>
+    [RequiresDynamicCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
+    [RequiresUnreferencedCode(MessageStrings.JsonComparisonRequiresDynamicCodeMessage)]
     public static PropertyBuilder<JsonNode> HasJsonNodeConversion(this PropertyBuilder<JsonNode> propertyBuilder)
     {
         ArgumentNullException.ThrowIfNull(propertyBuilder);

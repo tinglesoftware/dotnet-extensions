@@ -43,6 +43,9 @@ public class JsonStringEnumMemberConverter<[DynamicallyAccessedMembers(EnumConve
 [RequiresDynamicCode(
     "JsonStringEnumMemberConverter cannot be statically analyzed and requires runtime code generation. " +
     "Applications should use the generic JsonStringEnumMemberConverter<TEnum> instead")]
+[RequiresUnreferencedCode(
+    "JsonStringEnumMemberConverter cannot be statically analyzed and requires runtime code generation. " +
+    "Applications should use the generic JsonStringEnumMemberConverter<TEnum> instead")]
 public class JsonStringEnumMemberConverter(JsonNamingPolicy? namingPolicy = null, bool allowIntegerValues = true) : JsonConverterFactory
 {
     private readonly JsonNamingPolicy? namingPolicy = namingPolicy;
@@ -57,14 +60,12 @@ public class JsonStringEnumMemberConverter(JsonNamingPolicy? namingPolicy = null
     /// <inheritdoc/>
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-#pragma warning disable IL2070 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The parameter of method does not have matching annotations.
         return (JsonConverter?)Activator.CreateInstance(
                 typeof(EnumMemberConverter<>).MakeGenericType(typeToConvert),
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
                 args: [namingPolicy, allowIntegerValues],
                 culture: null);
-#pragma warning restore IL2070 // 'this' argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The parameter of method does not have matching annotations.
     }
 }
 
