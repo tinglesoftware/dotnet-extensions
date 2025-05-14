@@ -142,5 +142,5 @@ public class ConnectionStringBuilderTests
         ],
     ];
 
-    public static readonly IEnumerable<object[]> ConverterTestDataReverse = ConverterTestData.Select(t => t.Reverse().ToArray()).ToList();
+    public static readonly IEnumerable<object[]> ConverterTestDataReverse = [.. ConverterTestData.Select(t => t.Reverse().ToArray())];
 }

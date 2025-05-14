@@ -195,7 +195,7 @@ internal partial class TemplateTokenizer
                 return new { scope = value, location = HumanizeLocation(k.Item2, ref lines) };
             });
 
-            unclosedScopes = unclosedScopes.Reverse().ToArray();
+            unclosedScopes = [.. unclosedScopes.Reverse()];
 
             foreach (var unclosed in unclosedScopes)
             {

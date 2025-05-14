@@ -267,5 +267,5 @@ public class DurationTests
         ["PT10M", Duration.FromMinutes(10)],
     ];
 
-    public static readonly IEnumerable<object[]> ConverterTestDataReverse = ConverterTestData.Select(t => t.Reverse().ToArray()).ToList();
+    public static readonly IEnumerable<object[]> ConverterTestDataReverse = [.. ConverterTestData.Select(t => t.Reverse().ToArray())];
 }
