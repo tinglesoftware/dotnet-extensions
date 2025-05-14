@@ -13,6 +13,7 @@ public class ReDocLogoDocumentTransformer(OpenApiReDocLogo logo) : IOpenApiDocum
     /// <inheritdoc/>
     public Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context, CancellationToken cancellationToken)
     {
+        document.Info.Extensions ??= [];
         document.Info.Extensions["x-logo"] = logo;
         return Task.CompletedTask;
     }

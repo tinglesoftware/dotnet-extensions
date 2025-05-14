@@ -30,8 +30,7 @@ public class OpenApiTagGroup
     {
         Name = name ?? throw new ArgumentNullException(nameof(name));
         Description = description;
-        Tags = tags.Select(m => new OpenApiReference { Id = m, Type = ReferenceType.Tag, })
-                   .ToList();
+        Tags = [.. tags.Select(m => new OpenApiReference { Id = m, Type = ReferenceType.Tag, })];
         Internal = @internal;
     }
 

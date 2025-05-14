@@ -33,7 +33,7 @@ public class ErrorCodesDocumentTransformer(IDictionary<string, string> descripti
             ["description"] = desc.Value,
         })]);
 
-        document.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
+        document.Extensions ??= [];
         document.Extensions[ExtensionName] = new OpenApiAny(ext);
 
         return Task.CompletedTask;

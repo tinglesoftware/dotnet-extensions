@@ -48,7 +48,7 @@ public class ErrorCodesOperationTransformer : IOpenApiOperationTransformer
 
         var ext = new System.Text.Json.Nodes.JsonArray([.. uniqueErrorCodes.Select(code => code)]);
 
-        operation.Extensions ??= new Dictionary<string, Microsoft.OpenApi.Interfaces.IOpenApiExtension>();
+        operation.Extensions ??= [];
         operation.Extensions[ErrorCodesDocumentTransformer.ExtensionName] = new OpenApiAny(ext);
 
         return Task.CompletedTask;
