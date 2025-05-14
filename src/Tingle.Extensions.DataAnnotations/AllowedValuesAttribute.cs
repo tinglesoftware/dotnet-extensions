@@ -35,7 +35,7 @@ public class AllowedValuesAttribute(IEnumerable<object> allowedValues) : Validat
         // if the value is an enumerable, create values from each, otherwise its just the value
         var values = value is not string && value is IEnumerable ie
             ? ie.Cast<object>().ToList()
-            : new List<object> { value };
+            : [value];
 
         // find the values not allowed
         var unknown = values.Where(o => !allowedValues.Contains(o, comparer: Comparer))

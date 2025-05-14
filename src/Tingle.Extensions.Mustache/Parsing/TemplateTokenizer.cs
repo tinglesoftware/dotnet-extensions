@@ -276,7 +276,7 @@ internal partial class TemplateTokenizer
 
     private CharacterLocation HumanizeLocation(int characterIndex, ref int[]? lines)
     {
-        lines ??= GetNewlineFinder().Matches(template).OfType<Match>().Select(k => k.Index).ToArray();
+        lines ??= [.. GetNewlineFinder().Matches(template).OfType<Match>().Select(k => k.Index)];
 
         var line = Array.BinarySearch(lines, characterIndex);
         line = line < 0 ? ~line : line;

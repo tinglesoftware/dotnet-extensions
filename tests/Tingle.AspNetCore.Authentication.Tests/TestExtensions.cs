@@ -27,7 +27,7 @@ public static class TestExtensions
         };
         if (transaction.Response.Headers.Contains("Set-Cookie"))
         {
-            transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie").ToList();
+            transaction.SetCookie = [.. transaction.Response.Headers.GetValues("Set-Cookie")];
         }
         transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
 

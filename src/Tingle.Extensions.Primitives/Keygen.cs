@@ -80,7 +80,7 @@ public static class Keygen
         {
             OutputFormat.Base64 => Convert.FromBase64String(key),
             OutputFormat.Base62 => key.FromBase62(),
-            OutputFormat.Hex => key.Chunk(2).Select(b => Convert.ToByte(new string(b), 16)).ToArray(),
+            OutputFormat.Hex => [.. key.Chunk(2).Select(b => Convert.ToByte(new string(b), 16))],
             _ => throw new ArgumentException("Invalid format", nameof(format)),
         };
     }

@@ -277,7 +277,7 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
     private static Currency ExtractCurrencyFromString(string value, out string repaired)
     {
         repaired = value;
-        var extracted = new string(value.ToCharArray().Where(IsNotNumericCharacter()).ToArray());
+        var extracted = new string([.. value.ToCharArray().Where(IsNotNumericCharacter())]);
 
         var current = Currency.CurrentCurrency;
         if (current is not null && extracted.Length == 0) return current;
@@ -300,7 +300,7 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
         currency = default;
         if (string.IsNullOrWhiteSpace(value)) return false;
 
-        var extracted = new string(value.ToCharArray().Where(IsNotNumericCharacter()).ToArray());
+        var extracted = new string([.. value.ToCharArray().Where(IsNotNumericCharacter())]);
         if (extracted.Length == 0) return false;
 
         var matching = Currency.All.Where(c => c.Symbol == extracted || c.Code == extracted).ToList();
