@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.6" />
   </ItemGroup>
 
 </Project>
