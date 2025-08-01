@@ -58,7 +58,11 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
         if (response.IsSuccessStatusCode)
         {
             // get a stream reference for the content and copy its contents to the destination
+#if NET5_0_OR_GREATER
             using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+#else
+            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+#endif
             await stream.CopyToAsync(destination, bufferSize: bufferSize, cancellationToken).ConfigureAwait(false);
             stream.Seek(0, SeekOrigin.Begin);
         }
@@ -92,7 +96,11 @@ public abstract class AbstractHttpApiClient<TOptions> where TOptions : AbstractH
         if (response.IsSuccessStatusCode)
         {
             // get a stream reference for the content and copy its contents to the destination
+#if NET5_0_OR_GREATER
             using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+#else
+            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+#endif
             await stream.CopyToAsync(destination, bufferSize: bufferSize, cancellationToken).ConfigureAwait(false);
             stream.Seek(0, SeekOrigin.Begin);
         }
