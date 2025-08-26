@@ -1,7 +1,6 @@
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace Tingle.AspNetCore.OpenApi.Transformers.Documents;
 
@@ -33,8 +32,8 @@ public class ErrorCodesDocumentTransformer(IDictionary<string, string> descripti
             ["description"] = desc.Value,
         })]);
 
-        document.Extensions ??= [];
-        document.Extensions[ExtensionName] = new OpenApiAny(ext);
+        document.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+        document.Extensions[ExtensionName] = new JsonNodeExtension(ext);
 
         return Task.CompletedTask;
     }

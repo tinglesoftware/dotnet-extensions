@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace Tingle.AspNetCore.OpenApi.Transformers.Documents;
 
@@ -13,7 +13,7 @@ public class ReDocLogoDocumentTransformer(OpenApiReDocLogo logo) : IOpenApiDocum
     /// <inheritdoc/>
     public Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context, CancellationToken cancellationToken)
     {
-        document.Info.Extensions ??= [];
+        document.Info.Extensions ??= new Dictionary<string, IOpenApiExtension>();
         document.Info.Extensions["x-logo"] = logo;
         return Task.CompletedTask;
     }

@@ -1,7 +1,4 @@
 ﻿using Microsoft.OpenApi;
-using Microsoft.OpenApi.Interfaces;
-using Microsoft.OpenApi.Models;
-using Microsoft.OpenApi.Writers;
 
 namespace Tingle.AspNetCore.OpenApi;
 

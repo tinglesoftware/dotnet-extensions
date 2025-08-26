@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Tingle.AspNetCore.OpenApi.Transformers.Documents;
 
 namespace Tingle.AspNetCore.OpenApi.Transformers.Operations;
@@ -48,8 +47,8 @@ public class ErrorCodesOperationTransformer : IOpenApiOperationTransformer
 
         var ext = new System.Text.Json.Nodes.JsonArray([.. uniqueErrorCodes.Select(code => code)]);
 
-        operation.Extensions ??= [];
-        operation.Extensions[ErrorCodesDocumentTransformer.ExtensionName] = new OpenApiAny(ext);
+        operation.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+        operation.Extensions[ErrorCodesDocumentTransformer.ExtensionName] = new JsonNodeExtension(ext);
 
         return Task.CompletedTask;
     }

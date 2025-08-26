@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Tingle.AspNetCore.OpenApi.Transformers.Operations;
@@ -21,8 +20,8 @@ public class InternalOnlySchemaTransformer : IOpenApiSchemaTransformer
         if (attr is null) return Task.CompletedTask;
 
         // At this point, the API is internal only, so just set the extension value
-        schema.Extensions ??= [];
-        schema.Extensions[InternalOnlyOperationTransformer.ExtensionName] = new OpenApiAny(true);
+        schema.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+        schema.Extensions[InternalOnlyOperationTransformer.ExtensionName] = new JsonNodeExtension(true);
 
         return Task.CompletedTask;
     }

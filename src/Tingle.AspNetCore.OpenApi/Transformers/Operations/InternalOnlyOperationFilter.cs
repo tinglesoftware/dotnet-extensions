@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -33,8 +32,8 @@ public class InternalOnlyOperationTransformer : IOpenApiOperationTransformer
         if (attr is null) return Task.CompletedTask;
 
         // At this point, the API is internal only, so just set the extension value
-        operation.Extensions ??= [];
-        operation.Extensions[ExtensionName] = new OpenApiAny(true);
+        operation.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+        operation.Extensions[ExtensionName] = new JsonNodeExtension(true);
 
         return Task.CompletedTask;
     }
