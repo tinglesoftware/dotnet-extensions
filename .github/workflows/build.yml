@@ -49,12 +49,12 @@ jobs:
 
       # this step only exists because we still reference 9.x but some projects have moved to 10 preview
       - name: Setup .NET 9 SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '9.x'
 
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
 
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v4
@@ -110,7 +110,7 @@ jobs:
       # TODO: remove support for Azure Artifacts once we have migrated all packages to GitHub Packages
       - name: Setup .NET Private feed
         if: ${{ (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags')) }}
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           source-url: 'https://pkgs.dev.azure.com/tingle/_packaging/tingle/nuget/v3/index.json'
         env:
