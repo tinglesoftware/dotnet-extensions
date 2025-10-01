@@ -26,13 +26,13 @@ public class ContinentTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData =
-    [
-        ["Africa", new Continent("Africa")],
-        ["Europe", new Continent("Europe")],
-        ["Australia", new Continent("Australia")],
-        ["Americas", new Continent("Americas")],
-    ];
+    public static readonly TheoryData<string, Continent> ConverterTestData = new()
+    {
+        { "Africa", new Continent("Africa") },
+        { "Europe", new Continent("Europe") },
+        { "Australia", new Continent("Australia") },
+        { "Americas", new Continent("Americas") },
+    };
 
     [Fact]
     public void JsonConverter_Works()

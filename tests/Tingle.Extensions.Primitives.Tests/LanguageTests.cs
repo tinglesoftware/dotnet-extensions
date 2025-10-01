@@ -77,11 +77,11 @@ public class LanguageTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData =
-    [
-        ["eng", Language.FromCode("eng")],
-        ["swa", Language.FromCode("swa")],
-    ];
+    public static readonly TheoryData<string, Language> ConverterTestData = new()
+    {
+        { "eng", Language.FromCode("eng") },
+        { "swa", Language.FromCode("swa") },
+    };
 
     [Fact]
     public void JsonConverter_Works()

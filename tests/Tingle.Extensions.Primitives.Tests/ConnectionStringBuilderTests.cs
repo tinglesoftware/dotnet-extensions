@@ -128,19 +128,27 @@ public class ConnectionStringBuilderTests
         public ConnectionStringBuilder Value { get; set; }
     }
 
-
-    public static readonly IEnumerable<object[]> ConverterTestData =
-    [
-        [
+    public static TheoryData<string, ConnectionStringBuilder> ConverterTestData => new()
+    {
+        {
             "Hostname=contoso.com;Scheme=https;Key=abcd",
             new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpsScheme().WithKey("abcd")
-        ],
-
-        [
+        },
+        {
             "Hostname=contoso.com;Scheme=http;Key=123456",
             new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpScheme().WithKey("123456")
-        ],
-    ];
+        }
+    };
 
-    public static readonly IEnumerable<object[]> ConverterTestDataReverse = [.. ConverterTestData.Select(t => t.Reverse().ToArray())];
+    public static TheoryData<ConnectionStringBuilder, string> ConverterTestDataReverse => new()
+    {
+        {
+            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpsScheme().WithKey("abcd"),
+            "Hostname=contoso.com;Scheme=https;Key=abcd"
+        },
+        {
+            new ConnectionStringBuilder("").WithHostname("contoso.com").WithHttpScheme().WithKey("123456"),
+            "Hostname=contoso.com;Scheme=http;Key=123456"
+        }
+    };
 }

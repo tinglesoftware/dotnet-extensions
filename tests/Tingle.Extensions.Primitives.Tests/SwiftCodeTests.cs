@@ -115,12 +115,13 @@ public class SwiftCodeTests
         Assert.Equal(expected, actual);
     }
 
-    public static readonly IEnumerable<object[]> ConverterTestData =
-    [
-        ["KCBLKENXXXX", SwiftCode.Parse("KCBLKENXXXX")],
-        ["IMBLKENAXXX", SwiftCode.Parse("IMBLKENAXXX")],
-        ["PMFAUS66HKG", SwiftCode.Parse("PMFAUS66HKG")],
-    ];
+    public static TheoryData<string, SwiftCode> ConverterTestData =>
+        new()
+        {
+            { "KCBLKENXXXX", SwiftCode.Parse("KCBLKENXXXX") },
+            { "IMBLKENAXXX", SwiftCode.Parse("IMBLKENAXXX") },
+            { "PMFAUS66HKG", SwiftCode.Parse("PMFAUS66HKG") },
+        };
 
     [Fact]
     public void JsonConverter_Works()

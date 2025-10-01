@@ -258,14 +258,19 @@ public class DurationTests
         public Duration Duration { get; set; }
     }
 
+    public static TheoryData<string, Duration> ConverterTestData => new()
+    {
+        { "P3M", Duration.FromMonths(3) },
+        { "P5D", Duration.FromDays(5) },
+        { "P3M5D", new Duration(0, months: 3, 0, days: 5) },
+        { "PT10M", Duration.FromMinutes(10) }
+    };
 
-    public static readonly IEnumerable<object[]> ConverterTestData =
-    [
-        ["P3M", Duration.FromMonths(3)],
-        ["P5D", Duration.FromDays(5)],
-        ["P3M5D", new Duration(0, months: 3, 0, days: 5)],
-        ["PT10M", Duration.FromMinutes(10)],
-    ];
-
-    public static readonly IEnumerable<object[]> ConverterTestDataReverse = [.. ConverterTestData.Select(t => t.Reverse().ToArray())];
+    public static TheoryData<Duration, string> ConverterTestDataReverse => new()
+    {
+        { Duration.FromMonths(3), "P3M" },
+        { Duration.FromDays(5), "P5D" },
+        { new Duration(0, months: 3, 0, days: 5), "P3M5D" },
+        { Duration.FromMinutes(10), "PT10M" }
+    };
 }
