@@ -95,20 +95,16 @@ public class CurrencyTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, Currency expected)
+    [InlineData("KES")]
+    [InlineData("USD")]
+    public void TypeConverter_ConvertsFromString(string input)
     {
+        var expected = Currency.FromCode(input);
         var converter = TypeDescriptor.GetConverter(typeof(Currency));
         Assert.NotNull(converter);
         var actual = Assert.IsType<Currency>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static TheoryData<string, Currency> ConverterTestData => new()
-    {
-        { "KES", Currency.FromCode("KES") },
-        { "USD", Currency.FromCode("USD") },
-    };
 
     [Fact]
     public void JsonConverter_Works()

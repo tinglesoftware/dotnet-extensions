@@ -17,22 +17,18 @@ public class ContinentTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, Continent expected)
+    [InlineData("Africa")]
+    [InlineData("Europe")]
+    [InlineData("Australia")]
+    [InlineData("Americas")]
+    public void TypeConverter_ConvertsFromString(string input)
     {
+        var expected = new Continent(input);
         var converter = TypeDescriptor.GetConverter(typeof(Continent));
         Assert.NotNull(converter);
         var actual = Assert.IsType<Continent>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static readonly TheoryData<string, Continent> ConverterTestData = new()
-    {
-        { "Africa", new Continent("Africa") },
-        { "Europe", new Continent("Europe") },
-        { "Australia", new Continent("Australia") },
-        { "Americas", new Continent("Americas") },
-    };
 
     [Fact]
     public void JsonConverter_Works()

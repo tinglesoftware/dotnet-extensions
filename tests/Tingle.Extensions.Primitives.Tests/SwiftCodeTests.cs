@@ -106,22 +106,17 @@ public class SwiftCodeTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, SwiftCode expected)
+    [InlineData("KCBLKENXXXX")]
+    [InlineData("IMBLKENAXXX")]
+    [InlineData("PMFAUS66HKG")]
+    public void TypeConverter_ConvertsFromString(string input)
     {
+        var expected = SwiftCode.Parse(input);
         var converter = TypeDescriptor.GetConverter(typeof(SwiftCode));
         Assert.NotNull(converter);
         var actual = Assert.IsType<SwiftCode>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static TheoryData<string, SwiftCode> ConverterTestData =>
-        new()
-        {
-            { "KCBLKENXXXX", SwiftCode.Parse("KCBLKENXXXX") },
-            { "IMBLKENAXXX", SwiftCode.Parse("IMBLKENAXXX") },
-            { "PMFAUS66HKG", SwiftCode.Parse("PMFAUS66HKG") },
-        };
 
     [Fact]
     public void JsonConverter_Works()

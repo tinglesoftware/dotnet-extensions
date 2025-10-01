@@ -158,20 +158,16 @@ public class KsuidTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, Ksuid expected)
+    [InlineData("0o5Fs0EELR0fUjHjbCnEtdUwQe3")]
+    [InlineData("05A95E21D7B6FE8CD7CFF211704D8E7B9421210B")]
+    public void TypeConverter_ConvertsFromString(string input)
     {
+        var expected = Ksuid.Parse(input);
         var converter = TypeDescriptor.GetConverter(typeof(Ksuid));
         Assert.NotNull(converter);
         var actual = Assert.IsType<Ksuid>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static readonly TheoryData<string, Ksuid> ConverterTestData = new()
-    {
-        { "0o5Fs0EELR0fUjHjbCnEtdUwQe3", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3") },
-        { "05A95E21D7B6FE8CD7CFF211704D8E7B9421210B", Ksuid.Parse("0o5Fs0EELR0fUjHjbCnEtdUwQe3") },
-    };
 
     [Fact]
     public void JsonConverter_Works()

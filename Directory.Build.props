@@ -11,7 +11,7 @@
   <PropertyGroup>
     <WarningsAsErrors>$(WarningsAsErrors),IL2026,IL2060,IL2091,IL2095,IL3050</WarningsAsErrors>
     <WarningsAsErrors>$(WarningsAsErrors),SYSLIB1045</WarningsAsErrors>
-    <WarningsAsErrors>$(WarningsAsErrors),xUnit1051,xUnit2031</WarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors),xUnit1044,xUnit1051,xUnit2031</WarningsAsErrors>
   </PropertyGroup>
 
 </Project>

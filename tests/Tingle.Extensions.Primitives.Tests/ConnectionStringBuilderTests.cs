@@ -74,6 +74,7 @@ public class ConnectionStringBuilderTests
         Assert.Equal(expected, actual);
     }
 
+#pragma warning disable xUnit1044 // Avoid using TheoryData type arguments that are not serializable
     [Theory]
     [MemberData(nameof(ConverterTestData))]
     public void TypeConverter_ConvertsFromString(string input, ConnectionStringBuilder expected)
@@ -113,6 +114,7 @@ public class ConnectionStringBuilderTests
         var dst_json = JsonSerializer.Serialize(model, options);
         Assert.Equal(expected_json, dst_json);
     }
+#pragma warning restore xUnit1044 // Avoid using TheoryData type arguments that are not serializable
 
     [Fact]
     public void JsonSerializerContext_Works()

@@ -68,20 +68,16 @@ public class LanguageTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, Language expected)
+    [InlineData("eng")]
+    [InlineData("swa")]
+    public void TypeConverter_ConvertsFromString(string input)
     {
+        var expected = Language.FromCode(input);
         var converter = TypeDescriptor.GetConverter(typeof(Language));
         Assert.NotNull(converter);
         var actual = Assert.IsType<Language>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static readonly TheoryData<string, Language> ConverterTestData = new()
-    {
-        { "eng", Language.FromCode("eng") },
-        { "swa", Language.FromCode("swa") },
-    };
 
     [Fact]
     public void JsonConverter_Works()

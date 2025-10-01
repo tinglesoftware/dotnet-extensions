@@ -145,18 +145,19 @@ public class SequenceNumberTests
 
     [Theory]
     [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, SequenceNumber expected)
+    public void TypeConverter_ConvertsFromString(string input, long expectedValue)
     {
+        var expected = new SequenceNumber(expectedValue);
         var converter = TypeDescriptor.GetConverter(typeof(SequenceNumber));
         Assert.NotNull(converter);
         var actual = Assert.IsType<SequenceNumber>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
 
-    public static TheoryData<string, SequenceNumber> ConverterTestData => new()
+    public static TheoryData<string, long> ConverterTestData => new()
     {
-        { "0", new SequenceNumber(0L) },
-        { "123456789", new SequenceNumber(123456789L) },
+        { "0", 0L },
+        { "123456789", 123456789L },
     };
 
     [Theory]

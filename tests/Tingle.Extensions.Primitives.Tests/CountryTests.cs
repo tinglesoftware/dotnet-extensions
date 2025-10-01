@@ -111,20 +111,16 @@ public class CountryTests
     }
 
     [Theory]
-    [MemberData(nameof(ConverterTestData))]
-    public void TypeConverter_ConvertsFromString(string input, Country expected)
+    [InlineData("KEN", "KEN")]
+    [InlineData("KE", "KEN")]
+    public void TypeConverter_ConvertsFromString(string input, string expectedCode)
     {
+        var expected = Country.FromCode(expectedCode);
         var converter = TypeDescriptor.GetConverter(typeof(Country));
         Assert.NotNull(converter);
         var actual = Assert.IsType<Country>(converter.ConvertFromString(input));
         Assert.Equal(expected, actual);
     }
-
-    public static TheoryData<string, Country> ConverterTestData => new()
-    {
-        { "KEN", Country.FromCode("KEN") },
-        { "KE", Country.FromCode("KEN") },
-    };
 
     [Fact]
     public void JsonConverter_Works()
