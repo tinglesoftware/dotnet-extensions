@@ -7,25 +7,36 @@ namespace Tingle.AspNetCore.Swagger.Tests;
 
 public class ReDocEndpointRouteBuilderExtensionsTest
 {
+    private static TestServer CreateTestServer(Action<WebApplicationBuilder>? configureBuilder = null, Action<WebApplication>? configureApp = null)
+    {
+        var builder = WebApplication.CreateBuilder();
+        builder.WebHost.UseTestServer();
+        configureBuilder?.Invoke(builder);
+
+        var app = builder.Build();
+        configureApp?.Invoke(app);
+
+        _ = app.StartAsync(); // Start the app asynchronously
+        return app.GetTestServer();
+    }
+
     [Fact]
     public void ThrowFriendlyErrorForWrongPathFormat()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            using var server = CreateTestServer(
+                builder =>
                 {
-                    endpoints.MapReDoc("/docs/{documentNam}");
+                    builder.Services.AddRouting();
+                    builder.Services.AddReDoc();
+                },
+                app =>
+                {
+                    app.UseRouting();
+                    app.MapReDoc("/docs/{documentNam}");
                 });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc();
-            });
-
-        var ex = Assert.Throws<ArgumentException>(() => new TestServer(builder));
+        });
 
         Assert.Equal(
             "The pattern must contain '{documentName}' parameter." +
@@ -36,21 +47,17 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact] // Matches based on '.Map'
     public async Task IgnoresRequestThatDoesNotMatchPath()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+                builder.Services.AddReDoc();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc("/docs/{documentName=v1}");
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc();
+                app.MapReDoc("/docs/{documentName=v1}");
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.GetAsync("/frob", TestContext.Current.CancellationToken);
@@ -60,21 +67,17 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact] // Matches based on '.Map'
     public async Task MatchIsCaseInsensitive()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+                builder.Services.AddReDoc();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc();
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc();
+                app.MapReDoc();
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.GetAsync("/DOCS/v1", TestContext.Current.CancellationToken);
@@ -86,21 +89,17 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact] // Matches based on '.Map'
     public async Task DefaultPathIsUsed()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+                builder.Services.AddReDoc();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc("/docs/{documentName=v1}");
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc();
+                app.MapReDoc("/docs/{documentName=v1}");
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.GetAsync("/DOCS/v1", TestContext.Current.CancellationToken);
@@ -112,20 +111,16 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact] // Matches based on '.Map'
     public async Task DefaultDocumentNameIsUsed()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc("/docs/{documentName=v2}");
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
+                app.MapReDoc("/docs/{documentName=v2}");
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.GetAsync("/docs", TestContext.Current.CancellationToken);
@@ -137,20 +132,16 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact] // Matches based on '.Map'
     public async Task DefaultDocumentNameIsNotUsed()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc("/docs/{documentName=v2}");
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
+                app.MapReDoc("/docs/{documentName=v2}");
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.GetAsync("/docs/v1", TestContext.Current.CancellationToken);
@@ -163,21 +154,17 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     [Fact]
     public async Task StatusCodeIs404IfNotGet()
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
+            {
+                builder.Services.AddRouting();
+                builder.Services.AddReDoc();
+            },
+            app =>
             {
                 app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc();
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc();
+                app.MapReDoc();
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         var response = await client.DeleteAsync("/docs/v1", TestContext.Current.CancellationToken);
@@ -193,24 +180,20 @@ public class ReDocEndpointRouteBuilderExtensionsTest
     public async Task MapReDoc_ReturnsOk()
     {
         // Arrange
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        using var server = CreateTestServer(
+            builder =>
             {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapReDoc();
-                });
-            })
-            .ConfigureServices(services =>
-            {
-                services.AddRouting();
-                services.AddReDoc(options =>
+                builder.Services.AddRouting();
+                builder.Services.AddReDoc(options =>
                 {
                     options.Config.ShowExtensions = new List<string> { "x-cake" };
                 });
+            },
+            app =>
+            {
+                app.UseRouting();
+                app.MapReDoc();
             });
-        using var server = new TestServer(builder);
         var client = server.CreateClient();
 
         // Act

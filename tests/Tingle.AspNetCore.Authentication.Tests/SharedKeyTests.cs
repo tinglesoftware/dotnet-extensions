@@ -885,80 +885,82 @@ public class SharedKeyTests : SharedAuthenticationTests<SharedKeyOptions>
 
     private static TestServer CreateServer(Action<SharedKeyOptions> options = null, Func<HttpContext, Func<Task>, Task> handlerBeforeAuth = null)
     {
-        var builder = new WebHostBuilder()
-            .Configure(app =>
+        var builder = WebApplication.CreateBuilder();
+        builder.WebHost.UseTestServer();
+        builder.Services.AddAuthentication(SharedKeyDefaults.AuthenticationScheme).AddSharedKey(options);
+
+        var app = builder.Build();
+
+        if (handlerBeforeAuth != null)
+        {
+            app.Use(handlerBeforeAuth);
+        }
+
+        app.UseAuthentication();
+        app.Use(async (context, next) =>
+        {
+            if (context.Request.Path == new PathString("/checkforerrors"))
             {
-                if (handlerBeforeAuth != null)
+                var result = await context.AuthenticateAsync(SharedKeyDefaults.AuthenticationScheme); // this used to be "Automatic"
+                if (result.Failure != null)
                 {
-                    app.Use(handlerBeforeAuth);
+                    throw new Exception("Failed to authenticate", result.Failure);
+                }
+                return;
+            }
+            else if (context.Request.Path == new PathString("/oauth"))
+            {
+                if (context.User == null ||
+                    context.User.Identity == null ||
+                    !context.User.Identity.IsAuthenticated)
+                {
+                    context.Response.StatusCode = 401;
+                    // REVIEW: no more automatic challenge
+                    await context.ChallengeAsync(SharedKeyDefaults.AuthenticationScheme);
+                    return;
                 }
 
-                app.UseAuthentication();
-                app.Use(async (context, next) =>
+                var identifier = context.User.FindFirst(ClaimTypes.NameIdentifier);
+                if (identifier == null)
                 {
-                    if (context.Request.Path == new PathString("/checkforerrors"))
-                    {
-                        var result = await context.AuthenticateAsync(SharedKeyDefaults.AuthenticationScheme); // this used to be "Automatic"
-                        if (result.Failure != null)
-                        {
-                            throw new Exception("Failed to authenticate", result.Failure);
-                        }
-                        return;
-                    }
-                    else if (context.Request.Path == new PathString("/oauth"))
-                    {
-                        if (context.User == null ||
-                            context.User.Identity == null ||
-                            !context.User.Identity.IsAuthenticated)
-                        {
-                            context.Response.StatusCode = 401;
-                            // REVIEW: no more automatic challenge
-                            await context.ChallengeAsync(SharedKeyDefaults.AuthenticationScheme);
-                            return;
-                        }
+                    context.Response.StatusCode = 500;
+                    return;
+                }
 
-                        var identifier = context.User.FindFirst(ClaimTypes.NameIdentifier);
-                        if (identifier == null)
-                        {
-                            context.Response.StatusCode = 500;
-                            return;
-                        }
+                await context.Response.WriteAsync(identifier.Value);
+            }
+            else if (context.Request.Path == new PathString("/token"))
+            {
+                var token = await context.GetTokenAsync("access_token");
+                await context.Response.WriteAsync(token);
+            }
+            else if (context.Request.Path == new PathString("/unauthorized"))
+            {
+                // Simulate Authorization failure 
+                var result = await context.AuthenticateAsync(SharedKeyDefaults.AuthenticationScheme);
+                await context.ChallengeAsync(SharedKeyDefaults.AuthenticationScheme);
+            }
+            else if (context.Request.Path == new PathString("/forbidden"))
+            {
+                // Simulate Forbidden
+                await context.ForbidAsync(SharedKeyDefaults.AuthenticationScheme);
+            }
+            else if (context.Request.Path == new PathString("/signIn"))
+            {
+                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignInAsync(SharedKeyDefaults.AuthenticationScheme, new ClaimsPrincipal()));
+            }
+            else if (context.Request.Path == new PathString("/signOut"))
+            {
+                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync(SharedKeyDefaults.AuthenticationScheme));
+            }
+            else
+            {
+                await next();
+            }
+        });
 
-                        await context.Response.WriteAsync(identifier.Value);
-                    }
-                    else if (context.Request.Path == new PathString("/token"))
-                    {
-                        var token = await context.GetTokenAsync("access_token");
-                        await context.Response.WriteAsync(token);
-                    }
-                    else if (context.Request.Path == new PathString("/unauthorized"))
-                    {
-                        // Simulate Authorization failure 
-                        var result = await context.AuthenticateAsync(SharedKeyDefaults.AuthenticationScheme);
-                        await context.ChallengeAsync(SharedKeyDefaults.AuthenticationScheme);
-                    }
-                    else if (context.Request.Path == new PathString("/forbidden"))
-                    {
-                        // Simulate Forbidden
-                        await context.ForbidAsync(SharedKeyDefaults.AuthenticationScheme);
-                    }
-                    else if (context.Request.Path == new PathString("/signIn"))
-                    {
-                        await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignInAsync(SharedKeyDefaults.AuthenticationScheme, new ClaimsPrincipal()));
-                    }
-                    else if (context.Request.Path == new PathString("/signOut"))
-                    {
-                        await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync(SharedKeyDefaults.AuthenticationScheme));
-                    }
-                    else
-                    {
-                        await next();
-                    }
-                });
-            })
-            .ConfigureServices(services => services.AddAuthentication(SharedKeyDefaults.AuthenticationScheme).AddSharedKey(options));
-
-        return new TestServer(builder);
+        _ = app.StartAsync(); // Start the app asynchronously
+        return app.GetTestServer();
     }
 
     // TODO: see if we can share the TestExtensions SendAsync method (only diff is auth header)
