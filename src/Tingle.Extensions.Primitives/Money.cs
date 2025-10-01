@@ -105,6 +105,13 @@ public readonly struct Money(Currency currency, long amount) : IEquatable<Money>
             return $"{amountD.ToString(format, provider)} {(amountD == 1 ? currency.Name : currency.NamePlural)}";
         }
 
+        // For "N" format, explicitly specify decimal places to match currency precision
+        // The "N" format doesn't automatically use CurrencyDecimalDigits like "C" format does
+        if (format == "N")
+        {
+            format = $"N{currency.DecimalDigits}";
+        }
+
         return amountD.ToString(format ?? "C", provider);
     }
 
