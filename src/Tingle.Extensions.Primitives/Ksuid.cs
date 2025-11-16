@@ -47,7 +47,7 @@ public readonly partial struct Ksuid : IEquatable<Ksuid>, IConvertible, IFormatt
         ArgumentNullException.ThrowIfNull(bytes);
         if (bytes.Length != TotalBytesLength)
         {
-            throw new ArgumentOutOfRangeException(nameof(bytes), $"Only 20 {TotalBytesLength} bytes are allowed.");
+            throw new ArgumentOutOfRangeException(nameof(bytes), $"Only {TotalBytesLength} bytes are allowed.");
         }
 
         var timestampBytes = new byte[TimestampLengthInBytes];
