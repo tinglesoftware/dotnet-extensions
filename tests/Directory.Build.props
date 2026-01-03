@@ -15,14 +15,14 @@
 
   <ItemGroup>
     <PackageReference Include="MartinCostello.Logging.XUnit.v3" Version="0.7.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageReference Include="xunit.v3" Version="3.2.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.StartsWith('Tingle.AspNetCore.'))">
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.11" />
   </ItemGroup>
 
 </Project>
