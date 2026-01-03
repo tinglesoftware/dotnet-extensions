@@ -50,7 +50,7 @@ public class ApprovedIPNetworksTests
     public void RequireNetworkFromDns_Skips_UnknownHost()
     {
         var builder = new AuthorizationPolicyBuilder();
-        builder.RequireNetworkFromDns("cakes.maxwellweru.com");
+        builder.RequireNetworkFromDns("cakes.tinglesoftware.com");
         Assert.Empty(builder.Requirements);
     }
 
