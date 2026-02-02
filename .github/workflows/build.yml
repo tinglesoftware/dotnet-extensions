@@ -53,12 +53,6 @@ jobs:
         with:
           fetch-depth: 0 # Required for GitVersion
 
-      # this step only exists because we still reference 9.x but some projects have moved to 10 preview
-      - name: Setup .NET 9 SDK
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: '9.x'
-
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
 
