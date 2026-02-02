@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Tingle.AspNetCore.ApplicationInsights\Tingle.AspNetCore.ApplicationInsights.csproj" />
-  </ItemGroup>
-
-</Project>

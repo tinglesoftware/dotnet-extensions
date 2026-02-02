@@ -6,7 +6,6 @@
         "Ksuid",
         "libphonenumber",
         "Newtonsoft",
-        "Serilog",
         "Xunit"
     ]
 }
