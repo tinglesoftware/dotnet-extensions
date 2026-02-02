@@ -1,7 +1,7 @@
 # Tingle.Extensions.MongoDB
 
 > [!IMPORTANT]
-> Use of `MongoDbContext` is no longer recommended. Instead migrate to the official EntityFrameworkCore for MongoDB [here](https://github.com/mongodb/mongo-efcore-provider). Health checks can be ran using [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-9.0#entity-framework-core-dbcontext-probe) in EfCore or [`AspNetCore.HealthChecks.MongoDb`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
+> Use of `MongoDbContext` is no longer recommended. Instead migrate to the official EntityFrameworkCore for MongoDB [here](https://github.com/mongodb/mongo-efcore-provider). Health checks can be ran using [`Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore`](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0#entity-framework-core-dbcontext-probe) in EfCore or [`AspNetCore.HealthChecks.MongoDb`](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
 
 `MongoDB` is a cross-platform NoSQL database program which uses JSON like documents with schema.
 
