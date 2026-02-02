@@ -4,7 +4,7 @@ The primary goal of this library is to provide functionalities to perform [Json 
 
 ## Json Patch
 
-JSON patch support is quite similar to Microsoft's equivalent for [Newtonsoft.Json](https://learn.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-8.0). The only difference is how you configure the input and output formatters for all JSON content. This should be done as shown below:
+JSON patch support is quite similar to Microsoft's equivalent for [Newtonsoft.Json](https://learn.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-10.0). The only difference is how you configure the input and output formatters for all JSON content. This should be done as shown below:
 
 ```cs
 var builder = WebApplication.CreateBuilder(args);

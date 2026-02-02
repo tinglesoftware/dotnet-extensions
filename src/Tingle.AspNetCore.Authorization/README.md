@@ -43,7 +43,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddApprovedNetworksHandler();
 ```
 
-Details of the implementation of `my_auth_scheme` authentication scheme have been omitted here since it is beyond the scope of this discussion. More details on how to handle authentication in ASP.NET Core can be found [here](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-8.0).
+Details of the implementation of `my_auth_scheme` authentication scheme have been omitted here since it is beyond the scope of this discussion. More details on how to handle authentication in ASP.NET Core can be found [here](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/?view=aspnetcore-10.0).
 
 The above code section defines `my_auth_policy` authorization policy which ensures the user who has been authenticated via the `my_auth_scheme` has access to the resource they're trying to gain access to. Using `RequireApprovedNetworks` extension method on the `AuthorizationPolicyBuilder` we can then add a comma separated list of IP networks that are approved to access the resource from.
 
