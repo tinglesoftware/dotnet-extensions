@@ -8,10 +8,9 @@ updates:
   - package-ecosystem: 'nuget'
     directory: '/'
     schedule:
-      interval: 'weekly'
-      day: 'monday'
+      interval: 'monthly'
       time: '02:00'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
     groups:
       microsoft:
         patterns: ['Microsoft*']
@@ -41,21 +40,16 @@ updates:
     directory: '/'
     schedule:
       interval: 'monthly'
-      day: 'monday'
       time: '02:00'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
-      day: 'monday'
+      interval: 'monthly'
       time: '02:00'
-    open-pull-requests-limit: 10
 
   - package-ecosystem: 'devcontainers'
     directory: '/'
     schedule:
-      interval: 'weekly'
-      day: 'monday'
+      interval: 'monthly'
       time: '02:00'
-    open-pull-requests-limit: 10
