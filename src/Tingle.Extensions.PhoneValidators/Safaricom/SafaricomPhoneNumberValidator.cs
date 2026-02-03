@@ -25,10 +25,6 @@ public partial class SafaricomPhoneNumberValidator : AbstractPhoneNumberValidato
 
     internal override Regex RegularExpression => Expression;
 
-#if NET7_0_OR_GREATER
     [GeneratedRegex(RegExComplete)]
     private static partial Regex GetExpression();
-#else
-    private static Regex GetExpression() => new(RegExComplete);
-#endif
 }

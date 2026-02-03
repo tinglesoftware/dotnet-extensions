@@ -11,8 +11,6 @@ namespace Tingle.AspNetCore.Authentication.PassThrough;
 /// </summary>
 public class PassThroughHandler : AuthenticationHandler<PassThroughOptions>
 {
-#if NET8_0_OR_GREATER
-
     /// <summary>
     /// Create an instance of <see cref="PassThroughHandler"/>
     /// </summary>
@@ -20,25 +18,6 @@ public class PassThroughHandler : AuthenticationHandler<PassThroughOptions>
     /// <param name="logger"></param>
     /// <param name="encoder"></param>
     public PassThroughHandler(IOptionsMonitor<PassThroughOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder) { }
-
-#else
-
-    /// <summary>
-    /// Create an instance of <see cref="PassThroughHandler"/>
-    /// </summary>
-    /// <param name="options"></param>
-    /// <param name="logger"></param>
-    /// <param name="encoder"></param>
-    /// <param name="clock"></param>
-    [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public PassThroughHandler(IOptionsMonitor<PassThroughOptions> options,
-                              ILoggerFactory logger,
-                              UrlEncoder encoder,
-                              ISystemClock clock) : base(options, logger, encoder, clock) { }
-
-#endif
-
-
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring. 

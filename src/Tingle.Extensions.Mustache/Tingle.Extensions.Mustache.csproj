@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <Description>Basic mustache cache implementation in .NET.
 This project is built on the good work offered in Wildbit's implementation at https://github.com/ActiveCampaign/mustachio
 For more information on the spec, refer to https://mustache.github.io/

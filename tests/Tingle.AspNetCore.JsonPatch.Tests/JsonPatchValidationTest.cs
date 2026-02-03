@@ -22,11 +22,7 @@ public class JsonPatchValidationTest
             NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
             WriteIndented = false,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#if NET8_0_OR_GREATER
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-#else
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-#endif
             PropertyNameCaseInsensitive = true,
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
@@ -59,11 +55,7 @@ public class JsonPatchValidationTest
             NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
             WriteIndented = false,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#if NET8_0_OR_GREATER
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-#else
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-#endif
             PropertyNameCaseInsensitive = true,
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
@@ -103,21 +95,13 @@ public class JsonPatchValidationTest
         };
 
         // test with compound property names
-#if NET8_0_OR_GREATER
         var json = "[{\"op\":\"replace\",\"path\":\"/middle_name\",\"value\":\"Kamau\"},{\"op\":\"add\",\"path\":\"/extra_metadata/strength\",\"value\":\"average\"}]";
-#else
-        var json = "[{\"op\":\"replace\",\"path\":\"/middleName\",\"value\":\"Kamau\"},{\"op\":\"add\",\"path\":\"/extraMetadata/strength\",\"value\":\"average\"}]";
-#endif
         var options = new JsonSerializerOptions
         {
             NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
             WriteIndented = false,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-#if NET8_0_OR_GREATER
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-#else
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-#endif
             PropertyNameCaseInsensitive = true,
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,

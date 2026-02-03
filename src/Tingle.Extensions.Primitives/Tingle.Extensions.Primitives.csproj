@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <Description>Additional primitive types such as Money, Currency, Country, Duration, Keygen, Etag, Ksuid, Language, SequenceNumber, ByteSize, etc</Description>
     <PackageTags>$(PackageTags);primitives;etag;keygen;country;currency;sequence;bytesize;ksuid,language;money;duration;connectionstring;swift</PackageTags>
   </PropertyGroup>

@@ -137,7 +137,6 @@ public static class PropertyBuilderExtensions
         return propertyBuilder;
     }
 
-#if NET8_0_OR_GREATER
     /// <summary>
     /// Attach conversion of property to/from <see cref="IPNetwork"/> stored in the database as a <see cref="string"/>.
     /// </summary>
@@ -152,7 +151,6 @@ public static class PropertyBuilderExtensions
 
         return propertyBuilder;
     }
-#endif
 
     /// <summary>
     /// Attach conversion of property to/from <see cref="JsonElement"/> stored in the database as a <see cref="string"/>.

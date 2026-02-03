@@ -2,14 +2,11 @@
 using System.Text.Json.Nodes;
 using Tingle.Extensions.EntityFrameworkCore.Converters;
 using Tingle.Extensions.Primitives;
-
-#if NET8_0_OR_GREATER
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using Tingle.Extensions.EntityFrameworkCore.Conventions;
-#endif
 
 namespace Microsoft.EntityFrameworkCore;
 
@@ -105,7 +102,6 @@ public static class ModelConfigurationBuilderExtensions
         configurationBuilder.Properties<Duration>().HaveConversion<DurationConverter, DurationComparer>();
     }
 
-#if NET8_0_OR_GREATER
     /// <summary>
     /// Add fields of type <see cref="IPNetwork"/> to be converted using <see cref="IPNetworkConverter"/>.
     /// </summary>
@@ -116,7 +112,6 @@ public static class ModelConfigurationBuilderExtensions
 
         configurationBuilder.Properties<IPNetwork>().HaveConversion<IPNetworkConverter, IPNetworkComparer>();
     }
-#endif
 
     /// <summary>
     /// Add fields of type <see cref="JsonElement"/> to be converted using <see cref="JsonElementConverter"/>.
@@ -166,7 +161,6 @@ public static class ModelConfigurationBuilderExtensions
         configurationBuilder.AddJsonNodeConventions();
     }
 
-#if NET8_0_OR_GREATER
     /// <summary>
     /// Add convention for handling <see cref="LengthAttribute"/>.
     /// </summary>
@@ -179,5 +173,4 @@ public static class ModelConfigurationBuilderExtensions
             => new LengthAttributeConvention(
                 provider.GetRequiredService<ProviderConventionSetBuilderDependencies>()));
     }
-#endif
 }

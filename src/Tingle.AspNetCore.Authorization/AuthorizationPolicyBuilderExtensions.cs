@@ -19,19 +19,10 @@ public static class AuthorizationPolicyBuilderExtensions
     /// </summary>
     /// <param name="builder">The instance to add to</param>
     /// <param name="networks">The allowed networks</param>
-#if NET8_0_OR_GREATER
     public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, IList<IPNetwork> networks)
-#else
-    public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, IList<IPNetwork2> networks)
-#endif
     {
         // if there are no networks just return
         if (!networks.Any()) return builder;
-
-        // reduce the networks where possible (referred to as supernetting)
-#if !NET8_0_OR_GREATER
-        networks = IPNetwork2.Supernet([.. networks]);
-#endif
 
         // add the requirement
         return builder.AddRequirements(new ApprovedIPNetworkRequirement(networks));
@@ -46,11 +37,7 @@ public static class AuthorizationPolicyBuilderExtensions
     /// <param name="networks">The allowed networks</param>
     public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, params string[] networks)
     {
-#if NET8_0_OR_GREATER
         var parsed = networks.Select(a => IPNetwork.Parse(a)).ToList();
-#else
-        var parsed = networks.Select(a => IPNetwork2.Parse(a)).ToList();
-#endif
         return builder.RequireApprovedNetworks(parsed);
     }
 
@@ -61,11 +48,7 @@ public static class AuthorizationPolicyBuilderExtensions
     /// </summary>
     /// <param name="builder">The instance to add to</param>
     /// <param name="networks">The allowed networks</param>
-#if NET8_0_OR_GREATER
     public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, params IPNetwork[] networks)
-#else
-    public static AuthorizationPolicyBuilder RequireApprovedNetworks(this AuthorizationPolicyBuilder builder, params IPNetwork2[] networks)
-#endif
     {
         return builder.RequireApprovedNetworks(networks.ToList());
     }
@@ -210,11 +193,7 @@ public static class AuthorizationPolicyBuilderExtensions
     /// </param>
     public static AuthorizationPolicyBuilder RequireNetworkFromDns(this AuthorizationPolicyBuilder builder, params string[] fqdns)
     {
-#if NET8_0_OR_GREATER
         var networks = new List<IPNetwork>();
-#else
-        var networks = new List<IPNetwork2>();
-#endif
 
         // work on each FQDN
         foreach (var f in fqdns)
@@ -225,11 +204,7 @@ public static class AuthorizationPolicyBuilderExtensions
                 var ips = Dns.GetHostAddresses(f);
 
                 // parse the IP addresses into IP networks
-#if NET8_0_OR_GREATER
                 var rawNetworks = ips?.Select(ip => new IPNetwork(ip, (byte)(ip.AddressFamily is AddressFamily.InterNetwork ? 32 : 128)));
-#else
-                var rawNetworks = ips?.Select(ip => new IPNetwork2(ip, (byte)(ip.AddressFamily is AddressFamily.InterNetwork ? 32 : 128)));
-#endif
 
                 // add networks into the list if there are any
                 if (rawNetworks?.Any() ?? false)

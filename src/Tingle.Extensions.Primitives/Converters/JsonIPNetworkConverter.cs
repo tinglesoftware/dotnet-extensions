@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,4 +35,3 @@ public class JsonIPNetworkConverter : JsonConverter<IPNetwork>
         writer.WriteStringValue(value.ToString());
     }
 }
-#endif
