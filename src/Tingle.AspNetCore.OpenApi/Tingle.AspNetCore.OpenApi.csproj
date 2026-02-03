@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <Description>Usability extensions for OpenAPI including ReDoc support</Description>
-    <!-- Still buggy in .NET 10 so we skip it till later? -->
-    <!-- TODO: remove this once compile issues are fixed -->
-    <IsPackable Condition="'$([System.String]::Copy($(GITHUB_REF)).StartsWith(`refs/tags/`))' == 'true'">false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
