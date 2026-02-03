@@ -16,21 +16,10 @@ updates:
         patterns: ['Microsoft*']
         exclude-patterns:
           - 'Microsoft.IdentityModel.Protocols.OpenIdConnect' # different team and cycle
-          - 'Microsoft.AspNetCore.OpenApi*' # TODO: remove once fixed in the preview
       system:
         patterns: ['System*']
       xunit:
         patterns: ['Xunit*']
-    ignore:
-      # Ignore major updates for packages used in multi-targeting
-      - dependency-name: 'Microsoft.AspNetCore.Mvc.NewtonsoftJson'
-        update-types: ['version-update:semver-major']
-      - dependency-name: 'Microsoft.AspNetCore.TestHost'
-        update-types: ['version-update:semver-major']
-      - dependency-name: 'Microsoft.EntityFrameworkCore.Relational'
-        update-types: ['version-update:semver-major']
-      - dependency-name: 'Microsoft.Extensions.Hosting.Abstractions'
-        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'dotnet-sdk'
     directory: '/'
