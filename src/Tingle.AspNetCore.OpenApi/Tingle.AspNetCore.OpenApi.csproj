@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0</TargetFrameworks>
     <Description>Usability extensions for OpenAPI including ReDoc support</Description>
     <!-- Still buggy in .NET 10 so we skip it till later? -->
     <!-- TODO: remove this once compile issues are fixed -->

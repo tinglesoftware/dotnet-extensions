@@ -14,9 +14,7 @@ public class TingleSerializationProvider : BsonSerializationProviderBase
 {
     private static readonly Dictionary<Type, Type> __serializersTypes = new()
     {
-#if NET8_0_OR_GREATER
         { typeof(IPNetwork), typeof(IPNetworkBsonSerializer) },
-#endif
         { typeof(Duration), typeof(DurationBsonSerializer) },
         { typeof(Etag), typeof(EtagBsonSerializer) },
         { typeof(SequenceNumber), typeof(SequenceNumberBsonSerializer) }

@@ -17,8 +17,6 @@ namespace Tingle.AspNetCore.Authentication.SharedKey;
 /// </summary>
 public class SharedKeyHandler : AuthenticationHandler<SharedKeyOptions>
 {
-#if NET8_0_OR_GREATER
-
     /// <summary>
     /// Create an instance of <see cref="SharedKeyHandler"/>
     /// </summary>
@@ -26,23 +24,6 @@ public class SharedKeyHandler : AuthenticationHandler<SharedKeyOptions>
     /// <param name="logger"></param>
     /// <param name="encoder"></param>
     public SharedKeyHandler(IOptionsMonitor<SharedKeyOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder) { }
-
-#else
-
-    /// <summary>
-    /// Create an instance of <see cref="SharedKeyHandler"/>
-    /// </summary>
-    /// <param name="options"></param>
-    /// <param name="logger"></param>
-    /// <param name="encoder"></param>
-    /// <param name="clock"></param>
-    [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public SharedKeyHandler(IOptionsMonitor<SharedKeyOptions> options,
-                            ILoggerFactory logger,
-                            UrlEncoder encoder,
-                            ISystemClock clock) : base(options, logger, encoder, clock) { }
-
-#endif
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring. 

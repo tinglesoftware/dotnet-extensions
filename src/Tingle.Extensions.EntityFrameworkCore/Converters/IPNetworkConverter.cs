@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Net;
 
@@ -23,4 +22,3 @@ public class IPNetworkComparer : ValueComparer<IPNetwork>
                                       snapshotExpression: v => IPNetwork.Parse(v.ToString()))
     { }
 }
-#endif

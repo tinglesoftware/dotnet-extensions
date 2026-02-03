@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Tingle.Extensions.Primitives.Converters;
@@ -49,4 +48,3 @@ public class JsonIPNetworkConverterTests
         public IPNetwork? Value { get; set; }
     }
 }
-#endif

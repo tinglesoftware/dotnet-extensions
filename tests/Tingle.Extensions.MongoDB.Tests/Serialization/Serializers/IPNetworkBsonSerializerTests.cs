@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.Net;
 using Tingle.Extensions.MongoDB.Serialization;
@@ -63,4 +62,3 @@ public class IPNetworkBsonSerializerTests
         public IPNetwork? Network { get; set; }
     }
 }
-#endif

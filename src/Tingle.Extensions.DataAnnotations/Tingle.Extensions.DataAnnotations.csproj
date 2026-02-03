@@ -6,12 +6,4 @@
     <NoWarn>$(NoWarn);CA1813</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
-    <PackageReference Include="TimeZoneConverter" Version="7.2.0" />
-  </ItemGroup>
-
 </Project>

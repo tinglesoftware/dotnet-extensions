@@ -5,10 +5,6 @@
     <PackageTags>$(PackageTags);validation;dataannotations;phonevalidators;phones</PackageTags>
   </PropertyGroup>
 
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net5.0'))">
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="libphonenumber-csharp" Version="9.0.23" />
   </ItemGroup>

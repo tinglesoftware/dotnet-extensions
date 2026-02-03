@@ -11,11 +11,7 @@ public class CustomNamingPolicyTests
         // Arrange
         var serializerOptions = new JsonSerializerOptions
         {
-#if NET8_0_OR_GREATER
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-#else
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-#endif
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObject>(serializerOptions);
@@ -23,11 +19,7 @@ public class CustomNamingPolicyTests
 
         // Act
         var operation = Assert.Single(patchDocument.Operations);
-#if NET8_0_OR_GREATER
         Assert.Equal("/string_property", operation.path);
-#else
-        Assert.Equal("/stringProperty", operation.path);
-#endif
     }
 
     [Fact]
@@ -36,11 +28,7 @@ public class CustomNamingPolicyTests
         // Arrange
         var serializerOptions = new JsonSerializerOptions
         {
-#if NET8_0_OR_GREATER
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-#else
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-#endif
         };
 
         var patchDocument = new JsonPatchDocument<ObjectWithDictionary>(serializerOptions);
@@ -48,11 +36,7 @@ public class CustomNamingPolicyTests
 
         // Act
         var operation = Assert.Single(patchDocument.Operations);
-#if NET8_0_OR_GREATER
         Assert.Equal("/custom_data/NamedKey", operation.path);
-#else
-        Assert.Equal("/customData/NamedKey", operation.path);
-#endif
     }
 
     [Fact]

@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using System.Net;
@@ -94,4 +93,3 @@ public class IPNetworkBsonSerializer : StructSerializerBase<IPNetwork>, IReprese
         return WithRepresentation(representation);
     }
 }
-#endif
