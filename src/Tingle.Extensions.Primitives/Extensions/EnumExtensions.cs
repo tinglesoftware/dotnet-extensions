@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Tingle.Extensions.Primitives;
 
 namespace System;
 
@@ -41,10 +42,14 @@ public static class EnumExtensions
 
     /// <summary>Gets the value declared on the <see cref="Enum"/> using <see cref="EnumMemberAttribute"/>.</summary>
     /// <param name="value">The value of the enum member/field.</param>
+    [RequiresUnreferencedCode(MessageStrings.EnumMemberUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.EnumMemberRequiresDynamicCodeMessage)]
     public static string? GetEnumMemberAttrValue(this Enum value) => GetEnumMemberAttrValue(value.GetType(), value);
 
     /// <summary>Gets the value declared on the <see cref="Enum"/> using <see cref="EnumMemberAttribute"/> or the default.</summary>
     /// <param name="value">The value of the enum member/field.</param>
+    [RequiresUnreferencedCode(MessageStrings.EnumMemberUnreferencedCodeMessage)]
+    [RequiresDynamicCode(MessageStrings.EnumMemberRequiresDynamicCodeMessage)]
     public static string GetEnumMemberAttrValueOrDefault(this Enum value) => GetEnumMemberAttrValueOrDefault(value.GetType(), value);
 
     /// <summary>Gets the value declared on the member using <see cref="EnumMemberAttribute"/>.</summary>
