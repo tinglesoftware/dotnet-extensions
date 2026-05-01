@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\Tingle.Extensions.DataAnnotations\Tingle.Extensions.DataAnnotations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.Logging" />
+    <Using Include="Xunit" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="MartinCostello.Logging.XUnit.v3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
 </Project>

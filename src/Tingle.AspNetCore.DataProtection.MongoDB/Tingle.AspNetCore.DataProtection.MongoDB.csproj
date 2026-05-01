@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="MongoDB.Driver" Version="3.8.0" />
+    <PackageReference Include="MongoDB.Driver" />
   </ItemGroup>
 
 </Project>

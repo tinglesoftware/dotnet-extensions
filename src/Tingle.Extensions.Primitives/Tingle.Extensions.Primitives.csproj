@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Base62-Net" Version="1.2.157201" />
+    <PackageReference Include="Base62-Net" />
   </ItemGroup>
 
 </Project>
