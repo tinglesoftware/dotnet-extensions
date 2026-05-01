@@ -13,7 +13,6 @@
     <PackageReference Include="AnyOf" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Http" />
-    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
 
 </Project>
