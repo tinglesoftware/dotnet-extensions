@@ -1,8 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using Tingle.AspNetCore.JsonPatch.Adapters;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Adapters;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Operations;
 using Tingle.AspNetCore.JsonPatch.Converters;
-using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
@@ -30,12 +31,9 @@ public class JsonMergePatchDocument<TModel>(JsonPatchDocument<TModel> inner) : I
     /// Apply this JsonMergePatchDocument
     /// </summary>
     /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
-    /// <param name="create">Whether to create nested objects if they do not exist</param>
-    public void ApplyTo(TModel objectToApplyTo, bool create = true)
+    public void ApplyTo(TModel objectToApplyTo)
     {
-        ArgumentNullException.ThrowIfNull(objectToApplyTo);
-
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, null, AdapterFactory.Default, create));
+        JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions);
     }
 
     /// <summary>
@@ -43,11 +41,28 @@ public class JsonMergePatchDocument<TModel>(JsonPatchDocument<TModel> inner) : I
     /// </summary>
     /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     /// <param name="logErrorAction">Action to log errors</param>
-    /// <param name="create">Whether to create nested objects if they do not exist</param>
-    public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction, bool create = true)
+    public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction)
     {
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, logErrorAction, AdapterFactory.Default, create), logErrorAction);
+        JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions, logErrorAction);
     }
+
+    /// <summary>
+    /// Apply this JsonMergePatchDocument.
+    /// </summary>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
+    /// <param name="create">Ignored. The merge patch implementation always creates missing object members when needed.</param>
+    [Obsolete("The create parameter is ignored. Use ApplyTo(objectToApplyTo).", false)]
+    public void ApplyTo(TModel objectToApplyTo, bool create) => JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions);
+
+    /// <summary>
+    /// Apply this JsonMergePatchDocument.
+    /// </summary>
+    /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
+    /// <param name="logErrorAction">Action to log errors</param>
+    /// <param name="create">Ignored. The merge patch implementation always creates missing object members when needed.</param>
+    [Obsolete("The create parameter is ignored. Use ApplyTo(objectToApplyTo, logErrorAction).", false)]
+    public void ApplyTo(TModel objectToApplyTo, Action<JsonPatchError> logErrorAction, bool create)
+        => JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions, logErrorAction);
 
     /// <summary>
     /// Apply this JsonMergePatchDocument

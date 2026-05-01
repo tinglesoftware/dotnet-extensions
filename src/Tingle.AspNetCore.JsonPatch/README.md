@@ -1,16 +1,15 @@
 # Tingle.AspNetCore.JsonPatch
 
-The primary goal of this library is to provide functionalities to perform [Json Patch](https://datatracker.ietf.org/doc/html/rfc6902) and [JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7386) operations on documents using `System.Text.Json` library.
+The primary goal of this library is to provide [JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7386) support and helper extensions for patch workflows using `System.Text.Json`.
 
 ## Json Patch
 
-JSON patch support is quite similar to Microsoft's equivalent for [Newtonsoft.Json](https://learn.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-10.0). The only difference is how you configure the input and output formatters for all JSON content. This should be done as shown below:
+JSON Patch support comes from the official `Microsoft.AspNetCore.JsonPatch.SystemTextJson` package. No additional formatter setup is required in ASP.NET Core.
 
 ```cs
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
-                .AddJsonPatch() // would be .AddNewtonsoftJson() in the Newtonsoft.Json equivalent
                 .AddJsonOptions(options => {}); // Add and configure JSON formatters
 
 var app = builder.Build();
@@ -84,7 +83,7 @@ Add the following logic in the `Program.cs` file. This same logic can be added t
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers()
-                .AddJsonPatch()
+                .AddJsonMergePatch()
                 .AddJsonOptions(options => {}); // Add and configure JSON formatters
 
 var app = builder.Build();
@@ -115,3 +114,5 @@ public void Patch([FromBody] JsonMergePatchDocument<Customer> patch)
 In a real app, the code would retrieve the data from a store such as a database and update the database after applying the patch.
 
 The preceding action method example calls an overload of `ApplyTo` that takes model state as one of its parameters. With this option, you can get error messages in responses.
+
+> `AddJsonPatch()` is still available as a compatibility alias and calls `AddJsonMergePatch()`.

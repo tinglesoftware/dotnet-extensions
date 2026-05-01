@@ -13,7 +13,7 @@ internal class TypedJsonMergePatchDocumentConverter : JsonConverterFactory
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var modelType = typeToConvert.GetGenericArguments()[0];
-        var conveterType = typeof(JsonMergePatchDocumentConverter<>).MakeGenericType(modelType);
-        return (JsonConverter?)Activator.CreateInstance(conveterType);
+        var converterType = typeof(JsonMergePatchDocumentConverter<>).MakeGenericType(modelType);
+        return (JsonConverter?)Activator.CreateInstance(converterType);
     }
 }
