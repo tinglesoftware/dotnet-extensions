@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Tingle.AspNetCore.JsonPatch;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -11,53 +9,40 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class IMvcBuilderExtensions
 {
     /// <summary>
-    /// Adds JSON Patch support via System.Text.Json library.
+    /// Adds JSON Patch and JSON Merge Patch support via <see cref="System.Text.Json"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddJsonPatch(this IMvcBuilder builder)
     {
-        var services = builder.Services;
+        return builder.AddJsonMergePatch();
+    }
 
-        services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApiDescriptionProvider, JsonPatchOperationsArrayProvider>());
+    /// <summary>
+    /// Adds JSON Merge Patch support via <see cref="System.Text.Json"/>.
+    /// </summary>
+    /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
+    /// <returns>The <see cref="IMvcBuilder"/>.</returns>
+    public static IMvcBuilder AddJsonMergePatch(this IMvcBuilder builder)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+
+        var services = builder.Services;
 
         services.TryAddEnumerable(
             ServiceDescriptor.Transient<IApiDescriptionProvider, JsonMergePatchDocumentProvider>());
 
-        services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, JsonPatchMvcOptionsSetup>());
-
         return builder;
     }
 
-    private class JsonPatchMvcOptionsSetup : IConfigureOptions<MvcOptions>
+    /// <summary>
+    /// Adds JSON Merge Patch support via <see cref="System.Text.Json"/>.
+    /// </summary>
+    /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
+    /// <returns>The <see cref="IMvcBuilder"/>.</returns>
+    [Obsolete("Use AddJsonMergePatch(builder).", false)]
+    public static IMvcBuilder AddJsonPatchMerge(this IMvcBuilder builder)
     {
-        private readonly ILoggerFactory loggerFactory;
-        private readonly JsonOptions jsonOptions;
-
-        public JsonPatchMvcOptionsSetup(ILoggerFactory loggerFactory, IOptions<JsonOptions> jsonOptions)
-        {
-            this.loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
-            this.jsonOptions = jsonOptions?.Value ?? throw new ArgumentNullException(nameof(jsonOptions)); ;
-        }
-
-        public void Configure(MvcOptions options)
-        {
-            // Register patch input formatters before SystemTextJsonInputFormatter, otherwise
-            // SystemTextJsonInputFormatter would consume "application/json-patch+json" requests first
-
-            options.InputFormatters.Insert(
-                0,
-                new SystemTextJsonPatchInputFormatter(
-                    jsonOptions,
-                    loggerFactory.CreateLogger<SystemTextJsonPatchInputFormatter>()));
-
-            options.InputFormatters.Insert(
-                0,
-                new SystemTextJsonMergePatchInputFormatter(
-                    jsonOptions,
-                    loggerFactory.CreateLogger<SystemTextJsonMergePatchInputFormatter>()));
-        }
+        return builder.AddJsonMergePatch();
     }
 }

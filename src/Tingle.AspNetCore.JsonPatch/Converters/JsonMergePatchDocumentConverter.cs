@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch.Converters;
 
@@ -20,7 +21,7 @@ public class JsonMergePatchDocumentConverter : JsonConverter<JsonMergePatchDocum
 
         var no = new JsonNodeOptions { PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive, };
         var node = JsonNode.Parse(ref reader, no)!.AsObject();
-        var operations = new List<Operations.Operation>();
+        var operations = new List<Operation>();
         JsonMergePatchDocumentConverterHelper.PopulateOperations(operations, node);
 
         return new JsonMergePatchDocument(operations, options);
@@ -36,7 +37,7 @@ public class JsonMergePatchDocumentConverter : JsonConverter<JsonMergePatchDocum
         foreach (var operation in operations)
         {
             var type = operation.OperationType;
-            if (type is Operations.OperationType.Add or Operations.OperationType.Replace)
+            if (type is OperationType.Add or OperationType.Replace)
             {
                 var segments = operation.path.Trim('/').Split('/');
                 JsonMergePatchDocumentConverterHelper.PopulateJsonObject(node, segments, operation.value, options);
@@ -64,7 +65,7 @@ public class JsonMergePatchDocumentConverter<TModel> : JsonConverter<JsonMergePa
 
         var no = new JsonNodeOptions { PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive, };
         var node = JsonNode.Parse(ref reader, no)!.AsObject();
-        var operations = new List<Operations.Operation<TModel>>();
+        var operations = new List<Operation<TModel>>();
         JsonMergePatchDocumentConverterHelper.PopulateOperations(operations, node);
 
         return new JsonMergePatchDocument<TModel>(operations, options);
@@ -81,7 +82,7 @@ public class JsonMergePatchDocumentConverter<TModel> : JsonConverter<JsonMergePa
         {
             var type = operation.OperationType;
             var segments = operation.path.Trim('/').Split('/');
-            var opvalue = type is Operations.OperationType.Remove ? null : operation.value;
+            var opvalue = type is OperationType.Remove ? null : operation.value;
             JsonMergePatchDocumentConverterHelper.PopulateJsonObject(node, segments, opvalue, options);
         }
 
@@ -114,7 +115,7 @@ internal static class JsonMergePatchDocumentConverterHelper
         }
     }
 
-    internal static void PopulateOperations<TOperation>(List<TOperation> operations, JsonNode? node, string key = "") where TOperation : Operations.Operation, new()
+    internal static void PopulateOperations<TOperation>(List<TOperation> operations, JsonNode? node, string key = "") where TOperation : Operation, new()
     {
         if (node is null && key == "") return;
 

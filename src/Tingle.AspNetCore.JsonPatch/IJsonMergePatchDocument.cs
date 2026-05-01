@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using Tingle.AspNetCore.JsonPatch.Operations;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 

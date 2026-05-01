@@ -1,8 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using Tingle.AspNetCore.JsonPatch.Adapters;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Adapters;
+using Microsoft.AspNetCore.JsonPatch.SystemTextJson.Operations;
 using Tingle.AspNetCore.JsonPatch.Converters;
-using Tingle.AspNetCore.JsonPatch.Operations;
 
 namespace Tingle.AspNetCore.JsonPatch;
 
@@ -32,9 +33,7 @@ public class JsonMergePatchDocument(JsonPatchDocument inner) : IJsonMergePatchDo
     /// <param name="objectToApplyTo">Object to apply the JsonMergePatchDocument to</param>
     public void ApplyTo(object objectToApplyTo)
     {
-        ArgumentNullException.ThrowIfNull(objectToApplyTo);
-
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, null, AdapterFactory.Default, create: true));
+        JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions);
     }
 
     /// <summary>
@@ -44,7 +43,7 @@ public class JsonMergePatchDocument(JsonPatchDocument inner) : IJsonMergePatchDo
     /// <param name="logErrorAction">Action to log errors</param>
     public void ApplyTo(object objectToApplyTo, Action<JsonPatchError> logErrorAction)
     {
-        ApplyTo(objectToApplyTo, new ObjectAdapter(SerializerOptions, logErrorAction, AdapterFactory.Default, create: true), logErrorAction);
+        JsonMergePatchApplier.Apply(this, objectToApplyTo, SerializerOptions, logErrorAction);
     }
 
     /// <summary>
