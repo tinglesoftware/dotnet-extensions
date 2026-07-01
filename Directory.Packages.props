@@ -1,7 +1,7 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="AnyOf" Version="0.5.0.1" />
-    <PackageVersion Include="AzureIPNetworks" Version="2.1.1" />
+    <PackageVersion Include="AzureIPNetworks" Version="2.1.2" />
     <PackageVersion Include="Base62-Net" Version="1.2.157201" />
     <PackageVersion Include="coverlet.collector" Version="10.0.0" />
     <PackageVersion Include="libphonenumber-csharp" Version="9.0.29" />
