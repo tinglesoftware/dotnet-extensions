@@ -4,7 +4,7 @@
     <PackageVersion Include="AzureIPNetworks" Version="2.1.1" />
     <PackageVersion Include="Base62-Net" Version="1.2.157201" />
     <PackageVersion Include="coverlet.collector" Version="10.0.0" />
-    <PackageVersion Include="libphonenumber-csharp" Version="9.0.29" />
+    <PackageVersion Include="libphonenumber-csharp" Version="9.0.35" />
     <PackageVersion Include="MartinCostello.Logging.XUnit.v3" Version="0.7.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.7" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.7" />
